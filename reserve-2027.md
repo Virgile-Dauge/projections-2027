@@ -8,7 +8,7 @@ définition ex ante, analyse de sensibilité (section 3) et appel public à
 contradiction, jamais par un gate PASS/FAIL comme les backtests structure/
 participation de `projections.backtest` (issue #24).
 
-**⚠ PRÉPARATION SEULEMENT — non publiable en carte tant que la révision (issue #28) n'a pas tranché.** Le gate de publication de la carte mobilisation (ADR 0002 point 5, réutilisation de `projections.backtest.verdict_carte_mobilisation`) est **FAIL** : le backtest participation est sorti rouge (ρ europ. 0,769 < 0,8, voir `backtest-2022-2024.md` §4). Cette table et ce rapport sont publiés tels quels, en préparation de la carte — aucun chiffre n'est caché — mais aucune publication cartographique n'est autorisée avant que la révision d'architecture (#28) ne tranche. Les seuils ne bougent pas.
+**Publication en carte : AUTORISÉE** — la clause participation révisée (ADR 0003, relative au plafond inter-cibles — voir `backtest-2022-2024.md` §6) et la garde anti-hasard (ADR 0002, §5) sont au vert. Le seuil absolu ρ ≥ 0,8 (ADR 0002, §4) reste publié **FAIL** pour la cible européennes (0,769 < 0,8) — il ne gouverne plus cette publication depuis la révision ADR 0003, post-hoc et datée. Le test de même enjeu pré-enregistré (présidentielle 2017 T1 → 2022 T1, clause ρ ≥ 0,8) reste la validation forte à venir, calcul différé au chantier data 2017.
 
 ## Formule
 
@@ -246,6 +246,6 @@ du bloc » n'a pas de lift (non backtestable, cf. section 4 ci-dessus).
 | euro | 0.769 | 0.0 (lift 0.769) | 0.284 (lift 0.485) | PASS |
 | legi | 0.815 | 0.0 (lift 0.815) | 0.349 (lift 0.466) | PASS |
 
-## Verdict de publication en carte (ADR 0002 point 5)
+## Verdict de publication en carte (ADR 0002 point 5, clause participation ADR 0003)
 
-**⚠ PRÉPARATION SEULEMENT — non publiable en carte tant que la révision (issue #28) n'a pas tranché.** Le gate de publication de la carte mobilisation (ADR 0002 point 5, réutilisation de `projections.backtest.verdict_carte_mobilisation`) est **FAIL** : le backtest participation est sorti rouge (ρ europ. 0,769 < 0,8, voir `backtest-2022-2024.md` §4). Cette table et ce rapport sont publiés tels quels, en préparation de la carte — aucun chiffre n'est caché — mais aucune publication cartographique n'est autorisée avant que la révision d'architecture (#28) ne tranche. Les seuils ne bougent pas.
+**Publication en carte : AUTORISÉE** — la clause participation révisée (ADR 0003, relative au plafond inter-cibles — voir `backtest-2022-2024.md` §6) et la garde anti-hasard (ADR 0002, §5) sont au vert. Le seuil absolu ρ ≥ 0,8 (ADR 0002, §4) reste publié **FAIL** pour la cible européennes (0,769 < 0,8) — il ne gouverne plus cette publication depuis la révision ADR 0003, post-hoc et datée. Le test de même enjeu pré-enregistré (présidentielle 2017 T1 → 2022 T1, clause ρ ≥ 0,8) reste la validation forte à venir, calcul différé au chantier data 2017.
