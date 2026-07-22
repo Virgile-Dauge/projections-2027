@@ -2,9 +2,10 @@
 
 Vocabulaire du glossaire (CONTEXT.md) : une commune est stable si le nombre de
 bureaux est identique sur les 4 scrutins sources -> jointure directe par
-id_bv. Instable -> repli (agrégation à la maille communale). Chaque bureau du
-panel final porte l'un de ces deux statuts, jamais un troisième état
-silencieux.
+id_bv. Instable -> repli (agrégation à la maille communale, ou réconciliation
+bureau par réallocation dasymétrique pondérée par les inscrits pour Paris —
+issue #14). Chaque bureau du panel final porte un statut explicite, jamais un
+troisième état silencieux.
 """
 
 from pathlib import Path
@@ -13,9 +14,13 @@ import polars as pl
 import pytest
 
 from projections.churn import (
+    COMMUNES_RECONCILIATION_BUREAU,
     ELECTIONS_SOURCES,
     STATUT_INSTABLE,
+    STATUT_IRRESOLUBLE,
     STATUT_JOINT_VALIDE,
+    STATUT_RECONCILIE,
+    STATUT_REALLOUE,
     STATUT_REPLI,
     STATUT_STABLE,
     classifier_communes,
@@ -26,7 +31,9 @@ from projections.churn import (
     inscrits_par_departement,
     main,
     part_inscrits_zone_instable,
+    part_inscrits_zone_instable_apres_reconciliation,
     part_inscrits_zone_stable,
+    reconcilier_bureaux_par_reallocation,
     table_departements,
     taux_churn_national,
     top_communes_instables_par_inscrits,
@@ -216,6 +223,138 @@ def test_construire_panel_avec_statut_leve_une_erreur_si_commune_absente_de_la_c
         construire_panel_avec_statut(panel, classification_incomplete)
 
 
+# --- reconcilier_bureaux_par_reallocation : second étage du repli (issue #14) --
+
+
+def test_reconcilier_bureaux_par_reallocation_bureau_apparie_reste_reconcilie():
+    # Même id_bv des deux côtés : jointure directe, pas de réallocation, mais
+    # statut distinct de joint-validé (CONTEXT.md : la commune reste instable).
+    lignes = [
+        _ligne_bureau("2024_legi_t1", "75056", "0001", voix=20, code_departement="75"),
+        _ligne_bureau("2022_pres_t1", "75056", "0001", voix=15, code_departement="75"),
+    ]
+    commune = _panel_synthetique(lignes)
+    resultat = reconcilier_bureaux_par_reallocation(commune, scrutin_reference="2024_legi_t1")
+    assert resultat.get_column("statut").unique().to_list() == [STATUT_RECONCILIE]
+    assert sorted(resultat.get_column("voix").to_list()) == [15, 20]
+
+
+def test_reconcilier_bureaux_par_reallocation_reliquat_realloue_au_prorata_des_inscrits():
+    # Grille cible (scrutin_reference) : 2 bureaux orphelins, poids d'inscrits
+    # très inégaux (300 vs 700). Scrutin source : 1 bureau orphelin (numéroté
+    # différemment, ex. renumérotation), avec des voix connues par bloc.
+    cible = [
+        {**_ligne_bureau("2024_legi_t1", "75056", "0211", bloc="Gauche", voix=999, code_departement="75"), "inscrits": 300},
+        {**_ligne_bureau("2024_legi_t1", "75056", "0212", bloc="Gauche", voix=999, code_departement="75"), "inscrits": 700},
+    ]
+    source = [
+        {**_ligne_bureau("2022_pres_t1", "75056", "0201", bloc="Gauche", voix=100, code_departement="75"), "inscrits": 950},
+        {**_ligne_bureau("2022_pres_t1", "75056", "0201", bloc="Droite", voix=50, code_departement="75"), "inscrits": 950},
+    ]
+    commune = _panel_synthetique(cible + source)
+    resultat = reconcilier_bureaux_par_reallocation(commune, scrutin_reference="2024_legi_t1")
+
+    realloue = resultat.filter(pl.col("id_election") == "2022_pres_t1")
+    assert set(realloue.get_column("statut").unique().to_list()) == {STATUT_REALLOUE}
+
+    b211 = realloue.filter((pl.col("id_bv") == "75056_0211") & (pl.col("bloc") == "Gauche")).get_column("voix").item()
+    b212 = realloue.filter((pl.col("id_bv") == "75056_0212") & (pl.col("bloc") == "Gauche")).get_column("voix").item()
+    assert b211 == pytest.approx(30.0)  # 100 * 300/1000
+    assert b212 == pytest.approx(70.0)  # 100 * 700/1000
+
+    # Conservation des totaux par commune x scrutin x bloc (critère d'acceptation) :
+    # la somme réallouée reconstitue exactement le pool source, jamais plus jamais moins.
+    assert realloue.filter(pl.col("bloc") == "Gauche").get_column("voix").sum() == pytest.approx(100.0)
+    assert realloue.filter(pl.col("bloc") == "Droite").get_column("voix").sum() == pytest.approx(50.0)
+
+    # Participation réallouée au même prorata d'inscrits (jamais par la surface).
+    inscrits_211 = realloue.filter(pl.col("id_bv") == "75056_0211").get_column("inscrits").to_list()[0]
+    assert inscrits_211 == pytest.approx(950 * 0.3)
+
+
+def test_reconcilier_bureaux_par_reallocation_bureau_non_resoluble_sans_donnee_source():
+    # 75056_0299 n'a aucune ligne (sous aucun id_bv) sur 2022_pres_t1 : aucun
+    # reliquat à réallouer -> statut explicite, jamais un zéro fabriqué.
+    cible = [
+        {**_ligne_bureau("2024_legi_t1", "75056", "0211", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 300},
+        {**_ligne_bureau("2024_legi_t1", "75056", "0299", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 200},
+    ]
+    source = [
+        {**_ligne_bureau("2022_pres_t1", "75056", "0211", bloc="Gauche", voix=8, code_departement="75"), "inscrits": 300},
+    ]
+    commune = _panel_synthetique(cible + source)
+    resultat = reconcilier_bureaux_par_reallocation(commune, scrutin_reference="2024_legi_t1")
+
+    irresoluble = resultat.filter((pl.col("id_election") == "2022_pres_t1") & (pl.col("id_bv") == "75056_0299"))
+    assert irresoluble.get_column("statut").to_list() == [STATUT_IRRESOLUBLE]
+    assert irresoluble.get_column("voix").item() is None
+
+
+def test_reconcilier_bureaux_par_reallocation_second_tour_legi_partiel_non_realloue():
+    # Ballottage : seul le bureau 0211 a un second tour de législatives, 0212
+    # n'en a pas -- absence normale (pas de circonscription disputée partout),
+    # jamais une réallocation ou une irrésolution fabriquée pour 0212.
+    cible = [
+        {**_ligne_bureau("2024_legi_t1", "75056", "0211", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 300},
+        {**_ligne_bureau("2024_legi_t1", "75056", "0212", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 200},
+    ]
+    source_t2 = [
+        {**_ligne_bureau("2024_legi_t2", "75056", "0211", bloc="Gauche", voix=9, code_departement="75"), "inscrits": 300},
+    ]
+    commune = _panel_synthetique(cible + source_t2)
+    resultat = reconcilier_bureaux_par_reallocation(commune, scrutin_reference="2024_legi_t1")
+
+    t2 = resultat.filter(pl.col("id_election") == "2024_legi_t2")
+    assert t2.get_column("id_bv").to_list() == ["75056_0211"]
+    assert t2.get_column("statut").to_list() == [STATUT_RECONCILIE]
+
+
+# --- construire_panel_avec_statut : routage Paris (issue #14) ------------------
+
+
+def test_construire_panel_avec_statut_paris_maille_bureau_statut_distinct_joint_valide():
+    # Reproduit la structure réelle de Paris en miniature : un bureau apparié
+    # (0001) + un bureau renumérotée entre 2022 et 2024 (0201 -> 0211).
+    lignes = [
+        _ligne_bureau("2024_legi_t1", "75056", "0001", code_departement="75"),
+        _ligne_bureau("2024_legi_t1", "75056", "0211", code_departement="75"),
+        _ligne_bureau("2022_pres_t1", "75056", "0001", code_departement="75"),
+        _ligne_bureau("2022_pres_t1", "75056", "0201", code_departement="75"),
+    ]
+    panel = _panel_synthetique(lignes)
+    classification = pl.DataFrame(
+        {"code_commune": ["75056"], "code_departement": ["75"], "statut": [STATUT_INSTABLE]}
+    )
+    resultat = construire_panel_avec_statut(panel, classification, scrutin_reference="2024_legi_t1")
+    paris = resultat.filter(pl.col("code_commune") == "75056")
+
+    # Critère d'acceptation #1 : maille bureau conservée, statut distinct de
+    # joint-validé (la commune reste instable dans son ensemble).
+    assert paris.get_column("id_bv").null_count() == 0
+    statuts = set(paris.get_column("statut").unique().to_list())
+    assert statuts <= {STATUT_RECONCILIE, STATUT_REALLOUE, STATUT_IRRESOLUBLE}
+    assert STATUT_JOINT_VALIDE not in statuts
+    assert STATUT_REPLI not in statuts
+
+
+def test_construire_panel_avec_statut_commune_hors_paris_inchangee():
+    # Critère d'acceptation : une commune instable hors Paris continue le
+    # repli communal classique, même structure de mismatch que Paris.
+    assert "69123" not in COMMUNES_RECONCILIATION_BUREAU
+    lignes = [
+        _ligne_bureau("2024_legi_t1", "69123", "0001", voix=6),
+        _ligne_bureau("2024_legi_t1", "69123", "0002", voix=4),
+        _ligne_bureau("2022_pres_t1", "69123", "0001", voix=10),
+    ]
+    panel = _panel_synthetique(lignes)
+    classification = pl.DataFrame(
+        {"code_commune": ["69123"], "code_departement": ["69"], "statut": [STATUT_INSTABLE]}
+    )
+    resultat = construire_panel_avec_statut(panel, classification)
+    assert resultat.get_column("statut").unique().to_list() == [STATUT_REPLI]
+    assert resultat.get_column("id_bv").null_count() == resultat.height
+
+
 # --- Statistiques du rapport ----------------------------------------------------
 
 
@@ -369,6 +508,42 @@ def test_part_inscrits_zone_instable_pondere_par_les_inscrits_jamais_par_la_surf
     assert resultat == pytest.approx(0.8)  # 800 / (200 + 800), pas une moyenne de statuts (0.5)
 
 
+# --- part_inscrits_zone_instable_apres_reconciliation : gain Paris (issue #14) -
+
+
+def test_part_inscrits_zone_instable_apres_reconciliation_baisse_grace_a_paris():
+    # 01001 (joint-validé) et 75056 (réconciliée) comptent résolus ; seul
+    # 69123 (repli communal classique, id_bv devenu null) reste instable.
+    panel_avec_statut = pl.DataFrame(
+        {
+            "id_election": ["2024_legi_t1", "2024_legi_t1", "2024_legi_t1"],
+            "code_commune": ["01001", "75056", "69123"],
+            "id_bv": ["01001_0001", "75056_0001", None],
+            "inscrits": [500, 1000, 2000],
+            "statut": [STATUT_JOINT_VALIDE, STATUT_RECONCILIE, STATUT_REPLI],
+        }
+    )
+    resultat = part_inscrits_zone_instable_apres_reconciliation(panel_avec_statut, "2024_legi_t1")
+    assert resultat == pytest.approx(2000 / 3500)
+
+
+def test_part_inscrits_zone_instable_apres_reconciliation_bureau_irresoluble_compte_encore_instable():
+    # Le bureau est `reconcilie` à la référence, mais `irresoluble` sur un
+    # autre scrutin : il reste compté comme instable (jamais un blanc-seing
+    # donné par le seul statut du scrutin de référence).
+    panel_avec_statut = pl.DataFrame(
+        {
+            "id_election": ["2024_legi_t1", "2022_pres_t1"],
+            "code_commune": ["75056", "75056"],
+            "id_bv": ["75056_0001", "75056_0001"],
+            "inscrits": [1000, 1000],
+            "statut": [STATUT_RECONCILIE, STATUT_IRRESOLUBLE],
+        }
+    )
+    resultat = part_inscrits_zone_instable_apres_reconciliation(panel_avec_statut, "2024_legi_t1")
+    assert resultat == pytest.approx(1.0)
+
+
 def test_top_communes_instables_par_inscrits_tri_et_limite():
     # 3 communes instables + 1 stable (exclue) ; on ne garde que le top 2 par
     # inscrits, avec leur nombre de bureaux sur le scrutin de référence.
@@ -424,6 +599,18 @@ def test_generer_rapport_churn_contient_les_trois_chiffres_requis(panel_reel):
     assert "part des inscrits" in rapport
     assert "Distribution par département" in rapport
     assert "Top 20 communes instables par inscrits" in rapport
+
+
+def test_generer_rapport_churn_contient_le_gain_avant_apres_reconciliation(panel_reel):
+    # Issue #14 : le rapport documente la méthode et chiffre le gain
+    # avant/après réconciliation de Paris (le fixture réel de test ne contient
+    # pas Paris, donc le gain y est nul, mais la section doit être présente
+    # et ne jamais lever d'exception, y compris sans Paris dans les données).
+    rapport = generer_rapport_churn(panel_reel, scrutin_reference="2024_legi_t1")
+    assert "Réconciliation de Paris" in rapport
+    assert "Avant réconciliation" in rapport
+    assert "Après réconciliation" in rapport
+    assert "Gain chiffré" in rapport
 
 
 def test_generer_rapport_churn_table_departements_triee_par_absolu_pas_par_taux(panel_reel):

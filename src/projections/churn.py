@@ -14,16 +14,16 @@ Stratégie à deux étages (CONTEXT.md « Commune stable / instable », « Repli
 - commune stable (même nombre de bureaux sur les 4 scrutins sources) ->
   jointure directe par id_bv, statut `joint_valide` ;
 - commune instable (le compte change, ou la commune n'apparaît pas dans l'un
-  des 4 scrutins sources) -> repli à la maille communale, statut `repli`.
+  des 4 scrutins sources) -> repli, deux traitements possibles :
+  - repli communal classique (agrégation à la maille communale, voix
+    sommées, participation dédupliquée puis sommée), statut `repli` ;
+  - réconciliation bureau à bureau par réallocation dasymétrique pondérée
+    par les électeurs inscrits, jamais par la surface (CONTEXT.md « Repli »,
+    issue #14) — réservée aux communes de `COMMUNES_RECONCILIATION_BUREAU`
+    (Paris pour l'instant, cf. `reconcilier_bureaux_par_reallocation`),
+    statuts `reconcilie` / `realloue` / `irresoluble`.
 Jamais de troisième état silencieux : chaque ligne du panel final porte
-l'un de ces deux statuts.
-
-⚠️ Repli implémenté : agrégation à la maille communale (voix sommées,
-participation dédupliquée puis sommée). La réallocation dasymétrique
-pondérée par électeurs inscrits (CONTEXT.md, alternative au repli communal)
-n'est pas implémentée ici : elle suppose un crosswalk adresses -> bureaux
-(REU/IRIS) hors scope de cette étape. À ajouter si le repli communal s'avère
-trop grossier pour la baseline (étape 1).
+l'un de ces statuts explicites.
 """
 
 from __future__ import annotations
@@ -48,6 +48,31 @@ STATUT_STABLE = "stable"
 STATUT_INSTABLE = "instable"
 STATUT_JOINT_VALIDE = "joint_valide"
 STATUT_REPLI = "repli"
+
+# Second étage du repli (issue #14, CONTEXT.md « Repli ») : réconciliation
+# bureau à bureau d'une commune instable par réallocation dasymétrique
+# pondérée par les inscrits, plutôt que l'agrégation à la maille communale.
+# `reconcilie` : bureau apparié directement par id_bv (même identifiant dans
+# la grille cible et le scrutin source) — distinct de `joint_valide` car la
+# commune reste instable dans son ensemble (CONTEXT.md « Commune stable /
+# instable »). `realloue` : bureau cible sans id_bv correspondant dans le
+# scrutin source, dont les voix et la participation sont reconstruites au
+# prorata des inscrits des bureaux cible orphelins. `irresoluble` : bureau
+# cible sans aucune donnée exploitable pour ce scrutin (aucun reliquat à
+# réallouer) — jamais un zéro fabriqué.
+STATUT_RECONCILIE = "reconcilie"
+STATUT_REALLOUE = "realloue"
+STATUT_IRRESOLUBLE = "irresoluble"
+
+# Communes traitées par le second étage (réconciliation bureau) plutôt que le
+# repli communal classique. Paris (75056) seul : c'est la cible de l'issue
+# #14 (le plus gros gisement d'inscrits en zone instable, cf.
+# rapport-churn.md). Le mécanisme ci-dessous est générique (n'importe quelle
+# commune instable pourrait y être ajoutée), mais l'étendre à d'autres
+# grandes villes à arrondissements (Lyon, Marseille — également instables,
+# cf. top 20 du rapport) est un choix délibérément laissé de côté : chacune
+# mériterait sa propre vérification de crosswalk avant d'être ajoutée ici.
+COMMUNES_RECONCILIATION_BUREAU: tuple[str, ...] = ("75056",)
 
 # Scrutin de référence pour tout calcul en inscrits (churn national, tables par
 # département, top communes) : un seul scrutin explicite et documenté, jamais
@@ -150,15 +175,138 @@ def _replier_a_la_maille_communale(instable: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def construire_panel_avec_statut(panel: pl.DataFrame, classification: pl.DataFrame) -> pl.DataFrame:
+def reconcilier_bureaux_par_reallocation(
+    commune: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS
+) -> pl.DataFrame:
+    """Réconciliation bureau à bureau d'UNE commune instable (issue #14, CONTEXT.md « Repli »).
+
+    `commune` : lignes du panel brut pour une seule commune (toutes colonnes
+    de `COLONNES_PANEL` sauf `statut`), tous scrutins confondus.
+
+    La grille cible (id_bv + inscrits par bureau) est celle de
+    `scrutin_reference` — le scrutin le plus récent, seule grandeur stable
+    disponible pour un bureau qui n'existe pas sous cet identifiant dans un
+    scrutin plus ancien (même convention que le reste du module :
+    `SCRUTIN_REFERENCE_INSCRITS`, jamais une moyenne entre scrutins).
+
+    Pour chaque scrutin, les bureaux dont l'id_bv figure tel quel dans la
+    grille cible passent inchangés (statut `reconcilie`). Le reliquat — voix
+    et participation des bureaux orphelins côté source, dans ce scrutin —
+    est réalloué en comptes au prorata des inscrits (grille cible, jamais la
+    surface) des bureaux orphelins côté cible (statut `realloue`). Quand
+    aucun reliquat n'existe pour absorber un bureau cible orphelin (aucune
+    donnée source disponible, poids d'inscrits nul), ce bureau reste
+    `irresoluble` pour ce scrutin : voix et participation à `null`, jamais un
+    zéro fabriqué.
+
+    Second tour des législatives (`*_legi_t2`) exclu de la réallocation : son
+    absence pour une partie des bureaux est structurelle (pas de ballottage
+    dans toutes les circonscriptions, cf. `ELECTIONS_SOURCES`) et ne doit
+    jamais se lire comme un reliquat à réallouer — les bureaux non appariés y
+    sont silencieusement absents, comme pour une commune stable.
+    """
+    grille_cible = (
+        commune.filter(pl.col("id_election") == scrutin_reference)
+        .select("id_bv", "code_bv", "code_departement", "inscrits")
+        .unique()
+    )
+    if grille_cible.height == 0:
+        raise ValueError(
+            f"grille cible introuvable : commune absente de {scrutin_reference!r} "
+            "(réconciliation bureau impossible sans grille de référence)"
+        )
+    code_commune = commune.get_column("code_commune").unique().to_list()[0]
+    cible_ids = set(grille_cible.get_column("id_bv").to_list())
+    blocs_commune = commune.select("bloc").unique()
+
+    morceaux: list[pl.DataFrame] = []
+    for id_election in sorted(commune.get_column("id_election").unique().to_list()):
+        source = commune.filter(pl.col("id_election") == id_election)
+        source_ids = set(source.get_column("id_bv").unique().to_list())
+        apparies = cible_ids & source_ids
+
+        if apparies:
+            morceaux.append(
+                source.filter(pl.col("id_bv").is_in(apparies))
+                .select(*COLONNES_PANEL)
+                .with_columns(pl.lit(STATUT_RECONCILIE).alias("statut"))
+            )
+
+        if id_election.endswith("_legi_t2"):
+            # Ballottage partiel : cf. docstring, jamais de réallocation ici.
+            continue
+
+        orphelins_cible = cible_ids - source_ids
+        if not orphelins_cible:
+            continue
+
+        orphelins_source = source_ids - cible_ids
+        cible_orphelins = grille_cible.filter(pl.col("id_bv").is_in(orphelins_cible))
+        poids_total = cible_orphelins.get_column("inscrits").sum()
+
+        if not orphelins_source or not poids_total:
+            morceaux.append(
+                cible_orphelins.select("id_bv", "code_bv", "code_departement")
+                .join(blocs_commune, how="cross")
+                .with_columns(
+                    pl.lit(id_election).alias("id_election"),
+                    pl.lit(code_commune).alias("code_commune"),
+                    pl.lit(None, dtype=pl.Float64).alias("voix"),
+                    *(pl.lit(None, dtype=pl.Float64).alias(colonne) for colonne in PARTICIPATION),
+                )
+                .select(*COLONNES_PANEL)
+                .with_columns(pl.lit(STATUT_IRRESOLUBLE).alias("statut"))
+            )
+            continue
+
+        source_orphelins = source.filter(pl.col("id_bv").is_in(orphelins_source))
+        pool_participation = (
+            source_orphelins.select("id_bv", *PARTICIPATION)
+            .unique()
+            .select([pl.col(colonne).sum().alias(f"{colonne}_pool") for colonne in PARTICIPATION])
+        )
+        pool_voix = source_orphelins.group_by("bloc").agg(pl.col("voix").sum().alias("voix_pool"))
+
+        realloue = (
+            cible_orphelins.select("id_bv", "code_bv", "code_departement", "inscrits")
+            .rename({"inscrits": "inscrits_cible"})
+            .with_columns((pl.col("inscrits_cible") / poids_total).alias("part"))
+            .join(pool_voix, how="cross")
+            .join(pool_participation, how="cross")
+            .with_columns(
+                (pl.col("part") * pl.col("voix_pool")).alias("voix"),
+                *(
+                    (pl.col("part") * pl.col(f"{colonne}_pool")).alias(colonne)
+                    for colonne in PARTICIPATION
+                ),
+                pl.lit(id_election).alias("id_election"),
+                pl.lit(code_commune).alias("code_commune"),
+            )
+            .select(*COLONNES_PANEL)
+            .with_columns(pl.lit(STATUT_REALLOUE).alias("statut"))
+        )
+        morceaux.append(realloue)
+
+    return pl.concat(morceaux, how="vertical_relaxed")
+
+
+def construire_panel_avec_statut(
+    panel: pl.DataFrame,
+    classification: pl.DataFrame,
+    scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS,
+) -> pl.DataFrame:
     """Panel final bureau × scrutin × bloc : chaque ligne porte son statut de crosswalk.
 
     Communes stables : lignes du panel passées telles quelles (jointure
     directe par id_bv déjà faite dans `projections.ingest`), statut
-    `joint_valide`. Communes instables : lignes agrégées à la maille
-    communale (repli), statut `repli`. Aucune ligne sans statut explicite —
-    lève une erreur si une commune du panel manque à la classification plutôt
-    que de la joindre silencieusement.
+    `joint_valide`. Communes instables : deux traitements possibles (second
+    étage du repli, issue #14, CONTEXT.md « Repli ») —
+    `COMMUNES_RECONCILIATION_BUREAU` (Paris) passe par la réconciliation
+    bureau à bureau (`reconcilier_bureaux_par_reallocation`, statuts
+    `reconcilie` / `realloue` / `irresoluble`) ; toutes les autres communes
+    instables gardent le repli communal classique (statut `repli`). Aucune
+    ligne sans statut explicite — lève une erreur si une commune du panel
+    manque à la classification plutôt que de la joindre silencieusement.
     """
     avec_statut = panel.join(classification.select("code_commune", "statut"), on="code_commune", how="left")
     manquantes = avec_statut.filter(pl.col("statut").is_null())
@@ -175,12 +323,27 @@ def construire_panel_avec_statut(panel: pl.DataFrame, classification: pl.DataFra
     if instable.height == 0:
         return stable
 
-    repli = (
-        _replier_a_la_maille_communale(instable)
-        .select(*COLONNES_PANEL)
-        .with_columns(pl.lit(STATUT_REPLI).alias("statut"))
-    )
-    return pl.concat([stable, repli])
+    morceaux = [stable]
+
+    instable_reconciliee = instable.filter(pl.col("code_commune").is_in(COMMUNES_RECONCILIATION_BUREAU))
+    instable_repli = instable.filter(~pl.col("code_commune").is_in(COMMUNES_RECONCILIATION_BUREAU))
+
+    if instable_repli.height:
+        morceaux.append(
+            _replier_a_la_maille_communale(instable_repli)
+            .select(*COLONNES_PANEL)
+            .with_columns(pl.lit(STATUT_REPLI).alias("statut"))
+        )
+
+    for code_commune in sorted(instable_reconciliee.get_column("code_commune").unique().to_list()):
+        morceaux.append(
+            reconcilier_bureaux_par_reallocation(
+                instable_reconciliee.filter(pl.col("code_commune") == code_commune),
+                scrutin_reference,
+            )
+        )
+
+    return pl.concat(morceaux, how="vertical_relaxed")
 
 
 def taux_churn_national(classification: pl.DataFrame) -> float:
@@ -291,10 +454,12 @@ def top_communes_instables_par_inscrits(
 ) -> pl.DataFrame:
     """Top `n` communes instables par inscrits, avec leur nombre de bureaux.
 
-    Cible concrète de la future réallocation dasymétrique (CONTEXT.md,
-    « Repli ») : dit où chaque effort récupère le plus d'électorat, à la
-    granularité fine. Tri par inscrits décroissant, code_commune croissant
-    en secondaire (déterminisme à égalité).
+    Liste de cibles pour la réconciliation bureau par réallocation
+    dasymétrique (CONTEXT.md « Repli ») : dit où chaque effort récupère le
+    plus d'électorat, à la granularité fine. Paris (#1) y est déjà traitée
+    (issue #14) ; le reste de la liste reste en repli communal classique.
+    Tri par inscrits décroissant, code_commune croissant en secondaire
+    (déterminisme à égalité).
     """
     election_reference = re.sub(r"_t\d+$", "", scrutin_reference)
     nb_bureaux = (
@@ -331,22 +496,63 @@ def part_inscrits_zone_instable(panel: pl.DataFrame, classification: pl.DataFram
     return _part_inscrits(panel, classification, scrutin_reference, STATUT_INSTABLE)
 
 
+def part_inscrits_zone_instable_apres_reconciliation(
+    panel_avec_statut: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS
+) -> float:
+    """% des inscrits encore en zone instable après le second étage du repli (issue #14).
+
+    Comparable au chiffre de tête `part_inscrits_zone_instable` (même
+    dénominateur, inscrits lus sur `scrutin_reference`) : mesure le gain de
+    la réconciliation bureau. Un bureau (ou une commune restée en repli
+    classique) compte encore comme instable s'il porte, sur au moins un des
+    scrutins sources, le statut `irresoluble` — ou s'il n'a jamais quitté le
+    repli communal classique (`id_bv` devenu null par agrégation, cf.
+    `_replier_a_la_maille_communale`). Les bureaux `joint_valide`,
+    `reconcilie` et `realloue` comptent comme résolus.
+    """
+    jamais_resolu = (
+        panel_avec_statut.filter(pl.col("id_bv").is_not_null())
+        .group_by("id_bv")
+        .agg((pl.col("statut") == STATUT_IRRESOLUBLE).any().alias("jamais_resolu"))
+    )
+    reference = panel_avec_statut.filter(pl.col("id_election") == scrutin_reference)
+
+    bureau = (
+        reference.filter(pl.col("id_bv").is_not_null())
+        .select("id_bv", "inscrits")
+        .unique()
+        .join(jamais_resolu, on="id_bv", how="left")
+    )
+    commune_repli = reference.filter(pl.col("id_bv").is_null()).select("code_commune", "inscrits").unique()
+
+    total = bureau.get_column("inscrits").sum() + commune_repli.get_column("inscrits").sum()
+    if not total:
+        return 0.0
+    instable_bureau = bureau.filter(pl.col("jamais_resolu")).get_column("inscrits").sum()
+    instable_commune = commune_repli.get_column("inscrits").sum()
+    return (instable_bureau + instable_commune) / total
+
+
 def generer_rapport_churn(panel: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS) -> str:
-    """Construit le texte de `rapport-churn.md` (issue #13, CONTEXT.md).
+    """Construit le texte de `rapport-churn.md` (issues #13 et #14, CONTEXT.md).
 
     Chiffre de tête : part des inscrits en zone instable — la grandeur à
     minimiser (CONTEXT.md « Churn »), jamais un compte de communes ou de
     bureaux. Le compte de communes descend en simple contexte. Publie
-    ensuite la table de priorisation par département (triée par inscrits en
-    zone instable décroissant, ratios recalculés depuis les sommes) puis le
-    top 20 des communes instables par inscrits — la liste de cibles concrète
-    de la future réallocation dasymétrique.
+    ensuite le gain de la réconciliation bureau de Paris (issue #14, avant/
+    après chiffré), la table de priorisation par département (triée par
+    inscrits en zone instable décroissant, ratios recalculés depuis les
+    sommes) puis le top 20 des communes instables par inscrits.
     """
     classification = classifier_communes(panel)
     part_instable = part_inscrits_zone_instable(panel, classification, scrutin_reference)
     taux_national = taux_churn_national(classification)  # contexte uniquement, cf. docstring
     departements = table_departements(panel, classification, scrutin_reference)
     top_communes = top_communes_instables_par_inscrits(panel, classification, scrutin_reference)
+
+    panel_avec_statut = construire_panel_avec_statut(panel, classification, scrutin_reference)
+    part_apres = part_inscrits_zone_instable_apres_reconciliation(panel_avec_statut, scrutin_reference)
+    gain_points = (part_instable - part_apres) * 100
 
     lignes_departements = "\n".join(
         f"| {ligne['code_departement']} | {ligne['inscrits_instables']} | "
@@ -381,6 +587,48 @@ instable (CONTEXT.md « Churn »). Pour contexte : cela représente
 compte à part (les communes ont des tailles trop inégales pour être
 comparées directement).
 
+## Réconciliation de Paris (second étage du repli)
+
+Paris (75056, département 75) sort du repli communal (issue #14) : c'est la
+commune la plus lourde en zone instable (voir top 20 ci-dessous), pour un
+outil dont le cœur de cible est le ciblage fin en zone urbaine dense. Ses
+bureaux sont réconciliés un à un entre les {len(ELECTIONS_SOURCES)} scrutins
+sources plutôt qu'agrégés en un seul bloc départemental.
+
+**Méthode.** La grille cible (bureaux + inscrits) est celle du scrutin le
+plus récent ({scrutin_reference}). Pour chaque scrutin source, les bureaux
+dont l'`id_bv` figure tel quel dans cette grille passent inchangés (statut
+`reconcilie`). Le reliquat — voix et participation des bureaux orphelins côté
+source — est réalloué **en comptes de voix**, au prorata des inscrits
+(jamais de la surface, CONTEXT.md « Repli ») des bureaux orphelins côté
+cible (statut `realloue`) ; les ratios se recalculent ensuite depuis ces
+comptes, jamais l'inverse. Un bureau cible sans aucun reliquat exploitable
+reste `irresoluble` (statut explicite, voix à `null`, jamais un zéro
+fabriqué) — distinct à la fois de `joint_valide` (commune stable) et de
+`repli` (commune instable non réconciliée).
+
+**Hypothèses et cas non résolus.** Sur les données réelles, l'essentiel du
+désaccord entre scrutins parisiens est une pure renumérotation administrative
+d'une quarantaine de bureaux contigus (ex. `0201`→`0211` entre 2022 et 2024),
+à inscrits quasi identiques : le crosswalk parisien est mécaniquement
+trivial, pas un vrai découpage ou une fusion de zones. La réallocation ne
+cherche pas à retrouver cette bijection cachée (aucun crosswalk adresses/IRIS
+disponible) : elle répartit le reliquat au prorata des inscrits sur
+l'ensemble des bureaux orphelins du même scrutin — une approximation très
+proche de la vérité dans ce cas précis, qui le serait moins sur une commune
+au redécoupage plus disruptif. Le second tour des législatives (ballottage
+partiel, pas de second tour dans toutes les circonscriptions) est exclu de la
+réallocation : les bureaux non appariés y restent silencieusement absents,
+comme pour une commune stable. Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`)
+est générique mais volontairement limité à Paris ici : l'étendre à d'autres
+grandes villes à arrondissements (Lyon, Marseille, également instables) est
+laissé à une itération suivante.
+
+**Gain chiffré.** Avant réconciliation (Paris à 100 % en repli communal,
+comme toute commune instable) : **{part_instable:.1%}** des inscrits en zone
+instable. Après réconciliation bureau de Paris : **{part_apres:.1%}** — gain
+de **{gain_points:.1f} point(s)**.
+
 ## Distribution par département
 
 Triée par inscrits en zone instable décroissant (l'ordre de la charge de
@@ -394,9 +642,10 @@ en moyennant des taux communaux.
 
 ## Top 20 communes instables par inscrits
 
-Cible concrète de la future réallocation dasymétrique (CONTEXT.md
-« Repli ») : où chaque effort récupère le plus d'électorat, à la granularité
-fine.
+Cible concrète de la réconciliation bureau par réallocation dasymétrique
+(CONTEXT.md « Repli ») : où chaque effort récupère le plus d'électorat, à la
+granularité fine. Paris (#1) y est déjà traitée (issue #14, cf. section
+ci-dessus) ; le reste de la liste reste en repli communal classique.
 
 | Commune | Département | Bureaux | Inscrits |
 | --- | --- | --- | --- |
