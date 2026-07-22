@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Méthode, hypothèses, limites — Projections 2027</title>
+    <meta
+      name="description"
+      content="Comment la carte mobilisation est construite, ses hypothèses, ses limites, et l'historique complet des décisions — y compris les échecs publiés."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="methode.css" />
+  </head>
+  <body class="page-methode">
+    <header>
+      <p><a href="index.html">← Retour à la carte</a></p>
+      <h1>Méthode, hypothèses, limites</h1>
+      <p class="chapeau">
+        Cette page dit tout : ce que la carte affiche, sur quelles hypothèses, ce qu'on a vérifié, ce qui a
+        <strong>échoué en cours de route</strong> et pourquoi la publication a quand même lieu. Rien n'est caché.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2>En une phrase</h2>
+        <p>
+          Cette carte est un <strong>assemblage de briques validées</strong> (corrélation de rang, backtest
+          rétrospectif, gardes anti-hasard) — pas une méthode inédite ni « une première française ». Elle est
+          construite et publiée par une seule personne, non spécialiste du domaine électoral. Chaque hypothèse est
+          écrite noir sur blanc ci-dessous ; chaque seuil a été fixé <em>avant</em> de voir le résultat.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ce que la carte affiche</h2>
+        <h3>Couche principale : réserve de voix mobilisables par bloc</h3>
+        <p>
+          Pour chaque bureau de vote (ou commune, si le bureau n'est pas fiable — voir plus bas), une estimation du
+          nombre d'électeurs abstentionnistes qu'un bloc politique pourrait mobiliser. Formule :
+        </p>
+        <pre>réserve(unité, bloc) = inscrits
+              × taux d'abstention à la présidentielle 2022 (1ᵉʳ tour)
+              × part estimée du bloc parmi les exprimés de l'unité, à ce même scrutin</pre>
+        <p>
+          On utilise la présidentielle 2022 T1, pas les européennes ou les législatives 2024, parce que 2027 est
+          elle-même une présidentielle : c'est le <strong>scrutin de même enjeu</strong>, celui où le niveau
+          d'abstention et sa géographie ressemblent le plus à ce qu'on cherche à projeter.
+        </p>
+        <p>
+          Affichage : un <strong>nombre brut d'inscrits mobilisables</strong> et une <strong>tranche (quantile)</strong>
+          parmi 5, jamais un pourcentage avec marge d'erreur. Le dézoom (vue département/région) additionne les
+          voix mobilisables des bureaux d'une commune — jamais une moyenne de pourcentages.
+        </p>
+
+        <h3>Couche de contexte : rapport de force projeté</h3>
+        <p>
+          Le bloc en tête projeté dans chaque unité (indice composite combinant présidentielle 2022, européennes et
+          législatives 2024), affiché en <strong>4 tranches larges seulement</strong> — jamais un classement fin des
+          bureaux. Le rapport de force sert de repère géographique de contexte, pas d'objectif de ciblage bureau par
+          bureau (voir « Pourquoi l'ordre fin est abandonné », ci-dessous).
+        </p>
+
+        <h3>Communes en repli</h3>
+        <p>
+          Pour environ un tiers des communes françaises, le découpage en bureaux de vote a changé d'un scrutin à
+          l'autre (fusion de bureaux, redécoupage) : on ne peut pas comparer un bureau de 2022 à « le même » bureau
+          de 2024 avec confiance. Ces communes sont <strong>repliées à la maille communale</strong> — un contour
+          plus grossier, une estimation moins précise — et ce repli est <strong>toujours visible</strong> sur la
+          carte : contour en tirets, mention explicite au clic. Ce n'est jamais masqué ni lissé en silence.
+        </p>
+      </section>
+
+      <section>
+        <h2>Les deux hypothèses de la réserve (H1 et H2)</h2>
+        <p>
+          La réserve n'est <strong>pas backtestable</strong> : aucun scrutin passé ne nous dit qui, exactement, un
+          abstentionniste de 2027 aurait voté pour. Elle repose sur deux hypothèses explicites, ouvertes à la
+          contradiction plutôt que cachées derrière un chiffre :
+        </p>
+        <ul>
+          <li>
+            <strong>H1</strong> — dans un bureau donné, les abstentionnistes se répartiraient politiquement comme
+            les votants de ce même bureau (à ce même scrutin de référence).
+          </li>
+          <li>
+            <strong>H2</strong> — la géographie de l'abstention (quels bureaux abstiennent plus que d'autres) reste
+            à peu près stable d'une présidentielle à l'autre.
+          </li>
+        </ul>
+        <p>
+          <strong>Sensibilité à H1</strong> (analyse ex ante, jamais un backtest) : en remplaçant H1 par une variante
+          « répartition uniforme entre les blocs présents », le classement global des gisements reste robuste
+          (corrélation de rang ρ = 0,864 à 0,955 selon le bloc). En revanche, le <strong>top 20 des bureaux ne
+          l'est pas</strong> : seulement 20&nbsp;% de recouvrement entre les deux variantes, pour les 4 blocs
+          testés. Conclusion assumée : <strong>la carte sert à repérer des zones à gros gisements, pas à produire
+          un « top N » de bureaux précis</strong> — un usage en « top N » serait un artefact de l'hypothèse choisie,
+          pas un résultat robuste.
+        </p>
+      </section>
+
+      <section>
+        <h2>Chronologie complète — y compris les échecs</h2>
+        <p>Rien n'est réécrit après coup. Voici l'ordre réel des décisions, avec les résultats qui les ont motivées.</p>
+        <ol>
+          <li>
+            <strong>Gate initial (ADR 0001)</strong> — avant tout calcul, seuils gravés : corrélation de rang
+            ρ ≥ 0,7 sur l'ensemble des bureaux, ρ ≥ 0,5 sur le tiers « compétitif » de la carte (les bureaux ni
+            bastion ni désert pour un bloc), et le composite au moins aussi bon qu'un prédicteur à un seul scrutin.
+            Objectif d'origine : une carte de « bureaux disputés », sur le modèle des scrutins majoritaires.
+          </li>
+          <li>
+            <strong>Résultat : rouge</strong> — sur données réelles, le tiers compétitif échoue pour le bloc Gauche
+            (ρ = 0,433 &lt; 0,5, cible européennes) et le composite ne bat pas le mono-scrutin sur cette même cible.
+            Publié tel quel dans <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/backtest-2022-2024.md">backtest-2022-2024.md</a>.
+          </li>
+          <li>
+            <strong>Pivot (ADR 0002)</strong> — le gate mesurait, en creux, une vérité gênante : les deux scrutins
+            réels de juin 2024 (européennes et législatives) ne s'accordent entre eux qu'à ρ = 0,45–0,61 sur ce
+            même tiers compétitif. Personne — pas seulement notre prédicteur — ne peut prévoir l'ordre fin des
+            bureaux à cette échéance. La présidentielle est une circonscription nationale unique : un bureau ne se
+            « gagne » pas. Décision : la réserve de voix (mobilisation) devient le produit principal, le rapport de
+            force passe en couche de contexte à maille grossière ; une clause de participation (persistance de
+            l'abstention) est pré-enregistrée à la place.
+          </li>
+          <li>
+            <strong>Clause participation, seuil absolu (ADR 0002 §4)</strong> — pré-enregistrée à ρ ≥ 0,8 par cible,
+            <em>avant</em> tout calcul sur les vraies données.
+          </li>
+          <li>
+            <strong>Résultat : rouge sur une cible</strong> — européennes ρ = 0,769 (FAIL), législatives ρ = 0,815
+            (PASS). Publié tel quel. La carte mobilisation n'a <strong>pas</strong> été mise en ligne à ce
+            stade — issue de révision ouverte publiquement.
+          </li>
+          <li>
+            <strong>Révision post-hoc, assumée et datée (ADR 0003)</strong> — le mainteneur a documenté, sans se
+            dédouaner, que le seuil 0,8 était « un chiffre d'intuition », dans la mauvaise unité : un absolu, là où
+            la bonne grandeur est <em>relative</em> à ce que deux scrutins réels s'accordent entre eux (le
+            « plafond »). Ce plafond, mesuré sur les mêmes bureaux : ρ = 0,870. Nouvelle clause : chaque cible doit
+            atteindre 85&nbsp;% de ce plafond (seuil effectif 0,7394). Résultat : européennes 88,4&nbsp;% du plafond
+            (PASS), législatives 93,7&nbsp;% (PASS). La garde anti-hasard (le bureau doit battre le département) est
+            également au vert. <strong>Un lecteur exigeant a raison de se méfier d'une révision décidée après avoir
+            vu le résultat</strong> — c'est pourquoi le 0,769&nbsp;&lt;&nbsp;0,8 original reste publié, non
+            corrigé, dans le rapport.
+          </li>
+          <li>
+            <strong>Test de même enjeu, pré-enregistré, calcul différé</strong> — le vrai test de l'hypothèse H2
+            (persistance de l'abstention <em>entre deux présidentielles</em>, pas entre une présidentielle et des
+            européennes) n'a jamais été calculé : il exige les données de la présidentielle 2017 et une table de
+            correspondance des bureaux 2017↔2022, qui n'existent pas encore dans le panel. Clause gravée
+            <strong>maintenant, avant tout calcul</strong> : Spearman de l'abstention par bureau, présidentielle
+            2017 T1 → 2022 T1, seuil ρ ≥ 0,8. Si ce test échoue un jour, la conséquence est déjà écrite : révision
+            obligatoire de la couche d'estimation, carte à nouveau non publiable — pas un ajustement de seuil.
+          </li>
+        </ol>
+        <p>
+          Détail chiffré complet : <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/backtest-2022-2024.md">backtest-2022-2024.md</a>
+          (structure, participation, garde anti-hasard) et
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/reserve-2027.md">reserve-2027.md</a>
+          (réserve, sensibilité H1). Les décisions elles-mêmes sont dans les ADR :
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/docs/adr/0001-sortie-ordinale-gate-backtest.md">0001</a>,
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/docs/adr/0002-pivot-mobilisation-reserve.md">0002</a>,
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/docs/adr/0003-clause-participation-plafond-relatif.md">0003</a>.
+          Voir aussi <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/rapport-churn.md">rapport-churn.md</a>
+          sur l'instabilité du découpage en bureaux (à l'origine des communes en repli).
+        </p>
+      </section>
+
+      <section>
+        <h2>Pourquoi l'ordre fin est abandonné</h2>
+        <p>
+          Deux scrutins réels de juin 2024 — européennes et législatives, à trois semaines d'écart — ne
+          s'accordent entre eux qu'à ρ = 0,45–0,61 sur le classement fin des bureaux « disputés ». C'est le plafond
+          empirique de ce que la réalité électorale reproduit à elle-même à cette échéance : aucune méthode, la
+          nôtre ou une autre, ne peut prévoir un ordre plus fin que cela. Sur l'ensemble des bureaux (pas seulement
+          le tiers compétitif), l'accord est bien meilleur (ρ = 0,85–0,93 par bloc majeur) : c'est ce niveau de
+          détail — la géographie des gisements, pas le classement fin — que la carte peut honnêtement servir.
+        </p>
+      </section>
+
+      <section>
+        <h2>Garde anti-hasard</h2>
+        <p>
+          Chaque métrique principale publiée est comparée à deux références (« lifts ») : le hasard (ρ = 0,
+          l'espérance théorique d'un classement indépendant) et un prédicteur à la maille département (recalculé
+          par sommes de voix, jamais par moyenne). La règle : le bureau doit <strong>battre</strong> le département,
+          sinon la publication à cette granularité est refusée. Résultat sur données réelles : le bureau bat le
+          département sur toutes les métriques publiées (structure et participation) — détail dans
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/backtest-2022-2024.md">backtest-2022-2024.md</a>,
+          section « Garde anti-hasard ».
+        </p>
+      </section>
+
+      <section>
+        <h2>Ce qui est différé, volontairement</h2>
+        <ul>
+          <li>
+            La réserve du second tour (report des voix par bloc au 2ᵉ tour) dépend d'une matrice de transfert et des
+            voix du 2ᵉ tour 2022 — pas encore intégrée.
+          </li>
+          <li>
+            Le rapport de force projeté n'est <strong>pas recalculé</strong> pour les communes stables vues en
+            dézoom (vue département/région) : cela demanderait de reconstruire l'indice composite depuis les voix
+            communales, un chantier à part entière. À ce niveau de zoom, seules les communes déjà en repli affichent
+            un rapport de force (elles y sont déjà, par construction).
+          </li>
+          <li>
+            Aucune donnée socio-économique externe (type Filosofi) n'entre dans cette version : la réserve et le
+            rapport de force restent construits uniquement à partir de résultats électoraux, pour rester
+            backtestables et ne pas propager un même biais dans les deux couches à la fois.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Dites-nous où ça cloche</h2>
+        <p>
+          Cette méthode a été inventée par une seule personne, <strong>non spécialiste</strong> de la science
+          électorale. Elle assemble des briques connues (corrélation de rang, backtest rétrospectif) d'une manière
+          qui n'a — à notre connaissance — jamais été publiée à cette échelle en France, mais ce n'est en rien une
+          garantie de justesse. Si vous voyez une erreur de raisonnement, un biais non déclaré, ou un meilleur
+          scrutin de référence : ouvrez une
+          <a href="https://github.com/Virgile-Dauge/projections-2027/issues">issue sur le dépôt</a>. Le code, les
+          données intermédiaires et les rapports chiffrés sont publics :
+          <a href="https://github.com/Virgile-Dauge/projections-2027">github.com/Virgile-Dauge/projections-2027</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p><a href="index.html">← Retour à la carte</a></p>
+    </footer>
+  </body>
+</html>

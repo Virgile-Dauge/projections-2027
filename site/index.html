@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Projections 2027 — carte des résultats 2024 par bureau de vote</title>
+    <title>Projections 2027 — carte mobilisation par bureau de vote</title>
     <meta
       name="description"
-      content="Carte descriptive des résultats 2024 par bloc politique, au niveau du bureau de vote. Résultats réels, pas une projection."
+      content="Réserve de voix mobilisables par bloc, rapport de force projeté et résultats 2024 réels, par bureau de vote. Assemblage de briques validées, méthode publique."
     />
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" />
     <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -15,10 +15,29 @@
   </head>
   <body>
     <div id="bandeau">
-      <strong>Carte descriptive</strong> — résultats 2024 réels, pas une projection.
+      <strong id="bandeau-titre">Carte descriptive</strong>
+      <span id="bandeau-texte">— résultats 2024 réels, pas une projection.</span>
+      <a href="methode.html">Méthode, hypothèses, limites</a>
     </div>
 
     <div id="carte"></div>
+
+    <div id="controles">
+      <fieldset id="selecteur-couche">
+        <legend>Couche</legend>
+        <label><input type="radio" name="couche" value="resultats2024" checked />Résultats 2024</label>
+        <label><input type="radio" name="couche" value="reserve" />Réserve mobilisable</label>
+        <label><input type="radio" name="couche" value="force" />Rapport de force</label>
+      </fieldset>
+      <fieldset id="selecteur-bloc" hidden>
+        <legend>Bloc</legend>
+        <label><input type="radio" name="bloc" value="gauche" checked />Gauche</label>
+        <label><input type="radio" name="bloc" value="centre" />Centre</label>
+        <label><input type="radio" name="bloc" value="droite" />Droite</label>
+        <label><input type="radio" name="bloc" value="extreme_droite" />Extrême droite</label>
+        <label><input type="radio" name="bloc" value="divers" />Divers</label>
+      </fieldset>
+    </div>
 
     <div id="legende">
       <ul>
@@ -28,6 +47,10 @@
         <li><span class="pastille" style="background: #996633"></span>Extrême droite</li>
         <li><span class="pastille" style="background: #bababa"></span>Divers</li>
       </ul>
+      <p id="legende-quantile" hidden>
+        Intensité = tranche (quantile), jamais un pourcentage à intervalle de confiance.
+        <span class="degrade-exemple"></span> commune en repli (statut agrégé, dégradation visible).
+      </p>
     </div>
 
     <div id="panneau" hidden></div>
