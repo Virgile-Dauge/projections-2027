@@ -417,8 +417,18 @@ def test_calibrer_poids_retourne_au_moins_3_jeux_de_poids(panel_avec_statut_reel
     assert calibration.get_column("jeu_de_poids").n_unique() >= 3
 
 
-def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_statut_reel, baseline_reel):
+def _resultats_participation_reels(panel_avec_statut_reel, baseline_reel):
     resultat = executer_backtests(panel_avec_statut_reel, baseline_reel)
+    resultats_participation = executer_backtest_participation(panel_avec_statut_reel, baseline_reel)
+    anti_hasard_structure = garde_anti_hasard_structure(resultat, panel_avec_statut_reel)
+    anti_hasard_participation = garde_anti_hasard_participation(resultats_participation, panel_avec_statut_reel)
+    return resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation
+
+
+def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_statut_reel, baseline_reel):
+    resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation = (
+        _resultats_participation_reels(panel_avec_statut_reel, baseline_reel)
+    )
     calibration = calibrer_poids(panel_avec_statut_reel, baseline_reel)
     rapport = generer_rapport_backtest(
         resultat,
@@ -427,6 +437,9 @@ def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_sta
         methode_correction="imputation",
         n_total=100,
         n_perimetre=90,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
     )
     for section in (
         "Note d'étanchéité",
@@ -438,8 +451,32 @@ def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_sta
         "Distribution du swing",
         "Condition de régularité",
         "Calibration des poids",
+        "Backtest participation",
+        "Garde anti-hasard",
+        "carte mobilisation",
     ):
         assert section in rapport
+
+
+def test_generer_rapport_backtest_est_deterministe(panel_avec_statut_reel, baseline_reel):
+    # Déterminisme (acceptance criteria #24) : mêmes entrées -> texte identique,
+    # condition nécessaire à la régénération byte-identique CLI / notebook.
+    resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation = (
+        _resultats_participation_reels(panel_avec_statut_reel, baseline_reel)
+    )
+    calibration = calibrer_poids(panel_avec_statut_reel, baseline_reel)
+    args = dict(
+        poids_composite_2022=POIDS_COMPOSITE_2022_PAR_DEFAUT,
+        methode_correction="imputation",
+        n_total=100,
+        n_perimetre=90,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
+    )
+    rapport_1 = generer_rapport_backtest(resultat, calibration, **args)
+    rapport_2 = generer_rapport_backtest(resultat, calibration, **args)
+    assert rapport_1 == rapport_2
 
 
 # --- Backtest participation (ADR 0002) ------------------------------------------

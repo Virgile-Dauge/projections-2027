@@ -14,8 +14,12 @@ def _():
         POIDS_COMPOSITE_2022_PAR_DEFAUT,
         calibrer_poids,
         construire_table_backtest,
+        executer_backtest_participation,
         executer_backtests,
+        garde_anti_hasard_participation,
+        garde_anti_hasard_structure,
         generer_rapport_backtest,
+        verdict_carte_mobilisation,
         verdict_global,
     )
 
@@ -24,10 +28,14 @@ def _():
         POIDS_COMPOSITE_2022_PAR_DEFAUT,
         calibrer_poids,
         construire_table_backtest,
+        executer_backtest_participation,
         executer_backtests,
+        garde_anti_hasard_participation,
+        garde_anti_hasard_structure,
         generer_rapport_backtest,
         mo,
         pl,
+        verdict_carte_mobilisation,
         verdict_global,
     )
 
@@ -35,10 +43,11 @@ def _():
 @app.cell
 def _(mo):
     mo.md("""
-    # Backtest 2022→2024 et verdict du gate (ADR 0001)
+    # Backtest 2022→2024 et verdict du gate (ADR 0001 + ADR 0002)
 
     Shell fin : toute la logique (prédicteur 2022 anti-fuite, Spearman en Polars
-    pur, tercile compétitif, gate ADR 0001, calibration des poids) vit dans
+    pur, tercile compétitif, gate ADR 0001, calibration des poids, backtest
+    participation + garde anti-hasard ADR 0002 issue #24) vit dans
     `projections.backtest`, unit-testée dans `tests/test_backtest.py`. Ce notebook
     charge les 2 artefacts intermédiaires déjà reproductibles par leurs propres
     entrées console (`uv run rapport-churn` -> `panel_avec_statut.parquet`,
@@ -133,17 +142,66 @@ def _(baseline, construire_table_backtest, panel_avec_statut):
 
 @app.cell
 def _(mo):
-    mo.md("""## 5. Rapport publié : `backtest-2022-2024.md`""")
+    mo.md("""
+    ## 5. Backtest participation + garde anti-hasard (ADR 0002, issue #24)
+
+    Deux clauses pré-enregistrées qui conditionnent la publication de la carte
+    mobilisation (postérieures aux seuils, commit docs de la branche) : le
+    backtest participation (persistance de l'abstention 2022→2024, ρ ≥ 0,8 par
+    cible) et la garde anti-hasard (la granularité bureau doit battre la
+    granularité département sur la métrique principale de chaque backtest).
+    """)
+    return
+
+
+@app.cell
+def _(baseline, executer_backtest_participation, panel_avec_statut):
+    resultats_participation = executer_backtest_participation(panel_avec_statut, baseline)
+    resultats_participation["resultats"]
+    return (resultats_participation,)
+
+
+@app.cell
+def _(garde_anti_hasard_structure, panel_avec_statut, resultats_backtest):
+    anti_hasard_structure = garde_anti_hasard_structure(resultats_backtest, panel_avec_statut)
+    anti_hasard_structure
+    return (anti_hasard_structure,)
+
+
+@app.cell
+def _(garde_anti_hasard_participation, panel_avec_statut, resultats_participation):
+    anti_hasard_participation = garde_anti_hasard_participation(resultats_participation, panel_avec_statut)
+    anti_hasard_participation
+    return (anti_hasard_participation,)
+
+
+@app.cell
+def _(
+    anti_hasard_participation,
+    anti_hasard_structure,
+    resultats_participation,
+    verdict_carte_mobilisation,
+):
+    f"carte mobilisation PASS (ADR 0002) : {verdict_carte_mobilisation(resultats_participation['resultats'], anti_hasard_structure, anti_hasard_participation)}"
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""## 6. Rapport publié : `backtest-2022-2024.md`""")
     return
 
 
 @app.cell
 def _(
     POIDS_COMPOSITE_2022_PAR_DEFAUT,
+    anti_hasard_participation,
+    anti_hasard_structure,
     calibration,
     generer_rapport_backtest,
     mo,
     resultats_backtest,
+    resultats_participation,
     table_brute,
 ):
     rapport = generer_rapport_backtest(
@@ -153,6 +211,9 @@ def _(
         methode_correction="imputation",
         n_total=table_brute.height,
         n_perimetre=resultats_backtest["table"].height,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
     )
     mo.md(rapport)
     return (rapport,)

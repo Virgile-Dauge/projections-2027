@@ -864,6 +864,33 @@ def _ligne_calibration(ligne: dict) -> str:
     return f"| {ligne['jeu_de_poids']} | {ligne['cible']} | {ligne['bloc']} | {rho_txt} |"
 
 
+def _fmt_rho(x: float) -> str:
+    return f"{x:.3f}" if x == x else "n/d"  # NaN != NaN
+
+
+def _ligne_resultats_participation(ligne: dict) -> str:
+    verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
+    return f"| {ligne['cible']} | {_fmt_rho(ligne['rho'])} ≥ {ligne['seuil']:.1f} ({verdict_txt}) | {ligne['n']} |"
+
+
+def _ligne_anti_hasard(prefixe: str, ligne: dict) -> str:
+    verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
+    return (
+        f"| {prefixe} | {_fmt_rho(ligne['rho_bureau'])} "
+        f"| {ligne['rho_hasard']:.1f} (lift {_fmt_rho(ligne['lift_vs_hasard'])}) "
+        f"| {_fmt_rho(ligne['rho_departement'])} (lift {_fmt_rho(ligne['lift_vs_departement'])}) "
+        f"| **{verdict_txt}** |"
+    )
+
+
+def _ligne_anti_hasard_structure(ligne: dict) -> str:
+    return _ligne_anti_hasard(f"{ligne['bloc']} | {ligne['cible']}", ligne)
+
+
+def _ligne_anti_hasard_participation(ligne: dict) -> str:
+    return _ligne_anti_hasard(ligne["cible"], ligne)
+
+
 def generer_rapport_backtest(
     resultats_backtest: dict,
     calibration: pl.DataFrame,
@@ -871,8 +898,19 @@ def generer_rapport_backtest(
     methode_correction: str,
     n_total: int,
     n_perimetre: int,
+    resultats_participation: dict,
+    anti_hasard_structure: pl.DataFrame,
+    anti_hasard_participation: pl.DataFrame,
 ) -> str:
-    """Construit le texte de `backtest-2022-2024.md` (issue #6)."""
+    """Construit le texte de `backtest-2022-2024.md` (issue #6, enrichi ADR 0002/issue #24).
+
+    `resultats_participation` : sortie de `executer_backtest_participation`.
+    `anti_hasard_structure` / `anti_hasard_participation` : sorties de
+    `garde_anti_hasard_structure` / `garde_anti_hasard_participation`. Les
+    sections existantes (issue #6) ne sont pas réécrites -- seules des
+    sections nouvelles s'ajoutent à la suite (ADR 0002, point 5 : le rapport
+    s'enrichit sans réécrire l'existant, l'échec du tercile reste publié tel quel).
+    """
     resultats = resultats_backtest["resultats"]
     verdict = resultats_backtest["verdict"]
     correlation_euro_pres = resultats_backtest["correlation_euro_pres"]
@@ -919,7 +957,58 @@ def generer_rapport_backtest(
         for ligne in meilleur_par_cible.iter_rows(named=True)
     )
 
-    return f"""# Backtest 2022→2024 et verdict du gate (ADR 0001)
+    # --- ADR 0002 / issue #24 : sections ajoutées, aucune des lignes ci-dessus
+    # n'est modifiée (rapport enrichi, jamais réécrit).
+    resultats_part = resultats_participation["resultats"]
+    lignes_participation = "\n".join(
+        _ligne_resultats_participation(ligne) for ligne in resultats_part.sort("cible").iter_rows(named=True)
+    )
+    lignes_anti_hasard_structure = "\n".join(
+        _ligne_anti_hasard_structure(ligne)
+        for ligne in anti_hasard_structure.sort(["bloc", "cible"]).iter_rows(named=True)
+    )
+    lignes_anti_hasard_participation = "\n".join(
+        _ligne_anti_hasard_participation(ligne) for ligne in anti_hasard_participation.sort("cible").iter_rows(named=True)
+    )
+
+    pass_participation = verdict_global(resultats_part)
+    verdict_participation_txt = (
+        "**PASS** — ρ ≥ 0,8 atteint sur chaque cible (ADR 0002)."
+        if pass_participation
+        else (
+            "**FAIL** — au moins une cible est sous le seuil ρ ≥ 0,8 (ADR 0002), détail dans le tableau "
+            "ci-dessus. Clause pré-enregistrée, jamais réinterprétée ici."
+        )
+    )
+
+    pass_anti_hasard = verdict_global(anti_hasard_structure) and verdict_global(anti_hasard_participation)
+    verdict_anti_hasard_txt = (
+        "**PASS** — la granularité bureau bat la granularité département sur toutes les métriques "
+        "principales publiées ci-dessus (structure et participation)."
+        if pass_anti_hasard
+        else (
+            "**FAIL** — au moins une métrique principale ne bat pas son prédicteur département "
+            "(détail dans les tableaux ci-dessus)."
+        )
+    )
+
+    pass_carte = verdict_carte_mobilisation(resultats_part, anti_hasard_structure, anti_hasard_participation)
+    verdict_carte_mobilisation_txt = (
+        "**PASS** — les clauses pré-enregistrées de l'ADR 0002 (backtest participation + garde "
+        "anti-hasard) sont toutes au vert : publication de la carte mobilisation autorisée."
+        if pass_carte
+        else (
+            "**FAIL** — au moins une clause pré-enregistrée de l'ADR 0002 échoue (détail dans les "
+            "sections 4 et 5 ci-dessus) : pas de publication de la carte mobilisation. Décision de "
+            "révision d'architecture à l'humain (nouvelle issue de révision, ADR 0002) — les seuils "
+            "ne bougent pas."
+        )
+    )
+
+    rho_inter_cibles = resultats_participation["rho_inter_cibles"]
+    n_inter_cibles = resultats_participation["n_inter_cibles"]
+
+    sections_existantes = f"""# Backtest 2022→2024 et verdict du gate (ADR 0001)
 
 Validation auto-produite (HANDOFF.md étape 2, CONTEXT.md « Backtest ») : personne
 n'a jamais publié de projection à la maille bureau de vote en France, donc aucune
@@ -1021,6 +1110,66 @@ Recommandation écrite ici uniquement — `POIDS_COMPOSITE_2022_PAR_DEFAUT` et
 pas des constantes changées automatiquement par ce backtest.
 """
 
+    sections_ajoutees = f"""
+## 4. Backtest participation (ADR 0002)
+
+Corrélation de rang (Spearman) du taux d'abstention par bureau, présidentielle
+2022 T1 → cible 2024, sur l'ensemble des bureaux joints (statut `joint_valide`,
+maille bureau) — proxy de H2 (persistance de la géographie de l'abstention
+d'une présidentielle à l'autre, cf. ADR 0002 et CONTEXT.md « Réserve
+d'abstention »). Prédicteur (`abstention_2022_pres_t1`) structurellement
+aveugle à 2024 : un seul scrutin 2022 côté prédicteur.
+
+| Cible | ρ (seuil 0,8) | n |
+| --- | --- | --- |
+{lignes_participation}
+
+Accords inter-cibles publiés en contexte (même transparence que les plafonds
+du tercile, section 1 ci-dessus) : les 2 cibles 2024 (abstention européennes,
+abstention législatives) s'accordent entre elles à **ρ = {rho_inter_cibles:.3f}**
+(n = {n_inter_cibles}).
+
+{verdict_participation_txt}
+
+## 5. Garde anti-hasard (ADR 0002)
+
+Pour la métrique principale de chaque backtest publié ci-dessus (ρ ensemble du
+composite, blocs majeurs, pour la structure ; ρ par cible, pour la
+participation), lift contre 2 nulls : le **hasard** (ρ = 0, espérance
+théorique d'un classement indépendant — contexte, pas simulé) et le
+**prédicteur à maille département** (chaque bureau prédit par la valeur
+agrégée de son département, recalculée par sommes de voix/exprimés ou
+d'abstentions/inscrits — jamais une moyenne des écarts ou des taux de bureau).
+Clause : la granularité bureau doit **battre** (>, pas ≥) la granularité
+département, sinon pas de publication à cette maille.
+
+### Structure (composite, blocs majeurs)
+
+| Bloc | Cible | ρ bureau | ρ hasard (lift) | ρ département (lift) | Verdict |
+| --- | --- | --- | --- | --- | --- |
+{lignes_anti_hasard_structure}
+
+### Participation (abstention 2022)
+
+| Cible | ρ bureau | ρ hasard (lift) | ρ département (lift) | Verdict |
+| --- | --- | --- | --- | --- |
+{lignes_anti_hasard_participation}
+
+{verdict_anti_hasard_txt}
+
+## Verdict global — publication de la carte mobilisation (ADR 0002)
+
+{verdict_carte_mobilisation_txt}
+
+La clause tercile de l'ADR 0001 (section 1 ci-dessus) reste publiée telle
+quelle — son échec ne conditionne plus cette publication : elle gouvernait le
+rapport de force / persuasion, un produit déclassé au profit de la réserve de
+voix par bloc (ADR 0002, point 5). Les seuils de l'ADR 0001 comme ceux de
+l'ADR 0002 ne bougent pas après avoir vu les résultats.
+"""
+
+    return sections_existantes + sections_ajoutees
+
 
 # --- Entrée console -----------------------------------------------------------
 
@@ -1053,6 +1202,12 @@ def main() -> None:
     resultats_backtest = executer_backtests(panel, baseline, poids_composite_2022=poids, methode_correction=args.methode_correction)
     calibration = calibrer_poids(panel, baseline, methode_correction=args.methode_correction)
 
+    resultats_participation = executer_backtest_participation(panel, baseline)
+    anti_hasard_structure = garde_anti_hasard_structure(
+        resultats_backtest, panel, poids_composite_2022=poids, methode_correction=args.methode_correction
+    )
+    anti_hasard_participation = garde_anti_hasard_participation(resultats_participation, panel)
+
     table_brute = construire_table_backtest(
         panel, baseline, poids_composite_2022=poids, methode_correction=args.methode_correction
     )
@@ -1063,11 +1218,18 @@ def main() -> None:
         methode_correction=args.methode_correction,
         n_total=table_brute.height,
         n_perimetre=resultats_backtest["table"].height,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
     )
 
     args.out.write_text(rapport, encoding="utf-8")
     print(f"rapport écrit : {args.out}")
-    print(f"gate PASS: {verdict_global(resultats_backtest['verdict'])}")
+    print(f"gate ADR 0001 PASS: {verdict_global(resultats_backtest['verdict'])}")
+    print(
+        "carte mobilisation PASS (ADR 0002): "
+        f"{verdict_carte_mobilisation(resultats_participation['resultats'], anti_hasard_structure, anti_hasard_participation)}"
+    )
 
 
 if __name__ == "__main__":
