@@ -1,0 +1,161 @@
+:root {
+  --gauche: #e60000;
+  --centre: #ffcc00;
+  --droite: #542788;
+  --extreme-droite: #996633;
+  --divers: #bababa;
+  --fond: #f4f2ee;
+  --texte: #1a1a1a;
+  --panneau-fond: #ffffff;
+  --panneau-ombre: rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--texte);
+}
+
+#carte {
+  position: absolute;
+  inset: 0;
+}
+
+/* Bandeau descriptif — toujours visible, rappel obligatoire "pas une projection". */
+#bandeau {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background: var(--panneau-fond);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  box-shadow: 0 1px 4px var(--panneau-ombre);
+}
+
+#bandeau strong {
+  color: #900;
+}
+
+/* Légende des blocs, coin bas-gauche. */
+#legende {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 5;
+  background: var(--panneau-fond);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px var(--panneau-ombre);
+  font-size: 0.8rem;
+}
+
+#legende ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#legende li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1.5;
+}
+
+.pastille {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 2px;
+  flex: none;
+}
+
+/* Panneau de résultats au clic, coin haut-droit sur desktop. */
+#panneau {
+  position: absolute;
+  top: 3.5rem;
+  right: 0.75rem;
+  z-index: 6;
+  background: var(--panneau-fond);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--panneau-ombre);
+  max-width: 20rem;
+  font-size: 0.9rem;
+}
+
+#panneau[hidden] {
+  display: none;
+}
+
+#panneau h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  padding-right: 1.5rem;
+}
+
+#panneau .tete {
+  margin: 0.25rem 0;
+}
+
+#panneau table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+#panneau td {
+  padding: 0.15rem 0;
+}
+
+#panneau td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#panneau .participation {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+#fermer-panneau {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Mobile : le panneau devient une feuille en bas d'écran. */
+@media (max-width: 640px) {
+  #panneau {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: none;
+    border-radius: 12px 12px 0 0;
+  }
+
+  #legende {
+    font-size: 0.7rem;
+  }
+
+  #bandeau {
+    font-size: 0.75rem;
+  }
+}
