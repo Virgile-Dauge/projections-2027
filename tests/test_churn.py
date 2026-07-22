@@ -241,6 +241,21 @@ def test_distribution_par_departement_taux_instable_par_departement():
     assert resultat.get_column("taux_instable").to_list() == [0.0, 0.5]
 
 
+def test_distribution_par_departement_ordre_deterministe_a_egalite_de_taux():
+    # Reproductibilité du rapport (critère d'acceptation #4) : à taux
+    # d'instabilité égal (ex. 0 %, le cas le plus fréquent), l'ordre des
+    # départements doit être déterministe d'un run à l'autre.
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["A", "B", "C"],
+            "code_departement": ["93", "01", "69"],
+            "statut": [STATUT_STABLE, STATUT_STABLE, STATUT_STABLE],
+        }
+    )
+    resultat = distribution_par_departement(classification)
+    assert resultat.get_column("code_departement").to_list() == ["01", "69", "93"]
+
+
 def test_part_inscrits_zone_stable_pondere_par_les_inscrits_pas_par_la_surface():
     panel = _panel_synthetique(
         [
