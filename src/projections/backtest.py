@@ -283,42 +283,73 @@ def verifier_regularite_seuil(
     n_bins: int = 20,
     seuil_alerte: float = 1.5,
 ) -> dict:
-    """Condition de régularité : pas de masse anormale concentrée au seuil de décision.
+    """Condition de régularité : pas de DISCONTINUITÉ anormale au seuil de décision.
 
     Seuil pris comme la MÉDIANE de `colonne` -- choix défendable et
     documenté (cf. docstring du module) : le point qui sépare, dans le
     classement produit, les unités où le bloc progresse de celles où il
-    recule. Découpe `colonne` en `n_bins` classes de largeur égale entre son
-    min et son max, compare la densité de la classe contenant le seuil à la
-    densité moyenne des classes -- `anomalie` si le ratio dépasse
-    `seuil_alerte` (1,5x la densité moyenne par défaut).
+    recule. Découpe `colonne` en `n_bins` classes de largeur égale entre ses
+    percentiles 1 et 99 (PAS son min/max : le swing par bureau a des queues
+    extrêmes -- quelques bureaux à très faibles exprimés -- qui dilateraient
+    artificiellement la largeur de classe). Compare la densité de la classe
+    contenant le seuil à la densité MOYENNE DE SES 2 CLASSES VOISINES
+    (immédiatement inférieure et supérieure) -- pas à la densité moyenne sur
+    l'ensemble des classes, qui confondrait la forme globale de la
+    distribution (une variable de swing est naturellement piquée en son
+    centre, cf. `distribution_swing`) avec une vraie discontinuité locale au
+    seuil. `anomalie` si le ratio dépasse `seuil_alerte` (1,5x la densité
+    des voisins par défaut) -- un test dans l'esprit d'un test de
+    manipulation (densité locale, à la McCrary), pas une estimation de
+    densité à noyau complète (ponytail : bins équidistants + voisins
+    immédiats, à raffiner si ce diagnostic devient un critère du gate).
     """
     serie = table.filter(pl.col("bloc") == bloc).get_column(colonne).drop_nulls()
     if serie.len() < 2:
         return {"n": serie.len(), "anomalie": False}
     seuil = serie.median()
-    minimum, maximum = serie.min(), serie.max()
-    largeur = (maximum - minimum) / n_bins
+    borne_basse, borne_haute = serie.quantile(0.01), serie.quantile(0.99)
+    largeur = (borne_haute - borne_basse) / n_bins
     if largeur == 0:
         return {"n": serie.len(), "seuil": seuil, "anomalie": False}
 
-    classes = ((serie - minimum) / largeur).floor().clip(0, n_bins - 1)
-    comptes = pl.DataFrame({"classe": classes}).group_by("classe").agg(pl.len().alias("n")).sort("classe")
-    densite_moyenne = comptes.get_column("n").mean()
+    classes = ((serie - borne_basse) / largeur).floor().clip(0, n_bins - 1).cast(pl.Int64)
+    comptes_observes = pl.DataFrame({"classe": classes}).group_by("classe").agg(pl.len().alias("n"))
+    # Classes complètes 0..n_bins-1, y compris celles sans aucune observation
+    # (n=0) : sans ce complétage, une classe vide fausserait silencieusement
+    # la moyenne des voisins (elle disparaîtrait de la comparaison au lieu de
+    # compter comme une densité nulle).
+    comptes = (
+        pl.DataFrame({"classe": list(range(n_bins))})
+        .join(comptes_observes, on="classe", how="left")
+        .with_columns(pl.col("n").fill_null(0))
+    )
 
-    indice_seuil = min(max(int((seuil - minimum) / largeur), 0), n_bins - 1)
-    ligne_seuil = comptes.filter(pl.col("classe") == indice_seuil).get_column("n")
-    densite_seuil = ligne_seuil[0] if ligne_seuil.len() else 0
+    indice_seuil = min(max(int((seuil - borne_basse) / largeur), 0), n_bins - 1)
+    densite_seuil = comptes.filter(pl.col("classe") == indice_seuil).get_column("n")[0]
+    voisins = [i for i in (indice_seuil - 1, indice_seuil + 1) if 0 <= i < n_bins]
+    densites_voisines = comptes.filter(pl.col("classe").is_in(voisins)).get_column("n")
 
-    ratio = densite_seuil / densite_moyenne if densite_moyenne else float("nan")
+    if densites_voisines.len() == 0:
+        # Pas de classe voisine calculable (n_bins trop petit) : diagnostic
+        # non disponible, jamais une fausse "absence d'anomalie".
+        return {"n": serie.len(), "seuil": seuil, "n_bins": n_bins, "anomalie": False}
+
+    densite_voisine_moyenne = densites_voisines.mean()
+    if densite_voisine_moyenne == 0:
+        # Voisins vides : un seuil non nul y est un pic isolé (ratio infini),
+        # pas une absence de signal -- l'inverse de `bool(0) == False` aurait
+        # silencieusement classé ce cas-là comme "pas d'anomalie".
+        ratio = float("inf") if densite_seuil > 0 else 0.0
+    else:
+        ratio = densite_seuil / densite_voisine_moyenne
     return {
         "n": serie.len(),
         "seuil": seuil,
         "n_bins": n_bins,
         "densite_classe_seuil": densite_seuil,
-        "densite_moyenne_classe": densite_moyenne,
+        "densite_voisine_moyenne": densite_voisine_moyenne,
         "ratio": ratio,
-        "anomalie": bool(densite_moyenne) and ratio > seuil_alerte,
+        "anomalie": ratio > seuil_alerte,
     }
 
 
@@ -477,6 +508,10 @@ def calibrer_poids(
 # --- Rapport ------------------------------------------------------------------
 
 
+def _formater_poids(poids: dict[str, float]) -> str:
+    return " / ".join(f"{valeur:.0%} {scrutin}" for scrutin, valeur in poids.items())
+
+
 def _ligne_resultats(ligne: dict) -> str:
     rho = ligne["rho"]
     rho_txt = f"{rho:.3f}" if rho == rho else "n/d"  # NaN != NaN
@@ -587,7 +622,7 @@ du périmètre. Les unités en repli (maille commune, cf. `projections.churn`)
 sont exclues : elles agrègent plusieurs bureaux physiques, une granularité
 différente qui fausserait une validation de rang à la maille bureau.
 Correction de l'offre des législatives : méthode `{methode_correction}`.
-Poids du composite 2022 utilisés pour le backtest principal : {poids_composite_2022}.
+Poids du composite 2022 utilisés pour le backtest principal : {_formater_poids(poids_composite_2022)}.
 
 ## Tercile compétitif — définition
 
@@ -637,10 +672,10 @@ droite, unités joint-validées. n = {swing.get("n", 0)}.
 Seuil de décision pris comme la **médiane** de `derive` (choix défendable et
 documenté, cf. docstring de `verifier_regularite_seuil`) : {regularite.get("seuil", float("nan")):.2f}.
 Densité de la classe contenant le seuil : {regularite.get("densite_classe_seuil", "n/d")}
-(densité moyenne sur {regularite.get("n_bins", "n/d")} classes :
-{regularite.get("densite_moyenne_classe", float("nan")):.1f}, ratio
-{regularite.get("ratio", float("nan")):.2f}). {"**Anomalie détectée**" if regularite.get("anomalie") else "Pas de masse anormale détectée"}
-autour du seuil (seuil d'alerte : ratio > 1,5).
+(densité moyenne des 2 classes voisines, sur {regularite.get("n_bins", "n/d")} classes au total :
+{regularite.get("densite_voisine_moyenne", float("nan")):.1f}, ratio
+{regularite.get("ratio", float("nan")):.2f}). {"**Discontinuité détectée**" if regularite.get("anomalie") else "Pas de discontinuité anormale détectée"}
+autour du seuil, par rapport à ses classes immédiatement voisines (seuil d'alerte : ratio > 1,5).
 
 ## Calibration des poids du composite 2022 (promesse de l'issue #5)
 
