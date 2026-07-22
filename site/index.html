@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Projections 2027 — carte des résultats 2024 par bureau de vote</title>
+    <meta
+      name="description"
+      content="Carte descriptive des résultats 2024 par bloc politique, au niveau du bureau de vote. Résultats réels, pas une projection."
+    />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" />
+    <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/pmtiles@4/dist/pmtiles.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="bandeau">
+      <strong>Carte descriptive</strong> — résultats 2024 réels, pas une projection.
+    </div>
+
+    <div id="carte"></div>
+
+    <div id="legende">
+      <ul>
+        <li><span class="pastille" style="background: #e60000"></span>Gauche</li>
+        <li><span class="pastille" style="background: #ffcc00"></span>Centre</li>
+        <li><span class="pastille" style="background: #542788"></span>Droite</li>
+        <li><span class="pastille" style="background: #996633"></span>Extrême droite</li>
+        <li><span class="pastille" style="background: #bababa"></span>Divers</li>
+      </ul>
+    </div>
+
+    <div id="panneau" hidden></div>
+
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
