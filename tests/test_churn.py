@@ -314,7 +314,7 @@ def test_reconcilier_bureaux_par_reallocation_second_tour_legi_partiel_non_reall
 
 def test_construire_panel_avec_statut_paris_maille_bureau_statut_distinct_joint_valide():
     # Reproduit la structure réelle de Paris en miniature : un bureau apparié
-    # (0001) + un bureau renumérotée entre 2022 et 2024 (0201 -> 0211).
+    # (0001) + un bureau renuméroté entre 2022 et 2024 (0201 -> 0211).
     lignes = [
         _ligne_bureau("2024_legi_t1", "75056", "0001", code_departement="75"),
         _ligne_bureau("2024_legi_t1", "75056", "0211", code_departement="75"),
