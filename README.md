@@ -32,6 +32,10 @@ Ingère les 4 scrutins sources (présidentielle 2022, législatives 2022 et 2024
 européennes 2024) vers une table longue bureau × scrutin × bloc, en voix, écrite
 dans `data/interim/` (hors git) :
 
+> ⚠️ Format long : la participation (inscrits, votants, exprimés…) est répétée
+> sur chaque ligne de bloc d'un même bureau × scrutin — dédupliquer par
+> (`id_election`, `id_bv`) avant toute somme de participation.
+
 ```bash
 uv run ingest
 ```

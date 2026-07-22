@@ -209,7 +209,7 @@ def nuance_vers_bloc(df: pl.DataFrame) -> pl.DataFrame:
     codes en cause — jamais de repli silencieux vers Divers.
     """
     connues = set(NUANCE_VERS_BLOC)
-    presentes = set(df.get_column("nuance").to_list())
+    presentes = set(df.get_column("nuance").unique().to_list())
     inconnues = sorted(str(nuance) for nuance in presentes - connues)
     if inconnues:
         raise ValueError(
@@ -261,6 +261,12 @@ def ingest(general_results: pl.DataFrame, candidats_results: pl.DataFrame) -> pl
 
     DROM et bureaux de l'étranger sont ingérés, pas filtrés : c'est à la carte de
     décider de leur affichage, pas au pipeline.
+
+    ⚠️ Schéma long : les colonnes de participation (inscrits, abstentions, votants,
+    blancs, nuls, exprimes) sont RÉPÉTÉES sur chaque ligne de bloc d'un même
+    bureau × scrutin. Pour agréger la participation vers une maille supérieure,
+    dédupliquer d'abord par (id_election, id_bv) — les sommer telles quelles
+    compterait chaque bureau autant de fois qu'il a de blocs.
     """
     _verifier_colonnes(general_results, COLONNES_GENERAL_REQUISES, "general_results")
     _verifier_colonnes(candidats_results, COLONNES_CANDIDATS_REQUISES, "candidats_results")
