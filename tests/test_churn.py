@@ -417,10 +417,27 @@ def test_top_communes_instables_par_inscrits_ordre_deterministe_a_egalite():
 
 
 def test_generer_rapport_churn_contient_les_trois_chiffres_requis(panel_reel):
+    # Chiffre de tête = part des inscrits en zone instable (issue #13) ; le
+    # compte de communes descend en contexte dans le même paragraphe.
     rapport = generer_rapport_churn(panel_reel, scrutin_reference="2024_legi_t1")
-    assert "Taux de churn national" in rapport
+    assert "Churn national" in rapport
+    assert "part des inscrits" in rapport
     assert "Distribution par département" in rapport
-    assert "inscrits en zone stable" in rapport
+    assert "Top 20 communes instables par inscrits" in rapport
+
+
+def test_generer_rapport_churn_table_departements_triee_par_absolu_pas_par_taux(panel_reel):
+    # Reproductibilité + priorisation (issue #13) : la table des départements
+    # doit être ordonnée par inscrits en zone instable décroissant, jamais
+    # par le taux communal. On vérifie que l'ordre des lignes suit bien la
+    # colonne "Inscrits en zone instable" et pas la colonne "Taux instable".
+    rapport = generer_rapport_churn(panel_reel, scrutin_reference="2024_legi_t1")
+    debut = rapport.index("## Distribution par département")
+    fin = rapport.index("## Top 20 communes instables par inscrits")
+    bloc = rapport[debut:fin]
+    lignes = [ligne for ligne in bloc.splitlines() if ligne.startswith("| ") and "---" not in ligne][1:]
+    valeurs_inscrits = [int(ligne.split("|")[2].strip()) for ligne in lignes]
+    assert valeurs_inscrits == sorted(valeurs_inscrits, reverse=True)
 
 
 # --- Intégration sur l'extrait réel gelé ---------------------------------------
@@ -456,4 +473,4 @@ def test_main_ecrit_le_rapport_et_le_panel_avec_statut(tmp_path, monkeypatch):
     main()
     assert rapport_out.exists()
     assert panel_out.exists()
-    assert "Taux de churn national" in rapport_out.read_text(encoding="utf-8")
+    assert "Churn national" in rapport_out.read_text(encoding="utf-8")

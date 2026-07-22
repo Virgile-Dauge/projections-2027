@@ -325,48 +325,75 @@ def part_inscrits_zone_instable(panel: pl.DataFrame, classification: pl.DataFram
 
 
 def generer_rapport_churn(panel: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS) -> str:
-    """Construit le texte de `rapport-churn.md` (issue #4, CONTEXT.md).
+    """Construit le texte de `rapport-churn.md` (issue #13, CONTEXT.md).
 
-    Publie les trois chiffres requis : taux de churn national, distribution
-    par département, % d'inscrits en zone stable — un rapport qui a de la
-    valeur en soi, indépendamment des cartes.
+    Chiffre de tête : part des inscrits en zone instable — la grandeur à
+    minimiser (CONTEXT.md « Churn »), jamais un compte de communes ou de
+    bureaux. Le compte de communes descend en simple contexte. Publie
+    ensuite la table de priorisation par département (triée par inscrits en
+    zone instable décroissant, ratios recalculés depuis les sommes) puis le
+    top 20 des communes instables par inscrits — la liste de cibles concrète
+    de la future réallocation dasymétrique.
     """
     classification = classifier_communes(panel)
-    taux_national = taux_churn_national(classification)
-    distribution = distribution_par_departement(classification)
-    part_stable = part_inscrits_zone_stable(panel, classification, scrutin_reference)
+    part_instable = part_inscrits_zone_instable(panel, classification, scrutin_reference)
+    taux_national = taux_churn_national(classification)  # contexte uniquement, cf. docstring
+    departements = table_departements(panel, classification, scrutin_reference)
+    top_communes = top_communes_instables_par_inscrits(panel, classification, scrutin_reference)
 
     lignes_departements = "\n".join(
-        f"| {ligne['code_departement']} | {ligne['nb_communes']} | "
+        f"| {ligne['code_departement']} | {ligne['inscrits_instables']} | "
+        f"{ligne['part_inscrits_instables']:.1%} | {ligne['nb_communes']} | "
         f"{ligne['nb_communes_instables']} | {ligne['taux_instable']:.1%} |"
-        for ligne in distribution.iter_rows(named=True)
+        for ligne in departements.iter_rows(named=True)
+    )
+
+    lignes_communes = "\n".join(
+        f"| {ligne['code_commune']} | {ligne['code_departement']} | "
+        f"{ligne['nb_bureaux']} | {ligne['inscrits']} |"
+        for ligne in top_communes.iter_rows(named=True)
     )
 
     return f"""# Rapport de churn — étape 0
 
-Mesure du churn (CONTEXT.md) : proportion de communes dont le nombre de
-bureaux change entre les {len(ELECTIONS_SOURCES)} scrutins sources
-(présidentielle 2022, législatives 2022, législatives 2024, européennes
-2024), sans crosswalk REU — comparaison brute `id_election` × `code_commune`
-(HANDOFF.md, étape 0).
+Mesure du churn (CONTEXT.md) : la grandeur à minimiser est la **part des
+inscrits** en zone instable, jamais un compte de communes ou de bureaux —
+des unités de tailles trop inégales pour être comparées. L'instabilité est
+détectée par commune : le nombre de bureaux change entre les
+{len(ELECTIONS_SOURCES)} scrutins sources (présidentielle 2022, législatives
+2022, législatives 2024, européennes 2024), sans crosswalk REU — comparaison
+brute `id_election` × `code_commune` (HANDOFF.md, étape 0).
 
-## Taux de churn national
+## Churn national
 
-**{taux_national:.1%}** des {classification.height} communes du panel sont
-instables (le nombre de bureaux diffère d'un scrutin source à l'autre) et
-passent en repli à la maille communale plutôt qu'en jointure directe par
-bureau.
+**{part_instable:.1%}** des inscrits (référence : {scrutin_reference}) sont
+situés dans une commune instable et passent en repli à la maille communale
+plutôt qu'en jointure directe par bureau — la part des inscrits en zone
+instable (CONTEXT.md « Churn »). Pour contexte : cela représente
+**{taux_national:.1%}** des {classification.height} communes du panel, un
+compte à part (les communes ont des tailles trop inégales pour être
+comparées directement).
 
 ## Distribution par département
 
-| Département | Communes | dont instables | Taux instable |
-| --- | --- | --- | --- |
+Triée par inscrits en zone instable décroissant (l'ordre de la charge de
+travail) ; le taux instable communal reste en colonne (intensité) mais ne
+pilote plus le tri. Ratios recalculés depuis les sommes d'inscrits, jamais
+en moyennant des taux communaux.
+
+| Département | Inscrits en zone instable | % des inscrits du département | Communes | dont instables | Taux instable (communes) |
+| --- | --- | --- | --- | --- | --- |
 {lignes_departements}
 
-## % d'inscrits en zone stable
+## Top 20 communes instables par inscrits
 
-**{part_stable:.1%}** des inscrits (référence : {scrutin_reference}) sont
-situés dans une commune stable, jointe directement par `id_bv`.
+Cible concrète de la future réallocation dasymétrique (CONTEXT.md
+« Repli ») : où chaque effort récupère le plus d'électorat, à la granularité
+fine.
+
+| Commune | Département | Bureaux | Inscrits |
+| --- | --- | --- | --- |
+{lignes_communes}
 """
 
 
