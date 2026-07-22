@@ -21,6 +21,7 @@ from projections.baseline import (
     SCRUTIN_EUROPEENNES,
     SCRUTIN_LEGISLATIVES,
     SCRUTIN_PRESIDENTIELLE,
+    calculer_derive,
     calculer_ecart_national,
     composite_moyenne_tronquee,
     composite_pondere,
@@ -283,3 +284,27 @@ def test_composite_moyenne_tronquee_ignore_les_composantes_absentes():
     resultat = composite_moyenne_tronquee(table)
     # 2 valeurs restantes (10, 30) -> médiane = leur moyenne = 20.
     assert resultat.get_column("composite_tronque").to_list() == pytest.approx([20.0])
+
+
+# --- calculer_derive : cas synthétique connu ------------------------------------
+
+
+def test_calculer_derive_cas_synthetique_connu():
+    resultat = calculer_derive(_table_composantes())
+    # derive = moyenne(30, 50) - 10 = 40 - 10 = 30 : le bloc progresse de 30 points
+    # entre 2022 et la structure 2024 dans cette unité.
+    assert resultat.get_column("derive").to_list() == pytest.approx([30.0])
+
+
+def test_calculer_derive_nulle_si_structure_2024_egale_a_2022():
+    table = pl.DataFrame(
+        {
+            "unite_id": ["u1"],
+            "bloc": ["Gauche"],
+            f"ecart_{SCRUTIN_PRESIDENTIELLE}": [15.0],
+            f"ecart_{SCRUTIN_EUROPEENNES}": [15.0],
+            f"ecart_{SCRUTIN_LEGISLATIVES}_corrige": [15.0],
+        }
+    )
+    resultat = calculer_derive(table)
+    assert resultat.get_column("derive").to_list() == pytest.approx([0.0])
