@@ -56,8 +56,8 @@ Prérequis : [tippecanoe](https://github.com/felt/tippecanoe) (binaire non
 vendored — le compiler localement) :
 
 ```bash
-git clone https://github.com/felt/tippecanoe.git
-cd tippecanoe && make -j$(nproc)
+git clone https://github.com/felt/tippecanoe.git .tippecanoe-src
+cd .tippecanoe-src && make -j$(nproc)
 ```
 
 Le binaire se passe via `--tippecanoe-bin` ou la variable d'environnement
