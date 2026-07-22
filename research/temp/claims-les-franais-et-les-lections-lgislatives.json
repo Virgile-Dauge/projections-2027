@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Elabe administre l'offre électorale réelle de chaque circonscription à ses répondants pour mesurer les intentions de vote aux législatives 2024, sauf pour ~15% des répondants situés dans des codes postaux à cheval sur plusieurs circonscriptions.",
+    "stance": "supports",
+    "stance_target": "les instituts de sondage français granularisent déjà la mesure au niveau circonscription plutôt que national pur",
+    "evidence_type": "empirical",
+    "scope_conditions": "France métropolitaine, élections législatives 2024, sondage Elabe du 19-21 juin 2024",
+    "quoted_support": "Intentions de vote réalisées d'après l'offre électorale réelle dans chaque circonscription (sauf pour les codes postaux concernés par plusieurs circonscriptions, soit près de 15% des répondants, dans ce cas une offre électorale standard a été administrée).",
+    "numbers": ["15%"],
+    "entities": ["Elabe"],
+    "time_period": "19-21 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives"
+  },
+  {
+    "claim": "La projection en sièges d'Elabe pour les législatives 2024 est établie à partir du rapport de force mesuré dans l'intention de vote combiné au résultat des élections précédentes, plutôt qu'un simple swing uniforme national appliqué aux résultats 2022.",
+    "stance": "neutral",
+    "stance_target": "méthode de projection en sièges des instituts français : swing informé par le résultat électoral antérieur",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, législatives 2024",
+    "quoted_support": "Selon notre projection établie à partir du rapport de force actuel mesuré dans l'intention de vote et du résultat aux élections précédentes, le Rassemblement National et ses alliés obtiendraient entre 250 et 280 sièges, le « Nouveau Front populaire » et DVG entre 150 et 170 sièges, « Ensemble » entre 90 et 110 sièges, LR/DVD/UDI entre 35 et 45 sièges et les autres forces politiques entre 10 et 12 sièges.",
+    "numbers": ["36%", "27%", "20%", "10%", "250-280", "150-170", "90-110", "35-45", "10-12"],
+    "entities": ["Elabe", "Rassemblement National", "Nouveau Front populaire", "Ensemble", "LR"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives"
+  },
+  {
+    "claim": "L'échantillon Elabe (n=2002 dont 1870 inscrits sur les listes électorales) affiche une marge d'erreur comprise entre 1,0 et 2,6 points selon la méthode des quotas, un niveau d'incertitude structurellement trop large pour une résolution au bureau de vote.",
+    "stance": "supports",
+    "stance_target": "les sondages nationaux ne peuvent fournir qu'une dynamique agrégée, pas une résolution fine locale",
+    "evidence_type": "statistical",
+    "scope_conditions": "France métropolitaine, résidents 18 ans et plus",
+    "quoted_support": "Echantillon de 2002 personnes, représentatif des résidents de France métropolitaine âgés de 18 ans et plus, dont 1870 inscrits sur les listes électorales. [...] Marge d'erreur comprise entre 1,0 et 2,6 points de pourcentage.",
+    "numbers": ["2002", "1870", "1.0", "2.6"],
+    "entities": ["Elabe"],
+    "time_period": "19-21 juin 2024",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives"
+  },
+  {
+    "claim": "Les reports de voix intra-bloc de gauche vers le NFP sont très inégaux selon le parti d'origine : 91% des électeurs LFI, 71% des électeurs EELV, mais seulement 66% des électeurs PS se déclarent prêts à voter NFP en 2024.",
+    "stance": "supports",
+    "stance_target": "nécessité de matrices de transfert différenciées par parti d'origine plutôt qu'un swing de bloc uniforme",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, législatives 2024, électorat de gauche",
+    "quoted_support": "L'alliance de gauche bénéficie d'excellents reports de voix des électeurs de LFI/Aubry (91%) et dans une moindre mesure d'EELV/Toussaint (71%) mais d'un soutien incomplet des électeurs de PS/Glucksmann (66%).",
+    "numbers": ["91%", "71%", "66%"],
+    "entities": ["LFI", "EELV", "PS", "Nouveau Front populaire"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives"
+  },
+  {
+    "claim": "Le RN consolide son socle électoral sortant (91% de rétention des électeurs RN/Bardella) tout en captant 55% des électeurs Reconquête/Maréchal, avec une sur-représentation chez les employés/ouvriers (52%) et dans les petites agglomérations et communes rurales (45%).",
+    "stance": "neutral",
+    "stance_target": "sociologie électorale territoriale du RN pertinente pour pondérer un swing différentiel par type de commune",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, législatives 2024",
+    "quoted_support": "Ce score s'explique par un parfait soutien des électeurs du RN/Bardella (91%), des gains significatifs de voix chez les électeurs de Reconquête/Maréchal (55%) [...] : une consolidation dans ses « zones de force » (en tête chez les employés/ouvriers à 52% et dans les petites agglomérations et communes rurales à 45%).",
+    "numbers": ["91%", "55%", "52%", "45%"],
+    "entities": ["Rassemblement National", "Reconquête"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives"
+  }
+]

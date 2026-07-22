@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "The standard geographic method for reconciling IRIS and bureau-de-vote zonings (used by the Cartelec research program to produce socio-demographic data per bureau) is to compute the geometric intersection of the two zonings and distribute each source zone's data across intersections proportional to intersection area.",
+    "stance": "neutral",
+    "stance_target": "standard area-based method for IRIS↔bureau de vote crosswalk",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, IRIS and bureau-de-vote zonings",
+    "quoted_support": "La solution la plus standard (celle utilisée par exemple par les chercheurs de Cartelec pour produire des données sociodémographiques par bureau de vote) consiste à identifier les intersections entre les deux maillages (bureaux de vote et IRIS), et à ventiler les données dans chacune des intersections, proportionnellement à sa surface, pour pouvoir reconstituer l'autre maillage.",
+    "numbers": [],
+    "entities": ["Cartelec", "IRIS", "bureau de vote"],
+    "time_period": "documented as of 2016, citing Cartelec report",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comment-jai-presque-cartographi-les-lecteurs-fn-ladresse"
+  },
+  {
+    "claim": "The key assumption underlying area-based IRIS/bureau crosswalks, 'équirépartition' (homogeneous distribution of voters/residents within each zone), is empirically false and can introduce significant bias for fine-grained sociological analysis.",
+    "stance": "refutes",
+    "stance_target": "reliability of naive area-weighted crosswalks for fine-grained (sub-bureau or sub-IRIS) demographic-electoral analysis",
+    "evidence_type": "empirical",
+    "scope_conditions": "Marseille, bureau de vote n°1375, address-geolocated elector data",
+    "quoted_support": "L'hypothèse clé de cette méthode est celle dite d'équirépartition : on part du principe que les électeurs/habitants sont répartis de manière homogène au sein de chaque bureau de vote ou IRIS. Or, cette hypothèse est évidemment fausse, et surtout, sur le terrain qui nous intéresse, elle est fausse de telle manière que cela risque d'introduire des biais significatifs.",
+    "numbers": ["bureau n°1375"],
+    "entities": ["Marseille"],
+    "time_period": "2016",
+    "region": "Marseille, France",
+    "confidence": "high",
+    "source_note_id": "comment-jai-presque-cartographi-les-lecteurs-fn-ladresse"
+  },
+  {
+    "claim": "An alternative to area-based crosswalking is to geocode individual electoral-roll addresses via the Base Adresse Nationale API and reallocate bureau-level electoral results to IRIS using actual elector locations, which the author argues is preferable to reallocating IRIS census data to bureaux because IRIS boundaries are more temporally stable and sociologically coherent than bureau-de-vote boundaries.",
+    "stance": "supports",
+    "stance_target": "address-level geocoding as a superior alternative to area-weighted apportionment for IRIS↔bureau crosswalk when elector address data is available",
+    "evidence_type": "theoretical",
+    "scope_conditions": "requires access to geolocatable electoral-roll addresses (legally ambiguous availability in France)",
+    "quoted_support": "on peut donc à partir de ces données (géolocalisation des électeurs, résultats électoraux par bureaux de vote) reconstituer avec un bon degré de précision les résultats électoraux par IRIS (ou inversement, mais je pense qu'il est préférable de procéder dans ce sens, car les IRIS sont des découpages à la fois plus stables dans le temps et plus cohérents sociologiquement que les bureaux de vote).",
+    "numbers": [],
+    "entities": ["banR", "Base Adresse Nationale", "Paul-Antoine Chevalier"],
+    "time_period": "2016",
+    "region": "Marseille, France",
+    "confidence": "medium",
+    "source_note_id": "comment-jai-presque-cartographi-les-lecteurs-fn-ladresse"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Gary King's rebuttal to Freedman et al. does not dispute their empirical results directly but instead alleges the critics misread his methodology and refused to make their own data and software available for independent verification.",
+    "stance": "refutes",
+    "stance_target": "Impartial reproducibility of the Freedman et al. critique of King's EI method",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "1999 JASA exchange",
+    "quoted_support": "Freedman et al. raise several interesting issues, but also misrepresent or misunderstand the prior literature, my approach, and their own empirical analyses, and compound the problem, by refusing requests from me and the editor to make their data and software available for this note.",
+    "numbers": [],
+    "entities": ["Gary King", "D.A. Freedman"],
+    "time_period": "1999",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "the-future-of-ecological-inference-research-a-reply-to-freedman-et-al-gary-king"
+  }
+]

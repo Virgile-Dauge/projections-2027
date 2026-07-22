@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Les 24 projections en sièges publiées par les instituts durant la campagne des législatives 2024 ont toutes placé le RN en tête à l'issue du second tour, alors que le NFP est arrivé en tête en nombre de sièges — un échec généralisé de la méthode.",
+    "stance": "refutes",
+    "stance_target": "fiabilité des projections en sièges comme méthode de projection électorale fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "24 projections en sièges publiées durant la campagne des législatives 2024",
+    "quoted_support": "Sur les 24 projections de sièges publiées durant la campagne, toutes ont placé le Rassemblement national à la première place.",
+    "numbers": ["24 projections", "175-205 sièges (Ipsos-Talan)"],
+    "entities": ["RN", "NFP", "Ipsos-Talan"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats"
+  },
+  {
+    "claim": "Brice Teinturier (Ipsos) reconnaît qu'à 30-40 sièges près, le modèle de projection en sièges peut présenter des variations extrêmement fortes, notamment dans les circonscriptions se jouant à un point.",
+    "stance": "neutral",
+    "stance_target": "limites méthodologiques documentées des modèles de projections en sièges",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "modèle de projection en sièges Ipsos, législatives 2024",
+    "quoted_support": "Ce modèle reste et restera toujours complexe, toujours fragile... À 30 ou 40 sièges, il peut y avoir des variations extrêmement fortes, surtout si vous avez des circonscriptions qui se jouent à un point.",
+    "numbers": ["30-40 sièges"],
+    "entities": ["Ipsos", "Brice Teinturier"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats"
+  },
+  {
+    "claim": "L'institut BVA Opinion a été le seul à refuser de réaliser une projection en sièges lors des législatives 2024, la jugeant trop incertaine.",
+    "stance": "supports",
+    "stance_target": "existence d'un désaccord méthodologique entre instituts sur la validité même de l'exercice de projection en sièges",
+    "evidence_type": "empirical",
+    "scope_conditions": "instituts de sondage français, législatives 2024",
+    "quoted_support": "Lors de ces législatives, seul l'institut BVA Opinion a fait le choix de ne pas réaliser de projection en sièges, trop incertaine selon eux.",
+    "numbers": [],
+    "entities": ["BVA Opinion"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats"
+  },
+  {
+    "claim": "Le président de la Commission des sondages, Stéphane Hoynck, considère l'exercice de projection en sièges comme distinct d'un sondage classique et annonce demander des explications aux instituts.",
+    "stance": "refutes",
+    "stance_target": "légitimité méthodologique équivalente à un sondage classique pour les projections en sièges",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "instituts de sondage français, législatives 2024",
+    "quoted_support": "Les sondeurs se sont complètement concentrés au second tour sur des projections en sièges... Ce n'est pas un exercice de sondage à proprement parler.",
+    "numbers": [],
+    "entities": ["Commission des sondages", "Stéphane Hoynck"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats"
+  }
+]

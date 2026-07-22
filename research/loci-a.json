@@ -1,0 +1,185 @@
+{
+  "analyst_id": "a",
+  "loci": [
+    {
+      "name": "baseline-election-source-2027",
+      "flavor": "dialectical",
+      "one_line": "Pour projeter 2027 au bureau, faut-il ancrer la baseline sur les européennes 2024 (proportionnelle nationale, offre complète), les législatives 2024 (locales mais biaisées par l'offre/désistements), ou la présidentielle 2022 (comparable mais datée) — et peut-on vraiment séparer niveau national et géographie relative ?",
+      "rationale": "Le corpus documente un vrai désaccord non résolu : Cagé-Piketty (working-paper-n202418, the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit) utilisent les européennes comme série de référence long-terme, tandis que la littérature SOE (still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros, nine-second-order-national-elections-a-conceptual-framework-for-the-analysis-of) montre que les européennes ont une abstention différentielle et une géographie de participation structurellement différentes d'une présidentielle (18% très intéressés en 2024 vs 74% en 2019, selon les-dynamiques-dintention-de-vote-aux-lections-europennes-de-2024-fondation-jean). Ni un côté ni l'autre du corpus n'a testé empiriquement si la structure géographique RELATIVE des européennes prédit mieux le bureau-par-bureau qu'une présidentielle, alors que c'est exactement ce dont le projet a besoin.",
+      "corpus_evidence": [
+        "working-paper-n202418",
+        "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit",
+        "still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros",
+        "nine-second-order-national-elections-a-conceptual-framework-for-the-analysis-of",
+        "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-proj"
+      ],
+      "opposing_positions": [
+        {
+          "position": "Les européennes 2024 sont la meilleure photographie du rapport de force pour une présidentielle multipolaire à venir : proportionnelle nationale, offre complète, chaque voix compte, et c'est la série que la recherche française la plus outillée (Cagé-Piketty) utilise pour mesurer la tripartition.",
+          "sources": ["working-paper-n202418", "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit"]
+        },
+        {
+          "position": "Les européennes restent structurellement une élection de second ordre (Reif & Schmitt) : niveau ET géographie de la participation divergent d'une présidentielle, donc la baseline y est biaisée en niveau même si sa structure relative peut rester informative.",
+          "sources": ["still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros", "nine-second-order-national-elections-a-conceptual-framework-for-the-analysis-of"]
+        }
+      ],
+      "suggested_starting_urls": [
+        "https://www.data.gouv.fr/datasets/donnees-des-elections-agregees"
+      ],
+      "suggested_searches": [
+        "second-order election theory geographic swing versus national level bias",
+        "Cagé Piketty européennes 2024 tripartition méthodologie commune baseline",
+        "comparing European Parliament election results to national election results predictive accuracy"
+      ]
+    },
+    {
+      "name": "crosswalk-bureaux-fiabilite",
+      "flavor": "dialectical",
+      "one_line": "Le crosswalk officiel des identifiants de bureaux de vote (REU, table-bv-reu.csv) est-il suffisamment stable entre 2022 et 2024/2027 pour une jointure fiable, ou la numérotation communale sans norme rend-elle la maille bureau structurellement instable au point de forcer un repli sur la commune ?",
+      "rationale": "Le corpus contient une mise en garde officielle explicite de l'INSEE lui-même sur le jeu de données source ('la numérotation des bureaux de vote relève de la compétence des communes, sans norme de codage strict' — jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr) tout en documentant 3 reconstructions de contours indépendantes qui existent et convergent partiellement (github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa, jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr, une-approche-de-reconstruction-automatique-de-la-gomtrie-des-bureaux-de-vote-mak). Piketty documente que même l'équipe française la plus outillée a renoncé au crosswalk long terme et s'est repliée sur la commune (thomas-piketty). Aucune note du corpus ne chiffre le taux de churn réel des bureaux entre 2022 et 2024 en France — c'est un vrai trou empirique alors que c'est LA question qui détermine si le projet est faisable à la maille annoncée.",
+      "corpus_evidence": [
+        "jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr",
+        "github-inseefrlabtraitement-adresses-reu-traitements-des-adresses-du-rpertoire-l",
+        "thomas-piketty",
+        "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa",
+        "a-vot-chaque-bureau-de-vote-ses-lecteurs"
+      ],
+      "opposing_positions": [
+        {
+          "position": "Le crosswalk REU est utilisable : identifiants électoraux stables via la table officielle, pipeline data.gouv.fr actif, trois reconstructions indépendantes de contours convergent, et le blog INSEE valide empiriquement contre Strasbourg.",
+          "sources": ["github-inseefrlabtraitement-adresses-reu-traitements-des-adresses-du-rpertoire-l", "a-vot-chaque-bureau-de-vote-ses-lecteurs", "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa"]
+        },
+        {
+          "position": "La maille bureau est structurellement fragile : numérotation communale sans norme, arrêtés définis par listes d'adresses et non par géométrie, mise à jour REU seulement tous les 5 ans ; Cagé-Piketty (l'équipe la plus outillée de France) a renoncé au crosswalk long et s'est repliée sur la commune.",
+          "sources": ["jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr", "thomas-piketty"]
+        }
+      ],
+      "suggested_starting_urls": [
+        "https://www.data.gouv.fr/datasets/bureaux-de-vote-et-adresses-de-leurs-electeurs",
+        "https://github.com/InseeFrLab/traitement-adresses-REU"
+      ],
+      "suggested_searches": [
+        "taux de changement des bureaux de vote France entre deux scrutins redécoupage communal",
+        "table-bv-reu.csv documentation crosswalk identifiants électoraux",
+        "precinct boundary change rate election-to-election methodology United States comparison"
+      ]
+    },
+    {
+      "name": "sophistication-vs-degradation-maille-fine",
+      "flavor": "dialectical",
+      "one_line": "La sophistication méthodologique (MRP, inférence écologique, bayésien) apporte-t-elle un gain réel de précision plus on descend vers le bureau de vote, ou ce gain s'inverse-t-il — et si oui, quelle méthode dégrade le plus 'gracieusement' sous le niveau circonscription, là où aucune méthode n'a jamais été validée ?",
+      "rationale": "C'est la question structurante de tout l'Axe 1 (la gradation des méthodes) et le corpus contient un désaccord empirique frontal non résolu : les succès saillants du MRP (how-the-yougov-model-for-the-2017-general-election-works, 93% des sièges prédits) contredisent des validations systématiques bien plus rigoureuses montrant une corrélation MRP-vérité de 0,17 à 0,87 selon les covariables et seulement 28% de couverture nominale à 90% (uc-davis-previously-published-works), un échec collectif des 24 projections françaises en sièges en 2024 (lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats), et une performance pire qu'un tirage 50-50 pour les prévisions démographiques fines (pitfalls-of-demographic-forecasts-of-us-elections). Aucune étude du corpus ne teste la maille bureau (~1000 inscrits) — les deux camps extrapolent au-delà de leurs propres données de validation, ce qui est précisément le trou que le projet doit combler.",
+      "corpus_evidence": [
+        "how-the-yougov-model-for-the-2017-general-election-works",
+        "uc-davis-previously-published-works",
+        "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats",
+        "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in",
+        "models-of-inter-election-change-in"
+      ],
+      "opposing_positions": [
+        {
+          "position": "La sophistication paie et sa valeur ajoutée est précisément au niveau des unités fines : MRP a prédit les chocs locaux en 2017 et bat le swing uniforme de 13 sièges d'écart au Royaume-Uni ; l'EI moderne (ecolRxC, Dirichlet-multinomial) surpasse largement les baselines naïves.",
+          "sources": ["how-the-yougov-model-for-the-2017-general-election-works", "different-methods-similar-outcome-comparing-the-poll-of-poll"]
+        },
+        {
+          "position": "Le gain s'évapore ou s'inverse sous la maille validée : corrélation MRP-vérité erratique (0,17-0,87), les IC de toutes les familles (MRP, EI, swing) sous-couvrent systématiquement à maille fine, et les modèles démographiques fins font pire qu'un tirage aléatoire.",
+          "sources": ["uc-davis-previously-published-works", "pitfalls-of-demographic-forecasts-of-us-elections", "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in"]
+        }
+      ],
+      "suggested_starting_urls": [],
+      "suggested_searches": [
+        "MRP small area estimation validation error rate below constituency level",
+        "ecological inference precinct-level backtest known ground truth France",
+        "graceful degradation forecasting method fine-grained geographic units comparison"
+      ]
+    },
+    {
+      "name": "matrices-front-republicain-reutilisation-2027",
+      "flavor": "dialectical",
+      "one_line": "Les matrices de report de voix mesurées en 2024 (front républicain, désistements législatifs) sont-elles réutilisables telles quelles pour projeter une présidentielle 2027, ou seule leur STRUCTURE (asymétrie gauche/droite) survit tandis que les NIVEAUX se sont déjà érodés en 2025 ?",
+      "rationale": "Le corpus documente une mesure de très haute qualité en 2024 (ENEF n=11204, ±0,7pt — elections-lgislatives-2024) montrant une asymétrie stable et documentée depuis 2015 (un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs) mais aussi une érosion rapide mesurée dès 2025 où le report LR vers le barrage s'effondre et le report NFP se dégrade (un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublic), plus un effet de pénalité d'étiquette expérimental (40%→32% selon le candidat NFP). Ces sources ne se contredisent pas frontalement mais aucune ne résout comment paramétrer l'incertitude d'érosion pour un scrutin présidentiel (participation +25 points vs législatives 2022) à l'horizon 2027 — c'est directement la question de l'Axe 2 sur la réutilisation de scrutins passés.",
+      "corpus_evidence": [
+        "elections-lgislatives-2024",
+        "les-reports-de-voix-premier-second-tour-ipsos",
+        "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+      ],
+      "opposing_positions": [
+        {
+          "position": "Les taux 2024 sont mesurés avec une précision inédite et l'asymétrie NFP→Ensemble (97%) vs Ensemble→NFP (73%) est un invariant comportemental documenté depuis au moins 2015, donc réutilisable en structure.",
+          "sources": ["elections-lgislatives-2024", "les-reports-de-voix-premier-second-tour-ipsos"]
+        },
+        {
+          "position": "Le niveau du barrage s'érode rapidement (mesuré dès 2025) et dépend du candidat exact et du type de scrutin (présidentielle ≠ législative, participation très différente) — extrapoler les taux 2024 sans scénarisation de l'érosion produirait une projection 2027 biaisée.",
+          "sources": ["lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"]
+        }
+      ],
+      "suggested_starting_urls": [],
+      "suggested_searches": [
+        "front républicain 2025 érosion sondage report de voix RN baromètre",
+        "vote transfer matrix stability across election types presidential legislative France",
+        "candidate label penalty vote transfer experimental France 2024 2025"
+      ]
+    },
+    {
+      "name": "mecanique-fine-estimation-francaise",
+      "flavor": "convergent",
+      "one_line": "Comment les instituts et médias français (Elabe, Ipsos, Cluster17) construisent-ils concrètement leurs estimations sous le niveau circonscription (panels de bureaux-témoins, segmentation) en l'absence de tout MRP publié — et cette mécanique est-elle transposable à une projection PRÉ-électorale (pas seulement le soir du vote) au niveau bureau ?",
+      "rationale": "Le corpus établit un constat de recherche explicite (absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026) qu'AUCUNE institution française n'a publié de MRP pour une élection française, et mentionne des 'estimations 20h par panel de bureaux dépouillés comparés aux scrutins antérieurs' (comment-les-instituts-de-sondage-estiment-les-rsultats-des-lections-lgislatives) sans en détailler la mécanique statistique, ni Cluster17 dont le positionnement sur la segmentation fine de l'opinion (cluster17-laboratoire-dtudes-de-lopinion) n'est documenté qu'en surface. C'est directement la question de l'Axe 1 'qui fait ça en France et comment', et le corpus gestures vers une réponse (panel de bureaux témoins, pas de MRP) sans en donner le détail méthodologique transposable en amont d'un scrutin.",
+      "corpus_evidence": [
+        "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026",
+        "comment-les-instituts-de-sondage-estiment-les-rsultats-des-lections-lgislatives",
+        "cluster17-laboratoire-dtudes-de-lopinion",
+        "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"
+      ],
+      "suggested_starting_urls": [
+        "https://www.lemonde.fr/les-decodeurs/article/2024/06/30/comment-les-instituts-de-sondage-estiment-les-resultats-des-elections-legislatives-des-20-heures_6244935_4355771.html",
+        "https://cluster17.com/"
+      ],
+      "suggested_searches": [
+        "méthode estimation 20h bureaux témoins statisticien Ipsos France panel",
+        "Cluster17 segmentation méthodologie électorale France technique",
+        "instituts sondage France élection présidentielle méthode circonscription redressement"
+      ]
+    },
+    {
+      "name": "validation-empirique-ei-france-70k-bureaux",
+      "flavor": "convergent",
+      "one_line": "Quelle mise en œuvre concrète de l'inférence écologique (quelle famille de modèle — Dirichlet-multinomial, ecolRxC, Thomsen — et quel protocole de validation) est réellement adaptée aux ~70 000 bureaux français à 4-5 blocs, et comment la valider avant de lui faire confiance sur 2027 en utilisant les transitions 2022→2024 comme vérité terrain partielle ?",
+      "rationale": "Le corpus contient de nombreuses comparaisons théoriques entre méthodes EI (ecolrxc-ecological-inference-estimation-of-r-c-tables-using-, estimation-of-voter-transitions-based-on-ecological-inferenc, pyei-a-python-package-for-ecological-inference) et un débat académique ancien non résolu (Freedman vs King, a-rejoinder-to-king, on-solutions-to-the-ecological-inference-problem) mais AUCUNE note ne propose un protocole concret de validation empirique dans le cas français : avec ~70 000 bureaux et des transitions 2022→2024 partiellement connues via les résultats officiels (jeu-de-donnes-donnes-des-lections-agrges-datagouvfr), on pourrait backtester une méthode EI avant de l'appliquer à 2027 — mais le corpus ne documente aucune tentative de ce type sur données françaises, contrairement aux validations néo-zélandaises/écossaises citées.",
+      "corpus_evidence": [
+        "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-",
+        "estimation-of-voter-transitions-based-on-ecological-inferenc",
+        "pyei-a-python-package-for-ecological-inference",
+        "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in",
+        "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+      ],
+      "suggested_starting_urls": [
+        "https://www.theoj.org/joss-papers/joss.03397/10.21105.joss.03397.pdf",
+        "https://www.data.gouv.fr/datasets/donnees-des-elections-agregees"
+      ],
+      "suggested_searches": [
+        "ecological inference validation backtest known transitions multiparty European election",
+        "Dirichlet multinomial hierarchical ecological inference implementation large N precincts",
+        "PyEI eiCompare RxC comparative benchmark French multi-bloc election application"
+      ]
+    }
+  ],
+  "skip_loci": [
+    {
+      "slug": "fiabilite-ei-transferts-standalone",
+      "reason": "Cluster contradiction-graph 'fiabilite-ei-transferts' (Freedman vs King, Thomsen vs Dirichlet) est déjà largement résolu par la synthèse du graphe lui-même ('l'EI est utilisable pour des ordres de grandeur, pas pour des estimations bureau par bureau à IC crédibles') — un débat académique de 25+ ans bien caractérisé. J'ai replié la question actionnable restante (quelle implémentation choisir et comment la valider empiriquement sur le cas français) dans le locus convergent 'validation-empirique-ei-france-70k-bureaux', qui pousse au-delà de ce que le débat théorique résout déjà."
+    },
+    {
+      "slug": "cible-militante-persuasion-vs-mobilisation",
+      "reason": "Le cluster contradiction-graph 'cible-militante' (persuasion vs mobilisation) n'est pas un vrai désaccord : les deux effets sont documentés par des RCT de la même école (Pons 2018, Pons & Liégey 2019) et le graphe le note lui-même comme complémentaire, pas contradictoire. C'est une décision de design du livrable (quelles variables afficher sur la carte) que la phase de rédaction peut trancher directement à partir du corpus existant, sans creuser davantage de sources."
+    },
+    {
+      "slug": "swing-uniforme-vs-proportionnel-standalone",
+      "reason": "Le corpus (uniform-swing-versus-proportional-swing-which-is-best, models-of-inter-election-change-in) converge déjà vers une réponse actionnable claire : aucune supériorité empirique consistante en moyenne, mais le piecewise/proportionnel domine aux grandes amplitudes de swing — exactement le régime attendu pour le RN en 2027. Pas besoin de sources supplémentaires pour trancher ce point ; il est absorbé comme nuance dans le locus 'sophistication-vs-degradation-maille-fine'."
+    },
+    {
+      "slug": "sondages-vers-local-standalone",
+      "reason": "Question réelle mais déjà bien caractérisée par le corpus (quarterly-journal-of-political-science-2016 sur le swing artificiel, mise en garde explicite de More in Common sur son propre MRP à 4,5 ans de l'échéance) et redondante avec le locus 'sophistication-vs-degradation-maille-fine' qui couvre déjà la question de la fiabilité à maille fine ; ne justifie pas un investigateur dédié séparé."
+    }
+  ]
+}

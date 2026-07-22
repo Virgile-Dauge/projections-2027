@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "The BES vote-switching constituency nowcast, updated on election day itself with the latest polls, predicted Labour as the largest party in the 2015 UK general election with no party reaching a majority — a prediction the actual result (Conservative majority) directly contradicted.",
+    "stance": "refutes",
+    "stance_target": "geographically-detailed vote-switching/transfer-matrix models are inherently more accurate than simpler national forecasts",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK 2015 general election, forecast published 07/05/2015 (election day)",
+    "quoted_support": "unlike most other prediction models we are predicting Labour to be the largest party, albeit with a very small lead in seats.",
+    "numbers": ["SNP: >50 of 59 Scottish seats predicted", "Lib Dems: 23 seats predicted"],
+    "entities": ["Labour", "SNP", "Liberal Democrats", "Conservative Party"],
+    "time_period": "May 2015",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "general-election-constituency-forecast-update-the-british-election-study"
+  },
+  {
+    "claim": "The constituency-level flow-of-the-vote model's accuracy is bounded by the accuracy of the national/regional polling inputs it is anchored to; a sophisticated local-swing methodology cannot correct for systematic polling error in the underlying opinion polls.",
+    "stance": "supports",
+    "stance_target": "even fine-grained transfer-matrix/flow models inherit and cannot correct for bias in the national polling data feeding them",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK 2015 general election, contextualized by the subsequent industry-wide polling failure (British Polling Council inquiry)",
+    "quoted_support": "In March we blogged the British Election Study 'nowcast' based on preliminary data from Wave 4. We now publish an updated 'nowcast' to reflect the latest BES data and the most recent opinion polls.",
+    "numbers": [],
+    "entities": ["British Election Study"],
+    "time_period": "2015",
+    "region": "UK",
+    "confidence": "medium",
+    "source_note_id": "general-election-constituency-forecast-update-the-british-election-study"
+  },
+  {
+    "claim": "The BES model explicitly predicts it will mis-forecast seats with strong idiosyncratic local factors, naming Clacton (where UKIP incumbent Douglas Carswell was defending a prior by-election win) as a specific expected failure case, because the model captures only systematic constituency-type-level swing, not seat-specific local dynamics.",
+    "stance": "supports",
+    "stance_target": "transfer-matrix/flow models systematically under-predict outcomes in seats with strong idiosyncratic local factors (incumbency personality effects, local by-election dynamics)",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK 2015 general election, Clacton constituency",
+    "quoted_support": "seats which have very peculiar circumstances (for example, Clacton where Douglas Carswell is defending a by-election victory) may not be correctly forecast. For this reason we should not be surprised if parties that rely most heavily on local factors (such as UKIP) do slightly better than the table shows.",
+    "numbers": [],
+    "entities": ["Clacton", "Douglas Carswell", "UKIP"],
+    "time_period": "2015",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "general-election-constituency-forecast-update-the-british-election-study"
+  }
+]

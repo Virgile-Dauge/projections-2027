@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Ipsos's election-night estimation algorithm is explicitly built to smooth out the idiosyncrasies of individual polling stations ('lisser les spécificités électorales des bureaux de vote') rather than take raw station counts at face value.",
+    "stance": "supports",
+    "stance_target": "French election-night estimation applies a smoothing/adjustment layer on top of raw station-level counts, analogous to a swing or model-based correction rather than pure extrapolation",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, Ipsos, 2022 presidential election",
+    "quoted_support": "Nous centralisons toutes les remontées et un algorithme, nourri par les résultats passés, s'occupe de mettre au point une estimation. La méthode de calcul a pour but de lisser les spécificités électorales des bureaux de vote.",
+    "numbers": ["500 field investigators", "200 first ballots reported"],
+    "entities": ["Ipsos", "Mathieu Gallard"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-comment-sont-ralises-les-estimations-des-rsultats-20-heures"
+  },
+  {
+    "claim": "Different French polling institutes use materially different panel sizes and reporting thresholds for election-night estimation: Ipsos uses 500 investigators reporting at 200 ballots, Harris Interactive uses 250 investigators reporting at 100 ballots.",
+    "stance": "neutral",
+    "stance_target": "documenting methodological heterogeneity across French pollsters' election-night panels",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2022 presidential election",
+    "quoted_support": "250 enquêteurs sur le terrain qui font remonter le résultat des 100 premiers bulletins puis celui de la fin du dépouillement.",
+    "numbers": ["Ipsos: 500 investigators / 200-ballot checkpoint", "Harris Interactive: 250 investigators / 100-ballot checkpoint"],
+    "entities": ["Ipsos", "Harris Interactive", "Jean-Daniel Lévy"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-comment-sont-ralises-les-estimations-des-rsultats-20-heures"
+  },
+  {
+    "claim": "The 2022 round-1 20h underestimation of Mélenchon (20%-20.2% projected across Ipsos/Ifop/Elabe/Harris Interactive vs. 21.95% official) was called an unusually large gap by pollsters themselves, who describe typical 20h estimation error as much smaller.",
+    "stance": "refutes",
+    "stance_target": "French bureau-based election-night estimation is uniformly highly precise across candidates and elections",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, presidential round 1, 10 April 2022",
+    "quoted_support": "Effectivement c'est un écart plutôt important pour une estimation. En général, il est beaucoup plus faible.",
+    "numbers": ["20%-20.2% projected (multiple institutes)", "21.95% official", "~2-point gap"],
+    "entities": ["Jean-Luc Mélenchon", "Ipsos", "Ifop", "Elabe", "Harris Interactive", "Mathieu Gallard"],
+    "time_period": "10 April 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-comment-sont-ralises-les-estimations-des-rsultats-20-heures"
+  },
+  {
+    "claim": "Harris Interactive's round-1 2022 20h estimate for Le Pen (24.9%) also missed the official result (23.4%) by a comparable margin in the opposite direction, and the firm reshuffled less than 10% of its polling-station panel between the two rounds.",
+    "stance": "neutral",
+    "stance_target": "documenting a second, opposite-direction estimation error and panel stability between election rounds",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, presidential round 1 vs round 2, 2022",
+    "quoted_support": "Moins de 10 % de notre échantillon de bureaux de vote a été réaménagé entre les deux tours.",
+    "numbers": ["24.9% projected (Harris Interactive)", "23.4% official", "<10% panel turnover between rounds"],
+    "entities": ["Marine Le Pen", "Harris Interactive", "Jean-Daniel Lévy"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-comment-sont-ralises-les-estimations-des-rsultats-20-heures"
+  },
+  {
+    "claim": "Pollsters state that election-night estimation methods are very difficult to substantially revise in the two-week gap between presidential round 1 and round 2.",
+    "stance": "neutral",
+    "stance_target": "constraints on rapid methodological correction of election-night estimation models between rounds",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, 2022 presidential election, 2-week inter-round period",
+    "quoted_support": "les méthodes de calcul sont très difficiles à corriger en deux semaines.",
+    "numbers": ["2 weeks between rounds"],
+    "entities": ["Mathieu Gallard", "Ipsos"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "prsidentielle-comment-sont-ralises-les-estimations-des-rsultats-20-heures"
+  }
+]

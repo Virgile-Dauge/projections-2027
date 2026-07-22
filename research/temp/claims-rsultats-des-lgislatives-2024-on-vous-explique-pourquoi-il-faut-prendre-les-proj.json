@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Jérôme Fourquet (Ifop) compare la projection en sièges réalisée le soir du 1er tour à 'donner le score du 2e tour d'une présidentielle le soir du 1er tour' — l'exercice équivaut méthodologiquement à extrapoler un résultat à un tour non encore joué.",
+    "stance": "refutes",
+    "stance_target": "validité méthodologique des projections en sièges basées uniquement sur les résultats du premier tour",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "projections en sièges du soir du 1er tour, législatives 2024",
+    "quoted_support": "C'est comme si le soir du premier tour de la présidentielle, on essayait de donner le score du deuxième tour",
+    "numbers": [],
+    "entities": ["Jérôme Fourquet", "Ifop"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-des-lgislatives-2024-on-vous-explique-pourquoi-il-faut-prendre-les-proj"
+  },
+  {
+    "claim": "La Commission des sondages avertit que la projection en sièges 'ne présente pas les mêmes encadrements méthodologiques que les sondages' et dépend d'un grand nombre de paramètres propres à chacune des 577 circonscriptions.",
+    "stance": "refutes",
+    "stance_target": "existence d'un cadre méthodologique rigoureux standard pour les projections en sièges, contrairement aux sondages classiques",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "commission des sondages, avis officiel sur les législatives 2024",
+    "quoted_support": "Un tel exercice ne présente pas les mêmes encadrements méthodologiques que les sondages et demeure tributaire d'un grand nombre de paramètres, souvent propres à chacune des 577 circonscriptions",
+    "numbers": ["577 circonscriptions"],
+    "entities": ["Commission des sondages"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-des-lgislatives-2024-on-vous-explique-pourquoi-il-faut-prendre-les-proj"
+  },
+  {
+    "claim": "Les projections en sièges du soir du 1er tour ignoraient les 306 triangulaires et 4 quadrangulaires générées par le scrutin (contre 8 en 2022), ainsi que les consignes de désistement pas encore annoncées.",
+    "stance": "supports",
+    "stance_target": "limite documentée des projections statiques ne tenant pas compte des dynamiques d'entre-deux-tours locales",
+    "evidence_type": "empirical",
+    "scope_conditions": "projections en sièges publiées le 30 juin 2024, France",
+    "quoted_support": "A ce stade, les projections en siège ne prennent pas en compte les dynamiques d'entre-deux-tours à l'échelle locale dans chacune des circonscriptions. Elles ont été réalisées avant l'annonce des potentiels désistements",
+    "numbers": ["306 triangulaires", "4 quadrangulaires", "8 triangulaires en 2022"],
+    "entities": ["législatives 2024"],
+    "time_period": "30 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-des-lgislatives-2024-on-vous-explique-pourquoi-il-faut-prendre-les-proj"
+  }
+]

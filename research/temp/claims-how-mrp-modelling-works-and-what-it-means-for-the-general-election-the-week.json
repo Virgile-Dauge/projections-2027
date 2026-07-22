@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "In the 2024 UK general election campaign, competing MRP models built on similar underlying poll data produced sharply divergent seat projections: YouGov/Sky News projected Labour 422 seats vs Conservatives 140, while More in Common projected Labour 382 seats vs Conservatives 180 — a 40-seat swing between two contemporaneous MRP models.",
+    "stance": "supports",
+    "stance_target": "MRP model outputs are highly sensitive to modelling choices even when using similar underlying data",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2024 general election campaign, early polling period",
+    "quoted_support": "The YouGov MRP predicted that Labour would win 422 seats, up 220 from 2019, while the Conservatives would lose 225, leaving them with just 140... A separate MRP from More in Common released on Monday predicted a smaller win for Labour, of 382 seats, and 180 seats for the Conservatives.",
+    "numbers": ["422 seats Labour (YouGov)", "140 seats Conservative (YouGov)", "382 seats Labour (More in Common)", "180 seats Conservative (More in Common)"],
+    "entities": ["YouGov", "More in Common", "Sky News", "Labour", "Conservatives"],
+    "time_period": "2024",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-mrp-modelling-works-and-what-it-means-for-the-general-election-the-week"
+  },
+  {
+    "claim": "MRP cannot account for very specific local factors such as a hospital or large employer closing in a constituency, or a scandal relating to a particular candidate.",
+    "stance": "refutes",
+    "stance_target": "MRP alone is sufficient for hyper-local campaign targeting decisions",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK constituency-level MRP",
+    "quoted_support": "What MRP \"can't do is account for very specific local factors\", said Sky News, \"such as a hospital or large employer closing down in a constituency, or a scandal relating to a particular candidate\".",
+    "numbers": [],
+    "entities": ["Sky News"],
+    "time_period": "2024",
+    "region": "UK",
+    "confidence": "medium",
+    "source_note_id": "how-mrp-modelling-works-and-what-it-means-for-the-general-election-the-week"
+  },
+  {
+    "claim": "YouGov's MRP underestimated the scale of the Conservative majority in the 2019 UK general election but accurately predicted large Red Wall gains for the Conservatives.",
+    "stance": "neutral",
+    "stance_target": "track record of MRP accuracy across UK elections",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2019 general election",
+    "quoted_support": "The final YouGov MRP poll for the last UK general election underestimated the Conservative majority eventually secured by Boris Johnson, but it did accurately predict big gains in the so-called Red Wall.",
+    "numbers": [],
+    "entities": ["YouGov", "Boris Johnson", "Conservatives"],
+    "time_period": "2019",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-mrp-modelling-works-and-what-it-means-for-the-general-election-the-week"
+  }
+]

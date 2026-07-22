@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "For the March 2026 municipales, French media (LCP) published city-specific election-night estimates for at least 16 individual cities (Paris, Marseille, Lyon, Toulouse, Bordeaux, Strasbourg, Lille, Nice, Toulon, Montpellier, Rennes, Nantes, Besançon, Calais, Perpignan, Bastia), produced by Ipsos-Bva jointly with the CESI engineering school.",
+    "stance": "supports",
+    "stance_target": "French pollsters do publish sub-national, city-level election-night estimates for large individual cities, not just a single national figure",
+    "evidence_type": "empirical",
+    "scope_conditions": "March 2026 French municipal elections, first round",
+    "quoted_support": "LCP publie les estimations de vote, réalisées par l'institut IPSOS Bva et CESI-école d'ingénieurs, dans plusieurs villes de France.",
+    "numbers": ["16 cities covered", "Paris: Grégoire 37%, Dati ~25%", "Marseille: Payan 35.6%, Allisio (RN) 35.1%"],
+    "entities": ["IPSOS Bva", "CESI", "LCP", "Paris", "Marseille", "Lyon", "Toulouse", "Bordeaux", "Strasbourg", "Lille", "Nice", "Toulon", "Montpellier", "Rennes", "Nantes", "Besançon", "Calais", "Perpignan", "Bastia"],
+    "time_period": "15 March 2026",
+    "region": "France (major cities)",
+    "confidence": "high",
+    "source_note_id": "municipales-paris-marseille-lyon-nos-premires-estimations-lcp-assemble-nationale"
+  },
+  {
+    "claim": "City-level election-night estimation for the 2026 municipales was co-produced by a pollster (Ipsos-Bva) and an engineering school (CESI), an institutional pairing distinct from the pollster+media consortium model (Ipsos/Harris/Ifop + broadcaster) used for national legislative/presidential estimates.",
+    "stance": "neutral",
+    "stance_target": "institutional actors behind sub-national estimation",
+    "evidence_type": "empirical",
+    "scope_conditions": "March 2026 municipales",
+    "quoted_support": "les estimations de vote, réalisées par l'institut IPSOS Bva et CESI-école d'ingénieurs",
+    "numbers": [],
+    "entities": ["IPSOS Bva", "CESI"],
+    "time_period": "March 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "municipales-paris-marseille-lyon-nos-premires-estimations-lcp-assemble-nationale"
+  },
+  {
+    "claim": "Published city-level municipal estimates for 2026 give only candidate-list vote shares (not seat/council composition), and the LCP results article discloses no methodology detail — no bureau count, no sample size — for how the city-level figures were derived, unlike the 1998 Ipsos regional/departmental piece.",
+    "stance": "neutral",
+    "stance_target": "opacity of methodology disclosure for city-level estimates versus historical regional/departmental estimates",
+    "evidence_type": "empirical",
+    "scope_conditions": "March 2026 municipales, LCP publication",
+    "quoted_support": "Découvrez les premières estimations du premier tour des élections municipales, réalisées par l'institut IPSOS et CESI-école d'ingénieurs, dans plusieurs villes de France.",
+    "numbers": [],
+    "entities": ["IPSOS Bva", "CESI", "LCP"],
+    "time_period": "March 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "municipales-paris-marseille-lyon-nos-premires-estimations-lcp-assemble-nationale"
+  }
+]

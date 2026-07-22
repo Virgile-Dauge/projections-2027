@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "A working, reproducible pipeline exists (raphaeljolivet/eu2024-stats-iris) that geographically joins 2024 European election results with 2020 INSEE IRIS-level demographic data across all of metropolitan France, using an automatically reconstructed bureau-de-vote geometry (from INSEE REU + OpenStreetMap) as the intermediate layer, released as an open geopackage.",
+    "stance": "supports",
+    "stance_target": "feasibility of civic-tech-built IRIS↔bureau↔election-results crosswalk pipelines at national scale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France métropolitaine, 2024 European election results, 2020 IRIS demographic data",
+    "quoted_support": "Ce projet croise les résultats des élections européennes de 2024 avec les données démographiques INSEE au niveau IRIS (2020), pour l'ensemble de la France métropolitaine. Cette jointure est faite de manière géographique, gràce à la reconstruction de la géométrie des bureaux de vote produite par cet autre projet.",
+    "numbers": ["2020", "2024"],
+    "entities": ["raphaeljolivet", "INSEE", "IRIS", "OpenStreetMap", "REU"],
+    "time_period": "2024, using 2020 demographic base",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "github-raphaeljoliveteu2024-stats-iris-croisement-des-rsultats-aux-lections-euro"
+  }
+]

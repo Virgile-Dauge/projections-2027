@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Calibrating county-level MRP estimates to a known, highly-correlated ground-truth marginal (e.g., the actual gubernatorial election result) reduces county-level estimation error by roughly two-thirds relative to traditional (uncalibrated) MRP, validated on a real 2022 Michigan pre-election poll of abortion-referendum support.",
+    "stance": "supports",
+    "stance_target": "methodological sophistication (calibration) improves small-area MRP accuracy",
+    "evidence_type": "empirical",
+    "scope_conditions": "2022 Michigan midterm pre-election poll, county-level geography, calibration variable = governor/secretary of state race results",
+    "quoted_support": "We find that the method reduces county-level error by nearly two-thirds relative to traditional MRP... Calibrating to the governor race reduces county-level error by about two-thirds in the other elections.",
+    "numbers": ["~two-thirds error reduction (county level)"],
+    "entities": ["William Marble", "Joshua Clinton", "Stanford Hoover Institution", "Vanderbilt", "Michigan", "2022 midterm", "Proposition 3"],
+    "time_period": "2022",
+    "region": "Michigan, USA",
+    "confidence": "high",
+    "source_note_id": "improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat"
+  },
+  {
+    "claim": "The calibration approach extends to PRECINCT-level estimates -- below the county/district level -- by initializing precinct predictions from county-level MRP and calibrating to observed precinct-level vote share, and this precinct-level extension also reduces error by about 60%, comparable to the county-level gain, in real 2022 Michigan election data.",
+    "stance": "refutes",
+    "stance_target": "methodological sophistication gains from small-area estimation evaporate below the electoral-district level",
+    "evidence_type": "empirical",
+    "scope_conditions": "2022 Michigan midterm, precinct-level geography within counties, requires known precinct-level ground-truth vote totals as the calibration target",
+    "quoted_support": "Our precinct-level extension reduces error by 60%... We also show how our calibration approach can be used to generate estimates for smaller nested geographies, such as precincts, even in the absence of poststratification data at this level.",
+    "numbers": ["60% error reduction (precinct level)"],
+    "entities": ["Marble", "Clinton", "Michigan precincts", "2022"],
+    "time_period": "2022",
+    "region": "Michigan, USA",
+    "confidence": "high",
+    "source_note_id": "improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat"
+  },
+  {
+    "claim": "The precinct-level calibration extension explicitly assumes that the precinct-level correlation structure between the calibration variable and the outcome of interest matches the estimated county-level correlation structure -- an assumption the authors admit need not hold, particularly if there is significant heterogeneity across precincts within counties.",
+    "stance": "neutral",
+    "stance_target": "limitations/caveats on the precinct-level sophistication gain finding",
+    "evidence_type": "theoretical",
+    "scope_conditions": "precinct-level extension methodology, caveat stated by the authors themselves",
+    "quoted_support": "We then calibrate using observed precinct-level vote share, assuming the precinct-level correlation structure matches the estimated county-level structure. While this assumption need not hold-particularly if there is significant heterogeneity across precincts within counties-in our application it performs well.",
+    "numbers": [],
+    "entities": ["Marble", "Clinton", "precinct-level correlation structure"],
+    "time_period": "2022",
+    "region": "Michigan, USA",
+    "confidence": "high",
+    "source_note_id": "improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat"
+  },
+  {
+    "claim": "The calibration method requires known ground-truth marginal totals (e.g. actual election vote shares) at the target geography as the calibration anchor, meaning it is not a test of blind demographic-poststratification accuracy but of how well a known-total-anchored blending method can improve estimates -- structurally similar in spirit to swing/uniform-swing methods that other evidence shows degrade at fine geography.",
+    "stance": "neutral",
+    "stance_target": "whether this precinct-level gain generalizes to true blind small-area prediction without known-total anchoring",
+    "evidence_type": "theoretical",
+    "scope_conditions": "calibration methodology requires ground-truth calibration variable to exist at target geography",
+    "quoted_support": "For example, we can use it to estimate opinion in precincts, where election results are available but poststratification data are not.",
+    "numbers": [],
+    "entities": ["Marble", "Clinton", "calibratedMRP package"],
+    "time_period": "2026",
+    "region": "Michigan, USA",
+    "confidence": "medium",
+    "source_note_id": "improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat"
+  }
+]

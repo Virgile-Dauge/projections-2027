@@ -1,0 +1,6 @@
+{
+  "applied": [
+    {"category": "readability", "description": "split the ~450-word 'Réponse directe' exec-summary block into two paragraphs at the natural hinge 'Trois faits ancrent cette réponse.'", "chars_removed": -1}
+  ],
+  "escalations": []
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Dans un sondage Ipsos bva-CESI de fin mai 2026, le candidat du Rassemblement national obtient entre 31% et 36% des intentions de vote au premier tour de 2027 selon les 8 hypothèses testées, avec un score systématiquement meilleur pour Jordan Bardella que pour Marine Le Pen dans des configurations comparables.",
+    "stance": "supports",
+    "stance_target": "avance du RN et avantage relatif de Bardella sur Le Pen dans les intentions de vote nationales à un an du scrutin",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, sondage Ipsos bva-CESI pour Le Parisien, terrain 27-28 mai 2026, N=1500",
+    "quoted_support": "le niveau du candidat ou de la candidate du RN oscille entre 31% et 36%, largement devant les autres candidatures testées. On observe que dans des configurations similaires, c'est la candidature de Jordan Bardella qui obtiendrait un meilleur score que celle de Marine Le Pen.",
+    "numbers": ["31%-36%"],
+    "entities": ["Jordan Bardella", "Marine Le Pen", "Rassemblement National", "Ipsos bva"],
+    "time_period": "27-28 mai 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-2027-les-candidats-du-rassemblement-national-largement-en-tte-au-p"
+  },
+  {
+    "claim": "Édouard Philippe est crédité de 13% à 14,5% des intentions de vote si Gabriel Attal est également candidat, mais de 17,5% à 19% si Attal ne se présente pas, illustrant une forte interdépendance des scores entre candidats proches du centre selon la configuration testée.",
+    "stance": "neutral",
+    "stance_target": "sensibilité des intentions de vote centristes/macronistes à la configuration exacte de l'offre électorale testée",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, sondage Ipsos bva-CESI, mai 2026",
+    "quoted_support": "Le maire du Havre est en effet crédité de 13% à 14,5% des intentions de vote, en cas de candidature de Gabriel Attal, et de 17,5% à 19% si Gabriel Attal n'était pas candidat.",
+    "numbers": ["13%-14,5% (avec Attal)", "17,5%-19% (sans Attal)"],
+    "entities": ["Édouard Philippe", "Gabriel Attal"],
+    "time_period": "mai 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-2027-les-candidats-du-rassemblement-national-largement-en-tte-au-p"
+  },
+  {
+    "claim": "Jean-Luc Mélenchon obtient un score stable entre 13% et 13,5% dans les 8 configurations testées du sondage Ipsos de mai 2026, indépendamment de la présence ou non des autres candidats de gauche ou du centre — contrairement aux autres candidats dont les scores varient fortement selon la configuration.",
+    "stance": "neutral",
+    "stance_target": "stabilité relative de l'électorat Mélenchon face aux recompositions de l'offre électorale, contrairement à l'électorat centriste plus volatile",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, sondage Ipsos bva-CESI, mai 2026",
+    "quoted_support": "Jean-Luc Mélenchon serait quant à lui à un niveau relativement stable, quelle que soit les configurations, entre 13% et 13,5% des voix.",
+    "numbers": ["13%-13,5%"],
+    "entities": ["Jean-Luc Mélenchon", "La France insoumise"],
+    "time_period": "mai 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-2027-les-candidats-du-rassemblement-national-largement-en-tte-au-p"
+  },
+  {
+    "claim": "Pour un échantillon de 1 079 personnes (base intentions de vote 1er tour) et un score mesuré de 20%, l'intervalle de confiance à 95% du sondage Ipsos se situe entre 17,6% et 22,4%, soit une marge d'erreur de ±2,4 points.",
+    "stance": "neutral",
+    "stance_target": "précision statistique des sondages nationaux d'intention de vote à l'échelle d'un score individuel de candidat",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondage par quotas (non aléatoire), méthode Ipsos, norme ISO 20252",
+    "quoted_support": "pour un échantillon de 1079 personnes (Base intentions de vote présidentielle premier tour), si le score mesuré est de 20%, il y a 95% de chances pour que la valeur réelle se situe aujourd'hui entre 17,6% et 22,4% (plus ou moins 2,4 points).",
+    "numbers": ["N=1079", "score 20%", "IC95% [17,6%; 22,4%]", "±2,4 points"],
+    "entities": ["Ipsos bva"],
+    "time_period": "mai 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-2027-les-candidats-du-rassemblement-national-largement-en-tte-au-p"
+  }
+]

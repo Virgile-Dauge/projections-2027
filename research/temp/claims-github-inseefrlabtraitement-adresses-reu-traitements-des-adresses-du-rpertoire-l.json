@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Le travail de traitement des adresses du REU ayant permis la diffusion open data des données de bureaux de vote a été réalisé par l'INSEE entre octobre 2022 et juin 2023, en collaboration avec la DINUM/Etalab, soit environ 8 mois de traitement entre l'extraction des données brutes et leur publication.",
+    "stance": "neutral",
+    "stance_target": "durée du cycle de production des données ouvertes de bureaux de vote françaises",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, INSEE",
+    "quoted_support": "Ce travail a été réalisé par l'Insee entre octobre 2022 et juin 2023 avec la collaboration de la Dinum (Etalab).",
+    "numbers": ["octobre 2022", "juin 2023"],
+    "entities": ["INSEE", "DINUM", "Etalab"],
+    "time_period": "octobre 2022 - juin 2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-inseefrlabtraitement-adresses-reu-traitements-des-adresses-du-rpertoire-l"
+  }
+]

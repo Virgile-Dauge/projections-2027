@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "YouGov's 2017 MRP central estimate (302 Conservative, 269 Labour seats) closely matched the actual result (318 Conservative, 261 Labour) at a time when every conventional pre-election poll predicted a clear Conservative majority.",
+    "stance": "supports",
+    "stance_target": "MRP can outperform conventional national polling in anticipating non-consensus outcomes",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2017 general election",
+    "quoted_support": "YouGov's central estimate was that there would be 302 Conservative and 269 Labour MPs. The electorate returned 318 and 261, respectively.",
+    "numbers": ["302 Conservative predicted", "269 Labour predicted", "318 Conservative actual", "261 Labour actual"],
+    "entities": ["YouGov", "Conservative Party", "Labour Party", "Theresa May"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "this-is-the-election-of-mrp-polls-but-what-are-they-and-why-are-they-showing-suc"
+  },
+  {
+    "claim": "In the first weeks of the 2024 UK general election campaign, four independent MRP models (Find Out Now/Electoral Calculus, More in Common, YouGov, Survation) all forecast a Labour majority but diverged widely in magnitude: Labour seats ranged 382-487, Conservative seats ranged 66-180, Liberal Democrat seats ranged 30-59.",
+    "stance": "supports",
+    "stance_target": "MRP models built by different organisations on similar underlying phenomena produce widely divergent seat-level outputs, indicating substantial model-specification sensitivity",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2024 general election, four competing MRP models",
+    "quoted_support": "Labour's haul is put at between 382 and 487 MPs. Estimated Conservative representation ranges from 66 to 180. For the Liberal Democrats, the models point to a parliamentary party of 30 to 59.",
+    "numbers": ["Labour 382-487 seats", "Conservative 66-180 seats", "Lib Dem 30-59 seats"],
+    "entities": ["Find Out Now", "Electoral Calculus", "More in Common", "YouGov", "Survation"],
+    "time_period": "2024",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "this-is-the-election-of-mrp-polls-but-what-are-they-and-why-are-they-showing-suc"
+  },
+  {
+    "claim": "MRP's two-stage architecture is: (1) multilevel regression fitting a vote-choice model per distinct social/demographic group defined by the survey sample (the 'MR'), (2) poststratification using census-derived constituency demographic composition (plus past election/local results for turnout adjustment) to reweight the fitted group-level estimates onto each constituency's actual population mix (the 'P').",
+    "stance": "neutral",
+    "stance_target": "core MRP mechanics",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "general MRP methodology, UK context",
+    "quoted_support": "This analysis is repeated for each distinct social group identified, using a method called multilevel regression, and forms the first stage of the modelling... This stage of the modelling, known as post-stratification, is the P part of the MRP. It also typically adds other variables, such as past general and local election results, to estimate turnout and to adjust for the particular characteristics of each constituency.",
+    "numbers": [],
+    "entities": [],
+    "time_period": null,
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "this-is-the-election-of-mrp-polls-but-what-are-they-and-why-are-they-showing-suc"
+  },
+  {
+    "claim": "MRP models cannot incorporate candidate-specific local factors, such as Nigel Farage's high-profile candidacy for Reform UK in Clacton in 2024.",
+    "stance": "refutes",
+    "stance_target": "MRP alone captures all locally decisive factors relevant to campaign targeting",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2024 general election",
+    "quoted_support": "adjustments cannot be made for who the candidates are in each constituency and whether any have a profile that could enhance, or detract from, their party's chance of winning. Think Nigel Farage standing for Reform UK in Clacton.",
+    "numbers": [],
+    "entities": ["Nigel Farage", "Reform UK", "Clacton"],
+    "time_period": "2024",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "this-is-the-election-of-mrp-polls-but-what-are-they-and-why-are-they-showing-suc"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Pour relier des precincts (bureaux de vote US) à des circonscriptions quand un mapping GIS direct échoue (découpages denses/irréguliers), Inside Elections passe par les 'census blocks', unité plus petite que le precinct, en s'appuyant sur le 'block assignment file' officiel accompagnant chaque plan de redécoupage comme intermédiaire fiable entre grande et petite géographie électorale.",
+    "stance": "supports",
+    "stance_target": "un crosswalk fiable entre unités électorales de granularités différentes nécessite de passer par une géographie administrative intermédiaire plus fine que les deux unités à relier",
+    "evidence_type": "empirical",
+    "scope_conditions": "50 États US, precincts et circonscriptions du Congrès, cycles 2016-2022",
+    "quoted_support": "Redistricting data plans are almost always accompanied by a block assignment file that sorts census blocks into districts. Because blocks are generally smaller than precincts, this is in many cases the closest thing to an official translation between large and small geographies — a redistricting Rosetta stone.",
+    "numbers": [],
+    "entities": ["Census Bureau", "Inside Elections"],
+    "time_period": "2016-2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "methodology-inside-elections-baseline-by-congressional-district-inside-elections"
+  },
+  {
+    "claim": "Quand un precinct est scindé entre plusieurs circonscriptions et qu'aucun scrutin concurrent au même découpage n'existe pour calibrer la répartition des voix (cas d'un scrutin ancien recalculé avec de nouvelles lignes), Inside Elections choisit explicitement de répartir les voix ÉGALEMENT entre circonscriptions plutôt que proportionnellement à la surface ou par estimation visuelle, un choix assumé comme arbitraire mais 'le plus défendable et reproductible'.",
+    "stance": "neutral",
+    "stance_target": "il n'existe pas de méthode consensuelle pour répartir les votes d'une unité électorale scindée par un redécoupage rétroactif ; le choix méthodologique impacte directement le résultat",
+    "evidence_type": "empirical",
+    "scope_conditions": "precincts scindés, scrutins antérieurs à 2022 recalculés avec les lignes 2022",
+    "quoted_support": "our policy is to allocate a split precinct's votes across all districts evenly. This methodological decision notably differs from other standard techniques, such as assuming votes are allocated proportionally... or even making educated guesses by eyeballing maps.",
+    "numbers": ["écart max ~2 points entre méthodes de répartition"],
+    "entities": ["Inside Elections", "Daily Kos Elections"],
+    "time_period": "avant 2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "methodology-inside-elections-baseline-by-congressional-district-inside-elections"
+  },
+  {
+    "claim": "Quand un scrutin concurrent au même découpage existe pour calibrer la répartition d'un precinct scindé, Inside Elections répartit les voix au prorata exact des voix effectivement comptées dans chaque portion lors de ce scrutin simultané, comme illustré par le precinct 14 de Novi (Michigan), scindé entre les 6e et 11e circonscriptions, où 40% des voix démocrates au poste de gouverneur ont été assignées au 6e district car 40% des voix à la Chambre dans ce precinct en provenaient.",
+    "stance": "supports",
+    "stance_target": "un scrutin simultané au même découpage électoral permet une répartition précise et non-arbitraire des voix d'un precinct scindé",
+    "evidence_type": "empirical",
+    "scope_conditions": "Novi Precinct 14, Oakland County, Michigan, élections 2022",
+    "quoted_support": "531 votes to Democratic Gov. Gretchen Whitmer... 40 percent of Democratic votes... were cast from the portion of this precinct located within the 6th District... we would designate 212 of Whitmer's votes — or 40 percent of her 531 total — to the 6th District.",
+    "numbers": ["40% des voix démocrates gouvernorales → 6e district", "531 voix Whitmer, 220 voix Dixon, 762 voix totales"],
+    "entities": ["Gretchen Whitmer", "Tudor Dixon", "Novi Precinct 14", "Michigan"],
+    "time_period": "2022",
+    "region": "Michigan, United States",
+    "confidence": "high",
+    "source_note_id": "methodology-inside-elections-baseline-by-congressional-district-inside-elections"
+  },
+  {
+    "claim": "Le score Baseline final par parti est calculé comme une moyenne tronquée (trimmed mean) excluant à la fois la meilleure et la pire performance de chaque parti sur l'ensemble des scrutins retenus, ce qui élimine l'effet des candidats exceptionnels ou des élections sans opposition réelle.",
+    "stance": "supports",
+    "stance_target": "une moyenne tronquée est une méthode robuste pour agréger de nombreux scrutins hétérogènes en un indice partisan structurel",
+    "evidence_type": "empirical",
+    "scope_conditions": "Massachusetts 9th District, exemple illustratif",
+    "quoted_support": "To calculate each party's Baseline, simply take the trimmed mean of all previous elections — in other words, an average omitting the highest and lowest values for each party... the 9th's Democratic Baseline is 56.1 percent, while its Republican Baseline is 41.3 percent. The district's Baseline margin — D+14.8 — suggests this seat is a few points more Republican-leaning than the two D+18 federal races would indicate on their own.",
+    "numbers": ["Baseline démocrate 56.1%", "Baseline républicain 41.3%", "marge Baseline D+14.8 vs D+18 pour présidentielle/Chambre seules"],
+    "entities": ["Massachusetts's 9th District", "William Galvin", "Charlie Baker"],
+    "time_period": "cycles 2016-2022",
+    "region": "Massachusetts, United States",
+    "confidence": "high",
+    "source_note_id": "methodology-inside-elections-baseline-by-congressional-district-inside-elections"
+  }
+]

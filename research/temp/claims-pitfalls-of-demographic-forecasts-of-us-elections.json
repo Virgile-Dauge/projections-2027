@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Demographic-composition forecasts of US presidential elections up to five elections in advance perform about as well as a naive 'same as last election' forecast and worse than simply guessing a 50-50 partisan split, even under best-case assumptions favoring the forecaster.",
+    "stance": "refutes",
+    "stance_target": "demographic/compositional trend extrapolation is a reliable method for projecting future electoral results",
+    "evidence_type": "statistical",
+    "scope_conditions": "US presidential elections 1952-2024, backtested with ANES survey data",
+    "quoted_support": "We find that demographic forecasts of US presidential elections are poor. Forecasts of election results up to five elections in advance perform about as well as a naive forecast simply guessing that the result of the next election will be the same as today's result, and worse than predicting that every election will be an even (50-50) contest between Democrats and Republicans.",
+    "numbers": ["backtest window: elections since 1952", "up to 5 elections ahead"],
+    "entities": ["Richard Calvo", "Vincent Pons", "Jesse Shapiro", "ANES"],
+    "time_period": "1952-2024",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "pitfalls-of-demographic-forecasts-of-us-elections"
+  },
+  {
+    "claim": "Enriching demographic covariates, adding regression-tree interactions, or moving from individual-level survey data to county-level aggregate data does not improve demographic-forecast accuracy; county-level forecasts perform even worse than survey-based ones.",
+    "stance": "refutes",
+    "stance_target": "finer geographic/demographic granularity solves the failure of demographic election forecasting",
+    "evidence_type": "statistical",
+    "scope_conditions": "US, county-level replication of the main ANES-based analysis",
+    "quoted_support": "Because some prior demographic forecasts are based on aggregate data, we also apply our approach to county-level data, predicting voting at the county level using county-level demographics, and forecasting future elections based on trends in these characteristics. If anything, this approach performs even worse than the one based on survey data.",
+    "numbers": [],
+    "entities": ["Richard Calvo", "Vincent Pons", "Jesse Shapiro"],
+    "time_period": "1952-2024",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "pitfalls-of-demographic-forecasts-of-us-elections"
+  },
+  {
+    "claim": "The paper's theoretical explanation is a Downsian model in which office-motivated parties adjust their platforms to offset compositional shifts in the electorate; empirically, US party platforms (Manifesto Project data) track demographic shifts in the electorate with a lag, which mutes vote-share changes that a naive demographic forecast would predict.",
+    "stance": "supports",
+    "stance_target": "party strategic adaptation is a confound that breaks static demographic-to-vote-share extrapolation",
+    "evidence_type": "theoretical",
+    "scope_conditions": "US two-party competition, ANES + Manifesto Project data",
+    "quoted_support": "in a standard Downsian model of electoral competition between two parties that are office-motivated and only weakly committed to a certain ideology, changes in the composition of the electorate manifest as changes in party platforms rather than as changes in their vote shares... We find that changes in US parties' ideology and in the stances they take on different issues... have tracked demographic shifts in the electorate, albeit with a lag.",
+    "numbers": [],
+    "entities": ["Manifesto Project", "Downsian model"],
+    "time_period": "not stated (multi-decade)",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "pitfalls-of-demographic-forecasts-of-us-elections"
+  }
+]

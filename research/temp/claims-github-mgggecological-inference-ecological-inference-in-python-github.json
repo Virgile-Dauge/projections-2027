@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "PyEI bundles multiple ecological-inference model families (iterative 2x2 Bayesian EI, RxC multinomial-Dirichlet EI via PyMC) in one Python library, along with shared uncertainty quantification, diagnostics, and cross-method comparison tooling, aimed at analysts inferring group-level voting behavior (e.g. racial bloc voting) from precinct-level aggregate election and demographic data.",
+    "stance": "neutral",
+    "stance_target": "state of the art in ecological-inference tooling as a candidate methodology rung for bureau-de-vote-level projection (matrices de transfert / inférence écologique axis)",
+    "evidence_type": "empirical",
+    "scope_conditions": "US Voting Rights Act litigation context; underlying statistical methods (King 1997 iterative EI, RxC EI) are general and portable",
+    "quoted_support": "PyEI brings together a variety of inference methods in one place and facilitates reporting and plotting results; quantifying the uncertainty associated with results under a given model; making comparisons between methods; and bringing relevant diagnostic tools to bear on ecological inference methods.",
+    "numbers": ["v1.1.4 latest release, Jun 18 2025"],
+    "entities": ["PyEI", "MGGG", "PyMC"],
+    "time_period": "2020-2025",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-mgggecological-inference-ecological-inference-in-python-github"
+  },
+  {
+    "claim": "Ecological inference for Racially Polarized Voting (RPV) is legally grounded in the US Voting Rights Act framework established by Thornburg v. Gingles (1982), where demonstrating meaningful polarization is a necessary (not sufficient) condition for vote-dilution claims -- illustrating that EI methods were developed and validated primarily for a legal-evidentiary use case, not electoral forecasting.",
+    "stance": "neutral",
+    "stance_target": "original purpose and validation context of ecological inference methods, relevant when assessing their fitness for French bureau-de-vote projection (a different use case: forecasting/targeting, not litigation)",
+    "evidence_type": "legal",
+    "scope_conditions": "United States, post-1982 voting rights case law",
+    "quoted_support": "RPV refers specifically to the legal concept developed through case law around the Voting Rights Act of 1965, especially following the landmark Supreme Court case Thornburg v. Gingles (1982). Considered the \"evidentiary linchpin\" for vote dilution cases, demonstrating meaningful levels of polarization is a necessary, but not sufficient, condition that plaintiffs must satisfy to advance a VRA claim.",
+    "numbers": ["1982 (Thornburg v. Gingles)", "1965 (Voting Rights Act)"],
+    "entities": ["Thornburg v. Gingles", "Voting Rights Act", "PyEI"],
+    "time_period": "1965-present",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-mgggecological-inference-ecological-inference-in-python-github"
+  },
+  {
+    "claim": "PyEI is formally published and citable via a peer-reviewed software paper: Knudson, Schoenbach & Becker (2021), 'PyEI: A Python package for ecological inference,' Journal of Open Source Software, 6(64), 3397, doi:10.21105/joss.03397.",
+    "stance": "neutral",
+    "stance_target": "existence of a citable primary methodological source for ecological-inference tooling",
+    "evidence_type": "empirical",
+    "scope_conditions": "software citation record",
+    "quoted_support": "Knudson et al., (2021). PyEI: A Python package for ecological inference. Journal of Open Source Software, 6(64), 3397, https://doi.org/10.21105/joss.03397",
+    "numbers": ["JOSS vol 6, issue 64, article 3397", "doi:10.21105/joss.03397"],
+    "entities": ["Karin C. Knudson", "Gabe Schoenbach", "Amariah Becker", "Journal of Open Source Software"],
+    "time_period": "2021",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-mgggecological-inference-ecological-inference-in-python-github"
+  }
+]

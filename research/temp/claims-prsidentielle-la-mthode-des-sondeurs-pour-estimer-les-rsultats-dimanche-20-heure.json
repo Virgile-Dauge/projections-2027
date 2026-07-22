@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "French election-night estimates at 20h are built from actual counted ballots at a panel of polling stations, not from voter-exit interviews as in the UK/most of Europe.",
+    "stance": "supports",
+    "stance_target": "French election-night projection methodology is fundamentally different from (and, per pollsters, more reliable than) UK-style exit polling",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, presidential elections, Ipsos methodology as of 2022",
+    "quoted_support": "La principale différence avec un sondage de sortie des urnes, c'est qu'au lieu de demander aux gens à l'extérieur du bureau de vote comment ils ont voté, nous regardons directement leurs bulletins de vote.",
+    "numbers": ["~500 field investigators (Ipsos)"],
+    "entities": ["Ipsos", "Mathieu Doiret"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"
+  },
+  {
+    "claim": "French pollsters select their panel of polling stations not for national representativeness but because those specific stations have historically been predictive of political trends.",
+    "stance": "supports",
+    "stance_target": "predictive-station panel selection (vs. representative sampling) as the core French election-night method",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, Ipsos, 2022 presidential election",
+    "quoted_support": "l'idée n'est pas tant de trouver des zones où les habitudes de vote reflètent le reste du pays, mais plutôt d'avoir des bureaux de vote qui peuvent être révélateurs de tendances.",
+    "numbers": [],
+    "entities": ["Ipsos", "Mathieu Doiret"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"
+  },
+  {
+    "claim": "In round 1 of the 2022 French presidential election, Mélenchon's 20h projected score (~20%) undershot his official final result (21.95%) by roughly 2 points because his support surged specifically in large cities whose stations closed and reported later than the rural/small-town stations that dominate the early 20h sample.",
+    "stance": "supports",
+    "stance_target": "urban/rural closing-time asymmetry creates a systematic, documented bias in French election-night projections for candidates whose gains are concentrated in late-reporting urban areas",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, presidential election round 1, 10 April 2022",
+    "quoted_support": "Dans le cas de Jean-Luc Mélenchon, son soutien dans les zones rurales est resté largement inchangé par rapport à 2017, mais il a bondi dans certaines zones urbaines, là où les bureaux de vote fermaient plus tard.",
+    "numbers": ["20% at 20h", "21.95% official final"],
+    "entities": ["Jean-Luc Mélenchon", "Ministère de l'Intérieur"],
+    "time_period": "10 April 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"
+  },
+  {
+    "claim": "French law imposes a strict 'silence électoral' from Friday 23:59 to Sunday 20h banning publication of any poll or vote-count estimate, with fines up to 75,000 euros for violations, making foreign-media or social-media leaks during that window both illegal and empirically unreliable.",
+    "stance": "supports",
+    "stance_target": "the legal framework constrains what election-day data can be published or used before 20h in France",
+    "evidence_type": "legal",
+    "scope_conditions": "France, presidential election 2022",
+    "quoted_support": "la publication de résultats ou de sondages ou leur diffusion, y compris sur les réseaux sociaux, est passible d'une amende allant jusqu'à 75 000 euros.",
+    "numbers": ["75,000 euros maximum fine", "44 hours pre-vote campaign silence"],
+    "entities": ["CNCCEP", "Commission des sondages"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"
+  }
+]

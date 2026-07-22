@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Une régression multivariée au niveau des intercommunalités (âge, CSP, diplôme, revenu, mobilité) réduit l'écart brut de vote RN entre rural et urbain aux législatives 2024 de 10,9 points de pourcentage à seulement 1,3 point (rural autonome) et 3 points (périurbain) une fois neutralisés les effets de composition sociale, avec un modèle expliquant 72% de la variance.",
+    "stance": "supports",
+    "stance_target": "le déterminant social plutôt que géographique du vote RN, corroborant indépendamment la conclusion de l'analyse au niveau bureau de vote de Souidi & Vonderscher",
+    "evidence_type": "statistical",
+    "scope_conditions": "1er tour législatives 2024, France, régression au niveau intercommunalité",
+    "quoted_support": "En neutralisant les effets de composition sociale, le résultat principal que nous obtenons est le suivant : l'écart brut entre rural, périurbain et urbain... de l'ordre de 11 points de pourcentage, tombe à 1,3 point pour le rural et à 3 points pour le périurbain !",
+    "numbers": ["10.9 points", "1.3 point", "3 points", "72%"],
+    "entities": ["Rassemblement National"],
+    "time_period": "30 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "ce-qui-explique-vraiment-les-diffrences-de-vote-rn-entre-les-villes-et-les-campa"
+  },
+  {
+    "claim": "L'électorat-type du vote RN aux législatives 2024, identifié par régression, se caractérise par une faible part de jeunes (15-29 ans), une forte part de 60-74 ans, une forte part d'ouvriers et de retraités, une faible part de cadres supérieurs, une forte part de diplômés CAP/BEP, une faible part de diplômés du supérieur, des déplacements domicile-travail en voiture, et de faibles inégalités de revenu intra-territoriales.",
+    "stance": "neutral",
+    "stance_target": "profil socio-démographique déterminant du vote RN par intercommunalité",
+    "evidence_type": "statistical",
+    "scope_conditions": "1er tour législatives 2024, échelle intercommunalité",
+    "quoted_support": "Pour l'extrême droite, le score est d'autant plus important que les intercommunalités regroupent une part faible de jeunes (15-29 ans) et une part forte de personnes âgées (60-74 ans), que la part des ouvriers et des retraités est élevée et celle des cadres supérieurs est faible, que la proportion de personnes diplômées de CAP ou de BEP est forte et que celle de diplômés du supérieur est faible.",
+    "numbers": [],
+    "entities": ["Rassemblement National"],
+    "time_period": "30 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "ce-qui-explique-vraiment-les-diffrences-de-vote-rn-entre-les-villes-et-les-campa"
+  },
+  {
+    "claim": "Même après neutralisation de la composition sociale, un effet net résiduel de 3 points subsiste pour le vote RN dans le périurbain (contre seulement 1,3 point pour le rural isolé), suggérant une spécificité propre au périurbain liée à des problèmes d'accessibilité aux services non capturés par les variables socio-démographiques standards.",
+    "stance": "neutral",
+    "stance_target": "existence d'un effet territorial périurbain net (accessibilité aux services) au-delà de la composition sociale",
+    "evidence_type": "statistical",
+    "scope_conditions": "1er tour législatives 2024, effet net après contrôle socio-démographique",
+    "quoted_support": "on observe une spécificité périurbaine supérieure à celle du rural : l'effet « net » du territoire est encore de 3 points après correction de la composition sociale, ce qui n'est pas rien. Il semble donc que vivre dans le périurbain pousse, toutes choses égales par ailleurs, à voter davantage RN.",
+    "numbers": ["3 points", "1.3 point"],
+    "entities": ["Rassemblement National"],
+    "time_period": "30 juin 2024",
+    "region": "France, périurbain",
+    "confidence": "medium",
+    "source_note_id": "ce-qui-explique-vraiment-les-diffrences-de-vote-rn-entre-les-villes-et-les-campa"
+  }
+]

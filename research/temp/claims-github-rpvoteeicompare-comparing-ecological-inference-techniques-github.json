@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "eiCompare implements and directly compares three distinct ecological-inference estimator families for the same precinct-level dataset: Goodman's ecological regression (fast, deterministic baseline), King's (1997) iterative Bayesian 2x2 EI, and RxC multinomial-Dirichlet EI for simultaneous multi-candidate/multi-group estimation -- giving practitioners a built-in method-sensitivity check.",
+    "stance": "neutral",
+    "stance_target": "state of the art in ecological-inference tooling; usefulness of running multiple EI estimators in parallel to bound uncertainty from model choice, relevant to matrices de transfert axis of the French projection methodology gradient",
+    "evidence_type": "empirical",
+    "scope_conditions": "R package, wraps `ei` and `eiPack` packages; general statistical methods portable beyond the US racial-voting context",
+    "quoted_support": "The package provides three EI methods: Goodman's Regression (ei_good()) -- A fast, deterministic method based on ecological regression. Useful as a baseline estimate. Iterative EI (ei_iter()) -- King's (1997) iterative 2x2 ecological inference method with Bayesian estimation. RxC EI (ei_rxc()) -- Multinomial-Dirichlet model for simultaneous estimation across all race-candidate pairs.",
+    "numbers": ["v3.0.6"],
+    "entities": ["eiCompare", "Goodman regression", "King 1997 iterative EI", "RxC EI"],
+    "time_period": "2020-2026",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-rpvoteeicompare-comparing-ecological-inference-techniques-github"
+  },
+  {
+    "claim": "eiCompare's stated target user base explicitly includes grassroots/local organizations seeking data-driven local targeting tools to inform advocacy actions -- the same 'field organizing prioritization' use case as the French research query, but applied to racially polarized voting rather than partisan bloc vote projection.",
+    "stance": "supports",
+    "stance_target": "precedent for ecological-inference tooling being purpose-built for grassroots/local-action targeting, not just litigation or forecasting",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "US context; stated design intent, not empirical usage data",
+    "quoted_support": "eiCompare was built with several types of users in mind: ... Grassroots organizations looking for data-driven tools to fuel their fight against vote dilution at the local level.",
+    "numbers": [],
+    "entities": ["eiCompare", "RPVote"],
+    "time_period": "current",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "github-rpvoteeicompare-comparing-ecological-inference-techniques-github"
+  },
+  {
+    "claim": "eiCompare supports VAP-denominator (voting-age-population) normalization via rpv_normalize(), allowing EI estimates originally computed against total voting-age population to be re-conditioned on actual voters only -- addressing a known methodological choice-point (turnout vs. eligible population as denominator) in ecological inference of vote shares.",
+    "stance": "neutral",
+    "stance_target": "methodological nuance in ecological-inference implementations relevant to choosing turnout base for bureau-de-vote projections",
+    "evidence_type": "empirical",
+    "scope_conditions": "eiCompare v3.0.4+",
+    "quoted_support": "When using voting age population (VAP) as the denominator (instead of total votes), use rpv_normalize() to condition estimates on voters only",
+    "numbers": [],
+    "entities": ["eiCompare", "rpv_normalize"],
+    "time_period": "2024-2026",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "github-rpvoteeicompare-comparing-ecological-inference-techniques-github"
+  }
+]

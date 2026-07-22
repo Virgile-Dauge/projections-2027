@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "For the March 1998 French regional elections, Ipsos deployed a three-tier nested sampling design (national/regional/departmental) rather than a single flat sample, to produce estimates at multiple sub-national levels simultaneously.",
+    "stance": "supports",
+    "stance_target": "French pollsters have historically pushed election-night estimation below the national/circonscription level to the regional and departmental level for elections that are explicitly regional",
+    "evidence_type": "empirical",
+    "scope_conditions": "1998 French regional elections (15 March 1998), Ipsos-Bull-France2-Europe1-Le Figaro operation",
+    "quoted_support": "Pour ce faire, Ipsos fait appel à une quarantaine de bureaux de vote dans chacune de ces régions. Mais il y a encore plus complexe. Dans les trois régions phares du scrutin (Ile-de-France, Nord-Pas-de-Calais, Provence-Alpes-Côte d'Azur), l'opération Ipsos du 15 mars va plus loin dans la précision. Afin d'obtenir des estimation pointues, 30 bureaux de vote ont été sélectionnés dans chacun des départements constitutifs de ces régions.",
+    "numbers": ["1180 total bureaux de vote", "450 bureaux for national estimate", "~40 bureaux per region across 21 continental regions", "30 bureaux per département in 3 flagship regions", "~1 million registered voters sampled"],
+    "entities": ["Ipsos", "Bull", "France 2", "Europe 1", "Le Figaro", "Ile-de-France", "Nord-Pas-de-Calais", "Provence-Alpes-Côte d'Azur"],
+    "time_period": "March 1998",
+    "region": "France (regional elections)",
+    "confidence": "high",
+    "source_note_id": "comment-se-fabrique-lopration-estimation-ipsos-ipsos"
+  },
+  {
+    "claim": "Departmental-level precision in the 1998 Ipsos regional-election estimate was only pursued in the three regions considered politically pivotal, not uniformly across all 21 continental regions, indicating a cost/resource-driven prioritization of granularity.",
+    "stance": "supports",
+    "stance_target": "sample size/cost constraints limit how far below the national level French pollsters push estimation",
+    "evidence_type": "empirical",
+    "scope_conditions": "1998 regional elections",
+    "quoted_support": "Dans les trois régions phares du scrutin (Ile-de-France, Nord-Pas-de-Calais, Provence-Alpes-Côte d'Azur), l'opération Ipsos du 15 mars va plus loin dans la précision.",
+    "numbers": ["3 of 21 continental regions received departmental-level breakdown", "30 bureaux per département in those 3 regions"],
+    "entities": ["Ipsos"],
+    "time_period": "March 1998",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "comment-se-fabrique-lopration-estimation-ipsos-ipsos"
+  },
+  {
+    "claim": "The finer the sub-national estimation granularity, the later the result is available on election night: national estimate at 20h, but Nord-Pas-de-Calais regional/departmental seat projections at 20h, PACA at 21h, and Ile-de-France not until 21h30.",
+    "stance": "supports",
+    "stance_target": "granularity below the national level trades off against speed of delivery, not just sample size",
+    "evidence_type": "empirical",
+    "scope_conditions": "1998 regional elections",
+    "quoted_support": "Voilà qui permettra de donner des projections en sièges dans la région du Nord-Pas-de-Calais dés 20H, en Provence-Alpes-Côte d'Azur à 21H et en Ile-de-France à 21H30.",
+    "numbers": ["20h Nord-Pas-de-Calais", "21h PACA", "21h30 Ile-de-France"],
+    "entities": ["Ipsos", "Nord-Pas-de-Calais", "Provence-Alpes-Côte d'Azur", "Ile-de-France"],
+    "time_period": "March 1998",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comment-se-fabrique-lopration-estimation-ipsos-ipsos"
+  },
+  {
+    "claim": "The 1998 Ipsos correspondents in sampled bureaux reported in three sequential phone calls (mid-afternoon turnout, ~19h count of first 200 ballots, ~19h30 full station tally), the same 200-ballot threshold mechanism later documented for the modern national 20h estimate but replicated across a much larger 1,180-station panel to support multi-level output.",
+    "stance": "neutral",
+    "stance_target": "mechanics of the bureaux témoins phone-in protocol",
+    "evidence_type": "empirical",
+    "scope_conditions": "1998 regional elections",
+    "quoted_support": "En milieu d'après-midi, ils appelleront l'institut pour donner une indication de participation dans le bureau où ils se trouvent. Vers 19H, ils rappelleront une seconde fois pour fournir les résultats sur les 200 premiers bulletins de vote dépouillés. Leur troisième appel, aux alentours de 19H30 (pour les bureaux qui ferment à 18H), indiquera les résultats complets du bureau.",
+    "numbers": ["1180 correspondents", "200 first ballots at second call", "three call waves"],
+    "entities": ["Ipsos"],
+    "time_period": "March 1998",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comment-se-fabrique-lopration-estimation-ipsos-ipsos"
+  },
+  {
+    "claim": "An estimation methodology is explicitly distinguished from an opinion poll (sondage) in Ipsos's own public description: the estimate is calculated from actually-counted ballots in chosen stations, not from survey responses.",
+    "stance": "neutral",
+    "stance_target": "definitional distinction between estimation and sondage in French electoral polling",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "general, illustrated by 1998 regional elections",
+    "quoted_support": "Soulignons tout d'abord qu'une estimation, comme celle d'Ipsos Bull France 2 Europe 1 Le Figaro de la soirée du 15 mars, n'est pas un sondage. Les chiffres [...] ne sont pas le produit d'enquêtes d'opinion. Ils ont été calculés à partir d'un échantillon de bulletin de votes répartis dans une série de bureaux soigneusement choisis.",
+    "numbers": [],
+    "entities": ["Ipsos"],
+    "time_period": "1998",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comment-se-fabrique-lopration-estimation-ipsos-ipsos"
+  }
+]

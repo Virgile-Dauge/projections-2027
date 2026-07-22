@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Le dépôt technique Etalab bureau-vote documente que la génération de contours de bureaux de vote par Voronoï n'est pas unique et que d'autres méthodes sont possibles.",
+    "stance": "supports",
+    "stance_target": "non-unicité et non-autorité des contours de bureaux de vote générés depuis le REU",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France entière",
+    "quoted_support": "D'autres méthodes sont possibles, ainsi que d'autres choix au sein même de cette méthode : il n'y a pas unicité des contours.",
+    "numbers": [],
+    "entities": ["Etalab", "data.gouv.fr", "INSEE"],
+    "time_period": "2022-2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-datagouvbureau-vote-preparatory-work-for-the-publication-of-polling-place"
+  },
+  {
+    "claim": "La méthode de génération de contours par Voronoï a été pilotée sur un seul département (Ariège) avant d'être appliquée à l'ensemble du territoire, avec du code de nettoyage et géocodage des adresses REU spécifique à ce test.",
+    "stance": "neutral",
+    "stance_target": "processus de développement méthodologique des contours de bureaux de vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "département de l'Ariège comme pilote, puis généralisation nationale",
+    "quoted_support": "Ce dépôt comprend aussi du code en langage Python permettant de nettoyer et géocoder un extrait (le département de l'Ariège) du format brut des adresses du Répertoire Electoral Unique.",
+    "numbers": [],
+    "entities": ["Ariège", "Etalab", "INSEE"],
+    "time_period": "2022",
+    "region": "Ariège, France",
+    "confidence": "medium",
+    "source_note_id": "github-datagouvbureau-vote-preparatory-work-for-the-publication-of-polling-place"
+  },
+  {
+    "claim": "Le notebook Creation_de_contours_a_partir_du_REU.ipynb permet de régénérer intégralement les contours publiés sur data.gouv.fr, offrant une chaîne de traitement reproductible pour actualiser les contours avec de nouvelles données REU.",
+    "stance": "neutral",
+    "stance_target": "reproductibilité de la méthode de génération de contours de bureaux de vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Le notebook python Creation_de_contours_a_partir_du_REU.ipynb contient toutes les informations permettant de regénérer les contours tels que nous les avons publiés.",
+    "numbers": [],
+    "entities": ["Etalab", "REU"],
+    "time_period": "2022-2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-datagouvbureau-vote-preparatory-work-for-the-publication-of-polling-place"
+  }
+]

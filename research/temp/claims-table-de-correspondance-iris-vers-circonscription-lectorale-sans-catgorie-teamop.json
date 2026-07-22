@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "As of 2023, no official N:1 correspondence table existed between IRIS zones and legislative circonscriptions in France; practitioners had to build one manually via GIS overlay of IGN's IRIS-GE layer and data.gouv.fr's circonscription contours.",
+    "stance": "supports",
+    "stance_target": "absence of a documented official crosswalk for INSEE zonings and electoral zonings prior to later official releases",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "France, IRIS vs. circonscriptions législatives (a coarser unit than bureau de vote)",
+    "quoted_support": "Il me semble qu'il n'y a pas de correspondance N → 1 entre les deux, ce serait trop simple. Les IRIS sont ici... Les circo ici... Reste plus qu'à faire un croisement géographique entre les deux… et voir là où ça coince !",
+    "numbers": [],
+    "entities": ["IGN", "IRIS-GE", "data.gouv.fr"],
+    "time_period": "May-June 2023",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "table-de-correspondance-iris-vers-circonscription-lectorale-sans-catgorie-teamop"
+  },
+  {
+    "claim": "The hardest methodological step in IRIS-to-electoral-zone crosswalks is choosing how to redistribute the population of an IRIS split across a zone boundary; simple area-based redistribution is flagged by practitioners as the 'most hazardous' (least reliable) option.",
+    "stance": "refutes",
+    "stance_target": "simple area-based population redistribution as a reliable crosswalk method",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "France, IRIS split across a circonscription boundary",
+    "quoted_support": "Le plus difficile étant de choisir la méthode pour redistribuer la population d'un iris coupé par une limite de circonscriptions. La plus hasardeuse consiste à le faire en fonction de la surface de l'iris.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "table-de-correspondance-iris-vers-circonscription-lectorale-sans-catgorie-teamop"
+  }
+]

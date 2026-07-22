@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "L'article Bartels (2023, Swiss Political Science Review, doi:10.1111/spsr.12559) porte sur le côté OFFRE (comportement stratégique des partis) de la théorie SOE, pas sur la variation infranationale/régionale du caractère second-order des élections européennes : il teste si les petits partis marginaux allemands (SMP) traitent les européennes comme des élections de premier ordre, via l'analyse des dépenses de campagne et des programmes électoraux (Bundestagswahl 2017 vs Europawahl 2019 en Allemagne, année sans seuil électoral pour les européennes).",
+    "stance": "neutral",
+    "stance_target": "portée exacte de l'article Bartels 2023 SPSR",
+    "evidence_type": "theoretical",
+    "scope_conditions": "Allemagne, élections européennes 2019 vs Bundestag 2017, partis marginaux",
+    "quoted_support": "To capture whether SMPs view European elections as first-order elections and therefore expend more resources than parliamentary parties on these elections, I analysed campaign expenditures and manifestos. Results indicate that SMPs act within a rational actor framework, though not unequivocally.",
+    "numbers": ["2017", "2019"],
+    "entities": ["Jan-Eric Bartels", "Swiss Political Science Review", "SMP (small and marginal parties)", "Allemagne", "Bundestagswahl", "Europawahl"],
+    "time_period": "2017-2019 (données), publié 2023",
+    "region": "Allemagne",
+    "confidence": "high",
+    "source_note_id": "neuer-artikel-are-european-elections-second-order-elections-for-everyone-dr-jan"
+  },
+  {
+    "claim": "Le texte intégral de Bartels (2023) reste inaccessible malgré un statut Open Access hybride (CC-BY) revendiqué par les métadonnées Semantic Scholar : Wiley Online Library, ResearchGate et doi.org bloquent tous l'accès automatisé par challenge Cloudflare/anti-bot.",
+    "stance": "neutral",
+    "stance_target": "accessibilité de la littérature académique sur le caractère second-order infranational des élections européennes",
+    "evidence_type": "empirical",
+    "scope_conditions": "tentative de récupération juillet 2026",
+    "quoted_support": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1111/spsr.12559 [...] or https://doi.org/10.1111/spsr.12559, which is subject to the license by the author or copyright owner",
+    "numbers": [],
+    "entities": ["Wiley Online Library", "ResearchGate", "Semantic Scholar", "Unpaywall"],
+    "time_period": "2026",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "neuer-artikel-are-european-elections-second-order-elections-for-everyone-dr-jan"
+  },
+  {
+    "claim": "La théorie SOE (second-order elections) a été appliquée quasi exclusivement au côté demande (électeurs) jusqu'à Bartels (2023), qui explicite ce trou de littérature sur le côté offre (stratégie des partis), en particulier pour les petits partis marginaux.",
+    "stance": "neutral",
+    "stance_target": "lacune de la littérature SOE",
+    "evidence_type": "theoretical",
+    "scope_conditions": "littérature SOE générale",
+    "quoted_support": "most studies on the topic have focused on the demand side of SOEs – i.e. on the voters – and have ignored or only partially tackled the supply side – i.e. the strategic behaviour of parties – and excluded small and marginal parties (SMPs)",
+    "numbers": [],
+    "entities": ["second-order elections theory", "Jan-Eric Bartels"],
+    "time_period": null,
+    "region": null,
+    "confidence": "medium",
+    "source_note_id": "neuer-artikel-are-european-elections-second-order-elections-for-everyone-dr-jan"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Ecological correlations computed at the aggregate (state/area) level can have the opposite sign from the true individual-level correlation, demonstrating the ecological fallacy is not a minor bias but can fully reverse an inference.",
+    "stance": "refutes",
+    "stance_target": "General reliability of inferring individual behavior from aggregate/geographic data",
+    "evidence_type": "empirical",
+    "scope_conditions": "1930 US Census, 48 states, nativity vs literacy",
+    "quoted_support": "The correlation between the 48 pairs of numbers is .53... In reality, the association is negative: the correlation computed at the individual level is −.11. The ecological correlation gives the wrong inference.",
+    "numbers": ["Ecological correlation +.53", "Individual correlation -.11"],
+    "entities": ["Robinson 1950", "US Census 1930"],
+    "time_period": "1930",
+    "region": "United States (48 states)",
+    "confidence": "high",
+    "source_note_id": "ecological-inference-and-the-ecological-fallacy"
+  },
+  {
+    "claim": "A replication using 1995 Current Population Survey data (nativity vs. high income) shows the same sign reversal: ecological correlation of +.52 implies foreign-born have higher incomes, but the true individual-level relationship is negative and the gap is driven by immigrants concentrating in richer states.",
+    "stance": "refutes",
+    "stance_target": "Validity of area-level (geographic) regression as a proxy for demographic-group behavior",
+    "evidence_type": "empirical",
+    "scope_conditions": "US, 1995 Current Population Survey, persons 25+",
+    "quoted_support": "About 35% of the native-born have high incomes, compared to 28% for the foreign-born. The correlation at the individual level is −.05.",
+    "numbers": ["Ecological correlation +.52", "Native-born high income 35%", "Foreign-born high income 28%", "Individual correlation -.05"],
+    "entities": ["Current Population Survey"],
+    "time_period": "1995",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "ecological-inference-and-the-ecological-fallacy"
+  },
+  {
+    "claim": "On a controlled comparison where ground truth is known (nativity/income), the crude neighborhood model beats both ecological regression and King's random-coefficients EI method by a wide margin, with the regression-based methods overestimating foreign-born high-income share by roughly threefold.",
+    "stance": "refutes",
+    "stance_target": "Superiority of sophisticated EI models (ecological regression, King's random-coefficients model) over the naive neighborhood model",
+    "evidence_type": "empirical",
+    "scope_conditions": "1995 Current Population Survey, US states",
+    "quoted_support": "Table 2... 'random' is King's random-coefficients model, as implemented in his EZIDOS software... In a variety of test applications where all the data are available, the neighborhood model gives more accurate estimates for demographic groups than ecological regression or random-coefficients models.",
+    "numbers": ["Truth: native-born 35%, foreign-born 28%", "Neighborhood model: 34%/36%", "Ecological regression: 29%/85%", "King's random-coefficients (EZIDOS): 30%/72%"],
+    "entities": ["Gary King", "EZIDOS"],
+    "time_period": "1995",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "ecological-inference-and-the-ecological-fallacy"
+  },
+  {
+    "claim": "The 'method of bounds' using only known marginal totals can produce interval estimates too wide to be practically useful, even though it is a valid, assumption-free technique.",
+    "stance": "neutral",
+    "stance_target": "Practical usefulness of bounds-based ecological inference for fine-grained estimation",
+    "evidence_type": "empirical",
+    "scope_conditions": "Washington state, 1995 Current Population Survey",
+    "quoted_support": "it follows that q is trapped between .344/(1 −.079) .= .374 and (.344 −.079)/(1 −.079) .= .288... in many applications, the bounds are too broad to be informative.",
+    "numbers": ["Foreign-born share 7.9%", "High-income share 34.4%", "Bound interval 28.8%-37.4%"],
+    "entities": ["Duncan and Davis 1953", "Washington state"],
+    "time_period": "1995",
+    "region": "Washington state, United States",
+    "confidence": "medium",
+    "source_note_id": "ecological-inference-and-the-ecological-fallacy"
+  }
+]

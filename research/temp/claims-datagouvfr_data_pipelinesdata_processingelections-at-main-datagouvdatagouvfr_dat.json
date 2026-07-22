@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Le pipeline open source generant le jeu de données électorales agrégées de data.gouv.fr (incluant la table de crosswalk table-bv-reu.csv) a reçu un commit le 10 juillet 2026, soit peu avant la rupture de schéma de janvier 2026 annoncée sur le dataset, indiquant une maintenance active et continue.",
+    "stance": "neutral",
+    "stance_target": "niveau de maintenance actif du pipeline de données électorales agrégées de data.gouv.fr",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, data.gouv.fr",
+    "quoted_support": "Latest commit ... Jul 10, 2026",
+    "numbers": ["10 juillet 2026"],
+    "entities": ["data.gouv.fr", "datagouvfr_data_pipelines"],
+    "time_period": "2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "datagouvfr_data_pipelinesdata_processingelections-at-main-datagouvdatagouvfr_dat"
+  }
+]

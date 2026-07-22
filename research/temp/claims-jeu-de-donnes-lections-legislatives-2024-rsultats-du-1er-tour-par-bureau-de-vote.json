@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Le slug data.gouv.fr 'elections-legislatives-2024-resultats-du-1er-tour-par-bureau-de-vote' redirige vers une réutilisation municipale isolée (Meudon) et non vers le jeu de données national du Ministère de l'Intérieur, confirmant que ce piège de ciblage n'est pas isolé à un seul scrutin.",
+    "stance": "supports",
+    "stance_target": "problèmes documentés de réconciliation et de ciblage des jeux de données électoraux par bureau de vote sur data.gouv.fr",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, portail data.gouv.fr, élections législatives 2024",
+    "quoted_support": "Ce fichier contient les résultats des élections législatives du 30 juin 2024 à Meudon (1er tour), bureau de vote par bureau de vote... Ce jeu de données provient d'un portail externe. Voir la source originale : data.meudon.fr",
+    "numbers": ["30 juin 2024"],
+    "entities": ["Meudon", "data.gouv.fr"],
+    "time_period": "juin 2024",
+    "region": "Meudon, France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-lections-legislatives-2024-rsultats-du-1er-tour-par-bureau-de-vote"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "L'indice Baseline d'Inside Elections combine tous les résultats d'élections fédérales et d'État (Chambre, Sénat, gouverneur, et postes constitutionnels d'État) sur les 4 derniers cycles électoraux (2016-2022), soit plus de 750 courses et environ 7 950 résultats répartis sur les 435 circonscriptions de la Chambre, pour estimer le score qu'un candidat 'typique' de chaque parti obtiendrait dans chaque circonscription.",
+    "stance": "supports",
+    "stance_target": "combiner un grand nombre de scrutins passés de nature différente permet d'annuler les particularités individuelles des candidats et d'estimer un rapport de force structurel local",
+    "evidence_type": "empirical",
+    "scope_conditions": "435 circonscriptions de la Chambre des représentants US, cycles 2016-2022",
+    "quoted_support": "Inside Elections' Baseline captures a congressional district's political performance by combining all federal and state election results over the past four election cycles into a single score... over 750 races in total, or approximately 7,950 results when broken down across all 435 seats.",
+    "numbers": ["750+ courses", "~7 950 résultats", "435 sièges", "4 cycles (2016-2022)"],
+    "entities": ["Inside Elections", "Bradley Wascher"],
+    "time_period": "2016-2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "how-to-measure-the-partisanship-of-every-house-seat-inside-elections"
+  },
+  {
+    "claim": "Le score Baseline 2022 est corrélé à 97% avec le résultat présidentiel 2020 et à 95% avec le résultat de l'élection à la Chambre 2022 dans chaque circonscription, ce qui montre qu'un indice composite multi-scrutins reste fortement aligné avec les scrutins individuels de référence tout en en lissant la volatilité.",
+    "stance": "supports",
+    "stance_target": "un indice partisan composite multi-scrutins conserve une forte validité par rapport aux scrutins individuels qu'il agrège",
+    "evidence_type": "statistical",
+    "scope_conditions": "435 circonscriptions US, cycle 2022",
+    "quoted_support": "a district's 2022 Baseline margin was 97 percent correlated with the results of the 2020 presidential election, and 95 percent correlated with the 2022 House race.",
+    "numbers": ["corrélation 97% avec présidentielle 2020", "corrélation 95% avec législatives 2022"],
+    "entities": [],
+    "time_period": "2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "how-to-measure-the-partisanship-of-every-house-seat-inside-elections"
+  },
+  {
+    "claim": "L'écart entre le résultat réel d'un candidat et son score Baseline structurel mesure la force personnelle du candidat : Biden a dépassé le Baseline démocrate moyen de près de 3 points par circonscription en 2020, contre 1.2 point au niveau État et 4.5 points au niveau national (marge du vote populaire).",
+    "stance": "supports",
+    "stance_target": "un indice partisan structurel multi-scrutins permet d'isoler la performance propre d'un candidat de la tendance partisane de fond",
+    "evidence_type": "statistical",
+    "scope_conditions": "élection présidentielle US 2020",
+    "quoted_support": "Biden overperformed the Democratic Baseline by an average of nearly 3 points across all districts... at the state level, Biden outpaced the Democratic Baseline by an average of 1.2 points, and nationally, he won the popular vote by 4.5 points.",
+    "numbers": ["+3 points (niveau circonscription)", "+1.2 point (niveau État)", "+4.5 points (niveau national, vote populaire)"],
+    "entities": ["Joe Biden"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "how-to-measure-the-partisanship-of-every-house-seat-inside-elections"
+  },
+  {
+    "claim": "Les résultats des scrutins d'État pour des postes constitutionnels obscurs (auditeur, trésorier, inspecteur des mines en Arizona, régulateur ferroviaire au Texas) ne sont généralement pas publiés officiellement à l'échelle infra-étatique, obligeant Inside Elections à les recalculer manuellement circonscription par circonscription pour construire son indice Baseline.",
+    "stance": "neutral",
+    "stance_target": "la granularité des données électorales officielles limite la construction d'indices partisans composites précis",
+    "evidence_type": "empirical",
+    "scope_conditions": "États américains, scrutins constitutionnels d'État",
+    "quoted_support": "Unfortunately, most states don't officially report the results of these races at this level. So in order to gather the necessary data for Baseline, we manually calculated the results of every federal and state election in every state between 2016 and 2022 by congressional district.",
+    "numbers": [],
+    "entities": ["Inside Elections"],
+    "time_period": "2016-2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "how-to-measure-the-partisanship-of-every-house-seat-inside-elections"
+  }
+]

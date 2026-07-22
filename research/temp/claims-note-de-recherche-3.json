@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Aux élections européennes 2024, l'extrême droite (RN + Reconquête!) obtient des scores comparables entre secteur public et secteur privé chez les cadres/agents de catégorie A : 39% dans la fonction publique d'État (FPE), 39% dans la fonction publique territoriale (FPT), 41% dans la fonction publique hospitalière (FPH), contre 40% dans le privé.",
+    "stance": "neutral",
+    "stance_target": "ampleur du vote RN/extrême droite par secteur d'emploi aux européennes 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, européennes 2024, agents de la fonction publique par versant",
+    "quoted_support": "situant le vote RN [...] à 39% des suffrages exprimés dans la FPE, 39% dans la FPT et 41% dans la FPH",
+    "numbers": ["39%", "39%", "41%", "40%"],
+    "entities": ["RN", "Reconquête!", "fonction publique d'État", "fonction publique territoriale", "fonction publique hospitalière"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-3"
+  },
+  {
+    "claim": "Lors des duels de second tour des législatives 2024 opposant un candidat RN à un candidat NFP ou Ensemble!, les choix électoraux favorables au RN ou au NFP restent stables d'un tour à l'autre quel que soit le secteur d'emploi (public/privé), et les abstentionnistes du premier tour se sont mobilisés davantage vers le RN que vers la gauche au second tour, contredisant la thèse d'une abstention 'de gauche'.",
+    "stance": "refutes",
+    "stance_target": "hypothèse que la mobilisation différentielle de l'abstention profiterait à la gauche lors d'un front républicain",
+    "evidence_type": "empirical",
+    "scope_conditions": "duels de second tour, législatives 2024, panel électoral par secteur d'emploi",
+    "quoted_support": "Les choix en faveur du NFP ou du RN ne changent pas d'un scrutin à l'autre, quel que soit le secteur [...] Les abstentionnistes du premier tour ne se sont pas mobilisés pour la gauche au second tour mais bien plus pour le RN, ce qui vient démentir la thèse d'une abstention potentiellement de gauche.",
+    "numbers": ["215 circonscriptions (désistement front républicain)"],
+    "entities": ["RN", "NFP", "Ensemble!", "front républicain", "législatives 2024"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "note-de-recherche-3"
+  },
+  {
+    "claim": "Aucune note Cevipof équivalente à la note #17 (Boy & Chiche, rapports de force gauche) n'a été publiée pour chiffrer un coefficient de corrélation géographique RN/droite radicale entre scrutins — la littérature française disponible documente la stabilité géographique RN qualitativement (Institut Terram) mais pas quantitativement au niveau circonscription/bureau.",
+    "stance": "neutral",
+    "stance_target": "existence d'un équivalent RN au coefficient 0,89 CEVIPOF pour la gauche",
+    "evidence_type": "empirical",
+    "scope_conditions": "recherche ciblée juillet 2026, corpus Cevipof/Fondation Jean-Jaurès/Institut Terram/Le Grand Continent",
+    "quoted_support": "Recherche négative confirmée : aucun précédent français de baseline composite [ni de coefficient de corrélation RN chiffré équivalent au 0,89 CEVIPOF-gauche].",
+    "numbers": ["0,89"],
+    "entities": ["Cevipof", "RN", "Daniel Boy", "Jean Chiche"],
+    "time_period": "2024-2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "note-de-recherche-3"
+  }
+]

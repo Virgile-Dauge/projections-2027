@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Park, Gelman & Bafumi (2004) established the canonical MRP procedure: fit a multilevel logistic regression for an individual binary response given demographics and geographic unit to estimate a shrinkage-adjusted average response per demographic-x-geography cell, then reweight cell estimates by census population counts to produce a geographic-unit-level estimate.",
+    "stance": "neutral",
+    "stance_target": "definition of the canonical MRP procedure",
+    "evidence_type": "theoretical",
+    "scope_conditions": "foundational MRP methodology paper",
+    "quoted_support": "The procedure has two steps: 1. Fit a multilevel regression model for the individual response y given demographics and state of residence... 2. From the U.S. census, we get the adult population Nj for each category j.",
+    "numbers": [],
+    "entities": ["David K. Park", "Andrew Gelman", "Joseph Bafumi"],
+    "time_period": "2004",
+    "region": "US",
+    "confidence": "high",
+    "source_note_id": "political-analysis-2004-12375385"
+  },
+  {
+    "claim": "The Park/Gelman/Bafumi 2004 MRP framework expanded the number of demographic-geography 'synthetic voter types' from 960 (Weber et al., 1972-73) to 3,264 (sex x ethnicity x 4 age categories x 4 education categories x 50 states + DC), and validated the model against actual 1988 and 1992 US presidential election outcomes using CBS News/New York Times pre-election polls.",
+    "stance": "neutral",
+    "stance_target": "scale and validation design of the canonical MRP method",
+    "evidence_type": "empirical",
+    "scope_conditions": "US, 1988 and 1992 presidential elections",
+    "quoted_support": "We extend the work of Pool et al. (1965) and Weber et al. (1972–1973) by expanding the number of synthetic voter types from 960 to 3264... We demonstrate the method by application to a set of 1988 and 1992 national preelection polls.",
+    "numbers": ["3264 categories", "960 prior categories", "50 states plus DC"],
+    "entities": ["CBS News", "New York Times"],
+    "time_period": "1988-1992",
+    "region": "US",
+    "confidence": "high",
+    "source_note_id": "political-analysis-2004-12375385"
+  },
+  {
+    "claim": "Multilevel/shrinkage modelling as used in MRP outperforms both extreme alternative estimators — 'no pooling' (raw survey disaggregation, which ignores cross-unit information and gives unacceptably variable inferences for sparsely sampled geographic units) and 'complete pooling' (a single national estimate applied uniformly, which suppresses real geographic variation).",
+    "stance": "supports",
+    "stance_target": "multilevel modeling with partial pooling is preferable to raw disaggregation or complete national pooling for sub-national estimation",
+    "evidence_type": "theoretical",
+    "scope_conditions": "general MRP methodology",
+    "quoted_support": "multilevel modeling outperforms the simpler complete-pooling and no-pooling estimates, which is no surprise: not pooling ignores information and can give unacceptably variable inferences, and complete pooling suppresses variation that can be important or even the main objective of a study.",
+    "numbers": [],
+    "entities": [],
+    "time_period": null,
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "political-analysis-2004-12375385"
+  },
+  {
+    "claim": "Park, Gelman & Bafumi explicitly state that their intended primary use case for MRP is estimating general public opinion on policy issues at the state level, not forecasting election outcomes — pre-election polls were chosen as a validation test case purely for convenience because they can be checked against a known result.",
+    "stance": "refutes",
+    "stance_target": "MRP was originally designed as an election-forecasting tool",
+    "evidence_type": "theoretical",
+    "scope_conditions": "foundational MRP methodology paper, stated author intent",
+    "quoted_support": "We envision the most important usage of this method to be not forecasting elections but estimating public opinion on a variety of issues at the state level... we apply our method to preelection polls not to forecast elections but rather to provide an improved estimate for state-level opinions.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2004",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "political-analysis-2004-12375385"
+  }
+]

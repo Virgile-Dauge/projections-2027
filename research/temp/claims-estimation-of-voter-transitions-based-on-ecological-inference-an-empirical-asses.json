@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Dans la comparaison empirique la plus étendue à ce jour sur données électorales allemandes réelles, le modèle hiérarchique multinomial-Dirichlet (eiPack) surpasse l'ensemble des autres approches d'inférence écologique testées pour l'estimation des transferts de voix.",
+    "stance": "supports",
+    "stance_target": "supériorité empirique du modèle hiérarchique bayésien multinomial-Dirichlet pour l'estimation de transferts de voix",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections fédérales allemandes 2005/2009 à Munich, 314 districts constants",
+    "quoted_support": "we are able to show that an application of the hierarchical multinomial-Dirichlet model, which is implemented in the R-library eiPack, exhibits the best overall estimation performance.",
+    "numbers": [],
+    "entities": ["eiPack", "hierarchical multinomial-Dirichlet model", "Munich"],
+    "time_period": "2005, 2009",
+    "region": "Munich, Allemagne",
+    "confidence": "high",
+    "source_note_id": "estimation-of-voter-transitions-based-on-ecological-inference-an-empirical-asses"
+  },
+  {
+    "claim": "L'approche logit de Thomsen (1987), souvent présentée ailleurs comme la plus robuste pour les transferts de voix, s'est révélée incohérente (inconsistent) dans cette évaluation empirique sur données allemandes.",
+    "stance": "refutes",
+    "stance_target": "robustesse universelle de l'estimateur de Thomsen pour l'estimation de transferts de voix",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections fédérales allemandes 2005/2009 à Munich",
+    "quoted_support": "Other prominent approaches frequently used by practitioners, e.g. the Thomsen logit approach, proved to be inconsistent.",
+    "numbers": [],
+    "entities": ["Thomsen logit approach", "Munich"],
+    "time_period": "2005, 2009",
+    "region": "Munich, Allemagne",
+    "confidence": "medium",
+    "source_note_id": "estimation-of-voter-transitions-based-on-ecological-inference-an-empirical-asses"
+  },
+  {
+    "claim": "Le prétraitement des données (preprocessing) est décrit comme déterminant pour la fiabilité des résultats d'inférence écologique appliquée aux transferts de voix.",
+    "stance": "supports",
+    "stance_target": "importance du prétraitement des données dans les pipelines d'inférence écologique électorale",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections allemandes, comparaison multi-méthodes",
+    "quoted_support": "we demonstrate that appropriate data preprocessing is crucial for achieving reliable results.",
+    "numbers": [],
+    "entities": [],
+    "time_period": null,
+    "region": "Allemagne",
+    "confidence": "medium",
+    "source_note_id": "estimation-of-voter-transitions-based-on-ecological-inference-an-empirical-asses"
+  }
+]

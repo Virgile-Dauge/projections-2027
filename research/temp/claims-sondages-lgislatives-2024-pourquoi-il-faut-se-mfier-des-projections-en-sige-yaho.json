@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Les législatives françaises sont 'une élection avant tout locale' (577 circonscriptions), contrairement aux européennes qui sont une élection proportionnelle nationale à un tour — ce qui relativise fortement l'intérêt d'intentions de vote nationales pour prédire les résultats des législatives.",
+    "stance": "supports",
+    "stance_target": "les européennes offrent une mesure nationale plus 'sincère' et directement transposable, contrairement aux législatives dont l'issue dépend d'une offre et d'une dynamique locale par circonscription",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "élections législatives françaises, 577 circonscriptions",
+    "quoted_support": "le territoire est divisé en 577 circonscriptions, ce qui fait des élections législatives une élection avant tout locale, et relativise l'intérêt d'avoir les intentions de vote à l'échelle nationale.",
+    "numbers": ["577 circonscriptions"],
+    "entities": ["législatives", "européennes"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-projections-en-sige-yaho"
+  },
+  {
+    "claim": "Les projections en sièges des législatives 2024 se basaient sur les résultats des législatives 2022 combinés aux intentions de report de vote au second tour et à l'offre électorale réelle par circonscription (candidats effectivement déposés).",
+    "stance": "neutral",
+    "stance_target": "description de la méthode de projection en sièges utilisée par les instituts (proche d'une matrice de transfert appliquée circonscription par circonscription)",
+    "evidence_type": "empirical",
+    "scope_conditions": "méthode Odoxa et autres instituts, législatives 2024",
+    "quoted_support": "Des projections qui se basent, comme le précise Odoxa, sur les résultats des législatives 2022 et les intentions de report de vote au second tour.",
+    "numbers": [],
+    "entities": ["Odoxa", "législatives 2022"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-projections-en-sige-yaho"
+  },
+  {
+    "claim": "Ipsos a refusé de publier une projection en sièges avant le premier tour des législatives 2024, invoquant une participation attendue en forte hausse (de 47,5% en 2022 vers plus de 60%) comme source d'incertitude trop importante.",
+    "stance": "refutes",
+    "stance_target": "fiabilité systématique des projections en sièges pré-premier-tour",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "Ipsos, législatives 2024, avant le 1er tour",
+    "quoted_support": "Il y a beaucoup d'incertitudes et, de notre point de vue, trop nombreuses pour faire des projections précises à ce stade",
+    "numbers": ["47,5% participation 2022", "60%+ participation attendue 2024"],
+    "entities": ["Ipsos"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-projections-en-sige-yaho"
+  },
+  {
+    "claim": "Le seuil de qualification automatique au second tour (12,5% des inscrits) combiné à une participation en hausse a mécaniquement augmenté le nombre de triangulaires/quadrangulaires attendues (120 à 170 selon Odoxa), amplifiant l'incertitude sur les projections.",
+    "stance": "supports",
+    "stance_target": "mécanisme institutionnel expliquant pourquoi une forte participation dégrade la prévisibilité des législatives françaises",
+    "evidence_type": "statistical",
+    "scope_conditions": "règle électorale française (12,5% des inscrits), législatives 2024",
+    "quoted_support": "les candidats ayant un nombre de voix supérieur à 12,5% des inscrits sont qualifiés automatiquement au second tour. Plus la participation est importante, plus la possibilité d'avoir trois ou quatre candidats au second tour est élevée",
+    "numbers": ["12,5% des inscrits", "120-170 triangulaires/quadrangulaires estimées"],
+    "entities": ["Odoxa"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-projections-en-sige-yaho"
+  },
+  {
+    "claim": "Les projections en sièges des législatives 2022 avaient déjà sous-estimé le score final du RN, un précédent d'échec méthodologique documenté avant même 2024.",
+    "stance": "refutes",
+    "stance_target": "fiabilité historique répétée des projections en sièges pour le RN spécifiquement",
+    "evidence_type": "historical",
+    "scope_conditions": "législatives 2022, France",
+    "quoted_support": "En 2022, les projections avaient sous-estimé le RN",
+    "numbers": [],
+    "entities": ["RN", "législatives 2022", "Ifop"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-projections-en-sige-yaho"
+  }
+]

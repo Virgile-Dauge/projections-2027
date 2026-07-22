@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Cluster17 se présente comme un laboratoire indépendant d'études d'opinion présent dans 5 pays européens, dont le principal outil est la segmentation par 'clusters' de valeurs (plutôt que le clivage gauche-droite), utilisé pour l'analyse de tendances sociétales, le conseil stratégique et l'implantation de projets d'énergies renouvelables.",
+    "stance": "neutral",
+    "stance_target": "positionnement institutionnel de Cluster17 sur le marché des études d'opinion françaises",
+    "evidence_type": "empirical",
+    "scope_conditions": "France + 5 pays européens, 2026",
+    "quoted_support": "Laboratoire indépendant spécialisé dans les études d'opinion, la data analyse et le conseil stratégique. [...] nous avons construit un outil de segmentation et d'analyse innovant : les clusters. Présents dans 5 pays européens, nous accompagnons les décideurs dans leur action au quotidien.",
+    "numbers": ["5 pays européens"],
+    "entities": ["Cluster17", "Le Point", "Le Grand Continent"],
+    "time_period": "2026",
+    "region": "Europe",
+    "confidence": "low",
+    "source_note_id": "cluster17-laboratoire-dtudes-de-lopinion"
+  },
+  {
+    "claim": "Cluster17 revendique s'être classé parmi les meilleurs sondeurs français lors des élections européennes et législatives de 2024, malgré les critiques méthodologiques initiales de 2022.",
+    "stance": "supports",
+    "stance_target": "amélioration de la performance prédictive de Cluster17 depuis les controverses de 2022",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "France, 2024",
+    "quoted_support": "Cluster 17 s'est une nouvelle fois classé parmi les meilleurs sondeurs français lors des élections européennes et législatives de 2024.",
+    "numbers": [],
+    "entities": ["Cluster17"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "low",
+    "source_note_id": "cluster17-laboratoire-dtudes-de-lopinion"
+  },
+  {
+    "claim": "La page d'accueil officielle de Cluster17 ne fournit aucun détail méthodologique quantitatif (taille d'échantillon, marge d'erreur, méthode de projection infranationale) sur ses sondages, se limitant à une présentation marketing des partenariats médias.",
+    "stance": "neutral",
+    "stance_target": "transparence méthodologique publique de Cluster17",
+    "evidence_type": "empirical",
+    "scope_conditions": "site officiel cluster17.com, 2026",
+    "quoted_support": "Grâce aux clusters et aux datas collectées dans nos études, nous disposons du meilleur outil de compréhension de la société.",
+    "numbers": [],
+    "entities": ["Cluster17"],
+    "time_period": "2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "cluster17-laboratoire-dtudes-de-lopinion"
+  }
+]

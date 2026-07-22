@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Le slug data.gouv.fr 'elections-europeennes-2024-resultats-par-bureaux-de-vote' redirige vers une réutilisation municipale isolée (La Rochelle) et non vers le jeu de données national du Ministère de l'Intérieur, illustrant un piège de réconciliation par nommage de dataset sur data.gouv.fr.",
+    "stance": "supports",
+    "stance_target": "problèmes documentés de réconciliation et de ciblage des jeux de données électoraux par bureau de vote sur data.gouv.fr",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, portail data.gouv.fr, élections européennes 2024",
+    "quoted_support": "Détail des résultats des élections européennes 2024 pour la ville de La Rochelle. [...] Ce jeu de données provient d'un portail externe. Voir la source originale : opendata.agglo-larochelle.fr",
+    "numbers": [],
+    "entities": ["La Rochelle", "data.gouv.fr"],
+    "time_period": "juin 2024",
+    "region": "La Rochelle, France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-elections-europennes-2024-rsultats-par-bureaux-de-vote-datagouvfr"
+  }
+]

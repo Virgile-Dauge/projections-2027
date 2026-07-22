@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "In a simulation-based-calibration test using real precinct/voter-file covariates from the 2018 MA-7 Democratic primary but a known synthetic vote-choice model, precinct-aggregated ecological inference (EI) point estimates (z-scores) performed as well as, or slightly better than, individual-level inference that has access to (simulated) individual vote choice directly.",
+    "stance": "refutes",
+    "stance_target": "EI point-estimate accuracy necessarily degrades relative to individual-level baselines at fine geography",
+    "evidence_type": "empirical",
+    "scope_conditions": "simulation study, 2018 MA-7 Democratic primary voter file, correctly-specified linear model, single election",
+    "quoted_support": "In fact, a closer look at the z-scores suggests that the EI point estimate performed better on average than individual inference... this is also acting as a sort of noise filter, reducing the chances that model infers an incorrect value.",
+    "numbers": [],
+    "entities": ["Colin McAuliffe", "Nic Fishman", "Data for Progress", "MA-7", "2018 primary"],
+    "time_period": "2018-2019",
+    "region": "Massachusetts 7th congressional district, USA",
+    "confidence": "medium",
+    "source_note_id": "putting-ecological-inference-to-the-test-part-1"
+  },
+  {
+    "claim": "Despite point estimates holding up well under aggregation to precinct level, the EI method's posterior uncertainty was overdispersed relative to individual-level inference (S-shaped rank-statistic distribution vs near-uniform), meaning EI confidence intervals are less well-calibrated/less identified even when point accuracy does not suffer.",
+    "stance": "supports",
+    "stance_target": "point-estimate accuracy and CI calibration can diverge -- point estimates can survive aggregation to fine geography even as calibration degrades",
+    "evidence_type": "empirical",
+    "scope_conditions": "same MA-7 2018 primary simulation",
+    "quoted_support": "For the conventional individual level inference we get pretty close to uniformity, but for ecological inference we see an S-shaped distribution. This indicates that the posterior computed with EI is overdispersed, meaning it is more uncertain than it should be.",
+    "numbers": [],
+    "entities": ["Data for Progress", "ecological inference", "z-scores", "shrinkage statistic"],
+    "time_period": "2018-2019",
+    "region": "Massachusetts, USA",
+    "confidence": "medium",
+    "source_note_id": "putting-ecological-inference-to-the-test-part-1"
+  },
+  {
+    "claim": "The authors caveat that their favorable EI point-accuracy result is from a single election with a correctly-specified data-generating model, and that identification difficulty for EI depends on how well-sorted voters are by salient characteristics, so results may not generalize across elections.",
+    "stance": "neutral",
+    "stance_target": "generalizability of favorable EI accuracy findings",
+    "evidence_type": "empirical",
+    "scope_conditions": "single simulation study caveat",
+    "quoted_support": "This experiment was encouraging, although fairly limited in scope. There is no guarantee that these results will generalize because the difficulties in identification for EI will depend on how well-sorted voters are by salient characteristics, making every election unique.",
+    "numbers": [],
+    "entities": ["Data for Progress"],
+    "time_period": "2019",
+    "region": "USA",
+    "confidence": "high",
+    "source_note_id": "putting-ecological-inference-to-the-test-part-1"
+  }
+]

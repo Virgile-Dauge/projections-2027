@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Le modèle Economist estime la matrice de corrélation inter-États à partir des résultats électoraux passés et de variables comme le niveau d'éducation, met à zéro les corrélations négatives puis rééchelonne la matrice, ce qui permet à un État non sondé de suivre la tendance d'un État corrélé sondé, avec de l'incertitude ajoutée.",
+    "stance": "supports",
+    "stance_target": "un modèle bayésien peut estimer des unités peu ou pas sondées en empruntant l'information à des unités corrélées démographiquement/historiquement",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèle Economist 2020, niveau État",
+    "quoted_support": "if we have polls for Washington but not for Oregon, then the daily trend for Oregon will look similar to the trend in Washington with added uncertainty. We set the details of this correlation matrix so as to obtain reasonable results... We estimated the correlation matrix from past election results and other relevant state-level predictors such as education.",
+    "numbers": ["S = 51 (50 États + DC)"],
+    "entities": ["Oregon", "Washington"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "harvard-data-science-review-issue-24-fall-2020"
+  },
+  {
+    "claim": "L'échec de prédiction de 2016 dans les États du Midwest est attribué principalement à des sondages qui n'ajustaient pas pour la composition partisane de leur échantillon (non-réponse différentielle) ; le modèle 2020 introduit un terme d'ajustement autorégressif spécifique pour corriger ce biais, avec un paramètre de corrélation temporelle rho ~ Normal(0.7, 0.1).",
+    "stance": "supports",
+    "stance_target": "la non-réponse partisane différentielle est une cause majeure documentée d'erreur de sondage dans les modèles électoraux bayésiens",
+    "evidence_type": "empirical",
+    "scope_conditions": "élection présidentielle US 2016, États du Midwest (ex. Michigan)",
+    "quoted_support": "Poll-aggregation election forecasts performed poorly in 2016, a problem that can be attributed to polls in key midwestern states that did not appropriately adjust for nonresponse (Gelman & Azari, 2017)... ρ ~ Normal(0.7, 0.1).",
+    "numbers": ["rho ~ N(0.7, 0.1)"],
+    "entities": ["Michigan", "Hillary Clinton", "Gelman & Azari 2017"],
+    "time_period": "2016",
+    "region": "United States, Midwest",
+    "confidence": "high",
+    "source_note_id": "harvard-data-science-review-issue-24-fall-2020"
+  },
+  {
+    "claim": "Le modèle 'fondamentals' d'Abramowitz (Time-for-Change) est augmenté d'un terme d'interaction entre croissance économique et part d'électeurs swing (mesurée via l'American National Election Study), pour capter que l'effet de l'économie sur le vote s'atténue dans un électorat plus polarisé.",
+    "stance": "supports",
+    "stance_target": "la polarisation de l'électorat modère l'effet des variables économiques fondamentales sur le résultat électoral",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèle Economist 2020, fondamentals model",
+    "quoted_support": "we add an interaction term between economic growth and the share of swing voters in the electorate, as measured by the American National Election Study, to allow for dampening effects of economics in polarized elections.",
+    "numbers": [],
+    "entities": ["Abramowitz", "American National Election Study"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "harvard-data-science-review-issue-24-fall-2020"
+  },
+  {
+    "claim": "Les auteurs reconnaissent explicitement que les hyperparamètres et les prévisions du modèle fondamentals ne peuvent pas être divulgués car ils sont propriétaires à The Economist, ce qui limite la reproductibilité complète malgré la publication du code sur GitHub.",
+    "stance": "refutes",
+    "stance_target": "les modèles électoraux bayésiens publiés sont entièrement open et reproductibles",
+    "evidence_type": "empirical",
+    "scope_conditions": "modèle Economist",
+    "quoted_support": "In the following, we cannot disclose most of the specific information on the hyperparameters, as well as the fundamentals-based forecast, as these are proprietary to The Economist.",
+    "numbers": [],
+    "entities": ["The Economist"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "harvard-data-science-review-issue-24-fall-2020"
+  },
+  {
+    "claim": "Entre la mise en production initiale du modèle en juin 2020 et la publication de l'article en octobre 2020, les auteurs ont découvert des bugs et des choix de modélisation questionnables dans leur propre code, révélés notamment grâce à l'examen public rendu possible par l'ouverture du code sur GitHub.",
+    "stance": "neutral",
+    "stance_target": "l'ouverture du code des modèles électoraux bayésiens permet une détection collaborative d'erreurs",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "cycle 2020, modèle Economist",
+    "quoted_support": "In the four months between the initial release of our model in June, 2020, and the time of this writing, we have discovered or have been informed of several questionable predictions from our model as revealed in its fit to the current and previous elections, leading us back to our code, where we discovered some bugs and questionable modeling choices.",
+    "numbers": ["4 mois entre juin et octobre 2020"],
+    "entities": ["The Economist", "GitHub"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "harvard-data-science-review-issue-24-fall-2020"
+  }
+]

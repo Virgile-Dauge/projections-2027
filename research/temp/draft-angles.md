@@ -1,0 +1,10 @@
+# Draft angles — étape 10
+
+## Draft A — Strongest-thesis
+La « gradation » des méthodes n'est pas un escalier qu'on gravit mais une boîte à outils où chaque famille occupe un poste précis. L'architecture défendue : (0) crosswalk des bureaux comme condition suspensive, (1) baseline composite multi-scrutins (structure spatiale ordinale, à la PVI), (2) swing proportionnel/piecewise par bloc alimenté par des scénarios nationaux de sondages, (3) matrices de transfert scénarisées pour le second tour ; sortie assumée ordinale (classement des bureaux), validée par backtest 2022→2024. Argumenter avec force, en s'appuyant sur les consensus et les positions convergentes des six investigations.
+
+## Draft B — Steelman-contrarian
+Défendre sérieusement la position minoritaire : le projet devrait viser PLUS sophistiqué que le plancher swing+baseline — MRP calibré, EI à covariables, voire couche bayésienne — parce que les succès documentés sont réels (YouGov 2017, ecolRxC sur 565 élections, Marble & Clinton -60% d'erreur, Linzer/Economist), parce que la France dispose de covariables exceptionnelles (Filosofi 200m, liaison IRIS↔BV officielle, pipeline OS existant), et parce que le plancher naïf a ses propres échecs documentés (UNS aux amplitudes 2027, sign accuracy ~0,5). Engager honnêtement les contre-preuves (Buttice & Highton, Freedman, Pons et al.) et montrer où elles ne s'appliquent pas au cas français.
+
+## Draft C — Synthesis-reconciler / practitioner
+Conditions aux bornes : QUAND chaque famille tient-elle, à quelle maille, avec quelles données ? Organisé autour du livrable actionnable : tableau de gradation complet (précision à maille fine / complexité / données / limites / usages réels / ce que la méthode peut légitimement faire au bureau), inventaire précis des données françaises et de leurs pièges (datasets MI, REU, crosswalks, carreaux, IRIS), pratiques réelles des praticiens FR (1967→2026), programme de validation interne (test de stabilité des bureaux, backtest de rang, corrélation RN à calculer), et arbitrages produit pour les militant·es (marges vs réserves d'abstention).

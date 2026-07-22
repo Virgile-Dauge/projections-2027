@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "L'analyse Cagé-Piketty repose sur une erreur écologique assumée : le comportement moyen d'une commune est systématiquement assimilé au comportement des électeurs qui y résident, faute de données de vote individuelles disponibles avant 1945.",
+    "stance": "refutes",
+    "stance_target": "validité de conclusions sur les électeurs individuels tirées de données agrégées communales",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, 1789-2022, analyse communale",
+    "quoted_support": "quand on lit en introduction que « le vote Ensemble 2022 est le vote le plus bourgeois de toute l'histoire », il aurait été plus exact de dire : « en 2022, le vote pour lequel l'écart à la moyenne des résultats observés dans chaque commune est le plus corrélé avec le niveau de revenu moyen de la commune est le vote pour Ensemble ».",
+    "numbers": [],
+    "entities": ["Julia Cagé", "Thomas Piketty"],
+    "time_period": "1789-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "une-histoire-du-conflit-politique-sans-gographie-mtropolitiques"
+  },
+  {
+    "claim": "Les catégories géographiques utilisées par Cagé et Piketty (villages <2000 hab., bourgs 2000-100000 hab., banlieue, métropole) sont considérées comme stables entre 1789 et 2022 alors que la population française a triplé sur la période (27 millions en 1789 contre 67 millions en 2022), rendant les seuils de taille anachroniques.",
+    "stance": "refutes",
+    "stance_target": "stabilité des catégories territoriales utilisées dans l'analyse électorale de longue durée",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, 1789-2022",
+    "quoted_support": "il est étonnant que les auteurs n'aient pas eu la même rigueur pour les données géographiques [...] une ville de 80 000 habitants ne recouvrait pas la même réalité géographique dans la France de 2022, avec 67 millions d'habitants, et dans la France révolutionnaire qui en comptait 27 millions.",
+    "numbers": ["27 millions d'habitants (1789)", "67 millions d'habitants (2022)", "villages <2000 hab.", "bourgs 2000-100000 hab."],
+    "entities": ["Julia Cagé", "Thomas Piketty"],
+    "time_period": "1789-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "une-histoire-du-conflit-politique-sans-gographie-mtropolitiques"
+  },
+  {
+    "claim": "Le livre Cagé-Piketty rétro-projette les contours des unités urbaines de 2022 sur toute la période 1789-2022, si bien qu'une commune éloignée comme Pompignan (Tarn-et-Garonne, à 3-4h de calèche de Toulouse en 1790) est classée 'banlieue toulousaine' dès 1789, et qu'environ 400 communes dans un rayon de 50 km autour de Paris sont classées 'banlieusardes' dès 1789.",
+    "stance": "refutes",
+    "stance_target": "fiabilité des découpages territoriaux figés utilisés pour l'analyse électorale historique",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, agglomérations de Toulouse et Paris, 1789-2022",
+    "quoted_support": "Si l'on prend l'exemple de l'agglomération de Toulouse, cela signifie que les résultats électoraux de Pompignan [...] sont comptabilisés au sein de la catégorie « communes de banlieue » pour toute la période allant de 1789 à 2022. Pour la région parisienne [...] ce sont environ 400 communes, dans un rayon de plus de 50 km autour de Paris, qui sont « banlieusardes » dès 1789.",
+    "numbers": ["30 km / 3-4h de calèche", "environ 400 communes", "rayon de 50 km"],
+    "entities": ["Pompignan", "Toulouse", "Paris"],
+    "time_period": "1789-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "une-histoire-du-conflit-politique-sans-gographie-mtropolitiques"
+  },
+  {
+    "claim": "Le livre Cagé-Piketty ne teste presque jamais l'échelon départemental, alors que la géographie électorale a de longue date documenté des effets macro-régionaux puissants (le Nord-Est de la France ne votant pas comme l'Ouest ou le Sud-Ouest).",
+    "stance": "refutes",
+    "stance_target": "exhaustivité de l'analyse spatiale à l'échelle communale seule",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, 2017 et 2022",
+    "quoted_support": "alors que la géographie électorale a de longue date constaté l'existence d'effets macro-régionaux très puissants, la France du Nord-Est ne votant pas comme l'Ouest ou le Sud-Ouest, les auteurs limitent l'approche spatiale aux communes et à leur taille.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2017-2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "une-histoire-du-conflit-politique-sans-gographie-mtropolitiques"
+  }
+]

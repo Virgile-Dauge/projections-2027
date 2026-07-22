@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "CSP (categorie socio-professionnelle), employment status, and full-time/part-time variables are published by INSEE at IRIS granularity (~2,000 inhabitants per zone), derived from the population census, structurally separate from the Filosofi-based gridded ('carreaux') products.",
+    "stance": "supports",
+    "stance_target": "Hypothesis that CSP data is only available at IRIS level (~2000 inhabitants), not at the 200m Filosofi grid",
+    "evidence_type": "empirical",
+    "scope_conditions": "INSEE Base infracommunale IRIS Activite des residents, 2020 vintage, France (Mayotte excluded from main file)",
+    "quoted_support": "La base infracommunale «Activite des residents» fournit des donnees sur les caracteristiques des actifs (sexe, age, categorie socio-professionnelle), des salaries et non-salaries (sexe et age).",
+    "numbers": ["~15,500 IRIS zones in France", "750 of which are in DOM", "~2,000 inhabitants per IRIS"],
+    "entities": ["INSEE", "Recensement de la population"],
+    "time_period": "2020 (published 19 October 2023, geography as of 1 January 2022)",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "activit-des-rsidents-en-2020-insee"
+  },
+  {
+    "claim": "A parallel INSEE IRIS-level database, 'Diplomes - Formation', separately publishes education/diploma-level variables (CEP, BEPC/brevet, CAP/BEP, baccalaureat, Bac+2, Bac+3/4), confirming that diploma-level data, like CSP, sits at IRIS granularity rather than in the Filosofi grid products.",
+    "stance": "supports",
+    "stance_target": "Hypothesis that education/diploma variables are unavailable at the 200m Filosofi carreaux level",
+    "evidence_type": "empirical",
+    "scope_conditions": "INSEE IRIS-level census-derived data products, annual vintages",
+    "quoted_support": "The 'Diplome - Formation' (Diploma - Education) database provides data on the age of school-enrolled persons and education levels of non-enrolled persons.",
+    "numbers": [],
+    "entities": ["INSEE"],
+    "time_period": "2015-2022 vintages",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "activit-des-rsidents-en-2020-insee"
+  }
+]

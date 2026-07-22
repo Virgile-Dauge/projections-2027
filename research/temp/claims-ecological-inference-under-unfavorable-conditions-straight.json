@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "L'estimateur de Thomsen (1987), fondé sur une théorie latente de choix binaire, reste robuste (biais faible) même quand les unités agrégées sont hétérogènes racialement et politiquement, contredisant l'hypothèse d'homogénéité qui sous-tend théoriquement l'estimateur.",
+    "stance": "supports",
+    "stance_target": "robustesse empirique de l'inférence écologique par transfert de vote (Thomsen) hors conditions idéales",
+    "evidence_type": "empirical",
+    "scope_conditions": "4 comtés de Floride (Miami-Dade, Lee, Palm Beach, Sarasota), élection générale de 2000, données de bulletins de vote individuels (ballot images) comme vérité terrain",
+    "quoted_support": "Using ballot image data as our measure of actual vote proportions, we find that the Thomsen estimator is robust to individually and collectively diverse settings.",
+    "numbers": ["indice de dissimilarité 2.72% (Miami-Dade)", "3.50% (Palm Beach)", "5.15% (Sarasota)", "6.59% (Lee)", "2.8 millions de bulletins"],
+    "entities": ["Thomsen estimator", "Florida", "Miami-Dade", "Palm Beach", "Sarasota", "Lee County"],
+    "time_period": "élection présidentielle américaine 2000",
+    "region": "Floride, États-Unis",
+    "confidence": "high",
+    "source_note_id": "ecological-inference-under-unfavorable-conditions-straight"
+  },
+  {
+    "claim": "L'estimateur de Thomsen produit des estimations fiables avec aussi peu que 30 à 50 unités agrégées (bureaux/comtés), un seuil validé par une procédure de rééchantillonnage sur un échantillon combiné de 2915 précincts.",
+    "stance": "supports",
+    "stance_target": "nombre minimal d'unités agrégées nécessaires pour une inférence écologique fiable",
+    "evidence_type": "empirical",
+    "scope_conditions": "rééchantillonnage à 10/20/30/50/100/200 précincts, 1000 répétitions par taille d'échantillon",
+    "quoted_support": "suggesting that thirty to fifty such units are more than sufficient to determine the underlying individual-level relationship.",
+    "numbers": ["30-50 unités minimum", "1000 répétitions", "biais < 0.02 à 50 observations (Miami-Dade)"],
+    "entities": ["Thomsen estimator", "resampling procedure"],
+    "time_period": "2000",
+    "region": "Floride, États-Unis",
+    "confidence": "medium",
+    "source_note_id": "ecological-inference-under-unfavorable-conditions-straight"
+  },
+  {
+    "claim": "Sur les mêmes données, la méthode King's EI (1997) produit des erreurs très importantes et inverse parfois le sens des relations substantielles trouvées dans les données individuelles, contrairement à Thomsen.",
+    "stance": "refutes",
+    "stance_target": "fiabilité de King's EI comparée à Thomsen pour l'estimation de transferts de voix inter-scrutins",
+    "evidence_type": "empirical",
+    "scope_conditions": "comté de Miami-Dade, élection présidentielle/sénatoriale 2000",
+    "quoted_support": "King's EI estimates the total percentage of those voting for Bush and the Senate Democrat as 0.19% (compared to 3.13% using the actual ballot image data and 3.44% using Thomsen's approach)",
+    "numbers": ["0.19% (King EI) vs 3.13% (vérité) vs 3.44% (Thomsen)", "facteur d'erreur jusqu'à 21x"],
+    "entities": ["King's EI", "Thomsen estimator", "Bush", "Gore", "Nelson", "McCollum"],
+    "time_period": "2000",
+    "region": "Miami-Dade, Floride",
+    "confidence": "high",
+    "source_note_id": "ecological-inference-under-unfavorable-conditions-straight"
+  },
+  {
+    "claim": "Les techniques d'inférence écologique pour les transferts de voix sont largement utilisées en science politique comparée au-delà des États-Unis, y compris en Europe de l'Ouest.",
+    "stance": "neutral",
+    "stance_target": "usage international de l'inférence écologique appliquée aux élections",
+    "evidence_type": "empirical",
+    "scope_conditions": "revue de littérature multi-pays",
+    "quoted_support": "Studies of electoral dynamics frequently turn to ecological inference techniques to infer individual-level relationships from aggregate-level electoral results in the United States and, among others, Czechoslovakia, India, Italy, Japan, Post-Soviet Russia, Uruguay, and Western Europe",
+    "numbers": [],
+    "entities": ["Thomsen estimator"],
+    "time_period": null,
+    "region": "multi-pays",
+    "confidence": "medium",
+    "source_note_id": "ecological-inference-under-unfavorable-conditions-straight"
+  }
+]

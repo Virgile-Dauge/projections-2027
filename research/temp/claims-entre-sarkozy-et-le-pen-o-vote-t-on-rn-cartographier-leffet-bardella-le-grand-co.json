@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "A comparison of Sarkozy's 2007/2012 presidential vote maps versus Le Pen's/RN's more recent maps shows that the sociological transfer of the traditional right electorate to RN was not an exact transfer of electoral geography — RN's map has shifted, not stayed fixed.",
+    "stance": "refutes",
+    "stance_target": "assumption that a party's electoral geography is stable/transferable across time and election types",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, presidential 2007/2012 vs. legislative 2024, departmental scale",
+    "quoted_support": "Une comparaison suivie des cartes du vote Sarkozy en 2007 et 2012 par rapport au vote Le Pen montre toutefois que ce transfert électoral n'est pas exactement un transfert de la géographie électorale.",
+    "numbers": [],
+    "entities": ["Nicolas Sarkozy", "Marine Le Pen", "Rassemblement National"],
+    "time_period": "2007-2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "entre-sarkozy-et-le-pen-o-vote-t-on-rn-cartographier-leffet-bardella-le-grand-co"
+  },
+  {
+    "claim": "In the 2024 legislative first round, RN achieved its largest gains relative to 2017 outside its historical strongholds, notably in the traditionally left-leaning Southwest: +18.1 points in Tarn-et-Garonne, +17.9 in Lot-et-Garonne, +16.8 in Dordogne.",
+    "stance": "refutes",
+    "stance_target": "stability of RN's geographic base as a fixed predictor",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, legislative first round 2017 vs 2024, departmental scale, Southwest France",
+    "quoted_support": "dans le Sud-Ouest, longtemps considéré comme un bastion de la gauche, il connaît une forte croissance par rapport à 2017 : +18,1 points dans le Tarn-et-Garonne, +17,9 dans le Lot-et-Garonne, +16,8 en Dordogne.",
+    "numbers": ["+18.1pts Tarn-et-Garonne", "+17.9pts Lot-et-Garonne", "+16.8pts Dordogne"],
+    "entities": ["Rassemblement National", "Tarn-et-Garonne", "Lot-et-Garonne", "Dordogne"],
+    "time_period": "2017-2024",
+    "region": "Southwest France",
+    "confidence": "high",
+    "source_note_id": "entre-sarkozy-et-le-pen-o-vote-t-on-rn-cartographier-leffet-bardella-le-grand-co"
+  },
+  {
+    "claim": "RN's historical strongholds intensified sharply between 2017 and 2024 even as the base expanded elsewhere: Haute-Marne rose from 17% (2007 FN level, 2nd department nationally) to 50.8% RN in 2024; Pas-de-Calais reached 48.7%, and Var 49.6%.",
+    "stance": "neutral",
+    "stance_target": "intensity trajectory of RN strongholds across 2007-2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential/legislative 2007-2024, departmental scale",
+    "quoted_support": "La Haute-Marne affichait 17 % de vote RN (contre 50,8 % en 2024) et était le 2e département à voter RN, derrière l'Aisne.",
+    "numbers": ["Haute-Marne 17% (2007) to 50.8% (2024)", "Pas-de-Calais 48.7% (2024)", "Var 49.6% (2024)"],
+    "entities": ["Rassemblement National", "Haute-Marne", "Pas-de-Calais", "Var"],
+    "time_period": "2007-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "entre-sarkozy-et-le-pen-o-vote-t-on-rn-cartographier-leffet-bardella-le-grand-co"
+  },
+  {
+    "claim": "RN's electorate has evolved from an initially homogeneous base toward a diversified coalition increasingly resembling the electorate that supported Sarkozy in 2007 and 2012, per political scientist Jean-Yves Dormagen.",
+    "stance": "neutral",
+    "stance_target": "sociological transformation of RN electorate as driver of geographic expansion",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, 2007-2024",
+    "quoted_support": "la conquête du RN part d'un électorat au départ assez homogène vers un électorat aujourd'hui très diversifié — qui ressemble de plus en plus à la coalition électorale ayant porté ses suffrages sur Nicolas Sarkozy en 2007 et 2012.",
+    "numbers": [],
+    "entities": ["Jean-Yves Dormagen", "Rassemblement National", "Nicolas Sarkozy"],
+    "time_period": "2007-2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "entre-sarkozy-et-le-pen-o-vote-t-on-rn-cartographier-leffet-bardella-le-grand-co"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Cluster17's April 2026 first-round poll for Valeurs Actuelles (n=2003, quota method) gives Bardella 34%, Philippe 17.5%, Mélenchon 14.5%, Glucksmann 10.5%, Retailleau 9.5%, with no second-round transfer matrix published.",
+    "stance": "neutral",
+    "stance_target": "first-round polling baseline for 2027, cross-institute comparison point",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, Cluster17 poll, April 2026",
+    "quoted_support": "Cluster17 pour Valeurs Actuelles · Terrain : Avr. 2026 · n = 2 003 · Méthode des quotas. J. Bardella 34% / É. Philippe 17.5% / J.-L. Mélenchon 14.5% / R. Glucksmann 10.5% / B. Retailleau 9.5%",
+    "numbers": ["34%", "17.5%", "14.5%", "10.5%", "9.5%", "n=2003"],
+    "entities": ["Cluster17", "Valeurs Actuelles", "Jordan Bardella", "Édouard Philippe", "Jean-Luc Mélenchon", "Raphaël Glucksmann", "Bruno Retailleau"],
+    "time_period": "April 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "sondages-cluster17-prsidentielle-2027-rsultats-sp2027"
+  },
+  {
+    "claim": "Several Cluster17 polls for the 2024 legislative elections predicted atypical results not confirmed by the actual vote, prompting industry debate about the institute's weighting methodology.",
+    "stance": "neutral",
+    "stance_target": "reliability caveat for Cluster17 as a polling source",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "France, 2024 legislative elections",
+    "quoted_support": "À l'occasion des législatives de 2024, plusieurs de ses sondages avaient prédit des résultats atypiques non confirmés par les urnes, alimentant un débat interne à la profession sur ses méthodes de pondération.",
+    "numbers": [],
+    "entities": ["Cluster17"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "sondages-cluster17-prsidentielle-2027-rsultats-sp2027"
+  }
+]

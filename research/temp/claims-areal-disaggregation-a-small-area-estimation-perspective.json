@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le dasymetric mapping classique traite les totaux agrégés comme fixes et ignore l'erreur d'échantillonnage, ce qui le rend adapté aux comptages stables (population) mais mal adapté aux indicateurs issus d'enquêtes où l'incertitude doit être propagée.",
+    "stance": "supports",
+    "stance_target": "limites du dasymetric mapping simple pour la désagrégation de données d'enquête (par extension : de résultats électoraux bruités)",
+    "evidence_type": "theoretical",
+    "scope_conditions": "cartographie de population et indicateurs de santé/démographie",
+    "quoted_support": "However, these methods typically treat aggregate totals as fixed and ignore sampling or measurement error. Although effective for stable quantities such as population counts, they are less suited to outcomes derived from surveys, in which uncertainty must be explicitly propagated.",
+    "numbers": [],
+    "entities": ["LandScan", "WorldPop"],
+    "time_period": null,
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "areal-disaggregation-a-small-area-estimation-perspective"
+  },
+  {
+    "claim": "La microsimulation spatiale, technique voisine du MRP, construit une population synthétique contrainte aux marginales observées et redistribue des estimations modélisées par groupe démographique, mais fait face à des problèmes de passage à l'échelle computationnelle et de validation.",
+    "stance": "neutral",
+    "stance_target": "familles de méthodes de désagrégation spatiale applicables à des données socio-politiques",
+    "evidence_type": "theoretical",
+    "scope_conditions": "santé, protection sociale, transport, démographie",
+    "quoted_support": "Another strategy is spatial microsimulation, which constructs synthetic microdata constrained to match observed marginals. The approach parallels multilevel regression with poststratification (MRP)... However, microsimulation faces challenges of computational scaling, validation, and uncertainty quantification.",
+    "numbers": [],
+    "entities": ["MRP", "multilevel regression with poststratification"],
+    "time_period": null,
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "areal-disaggregation-a-small-area-estimation-perspective"
+  },
+  {
+    "claim": "Un cadre bayésien à un seul niveau reliant un champ spatial latent continu (SPDE) à des observations agrégées par une étape d'agrégation explicite pondérée par la population permet de générer des estimations à maille fine directement à partir de données d'enquête publiées à une échelle grossière, avec quantification cohérente de l'incertitude.",
+    "stance": "supports",
+    "stance_target": "faisabilité de modèles bayésiens spatiaux pour désagréger des données électorales/démographiques à maille fine à partir de mailles grossières",
+    "evidence_type": "theoretical",
+    "scope_conditions": "implémenté via inlabru, validé par simulation sur la fécondité générale au Kenya",
+    "quoted_support": "By defining a latent spatial process at the target resolution and linking it to observed outcomes through an aggregation step, the framework adopts small-area estimation techniques while incorporating covariates and delivering coherent uncertainty quantification.",
+    "numbers": [],
+    "entities": ["inlabru", "SPDE", "Fay-Herriot model"],
+    "time_period": null,
+    "region": "Kenya (étude de cas)",
+    "confidence": "high",
+    "source_note_id": "areal-disaggregation-a-small-area-estimation-perspective"
+  },
+  {
+    "claim": "Le cadre proposé a été appliqué pour produire des estimations au niveau district de la fécondité générale (Kenya DHS 2022) et d'indicateurs de travail domestique non rémunéré et d'usage des médias (Kenya Time Use Survey 2021), cette dernière enquête n'étant géo-indexée publiquement qu'au niveau comté.",
+    "stance": "neutral",
+    "stance_target": "cas d'usage réel de désagrégation aréale bayésienne à partir de données publiées à maille grossière",
+    "evidence_type": "empirical",
+    "scope_conditions": "Kenya, comté (Admin-1) vers district (Admin-2)",
+    "quoted_support": "The publicly released data are only geo-indexed at the county (Admin-1) level, even though many key indicators would ideally be mapped at the district scale to guide localized interventions.",
+    "numbers": [],
+    "entities": ["Kenya Demographic and Health Survey 2022", "Kenya Time Use Survey 2021"],
+    "time_period": "2021-2022",
+    "region": "Kenya",
+    "confidence": "high",
+    "source_note_id": "areal-disaggregation-a-small-area-estimation-perspective"
+  }
+]

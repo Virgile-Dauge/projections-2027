@@ -1,0 +1,115 @@
+[
+  {
+    "claim": "Aucun institut de sondage, média ou laboratoire académique n'a publié d'application MRP (multilevel regression with poststratification) à une élection présidentielle ou législative française, à quelque échelle géographique que ce soit, à date de juillet 2026.",
+    "stance": "supports",
+    "stance_target": "qui fait ça (MRP) en France : personne ne publie de MRP",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, élections présidentielle et législatives, recherche menée juillet 2026",
+    "quoted_support": "Aucune source, institutionnelle, journalistique ou académique, n'a été identifiée qui applique le MRP à une élection française (présidentielle ou législatives), à quelque échelle que ce soit (région, département, circonscription, bureau de vote).",
+    "numbers": [],
+    "entities": [
+      "YouGov",
+      "Datapraxis",
+      "Cluster17",
+      "MRP"
+    ],
+    "time_period": "jusqu'à juillet 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  },
+  {
+    "claim": "YouGov publie des MRP au Royaume-Uni et en Espagne mais ne revendique aucune application en France dans sa documentation méthodologique générique.",
+    "stance": "supports",
+    "stance_target": "portée géographique limitée du MRP commercial aux marchés anglo-saxons/hispanophone",
+    "evidence_type": "empirical",
+    "scope_conditions": "YouGov, élections nationales",
+    "quoted_support": "proven track record of success including in recent British and Spanish national elections",
+    "numbers": [],
+    "entities": [
+      "YouGov"
+    ],
+    "time_period": "jusqu'à 2026",
+    "region": "Royaume-Uni, Espagne",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  },
+  {
+    "claim": "Cluster17, l'institut français le plus orienté data-science du marché des sondages, utilise un clustering comportemental et un redressement par quotas + rappel de vote, mais pas un modèle multi-niveaux avec poststratification sur données de recensement INSEE (donc pas un MRP au sens technique).",
+    "stance": "refutes",
+    "stance_target": "existence d'un MRP français déguisé chez Cluster17",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, méthodologie Cluster17 (Jean-Yves Dormagen)",
+    "quoted_support": "Cluster17's surveys are conducted through self-administered online questionnaires, with sample representativeness ensured through the quota method [...]. The adjustment of raw results is performed using socio-demographic variables and memories of previous voting based on the population of registered voters (as established by INSEE) and election results.",
+    "numbers": [],
+    "entities": [
+      "Cluster17",
+      "Jean-Yves Dormagen",
+      "INSEE"
+    ],
+    "time_period": "depuis novembre 2021",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  },
+  {
+    "claim": "Pour représenter la future Assemblée nationale au niveau circonscription, il faudrait en théorie 577 sondages locaux, un par circonscription, ce qui n'est pas fait en pratique en France — les sondages restent nationaux et sont transposés en sièges par projection.",
+    "stance": "supports",
+    "stance_target": "l'absence de granularité circonscription/bureau dans la pratique française des sondages électoraux, contexte qui explique l'absence de MRP",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, législatives",
+    "quoted_support": "Pour représenter la future Assemblée nationale tout en restant dans la logique des sondages, il faudrait en réalité mener 577 sondages, un par circonscription [...]. Les sondages sont réalisés au niveau national.",
+    "numbers": [
+      "577"
+    ],
+    "entities": [
+      "Assemblée nationale"
+    ],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  },
+  {
+    "claim": "Aucun projet français (datajournalisme, civic tech, académique ou commercial) identifié en juillet 2026 ne combine à la fois la maille du bureau de vote/infra-communale ET la projection d'un scrutin futur non encore observé : les projets à maille bureau (Souidi & Vonderscher, Observatoire des Votes/Géoclip) sont descriptifs/rétrospectifs, et les projets prédictifs (France2027.eu, quiserapresident.fr) restent à maille nationale.",
+    "stance": "supports",
+    "stance_target": "GAP1 élargi : absence de projection française à maille bureau de vote 2025-2026, hors MRP",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, recherche menée juillet 2026, 6 requêtes ciblées datajournalisme/civic tech en complément des 5 requêtes MRP initiales",
+    "quoted_support": "Aucune source ne combine les deux : maille bureau de vote ET projection d'un scrutin futur non observé.",
+    "numbers": [
+      "6 requêtes supplémentaires",
+      "70 000 bureaux de vote"
+    ],
+    "entities": [
+      "Youssef Souidi",
+      "Thomas Vonderscher",
+      "Géoclip",
+      "France2027.eu",
+      "quiserapresident.fr"
+    ],
+    "time_period": "juillet 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  },
+  {
+    "claim": "Les dépôts GitHub français open source les plus visibles autour des bureaux de vote (datagouv/bureau-vote, cedricr/bureau-vote-insee, makinacorpus/bureaux-de-vote-reconstruction) traitent exclusivement de la RECONSTRUCTION GÉOMÉTRIQUE des contours de bureaux à partir du Répertoire Électoral Unique (REU) et des données INSEE, aucun ne portant sur la prédiction de résultats électoraux.",
+    "stance": "supports",
+    "stance_target": "distinction entre disponibilité de la donnée géographique bureau et absence d'outil de projection électorale à cette maille",
+    "evidence_type": "empirical",
+    "scope_conditions": "GitHub, projets open source français, recherche juillet 2026",
+    "quoted_support": "datagouv/bureau-vote: Preparatory work for the publication of polling place shapes as open data.",
+    "numbers": [],
+    "entities": [
+      "datagouv",
+      "Etalab",
+      "INSEE",
+      "makinacorpus"
+    ],
+    "time_period": "juillet 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026"
+  }
+]

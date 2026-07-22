@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "La Commission des sondages a ordonné, sur le fondement de l'article 9 de la loi du 19 juillet 1977, une mise au point publiée par Marianne le 4 février 2022 dénonçant les faiblesses méthodologiques de Cluster17 pour la présidentielle 2022.",
+    "stance": "refutes",
+    "stance_target": "fiabilité méthodologique de Cluster17 pour les projections électorales",
+    "evidence_type": "legal",
+    "scope_conditions": "France, présidentielle 2022",
+    "quoted_support": "Les méthodes de travail de Cluster 17 et la faiblesse des moyens mis en œuvre font douter de la qualité des sondages produits.",
+    "numbers": ["article 9 de la loi du 19 juillet 1977", "audiences des 24 novembre 2021 et 1er février 2022"],
+    "entities": ["Commission des sondages", "Cluster17", "Marianne"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "actualit-et-communiqus-commission-des-sondages-contrle-interdiction-publication"
+  },
+  {
+    "claim": "La Commission des sondages a identifié comme problème méthodologique central de Cluster17 le recrutement d'échantillons via un stock d'adresses email acquises à bas coût plutôt que via un panel constamment entretenu et renouvelé de répondants qualifiés, sans garantie sur l'origine des adresses ni contrôle des biais.",
+    "stance": "refutes",
+    "stance_target": "représentativité des échantillons de Cluster17",
+    "evidence_type": "legal",
+    "scope_conditions": "France, 2022",
+    "quoted_support": "Est particulièrement en cause la représentativité d'échantillons provenant non d'un panel constamment entretenu et renouvelé de répondants qualifiés mais d'un stock d'adresses électroniques acquises à bas coût, sans aucune garantie sur l'origine de ces adresses, sur la qualification des personnes qu'elles représentent et sans aucun contrôle de Cluster 17 sur cette base.",
+    "numbers": [],
+    "entities": ["Cluster17", "Commission des sondages"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "actualit-et-communiqus-commission-des-sondages-contrle-interdiction-publication"
+  },
+  {
+    "claim": "La Commission des sondages a invité les lecteurs des sondages Cluster17 à une prudence particulière dans l'appréciation de leur pertinence, en raison des insuffisances méthodologiques et de la faiblesse des contrôles dans le recueil des données.",
+    "stance": "refutes",
+    "stance_target": "usage sans réserve des sondages Cluster17 comme source pour des dynamiques nationales fiables",
+    "evidence_type": "legal",
+    "scope_conditions": "France, 2022",
+    "quoted_support": "En raison de ces insuffisances méthodologiques et de la faiblesse des contrôles dans la réalisation des opérations de recueil, la commission des sondages invite les lecteurs des sondages réalisés par Cluster 17 à une prudence particulière dans l'appréciation de leur pertinence.",
+    "numbers": [],
+    "entities": ["Commission des sondages", "Cluster17"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "actualit-et-communiqus-commission-des-sondages-contrle-interdiction-publication"
+  }
+]

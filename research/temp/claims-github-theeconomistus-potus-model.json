@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le modèle Economist de forecasting présidentiel étend le modèle Linzer 2013 en ajoutant des matrices de corrélation empiriques inter-États dérivées de variables démographiques et politiques, ce qui permet de propager le signal d'un sondage local vers des unités géographiques similaires plutôt que via un seul effet national uniforme.",
+    "stance": "supports",
+    "stance_target": "les modèles bayésiens modernes de forecasting électoral dépassent le swing uniforme en modélisant des corrélations démographiques entre unités géographiques",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèle Economist us-potus-model, cycles 2008-2020",
+    "quoted_support": "Improving on Pierre Kremp's implementation of Drew Linzer's dynamic linear model for election forecasting (Linzer 2013), we (1) add corrections for partisan non-response, survey mode and survey population; (2) use informative state-level priors that update throughout the election year; and (3) specify empirical state-level correlations from political and demographic variables.",
+    "numbers": [],
+    "entities": ["The Economist", "Drew Linzer", "Pierre Kremp", "Elliott Morris"],
+    "time_period": "2008-2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-theeconomistus-potus-model-code-for-a-dynamic-multilevel-bayesian-model-t"
+  },
+  {
+    "claim": "En backtest sur l'élection 2016 (résultat surprenant, mal anticipé par la plupart des agrégateurs), le modèle Economist prédit correctement 48 États sur 51 avec un score de Brier pondéré par collège électoral de 0.0726, comparé à 46/51 États et 0.0928-0.0936 pour les deux variantes de 538 (polls-plus / polls-only).",
+    "stance": "supports",
+    "stance_target": "les modèles bayésiens multiniveaux avec corrélations démographiques surperforment les agrégateurs plus simples sur les cycles électoraux difficiles",
+    "evidence_type": "empirical",
+    "scope_conditions": "backtest 2016, niveau État, USA",
+    "quoted_support": "economist (backtest) | 0.0725679 | 0.0508319 | 48 ... 538 polls-plus | 0.0928000 | 0.0664000 | 46 | 538 polls-only | 0.0936000 | 0.0672000 | 46",
+    "numbers": ["48/51 États corrects (Economist)", "46/51 États corrects (538 x2)", "ev_wtd_brier 0.0726 (Economist) vs 0.0928/0.0936 (538)"],
+    "entities": ["FiveThirtyEight", "The Economist"],
+    "time_period": "2016",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-theeconomistus-potus-model-code-for-a-dynamic-multilevel-bayesian-model-t"
+  },
+  {
+    "claim": "Le modèle Economist corrige explicitement pour le mode d'enquête (téléphone en direct, en ligne, autre) et la population sondée (adulte, électeur probable, électeur inscrit), reconnaissant que ces choix méthodologiques des instituts introduisent un biais systématique qu'il faut corriger avant d'agréger les sondages.",
+    "stance": "neutral",
+    "stance_target": "les corrections de biais d'échantillonnage sont nécessaires pour l'agrégation de sondages dans un modèle bayésien",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèle Economist, tous cycles",
+    "quoted_support": "we (1) add corrections for partisan non-response, survey mode and survey population",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2008-2020",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "github-theeconomistus-potus-model-code-for-a-dynamic-multilevel-bayesian-model-t"
+  },
+  {
+    "claim": "Le dépôt fournit un script Stan distinct par cycle électoral (2008, 2012, 2016, 2020) et une variante sans correction de mode, ce qui montre que la spécification du modèle bayésien est révisée à chaque élection plutôt que figée — une contrainte pratique pour la reproductibilité et la comparabilité inter-cycles.",
+    "stance": "neutral",
+    "stance_target": "la stabilité méthodologique des modèles bayésiens électoraux dans le temps",
+    "evidence_type": "empirical",
+    "scope_conditions": "dépôt de code, cycles 2008-2020",
+    "quoted_support": "In terms of useful files, you should pay attention to the 3 scripts for the 2008, 2012 and 2016 US presidential elections... poll_model_2020.stan - the final model we use for the 2020 presidential election, poll_model_2020_no_mode_adjustment.stan - a model that removes the correction for partisan non-response bias",
+    "numbers": ["4 cycles (2008, 2012, 2016, 2020)"],
+    "entities": [],
+    "time_period": "2008-2020",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "github-theeconomistus-potus-model-code-for-a-dynamic-multilevel-bayesian-model-t"
+  }
+]

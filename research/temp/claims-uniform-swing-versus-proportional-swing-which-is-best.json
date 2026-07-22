@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Backtesting uniform national swing (UNS) and proportional swing against UK general elections 1997, 2001 and 2005 found no consistent superiority of either method: UNS was more accurate in 2005, proportional slightly more accurate in 2001, and the two were tied in 1997.",
+    "stance": "refutes",
+    "stance_target": "proportional swing is more accurate than uniform swing",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK general elections 1997, 2001, 2005; two-party swing vs seat totals",
+    "quoted_support": "There is no evidence from this data that proportional swing calculations are superior to uniform swing calculations.",
+    "numbers": ["Conservatives 2005: actual 197, UNS 184, proportional 181", "Labour 2005: actual 355, UNS 369, proportional 371", "Lib Dem 2005: actual 62, UNS 62, proportional 68"],
+    "entities": ["Conservatives", "Labour", "Liberal Democrats", "Mark Pack"],
+    "time_period": "1997-2005",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "uniform-swing-versus-proportional-swing-which-is-best"
+  },
+  {
+    "claim": "Even the better of the two simple swing methods carries substantial national-level error: average error in predicted parliamentary majority size exceeds 30 seats.",
+    "stance": "supports",
+    "stance_target": "simple swing methods have material forecasting error even at the national aggregate level",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK general elections 1997-2005",
+    "quoted_support": "On average, the majority predicted by UNS is out by over 30 seats, though there is no consistent pattern to the error.",
+    "numbers": ["30+ seats average majority error"],
+    "entities": ["Mark Pack"],
+    "time_period": "1997-2005",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "uniform-swing-versus-proportional-swing-which-is-best"
+  },
+  {
+    "claim": "The Butler & Kavanagh study of the 1979 UK general election concluded uniform swing outperformed proportional swing at predicting that and previous elections, an early empirical precedent for UNS dominance.",
+    "stance": "supports",
+    "stance_target": "uniform swing has historically outperformed proportional swing in the UK",
+    "evidence_type": "historical",
+    "scope_conditions": "UK general election 1979 and preceding elections",
+    "quoted_support": "the Butler & Kavanagh book on the 1979 general election, The British General Election of 1979, concludes that uniform swing was superior at predicting results in that election than proportional swing and had also been at previous general elections.",
+    "numbers": [],
+    "entities": ["David Butler", "Dennis Kavanagh"],
+    "time_period": "1979",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "uniform-swing-versus-proportional-swing-which-is-best"
+  }
+]

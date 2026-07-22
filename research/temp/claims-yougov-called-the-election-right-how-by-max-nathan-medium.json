@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "YouGov's 2017 MRP pipeline runs in five steps: weekly individual-level panel data (~50k interviews/week) on vote intention and detailed characteristics including past vote; build a typology of voter types; fit a predictive vote-choice model per type; estimate the geographic distribution of each type per constituency using British Election Study and ONS area classifications; aggregate to a constituency-level vote estimate.",
+    "stance": "neutral",
+    "stance_target": "operational MRP pipeline as implemented by YouGov in 2017",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2017 general election",
+    "quoted_support": "1/ YouGov have weekly individual-level data on voting intention and detailed characteristics (including past voting)... 2/ They use this to build a typology of voter types; 3/ For each voter type, they then fit a model that predicts voting intention; 4/ For each constituency, they then estimate how these types are spread...; 5/ They work out how the vote should go in each constituency.",
+    "numbers": ["~50,000 interviews per week"],
+    "entities": ["YouGov", "British Election Study", "ONS"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "yougov-called-the-election-right-how-by-max-nathan-medium"
+  },
+  {
+    "claim": "MRP's micro-to-macro architecture (modelling each constituency individually) gave it a better chance of picking up local issues, such as the hospital-closure crisis that helped drive the surprise Labour win in Canterbury in 2017.",
+    "stance": "supports",
+    "stance_target": "MRP's constituency-level structure captures some local dynamics that national uniform-swing models miss",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "UK, 2017 general election, Canterbury constituency",
+    "quoted_support": "MRP is micro-to-macro: it models each constituency individually, so stands a better chance of picking up local issues (such as the hospital closure crisis which helped drive the Canterbury result).",
+    "numbers": [],
+    "entities": ["Canterbury"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "medium",
+    "source_note_id": "yougov-called-the-election-right-how-by-max-nathan-medium"
+  },
+  {
+    "claim": "Earlier MRP model variants correctly identified majority support for Leave in the 2016 Brexit referendum and performed well in forecasting the 2016 US presidential election, before the refined 2017 UK general election version.",
+    "stance": "supports",
+    "stance_target": "MRP has a multi-election track record of directional accuracy predating 2017",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK 2016 EU referendum; US 2016 presidential election",
+    "quoted_support": "It turns out that earlier versions of an MRP model also spotted the Leave vote in 2016, and did pretty well in the US 2016 Presidential Election.",
+    "numbers": [],
+    "entities": ["Ben Lauderdale"],
+    "time_period": "2016",
+    "region": "UK, US",
+    "confidence": "medium",
+    "source_note_id": "yougov-called-the-election-right-how-by-max-nathan-medium"
+  }
+]

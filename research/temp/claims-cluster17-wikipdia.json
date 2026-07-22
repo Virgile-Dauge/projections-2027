@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Cluster17 est un institut de sondage français fondé en novembre 2021 par Jean-Yves Dormagen, professeur de sciences politiques à l'université de Montpellier, qui segmente la population en 16 groupes d'opinion ('clusters') sur trois axes (identité/culture, radicalité/stabilité, économie/social) plutôt que selon le clivage gauche-droite.",
+    "stance": "neutral",
+    "stance_target": "typologie des méthodes de sondage/segmentation de l'électorat françaises",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, Italie, Espagne, Belgique ; fondé 2021",
+    "quoted_support": "Cette société de sondage se distingue par sa méthodologie qui consiste à segmenter la population française en «clusters».",
+    "numbers": ["16 clusters", "30 questions", "fondé novembre 2021"],
+    "entities": ["Cluster17", "Jean-Yves Dormagen", "université de Montpellier"],
+    "time_period": "2021-2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "cluster17-wikipdia"
+  },
+  {
+    "claim": "La Commission des sondages a mis en garde le public en 2022 sur la fiabilité de Cluster17, notamment en raison de sous-échantillons de clusters pouvant compter moins de 50 personnes et de l'absence de marges d'erreur publiées, en violation de la loi organique n°2021-335 du 29 mars 2021.",
+    "stance": "refutes",
+    "stance_target": "fiabilité méthodologique de Cluster17 pour les projections infranationales",
+    "evidence_type": "legal",
+    "scope_conditions": "présidentielle 2022, France",
+    "quoted_support": "Elle a mis en garde les lecteurs sur la fiabilité limitée des sous-échantillons utilisés pour les clusters, dont la taille peut être inférieure à 50 personnes.",
+    "numbers": ["sous-échantillons < 50 personnes", "loi organique n°2021-335 du 29 mars 2021"],
+    "entities": ["Commission des sondages", "Cluster17", "Marianne"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "cluster17-wikipdia"
+  },
+  {
+    "claim": "Cluster17 a contesté la mise en cause de la Commission des sondages devant le Conseil d'État, qui a rejeté sa requête le 20 décembre 2022, bien que le rapporteur public ait initialement soutenu la société de sondage lors de l'audience du 25 novembre 2022.",
+    "stance": "neutral",
+    "stance_target": "légitimité de la critique de la Commission des sondages envers Cluster17",
+    "evidence_type": "legal",
+    "scope_conditions": "France, 2022",
+    "quoted_support": "Le Conseil d'Etat rejette la requête de Cluster 17",
+    "numbers": ["décision du 20 décembre 2022, n° 461279"],
+    "entities": ["Cluster17", "Conseil d'État", "Commission des sondages"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "cluster17-wikipdia"
+  },
+  {
+    "claim": "Avant 2023, Cluster17 recrutait ses échantillons via l'envoi massif de courriels à des adresses achetées à des courtiers en données plutôt que via un panel en ligne géré ; depuis 2023 l'institut utilise un panel propriétaire.",
+    "stance": "neutral",
+    "stance_target": "évolution méthodologique des instituts de sondage numériques français",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2021-2023",
+    "quoted_support": "À ses débuts, l'institut n'utilisait pas de panels en ligne et avait recours à l'envoi massif de courriels à des adresses électroniques achetées à des courtiers en données afin de sonder la population. Depuis 2023, l'institut réalise ses sondages depuis son panel propriétaire.",
+    "numbers": [],
+    "entities": ["Cluster17"],
+    "time_period": "2021-2023",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "cluster17-wikipdia"
+  }
+]

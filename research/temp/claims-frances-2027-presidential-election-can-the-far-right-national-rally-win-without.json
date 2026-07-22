@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "À l'été 2026, le candidat du Rassemblement national (Le Pen ou Bardella selon l'issue de l'appel judiciaire) est crédité de 31 à 36% des intentions de vote au premier tour de la présidentielle 2027, largement devant les autres candidats déclarés ou pressentis.",
+    "stance": "neutral",
+    "stance_target": "état des lieux du rapport de force national pour la présidentielle 2027",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondages Ipsos, juin 2026, avant verdict d'appel du procès Le Pen (7 juillet 2026)",
+    "quoted_support": "Macron's approval ratings are low and his political camp has been weakened while the RN is polling well ahead of other contenders, with its candidate typically drawing around 31–36% of voting intentions for the first round.",
+    "numbers": ["31-36%"],
+    "entities": ["Rassemblement National", "Marine Le Pen", "Jordan Bardella", "Ipsos"],
+    "time_period": "juin 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "frances-2027-presidential-election-can-the-far-right-national-rally-win-without"
+  },
+  {
+    "claim": "Marine Le Pen a été condamnée en mars 2025 pour détournement de fonds du Parlement européen et frappée d'une inéligibilité de 5 ans ; elle a fait appel, avec un verdict attendu le 7 juillet 2026, ce qui laisse planer une incertitude sur l'identité du candidat RN à la présidentielle 2027 jusqu'à quelques mois du scrutin.",
+    "stance": "neutral",
+    "stance_target": "incertitude sur le candidat RN à la présidentielle 2027",
+    "evidence_type": "legal",
+    "scope_conditions": "France, procédure d'appel, verdict attendu juillet 2026",
+    "quoted_support": "In March 2025, she was convicted of embezzling European Parliament public funds to pay RN employees and barred from running for public office for five years. She filed an appeal shortly after the ruling and is awaiting a verdict on July 7.",
+    "numbers": ["5 ans d'inéligibilité"],
+    "entities": ["Marine Le Pen", "Rassemblement National", "Parlement européen"],
+    "time_period": "mars 2025 - juillet 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "frances-2027-presidential-election-can-the-far-right-national-rally-win-without"
+  },
+  {
+    "claim": "Selon le chercheur Baptiste Roger-Lacan, la popularité de Jordan Bardella sur TikTok ne se traduit pas nécessairement en capacité de conversion en votes, faute d'infrastructure militante du RN dédiée à cette conversion numérique-vers-vote.",
+    "stance": "refutes",
+    "stance_target": "la popularité numérique de Bardella se traduit automatiquement en avantage électoral mobilisable au niveau local",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, contexte présidentielle 2027",
+    "quoted_support": "Bardella's popular on TikTok, but there's no infrastructure at the RN that has been working on how to convert this digital support into actual votes, Roger-Lacan said.",
+    "numbers": [],
+    "entities": ["Jordan Bardella", "Baptiste Roger-Lacan", "Rassemblement National"],
+    "time_period": "2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "frances-2027-presidential-election-can-the-far-right-national-rally-win-without"
+  }
+]

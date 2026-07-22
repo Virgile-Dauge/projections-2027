@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "In non-Hispanic subgroup estimates for Los Angeles and Stockton, King's EI method again performs worse than the neighborhood model and is sometimes worse than plain ecological regression, extending the original critique beyond the minority-group estimates.",
+    "stance": "refutes",
+    "stance_target": "Claim that King's EI method's errors on minority subgroups are offset by better performance on majority subgroups",
+    "evidence_type": "empirical",
+    "scope_conditions": "Los Angeles tracts, Stockton precincts, non-Hispanic subgroup",
+    "quoted_support": "King's method does not appear in the table because in each case it does less well than the neighborhood model; furthermore, in each of the Los Angeles data sets, it does less well than ecological regression.",
+    "numbers": ["Party affiliation Z = -33.0", "Education Z = 24.0", "High Hispanic party affiliation Z = -18.2"],
+    "entities": ["Gary King", "Freedman Klein Ostland Roberts"],
+    "time_period": "1999",
+    "region": "Los Angeles and Stockton, California",
+    "confidence": "high",
+    "source_note_id": "a-rejoinder-to-king"
+  },
+  {
+    "claim": "On King's own preferred South Carolina poverty-by-sex dataset (used as a validation case in his 1997 book), the neighborhood model outperforms King's EI method for both men and women when tested against Census Bureau ground truth.",
+    "stance": "refutes",
+    "stance_target": "King's claim that his South Carolina example, 'chosen for its difficulty,' shows his method's inferences are accurate",
+    "evidence_type": "empirical",
+    "scope_conditions": "South Carolina census block groups, poverty status by sex, blocks with 25+ inhabitants",
+    "quoted_support": "King's method succeeds only in the sense that the estimate is within 1.1 standard errors of truth; the neighborhood model comes much closer to the mark, both for men and women.",
+    "numbers": ["Men in poverty: truth 12.9%, neighborhood 15.0%, King's method 5.8% +/- 6.6% (Z=-1.1)", "Women in poverty: truth 17.7%, neighborhood 15.7%, King's method 24.2% +/- 6.1% (Z=1.1)"],
+    "entities": ["Gary King", "South Carolina"],
+    "time_period": "1999",
+    "region": "South Carolina, United States",
+    "confidence": "high",
+    "source_note_id": "a-rejoinder-to-king"
+  },
+  {
+    "claim": "Feeding EZIDOS-generated artificial data (which by construction satisfies King's model assumptions exactly) back into EZIDOS produces a diagnostic plot where roughly half of the data points fall outside the model's own 80% confidence band, indicating a likely coding error in the diagnostic software itself, not just a modeling limitation.",
+    "stance": "refutes",
+    "stance_target": "Technical soundness and correctness of King's EZIDOS diagnostic implementation",
+    "evidence_type": "empirical",
+    "scope_conditions": "Simulated data matching Los Angeles party affiliation model parameters",
+    "quoted_support": "However, most of the dots are above the midline: indeed, about half of them spill over the top of the band... Clearly, something is wrong.",
+    "numbers": ["Five estimated parameters: means 1.0456/0.2853, SDs 0.1606/0.3028, r=-0.9640 (original); 1.0672/0.2559/0.1607/0.3024/-0.9640 (re-estimated from simulated data)"],
+    "entities": ["Gary King", "EZIDOS"],
+    "time_period": "1999",
+    "region": "Los Angeles, California",
+    "confidence": "medium",
+    "source_note_id": "a-rejoinder-to-king"
+  },
+  {
+    "claim": "Both sides of the Freedman-King debate agree, as a theoretical matter, that inferring subgroup behavior from aggregate data is generally impossible because the relevant individual-level parameters are not statistically identifiable from aggregate data alone.",
+    "stance": "supports",
+    "stance_target": "Fundamental non-identifiability of ecological inference without auxiliary assumptions or individual-level data",
+    "evidence_type": "theoretical",
+    "scope_conditions": "General ecological inference theory",
+    "quoted_support": "As a theoretical matter, inferring the behavior of subgroups from aggregate data is generally impossible: the relevant parameters are not identifiable. On this, there seems to be some agreement (Freedman et al., 1998, p. 1522; King, 1999).",
+    "numbers": [],
+    "entities": ["Gary King", "D.A. Freedman"],
+    "time_period": "1999",
+    "region": "N/A (theoretical)",
+    "confidence": "high",
+    "source_note_id": "a-rejoinder-to-king"
+  },
+  {
+    "claim": "Independent third-party evaluations (Stoto 1998, Tam 1998) of King's EI method reached mixed results, neither fully validating nor fully refuting the method — evidence the debate is not simply a two-party dispute.",
+    "stance": "neutral",
+    "stance_target": "Generalizability of the Freedman-King dispute's conclusions across the wider EI literature",
+    "evidence_type": "empirical",
+    "scope_conditions": "Independent replications post-1997",
+    "quoted_support": "Still other examples are contributed by Stoto (1998) and Tam (1998), with mixed results. Thus, King's method works in some data sets but not others.",
+    "numbers": [],
+    "entities": ["Michael Stoto", "Wendy Tam"],
+    "time_period": "1998",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "a-rejoinder-to-king"
+  }
+]

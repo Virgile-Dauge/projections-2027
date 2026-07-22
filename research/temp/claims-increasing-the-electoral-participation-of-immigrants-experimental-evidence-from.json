@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Identical non-targeted canvassing script raised turnout among immigrants by 3.4pp (round 1, from 34.4% base) and 2.8pp (round 2, from 38.7% base) in France's 2010 Ile-de-France regional elections, with no significant effect on non-immigrant turnout.",
+    "stance": "supports",
+    "stance_target": "canvassing effects are heterogeneous by voter subgroup even without a targeted message, justifying differential resource allocation across precincts by demographic composition",
+    "evidence_type": "empirical",
+    "scope_conditions": "8 cities in Ile-de-France, 2010 regional elections, 1,347 addresses / 23,773 citizens",
+    "quoted_support": "Canvassers' visits increased the turnout of immigrants and children of voting age living with them by 3.4 percentage points from a base of 34.4 percent (a 9.9 percent increase) in the first round of voting... The campaign had no impact on the voter turnout of non-immigrants.",
+    "numbers": ["3.4 pp (round 1)", "34.4% base turnout", "2.8 pp (round 2)", "38.7% base turnout", "678 treated addresses / 669 control", "~50% door-answer rate"],
+    "entities": ["Guillaume Liégey", "Vincent Pons", "Parti Socialiste", "Ile-de-France"],
+    "time_period": "2010",
+    "region": "France (Ile-de-France)",
+    "confidence": "high",
+    "source_note_id": "increasing-the-electoral-participation-of-immigrants-experimental-evidence-from"
+  },
+  {
+    "claim": "The heterogeneous canvassing effect on immigrant turnout did not persist to the following year's local elections, and is explained by immigrants' lower baseline political information rather than by demographic identity per se.",
+    "stance": "neutral",
+    "stance_target": "durability and mechanism of heterogeneous canvassing effects, relevant to how long a targeting map stays valid",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2010 regional elections vs. 2011 local elections",
+    "quoted_support": "Effects of canvassing on voter turnout diminished over time. Researchers compared voter turnout in local elections one year later and found no significant impact of the canvassing from the previous year... immigrants had significantly less political information than non-immigrants, which may have led to a stronger impact of the information provided by the canvassers.",
+    "numbers": [],
+    "entities": ["Parti Socialiste"],
+    "time_period": "2010-2011",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "increasing-the-electoral-participation-of-immigrants-experimental-evidence-from"
+  }
+]

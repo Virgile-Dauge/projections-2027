@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "FiveThirtyEight publie des scores d'élasticité politique (sensibilité au climat national) à deux mailles : par État/DC et par circonscription (les 435 districts de la Chambre), dérivés des caractéristiques démographiques des électeurs plutôt que d'une régression directe sur les résultats électoraux passés.",
+    "stance": "supports",
+    "stance_target": "un indice de sensibilité au swing national peut être calculé à une maille infra-étatique fine à partir de caractéristiques démographiques plutôt que de séries temporelles électorales",
+    "evidence_type": "empirical",
+    "scope_conditions": "États, DC et 435 circonscriptions de la Chambre US, données à déc. 2022",
+    "quoted_support": "An elasticity score measures how sensitive a state or district it is to changes in the national political environment. elasticity-by-district.csv contains the elasticity scores for all 435 congressional districts.",
+    "numbers": ["435 circonscriptions couvertes"],
+    "entities": ["FiveThirtyEight"],
+    "time_period": "à 2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "datapolitical-elasticity-scores-at-master-fivethirtyeightdata-github"
+  },
+  {
+    "claim": "Les électeurs situés aux extrêmes du spectre partisan (probabilité proche de 0% ou 100% de voter pour un parti) varient moins en réponse à un mouvement national que les électeurs du centre, ce qui implique qu'un district peut être très compétitif sans être élastique, et inversement.",
+    "stance": "supports",
+    "stance_target": "l'élasticité (réactivité au climat national) et la compétitivité (proximité du 50/50) sont deux dimensions indépendantes d'un indice partisan local",
+    "evidence_type": "theoretical",
+    "scope_conditions": "méthode FiveThirtyEight",
+    "quoted_support": "The principle is that voters at the extreme end of the spectrum — those who have close to a 0 percent or a 100 percent chance of voting for one of the parties, based on our analysis — don't swing as much as those in the middle.",
+    "numbers": ["exemple Alaska : élasticité 1.07", "exemple Georgia : élasticité 0.84"],
+    "entities": ["Nate Silver", "Nathaniel Rakich", "Alaska", "Georgia"],
+    "time_period": null,
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "datapolitical-elasticity-scores-at-master-fivethirtyeightdata-github"
+  }
+]

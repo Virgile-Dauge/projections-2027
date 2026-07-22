@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "L'équipe data.gouv.fr recommande explicitement le jeu de données agrégé (donnees-des-elections-agregees) comme point d'entrée pour l'ensemble des scrutins présidentiels, législatifs, européens, municipaux, régionaux, départementaux et cantonaux.",
+    "stance": "supports",
+    "stance_target": "existence d'un point d'entrée officiel unifié pour les données électorales françaises",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, data.gouv.fr",
+    "quoted_support": "L'équipe de data.gouv.fr propose un jeu de données qui agrège l'ensemble des données des élections présidentielles, législatives, européennes, municipales, régionales, départementales et cantonales.",
+    "numbers": [],
+    "entities": ["data.gouv.fr"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "datagouvfr-pagespagesdonnees-des-elections-et-referendumsmd-at-master-etalabdata"
+  },
+  {
+    "claim": "Les résultats officiels de la présidentielle 2022 et des législatives 2022 par bureau de vote sont publiés par le Ministère de l'Intérieur sur data.gouv.fr sous des slugs dédiés distincts par tour (1er et 2nd tour).",
+    "stance": "neutral",
+    "stance_target": "disponibilité des données officielles au niveau bureau de vote pour la présidentielle et les législatives 2022",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, scrutins 2022",
+    "quoted_support": "Résultats 1er tour : par bureau de vote (election-presidentielle-des-10-et-24-avril-2022-resultats-definitifs-du-1er-tour) [...] Résultats 1er tour : par bureau de vote (elections-legislatives-des-12-et-19-juin-2022-resultats-definitifs-du-premier-tour)",
+    "numbers": ["2022"],
+    "entities": ["Ministère de l'Intérieur", "présidentielle 2022", "législatives 2022"],
+    "time_period": "avril-juin 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "datagouvfr-pagespagesdonnees-des-elections-et-referendumsmd-at-master-etalabdata"
+  },
+  {
+    "claim": "Cette page d'indexation, gelée en octobre 2023 et dont le dépôt a été archivé en mai 2025, ne référence aucun jeu de données pour les élections européennes 2024 ni législatives 2024, ces scrutins étant postérieurs à son dernier commit.",
+    "stance": "supports",
+    "stance_target": "obsolescence des pages de référencement communautaires face au rythme de publication des nouveaux scrutins",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, page etalab/datagouvfr-pages",
+    "quoted_support": "This repository was archived by the owner on May 19, 2025. It is now read-only. [...] Latest commit ... Oct 25, 2023",
+    "numbers": ["octobre 2023", "mai 2025"],
+    "entities": ["etalab", "datagouvfr-pages"],
+    "time_period": "2023-2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "datagouvfr-pagespagesdonnees-des-elections-et-referendumsmd-at-master-etalabdata"
+  },
+  {
+    "claim": "Le Centre de données socio-politiques (CDSP) de Sciences Po fournit, en parallèle du Ministère de l'Intérieur, des séries longues de résultats électoraux par circonscription législative pour les présidentielles et législatives de 1958/1965 à 2012, une source alternative académique pour l'analyse historique.",
+    "stance": "neutral",
+    "stance_target": "acteurs académiques produisant des données électorales françaises alternatives aux sources gouvernementales",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 1958-2012",
+    "quoted_support": "Données du Centre de données socio-politiques de Sciences Po [...] Résultats 1er Tour: par circonscription (cdsp_presi1965t1_circ.csv)",
+    "numbers": ["1958-2012"],
+    "entities": ["Sciences Po", "CDSP"],
+    "time_period": "1958-2012",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "datagouvfr-pagespagesdonnees-des-elections-et-referendumsmd-at-master-etalabdata"
+  }
+]

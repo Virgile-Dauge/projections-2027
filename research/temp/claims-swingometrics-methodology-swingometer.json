@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "A production UK election forecast site explicitly chose regionally-adjusted Uniform National Swing over full MRP, citing MRP's requirement for extensive demographic modeling and granular survey data as a practical barrier.",
+    "stance": "supports",
+    "stance_target": "MRP is more complex/data-hungry than regionally-adjusted uniform swing and this tradeoff drives real-world method choice",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK general election forecasting, 2020s",
+    "quoted_support": "Multilevel Regression with Poststratification (MRP) is powerful but requires extensive demographic modeling and granular survey data. Our UNS-with-adjustments approach provides a good balance of accuracy and transparency.",
+    "numbers": [],
+    "entities": ["Swingometer.co.uk", "MRP"],
+    "time_period": "2020s",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "swingometrics-methodology-swingometer"
+  },
+  {
+    "claim": "A modified UNS model applies per-region, per-party multiplicative adjustment factors to the national swing rather than applying the same swing everywhere, to capture systematic regional divergence (e.g. amplified Labour swings in London, distinct SNP dynamics in Scotland).",
+    "stance": "neutral",
+    "stance_target": "how regional adjustment is layered onto uniform swing in practice",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK general election forecasting",
+    "quoted_support": "Regional factors capture systematic differences in how national swings play out locally. London typically sees amplified Labour swings; Scotland has unique SNP dynamics.",
+    "numbers": [],
+    "entities": ["Swingometer.co.uk", "Labour", "SNP"],
+    "time_period": "2020s",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "swingometrics-methodology-swingometer"
+  },
+  {
+    "claim": "A quantified uncertainty budget for a UK constituency-level swing forecast totals roughly 4-6 percentage points, decomposed into sampling error (~2%), pollster house effects (~1-2%), late swing (~2-3%, irreducible), turnout variation (~1-2%) and tactical voting (~1-3%).",
+    "stance": "neutral",
+    "stance_target": "sources and magnitude of irreducible uncertainty in swing-based constituency forecasts",
+    "evidence_type": "statistical",
+    "scope_conditions": "UK general election forecasting",
+    "quoted_support": "Total Uncertainty ~4-6%",
+    "numbers": ["Sampling error ~2%", "House effects ~1-2%", "Late swing ~2-3%", "Turnout variation ~1-2%", "Tactical voting ~1-3%", "Total ~4-6%"],
+    "entities": ["Swingometer.co.uk"],
+    "time_period": "2020s",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "swingometrics-methodology-swingometer"
+  },
+  {
+    "claim": "Backtesting against the 2015, 2017, 2019 and 2024 UK general elections, a regionally-adjusted UNS model correctly called the largest party in 4/4 elections and the majority outcome in 3/4, with a seat-prediction mean absolute error of 19.7 seats, but its 80% confidence intervals only achieved 50% (2/4) empirical coverage -- indicating overconfidence at that interval level despite well-calibrated 95% intervals.",
+    "stance": "neutral",
+    "stance_target": "calibration quality of swing-based Monte Carlo seat forecasts",
+    "evidence_type": "statistical",
+    "scope_conditions": "UK general elections 2015-2024, n=4 backtest",
+    "quoted_support": "95% CI Coverage Target 95% Backtest Result 100% (4/4); 80% CI Coverage Target 80% Backtest Result 50% (2/4); Seat Prediction MAE Target <20 Backtest Result 19.7",
+    "numbers": ["MAE 19.7 seats", "95% CI coverage 100% (4/4)", "80% CI coverage 50% (2/4)", "Largest party accuracy 100% (4/4)", "Majority call accuracy 75% (3/4)"],
+    "entities": ["Swingometer.co.uk"],
+    "time_period": "2015-2024",
+    "region": "United Kingdom",
+    "confidence": "medium",
+    "source_note_id": "swingometrics-methodology-swingometer"
+  },
+  {
+    "claim": "The 2024 UK general election's new constituency boundaries limit the amount of comparable historical backtesting data available to constituency-level forecasting models, a documented limitation directly analogous to bureau de vote redistricting between French elections.",
+    "stance": "supports",
+    "stance_target": "constituency/bureau boundary changes degrade the historical baseline data available for swing-based projection",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK 2024 general election boundary changes",
+    "quoted_support": "The 2024 election used new boundaries, limiting historical data. We use notional results but these add uncertainty.",
+    "numbers": [],
+    "entities": ["Swingometer.co.uk"],
+    "time_period": "2024",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "swingometrics-methodology-swingometer"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Quand le découpage d'une circonscription a changé depuis le dernier scrutin, ou que le titulaire se retire, ou que l'élection précédente n'était pas disputée, le modèle de Mac Tan abandonne la baseline partisane construite sur le scrutin homologue précédent (Chambre/Sénat) et bascule vers le résultat présidentiel le plus récent dans le même territoire comme baseline de repli plus stable.",
+    "stance": "supports",
+    "stance_target": "un modèle de swing doit gérer explicitement le changement de découpage électoral en revenant à un scrutin de référence plus stable comme la présidentielle",
+    "evidence_type": "theoretical",
+    "scope_conditions": "élections Chambre et Sénat US, cycle 2026",
+    "quoted_support": "However, often the prior election result doesn't serve as a reasonable baseline: common reasons for this would be that the incumbent is retiring, the previous election wasn't contested, or (in the case of House elections) the district's boundaries have been redrawn since the last election. In these cases the model will rely much more heavily on the most recent presidential election result in the district or state to form a partisan baseline.",
+    "numbers": [],
+    "entities": ["Mac Tan"],
+    "time_period": "2026",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "2026-forecast-methodology"
+  },
+  {
+    "claim": "Le modèle n'utilise les nouvelles limites de circonscription qu'une fois qu'elles ont survécu aux recours judiciaires ; à titre d'exemple daté, au 7 mai 2026 la Californie et le Texas utilisaient déjà les nouveaux découpages tandis que la Virginie et la Floride utilisaient encore les anciens, leurs recours étant toujours pendants.",
+    "stance": "neutral",
+    "stance_target": "l'incertitude juridique sur le redécoupage électoral complique le choix du référentiel géographique pour un modèle de projection",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections Chambre US, cycle 2026, situation au 7 mai 2026",
+    "quoted_support": "The model will only consider new district boundaries once they have survived any legal challenges to them (so as of May 7, 2026 for example, House forecasts for California and Texas use the new district boundaries but House forecasts for Virginia and Florida use the old ones).",
+    "numbers": ["date de référence : 7 mai 2026"],
+    "entities": ["California", "Texas", "Virginia", "Florida"],
+    "time_period": "2026",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "2026-forecast-methodology"
+  },
+  {
+    "claim": "Le modèle combine une prédiction de swing national et une prédiction basée sur les sondages locaux par pondération inverse-variance, ce qui garantit une transition continue et cohérente : sans sondage local, la prédiction converge vers le seul swing national ; avec de nombreux sondages fiables, elle converge vers les sondages seuls.",
+    "stance": "supports",
+    "stance_target": "la pondération inverse-variance est la méthode statistiquement fondée pour combiner un modèle structurel et des sondages locaux de qualité inégale",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèle Mac Tan, cycle 2026",
+    "quoted_support": "pred = (national_swing_pred/national_swing_var + poll_pred/poll_var) / (1/national_swing_var + 1/poll_var)... If var_poll → ∞ (no polls exist): pred → fund_pred. If var_poll → 0 (many perfect polls): pred → poll_pred. These weights are known to minimize the variance of the final prediction and are also consistent with Bayesian updating of a normal prior with normally distributed data.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2026",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "2026-forecast-methodology"
+  },
+  {
+    "claim": "Les sondages de courses à la Chambre des représentants sont rares et souffrent d'un biais de sélection fort car ils ne sont généralement publiés que lorsqu'une campagne choisit de les diffuser, ce qui limite fortement leur fiabilité pour un modèle infra-étatique.",
+    "stance": "refutes",
+    "stance_target": "les sondages infra-nationaux sont une source fiable et systématique pour calibrer un modèle électoral local",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections à la Chambre des représentants US",
+    "quoted_support": "Polling in low-salience House races is sparse and often of poor quality: typically the only polls of a House race will be those conducted for one of the campaigns which the campaign decides to release. As you might imagine, this can lead to significant selection bias in what House polls we see.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2026",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "2026-forecast-methodology"
+  },
+  {
+    "claim": "Le modèle exclut explicitement les candidats tiers/indépendants de sa métrique de vote bipartisan (2PV), ce qui peut fausser les résultats dans les rares courses où ces candidats ont un poids réel, comme la course sénatoriale du Nebraska où un indépendant se présentait de facto comme le candidat démocrate.",
+    "stance": "refutes",
+    "stance_target": "un modèle simplifié en deux blocs partisans capture correctement toutes les dynamiques électorales locales",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections sénatoriales/Chambre US, cycle 2026",
+    "quoted_support": "The model does not account for third-party and independent candidates who could tip results in close races. For the most part the impact of these candidates is limited, but in some races they may have a large impact or may even be running as the de facto Democratic nominee (see Nebraska's Senate election).",
+    "numbers": [],
+    "entities": ["Nebraska"],
+    "time_period": "2026",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "2026-forecast-methodology"
+  }
+]

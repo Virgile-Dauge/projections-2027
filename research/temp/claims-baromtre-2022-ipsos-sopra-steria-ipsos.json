@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Ipsos & Sopra Steria ont opéré un sondage 'rolling' (glissant sur les 3 derniers jours) pour mesurer quotidiennement les reports de voix et intentions de vote du second tour de la présidentielle 2022, auprès d'un échantillon de plus de 1500 personnes inscrites sur les listes électorales.",
+    "stance": "neutral",
+    "stance_target": "dispositif de sondage rolling pour le suivi quotidien des reports de voix en entre-deux-tours",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, présidentielle 2022, entre-deux-tours",
+    "quoted_support": "sondage \"rolling\" Ipsos & Sopra Steria pour Le Parisien, Aujourd'hui en France, franceinfo : rendez-vous à 16:30 du lundi au samedi pour faire le point sur les indicateurs de participation, les intentions de vote",
+    "numbers": ["1500"],
+    "entities": ["Ipsos", "Sopra Steria"],
+    "time_period": "avril 2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "baromtre-2022-ipsos-sopra-steria-ipsos"
+  }
+]

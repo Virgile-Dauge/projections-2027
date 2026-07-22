@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Le ministère de l'Intérieur n'a numérisé et diffusé les résultats des élections européennes à l'échelon des 36 000 communes qu'à partir du scrutin de 1994, ce qui borne la période d'analyse comparable des européennes à 1994-2024 (sept scrutins : 1994, 1999, 2004, 2009, 2014, 2019, 2024).",
+    "stance": "supports",
+    "stance_target": "disponibilité et profondeur historique des données électorales officielles françaises par type de scrutin",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections européennes, France, communes",
+    "quoted_support": "Le Ministère de l'intérieur n'a commencé à numériser et à diffuser les résultats des élections européennes à l'échelon des 36 000 communes qu'à compter du scrutin de 1994, et c'est pourquoi nous nous limitons à l'étude de la période 1994-2024.",
+    "numbers": ["1994", "1999", "2004", "2009", "2014", "2019", "2024", "36 000 communes"],
+    "entities": ["ministère de l'Intérieur"],
+    "time_period": "1994-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "working-paper-n202418"
+  },
+  {
+    "claim": "La participation aux élections européennes en France est passée de 61% en 1979 à un creux de 41% en 2009, avant de remonter à 54% en 2024 ; en 2019 et 2024 la participation européenne a dépassé celle des législatives 2022, des municipales 2020 et des régionales 2021.",
+    "stance": "neutral",
+    "stance_target": "évolution de la participation aux élections européennes en France par rapport aux autres scrutins",
+    "evidence_type": "statistical",
+    "scope_conditions": "France métropolitaine, 1979-2024",
+    "quoted_support": "La participation aux élections européennes est passée de 61% en 1979 à 41% en 2009, avant de remonter à 54% en 2024. [...] Lors des scrutins européenns de 2019 et 2024, la participation a toutefois dépassée celle observée lors des législatives de 2022, des muncipales de 2020 et des régionales de 2021.",
+    "numbers": ["61% (1979)", "41% (2009)", "54% (2024)"],
+    "entities": [],
+    "time_period": "1979-2024",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "working-paper-n202418"
+  },
+  {
+    "claim": "Aux élections européennes de 2024, le bloc central libéral est tombé à moins de 15% des voix, confirmant la fragilité de la tripartition politique française, en lien avec la base sociale étroite et très privilégiée de ce bloc.",
+    "stance": "supports",
+    "stance_target": "instabilité structurelle du bloc central libéral-progressiste français",
+    "evidence_type": "statistical",
+    "scope_conditions": "élections européennes 2024, France",
+    "quoted_support": "la chute du bloc libéral central à moins de 15% des voix confirme la fragilité du système de tripartition, en lien avec la base sociale très étroite et socialement très privilégiée de ce bloc électoral.",
+    "numbers": ["moins de 15%"],
+    "entities": ["bloc central libéral", "Renaissance", "RN", "LR", "Reconquête"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "working-paper-n202418"
+  },
+  {
+    "claim": "Une rebipolarisation gauche-droite en France ne pourra pleinement se réaliser, selon Cagé et Piketty, que si le clivage social l'emporte beaucoup plus nettement sur le clivage territorial, ce qui exige que le bloc de gauche reconquière une part sensiblement plus importante de l'électorat populaire des bourgs et des villages.",
+    "stance": "neutral",
+    "stance_target": "conditions d'une recomposition droite-gauche du système partisan français post-tripartition",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, 2024 et après",
+    "quoted_support": "on peut considérer que le scénario de rebipolarisation gauche-droite ne pourra pleinement se réaliser que si le clivage social l'emporte beaucoup plus nettement sur le clivage territorial, ce qui exige que le bloc de gauche parvienne à reconquérir une proportion sensiblement plus importante qu'actuellement de l'électorat populaire des bourgs et des villages.",
+    "numbers": [],
+    "entities": ["bloc de gauche", "bloc de droite"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "working-paper-n202418"
+  },
+  {
+    "claim": "Les étiquettes de listes aux élections européennes changent de scrutin en scrutin (ex. FN présent en 2009/2014, devient RN en 2019/2024 ; UMP en 2009/2014 devient LR en 2019/2024), ce qui impose un travail explicite de recodage/crosswalk politique pour toute comparaison longitudinale des blocs.",
+    "stance": "supports",
+    "stance_target": "nécessité d'un crosswalk des nuances politiques entre scrutins pour comparer les rapports de force dans le temps",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections européennes françaises, 1994-2024",
+    "quoted_support": "2019 : [...] RN (liste Rassemblement national) [...] 2024 : [...] RN (liste Rassemblement national), REC (Reconquête) [...]",
+    "numbers": [],
+    "entities": ["FN", "RN", "UMP", "LR", "Reconquête"],
+    "time_period": "1994-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "working-paper-n202418"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Dans les 134 circonscriptions où le second tour 2024 opposait NFP et RN, les électeurs se répartissaient 32,5% NFP contre 29,6% RN (37,9% abstention/blancs/nuls), aboutissant à 79 députés de gauche contre 55 RN.",
+    "stance": "neutral",
+    "stance_target": "fiabilité des matrices de transfert dérivées des législatives 2024 pour projeter 2027",
+    "evidence_type": "statistical",
+    "scope_conditions": "134 circonscriptions françaises, 2e tour législatives 2024",
+    "quoted_support": "ce rapport de force avait conduit à l'élection de 79 députés de gauche contre 55 d'extrême droite.",
+    "numbers": ["32,5%", "29,6%", "37,9%", "79 députés", "55 députés", "134 circonscriptions"],
+    "entities": ["NFP", "RN", "législatives 2024"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublicain-en-2025-fondatio"
+  },
+  {
+    "claim": "Un an après les législatives 2024, dans un duel hypothétique NFP/RN, 38% des électeurs choisiraient la gauche contre 42% le RN (enquête Ipsos BVA octobre 2025) - érosion du front républicain à gauche.",
+    "stance": "supports",
+    "stance_target": "instabilité temporelle des matrices de transfert : les taux de report mesurés en 2024 ne restent pas valides un an plus tard",
+    "evidence_type": "statistical",
+    "scope_conditions": "échantillon national représentatif, 3000 personnes, octobre 2025, hypothèse de nouvelle dissolution",
+    "quoted_support": "au niveau national, 38% des électeurs préfèreraient aujourd'hui choisir le candidat de gauche dans ce type de configuration, contre 42% le candidat du RN.",
+    "numbers": ["38%", "42%", "3000 personnes"],
+    "entities": ["Ipsos BVA", "Fondation Jean-Jaurès", "Cevipof", "NFP", "RN"],
+    "time_period": "octobre 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublicain-en-2025-fondatio"
+  },
+  {
+    "claim": "Chez les électeurs LR/divers droite du 1er tour 2024, le vote RN en duel face à la gauche est passé de 34-38% en 2024 à 56% déclaré en octobre 2025 ; seuls 21% pratiqueraient encore le barrage républicain contre 26-29% en 2024.",
+    "stance": "supports",
+    "stance_target": "effondrement différencié du front républicain selon l'électorat d'origine",
+    "evidence_type": "statistical",
+    "scope_conditions": "électorat LR/divers droite premier tour législatives 2024, enquête Ipsos BVA octobre 2025",
+    "quoted_support": "Ils sont désormais 56% à nous dire qu'ils glisseraient dans l'urne un bulletin du parti d'extrême droite, soit une hausse très conséquente.",
+    "numbers": ["34%", "38%", "56%", "21%", "26%", "29%"],
+    "entities": ["LR", "RN", "NFP"],
+    "time_period": "2024-2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublicain-en-2025-fondatio"
+  },
+  {
+    "claim": "Chez les électeurs NFP face au 'socle commun' (Ensemble+LR), le report de vote est passé de 72% en 2024 à seulement 44% en octobre 2025, avec 46% d'abstention/blanc/nul déclarée.",
+    "stance": "supports",
+    "stance_target": "effondrement du front républicain côté gauche face au bloc central, contrastant avec la relative stabilité côté socle commun",
+    "evidence_type": "statistical",
+    "scope_conditions": "électorat NFP premier tour législatives 2024, hypothèse duel socle commun vs RN",
+    "quoted_support": "seuls 44% des électeurs qui avaient voté pour un candidat du NFP au premier tour des élections législatives de juin dernier disent qu'ils voteraient pour un candidat du «socle commun» face à un candidat RN au second tour, contre 46% qui préfèreraient s'abstenir ou voter blanc ou nul.",
+    "numbers": ["72%", "44%", "46%", "10%"],
+    "entities": ["NFP", "socle commun", "RN"],
+    "time_period": "2024-2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublicain-en-2025-fondatio"
+  },
+  {
+    "claim": "Le front républicain se reconstitue historiquement surtout dans la dernière ligne droite de la campagne d'entre-deux-tours, avec un effet d'électrochoc mesuré aussi bien en 2022 (baromètre Ipsos) qu'en 2024.",
+    "stance": "neutral",
+    "stance_target": "pertinence d'un swing/report de vote 'statique' calculé a priori sans tenir compte de la dynamique de campagne d'entre-deux-tours",
+    "evidence_type": "historical",
+    "scope_conditions": "présidentielle 2022 et législatives 2024, France",
+    "quoted_support": "La règle à laquelle fait face le RN semble donc être la suivante : plus le parti semble être sur le point d'arriver au pouvoir à l'issue du premier tour, plus le «front républicain» s'active entre les deux tours et pèse sur ses résultats du second tour.",
+    "numbers": ["38% le 19 mars 2022", "47% le 8 avril 2022", "41,5% résultat final Le Pen 24 avril 2022"],
+    "entities": ["Marine Le Pen", "Emmanuel Macron", "front républicain"],
+    "time_period": "2022, 2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublicain-en-2025-fondatio"
+  }
+]

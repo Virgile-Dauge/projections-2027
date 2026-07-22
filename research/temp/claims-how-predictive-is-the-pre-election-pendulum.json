@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "A reusable probabilistic swing model applied to Australian federal electoral pendulums uses a per-seat standard deviation of 3.3% (average deviation from uniform swing measured across the last six federal elections) combined with a +/-1 percentage point incumbency adjustment (sophomore surge for new incumbents, penalty for retiring/defeated incumbents).",
+    "stance": "neutral",
+    "stance_target": "what parameters make a probabilistic uniform-swing pendulum model track real elections",
+    "evidence_type": "statistical",
+    "scope_conditions": "Australian federal elections back to 1993, using AEC two-party-preferred data",
+    "quoted_support": "Standard deviation for every electorate, 3.3%. This is a measure of how far we expect each electorate to deviate from uniform swing, on average... If a new (i.e. sophomore) incumbent is contesting in this electorate, I added 1% onto the 2pp for that incumbent's party.",
+    "numbers": ["3.3% standard deviation", "+/-1% incumbency adjustment"],
+    "entities": ["Armarium Interreta", "Kevin Bonham", "Australian Electoral Commission"],
+    "time_period": "1993-2021",
+    "region": "Australia",
+    "confidence": "high",
+    "source_note_id": "how-predictive-is-the-pre-election-pendulum"
+  },
+  {
+    "claim": "Newly-created electoral districts formed entirely from territory of one party's existing seats are modeled as an incumbency 'retirement' for that party (a specific handled edge case in redistricting-aware swing modeling), directly analogous to how a French bureau de vote created by splitting an existing bureau needs its baseline vote-share imputed from the predecessor unit.",
+    "stance": "neutral",
+    "stance_target": "how to handle newly-created electoral units with no direct prior-election baseline in a swing model",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "Australian federal redistribution, e.g. Division of Solomon created from Division of Northern Territory",
+    "quoted_support": "If a new electorate was created out of electorates all held by one party, I modelled it as having had a retirement from that party. For example, when the Division of Solomon was created, I modelled it as having had a Labor retirement, as it was created out of the Labor-held Division of Northern Territory.",
+    "numbers": [],
+    "entities": ["Division of Solomon", "Division of Northern Territory", "Labor"],
+    "time_period": null,
+    "region": "Australia",
+    "confidence": "medium",
+    "source_note_id": "how-predictive-is-the-pre-election-pendulum"
+  },
+  {
+    "claim": "Uniform swing pendulums can be systematically misleading not just from random seat-to-seat variance but from structural asymmetry between the two sides' marginal-seat distributions: if one party holds many more marginal seats under a tight margin than its opponent, even a near-zero net swing produces net seat losses for that party.",
+    "stance": "refutes",
+    "stance_target": "uniform swing gives an unbiased seat outcome whenever net national swing is near zero",
+    "evidence_type": "theoretical",
+    "scope_conditions": "Australian electoral pendulum, general mechanism",
+    "quoted_support": "uniform swing projections can be misleading when one side of the pendulum differs systematically from the other. For example, if Labor holds 14 marginal seats on margins of victory less than 3%, while the Coalition has just 4 marginals where they won by less than 3%, then even with very little overall swing we might expect the Coalition to make gains on net.",
+    "numbers": ["example: 14 Labor marginals under 3% vs. 4 Coalition marginals under 3%"],
+    "entities": ["Labor", "Coalition"],
+    "time_period": null,
+    "region": "Australia",
+    "confidence": "medium",
+    "source_note_id": "how-predictive-is-the-pre-election-pendulum"
+  }
+]

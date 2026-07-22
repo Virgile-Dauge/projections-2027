@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Aux législatives 2024, le front républicain a très bien fonctionné dans les duels LR-RN : 70% des électeurs du Nouveau Front populaire du premier tour et 79% des électeurs Ensemble ont voté LR au second tour.",
+    "stance": "supports",
+    "stance_target": "efficacité du front républicain contre le RN en 2024, avec hétérogénéité selon le camp",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, législatives 2024, second tour, duels LR-RN",
+    "quoted_support": "les duels LR-RN ont vu le barrage républicain fonctionner à plein : 70% des électeurs du NFP lors du premier tour ont voté LR au second tour et 79% des électeurs Ensemble ont fait de même.",
+    "numbers": ["70%", "79%"],
+    "entities": ["Nouveau Front populaire", "Les Républicains", "Ensemble", "Rassemblement National", "Ipsos-Talan"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+  },
+  {
+    "claim": "Le barrage républicain aux législatives 2024 a été nettement moins efficace dans les duels gauche(hors LFI)-RN que dans les duels LR-RN ou Ensemble-RN : seulement 54% des électeurs Ensemble du premier tour et 29% des électeurs LR se sont reportés sur le candidat PS/écologiste/communiste face au RN.",
+    "stance": "supports",
+    "stance_target": "hétérogénéité du front républicain selon l'identité partisane du candidat de gauche qualifié",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, législatives 2024, second tour, duels gauche non-LFI vs RN",
+    "quoted_support": "Quand le candidat du NFP était un PS, un écologiste ou un communiste, 54% des électeurs Ensemble du premier tour se sont reportés sur lui. Mais 29% seulement des électeurs LR et divers droite l'ont choisi.",
+    "numbers": ["54%", "29%", "34%", "37%"],
+    "entities": ["PS", "écologistes", "PCF", "Ensemble", "LR"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+  },
+  {
+    "claim": "Les candidats La France insoumise ont bénéficié du front républicain de façon très limitée aux législatives 2024 : seulement 43% des électeurs Ensemble du premier tour et 26% des électeurs LR se sont reportés sur LFI face au RN, contre 38% ayant voté RN chez les électeurs LR.",
+    "stance": "supports",
+    "stance_target": "pénalisation spécifique de LFI dans le mécanisme du front républicain en 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, législatives 2024, second tour, duels LFI vs RN",
+    "quoted_support": "Les électeurs Ensemble au premier tour n'ont été que 43% à voter LFI au second. Et du côté de LR, ce report tombe à 26% ; 38% ont voté RN et 36% ont voté nul ou blanc, ou se sont abstenus.",
+    "numbers": ["43%", "26%", "38%", "36%"],
+    "entities": ["La France insoumise", "Ensemble", "LR", "Rassemblement National"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+  },
+  {
+    "claim": "Sur les 258 circonscriptions où le RN et ses alliés étaient en tête au premier tour des législatives 2024, 154 ont finalement été perdues par le RN, dont 109 grâce à un désistement entre les deux tours.",
+    "stance": "supports",
+    "stance_target": "rôle déterminant des désistements/triangulaires évitées dans les défaites du RN en 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, législatives 2024, 501 circonscriptions encore en jeu au second tour",
+    "quoted_support": "Le RN et leurs alliés étaient en tête au premier tour dans 258 des 501 circonscriptions encore en jeu dimanche. Ils ont au final été battus dans 154 d'entre elles, à deux tiers (109) dans des circonscriptions où il y a eu un désistement entre les deux tours.",
+    "numbers": ["258", "501", "154", "109"],
+    "entities": ["Rassemblement National"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+  },
+  {
+    "claim": "Le RN a très largement remporté les triangulaires maintenues aux législatives 2024 : sur les 11 triangulaires où il était en tête au premier tour, une seule lui a échappé.",
+    "stance": "supports",
+    "stance_target": "les triangulaires maintenues favorisent structurellement le RN par rapport aux duels avec désistement",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, législatives 2024, triangulaires maintenues",
+    "quoted_support": "la partie a été plus facile dans les circonscriptions où des triangulaires ont été maintenues. Sur les 11 où le RN était en tête au premier tour, une seule lui a échappée.",
+    "numbers": ["11", "1"],
+    "entities": ["Rassemblement National"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-2024-comment-les-reports-de-voix-du-front-rpublicain-ont-jou-contre"
+  }
+]

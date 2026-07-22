@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Regional variation in swing (as opposed to a single national swing figure) accounted for 14 mis-predicted seats at the 2005 UK general election versus a plain uniform-national-swing baseline.",
+    "stance": "refutes",
+    "stance_target": "uniform national swing is adequate for constituency-level accuracy",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK general election 2005",
+    "quoted_support": "At the 2005 election, such regional swing accounted for 14 mis-predicted seats.",
+    "numbers": ["14 mis-predicted seats"],
+    "entities": ["Electoral Calculus", "2005 UK general election"],
+    "time_period": "2005",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "predicting-regional-swing"
+  },
+  {
+    "claim": "Between 2001 and 2005, national UK swing was near-flat (Conservatives +0.5%) but masked large regional divergence: Conservatives gained about 3 points in Essex/Anglia while losing about 1.7 points in Yorkshire, illustrating that a near-zero national swing can conceal substantial and offsetting local swings.",
+    "stance": "refutes",
+    "stance_target": "a small national swing implies small local changes everywhere",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK general elections 2001-2005",
+    "quoted_support": "between 2001 and 2005, the Conservatives increased their vote share by 0.5% nationally. But within this average, there were different regional trends: they gained 3% in Essex but lost 1.7% in Yorkshire.",
+    "numbers": ["national Conservative change +0.5%", "Essex +3%", "Yorkshire -1.7%"],
+    "entities": ["Conservatives", "Essex", "Yorkshire"],
+    "time_period": "2001-2005",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "predicting-regional-swing"
+  },
+  {
+    "claim": "Applying regional-level swing correction (derived from a 32,268-respondent regional megapoll) instead of plain uniform national swing to a June 2009 poll shifted the projected seat total by +28 Conservative seats and -33 Labour seats relative to the uniform-swing baseline.",
+    "stance": "refutes",
+    "stance_target": "the difference between regional-adjusted and plain uniform swing projections is small in practice",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, June 2009 polling snapshot projected onto constituencies",
+    "quoted_support": "The effect of the regional swing differentials in June 2009 is to give the Conservatives approximately another 30 seats at the expense of Labour.",
+    "numbers": ["Conservative regional impact +28 seats", "Labour regional impact -33 seats", "Lib Dem regional impact -1 seat"],
+    "entities": ["Conservatives", "Labour", "Liberal Democrats", "YouGov"],
+    "time_period": "2009",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "predicting-regional-swing"
+  },
+  {
+    "claim": "Estimating regional swing reliably requires a special-purpose regional megapoll (~1,000+ respondents per region); a standard national poll of ~1,000 respondents yields only ~100 per region, too small to measure regional opinion accurately, so such surveys are infrequent.",
+    "stance": "neutral",
+    "stance_target": "data requirements for moving from uniform national swing to regionally-adjusted swing",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK opinion polling methodology",
+    "quoted_support": "National opinion polls have a sample size of about 1,000 people, equivalent to 100 people per region, which is not enough to estimate opinion accurately. We need an opinion poll which surveys at least 1,000 people in each region of the country.",
+    "numbers": ["national poll ~1,000 respondents", "~100 per region", "megapoll n=32,268"],
+    "entities": ["YouGov", "Electoral Calculus"],
+    "time_period": "2009",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "predicting-regional-swing"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "maup is maintained by MGGG (Metric Geometry and Gerrymandering Group), now branded the Data and Democracy Lab, and was first announced in June 2019 as a Python package to streamline redistricting-data workflows (assigning, aggregating, disaggregating, prorating spatial data).",
+    "stance": "neutral",
+    "stance_target": "provenance and maturity of the maup crosswalk toolkit",
+    "evidence_type": "historical",
+    "scope_conditions": "package launch context, 2019",
+    "quoted_support": "maup is our attempt to make working with redistricting data easier for everyone. It is a Python package that streamlines the basic workflows that arise when working with blocks, precincts, and districts",
+    "numbers": ["15 June 2019 publication date"],
+    "entities": ["maup", "MGGG", "Max Hully"],
+    "time_period": "June 2019",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "maup-the-geospatial-toolkit-for-redistricting-data-data-and-democracy-lab"
+  }
+]

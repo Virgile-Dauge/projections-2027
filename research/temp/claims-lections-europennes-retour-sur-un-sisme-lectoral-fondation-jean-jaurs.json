@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "À Sarcelles, les bureaux de vote du quartier dit « la petite Jérusalem » ont voté préférentiellement pour la liste Reconquête! aux européennes 2024, exactement comme ils avaient placé Éric Zemmour en tête à la présidentielle 2022 — continuité géographique directe au niveau infra-communal (bureau de vote) entre deux scrutins de nature différente.",
+    "stance": "supports",
+    "stance_target": "stabilité géographique fine (bureau de vote) de l'électorat RN/droite radicale entre scrutins successifs",
+    "evidence_type": "empirical",
+    "scope_conditions": "Sarcelles (Val-d'Oise), quartier 'la petite Jérusalem', présidentielle 2022 vs européennes 2024",
+    "quoted_support": "Les bureaux de vote correspondant aux quartiers qu'on appelle localement « La petite Jérusalem » ont, quant à eux, voté préférentiellement pour liste Reconquête !, tout comme ils avaient placé Éric Zemmour en tête lors de l'élection présidentielle de 2022.",
+    "numbers": [],
+    "entities": ["Reconquête!", "Éric Zemmour", "Sarcelles", "présidentielle 2022", "européennes 2024"],
+    "time_period": "2022-2024",
+    "region": "Sarcelles, Val-d'Oise",
+    "confidence": "medium",
+    "source_note_id": "lections-europennes-retour-sur-un-sisme-lectoral-fondation-jean-jaurs"
+  },
+  {
+    "claim": "Il existe une dichotomie géographique stable et documentée depuis une dizaine d'années entre un 'FN/RN du Nord' à dimension sociale (bassins miniers Nord-Pas-de-Calais, Moselle) et un 'FN/RN du Sud' à dimension identitaire, et Reconquête! en 2024 a capté spécifiquement l'électorat radicalisé du Sud plutôt que du Nord, dans la continuité du vote Zemmour à la présidentielle 2022.",
+    "stance": "supports",
+    "stance_target": "stabilité de la structure spatiale relative RN/droite radicale entre scrutins",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, comparaison présidentielle 2022 / européennes 2024, échelle départementale/régionale",
+    "quoted_support": "Nous avions déjà mis en lumière, il y a une dizaine d'années, l'existence d'un FN du Nord, à dimension plus sociale, et d'un FN du Sud, à dimension identitaire. Aux élections européennes comme à la présidentielle, Reconquête ! a plus parlé au FN du Sud qu'à celui du Nord.",
+    "numbers": [],
+    "entities": ["Reconquête!", "RN", "Front national", "Nord-Pas-de-Calais", "Moselle", "sud de la France"],
+    "time_period": "~2014-2024",
+    "region": "France (Nord vs Sud)",
+    "confidence": "medium",
+    "source_note_id": "lections-europennes-retour-sur-un-sisme-lectoral-fondation-jean-jaurs"
+  },
+  {
+    "claim": "La liste RN de Jordan Bardella a progressé de près de 8 points aux européennes 2024 par rapport aux européennes 2019, soit un gain de 2 479 000 voix en cinq ans.",
+    "stance": "neutral",
+    "stance_target": "ampleur de la dynamique RN entre les européennes 2019 et 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France entière, européennes 2019 vs 2024",
+    "quoted_support": "Jordan Bardella made a spectacular leap of nearly eight points compared to the 2019 European election, gaining 2,479,000 votes in five years.",
+    "numbers": ["+8 points", "2 479 000 voix", "2019-2024"],
+    "entities": ["Jordan Bardella", "RN", "européennes 2019", "européennes 2024"],
+    "time_period": "2019-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lections-europennes-retour-sur-un-sisme-lectoral-fondation-jean-jaurs"
+  },
+  {
+    "claim": "L'effet de fief de Jean Lassalle (montagnes du Béarn, pays d'Oc — Aveyron, Gers, Dordogne) pour l'Alliance rurale aux européennes 2024 reproduit la géographie de sa candidature à la présidentielle 2022, avec un rejet symétrique dans les zones urbanisées du Sud (Toulouse, Bordeaux, littoral méditerranéen, couloir rhodanien).",
+    "stance": "supports",
+    "stance_target": "stabilité géographique inter-scrutins pour des listes à électorat de niche/identitaire",
+    "evidence_type": "empirical",
+    "scope_conditions": "Béarn et pays d'Oc, présidentielle 2022 vs européennes 2024",
+    "quoted_support": "Comme lors de la candidature de Jean Lassalle à l'élection présidentielle de 2022, la géographie du vote pour cette liste est marquée géographiquement. [...] on voit comment, comme en 2022, cette offre politique a rencontré un certain écho au sud d'une très vieille frontière, celle des pays d'Oc.",
+    "numbers": [],
+    "entities": ["Jean Lassalle", "Alliance rurale", "Béarn", "pays d'Oc", "Aveyron", "Gers", "Dordogne"],
+    "time_period": "2022-2024",
+    "region": "Béarn, pays d'Oc",
+    "confidence": "medium",
+    "source_note_id": "lections-europennes-retour-sur-un-sisme-lectoral-fondation-jean-jaurs"
+  }
+]

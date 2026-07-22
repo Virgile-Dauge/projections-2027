@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "L'ouvrage 'Nouvelle cartographie électorale de la France' (Souidi & Vonderscher, Textuel, janvier 2026) croise les résultats des ~70 000 bureaux de vote français (2017-2024) avec les données sociales INSEE disponibles au bureau depuis 2023, constituant la cartographie électorale à la maille bureau la plus aboutie identifiée pour la France — mais reste un exercice strictement descriptif/rétrospectif, sans aucune projection vers un scrutin futur.",
+    "stance": "supports",
+    "stance_target": "GAP1 : absence de projection française à maille bureau de vote 2025-2026 (hors MRP)",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, bureaux de vote, scrutins 2017-2024, publication janvier 2026",
+    "quoted_support": "les auteurs restent surtout descriptifs. Ils documentent des corrélations entre conditions de vie et choix électoraux sans prétendre établir des causalités univoques.",
+    "numbers": ["70 000 bureaux de vote", "304 pages", "24 euros"],
+    "entities": ["Youssef Souidi", "Thomas Vonderscher", "Éditions Textuel", "INSEE"],
+    "time_period": "2017-2024 (publication janvier 2026)",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "cartographie-bureaux-de-vote-rn-et-conditions-de-vie"
+  },
+  {
+    "claim": "Les auteurs identifient quatre 'swing circos' (circonscriptions où le vote a basculé de façon marquée d'un scrutin à l'autre entre 2017 et 2024) comme catégorie d'analyse rétrospective de la volatilité électorale, pas comme sortie d'un modèle prédictif tourné vers 2027.",
+    "stance": "neutral",
+    "stance_target": "distinction entre analyse de volatilité passée et projection prospective",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, circonscriptions législatives, 2017-2024",
+    "quoted_support": "L'ouvrage introduit la notion de « swing circos » — circonscriptions fluctuantes où le vote peut basculer d'une élection à l'autre — et en identifie quatre particulièrement déterminantes.",
+    "numbers": ["4 swing circos"],
+    "entities": ["Youssef Souidi", "Thomas Vonderscher"],
+    "time_period": "2017-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "cartographie-bureaux-de-vote-rn-et-conditions-de-vie"
+  },
+  {
+    "claim": "L'analyse bureau par bureau montre que le vote RN s'ancre moins dans des territoires administratifs définis que dans des configurations de vie (distance aux services, isolement des mobilités, absence d'expérience quotidienne de cohabitation avec des populations immigrées), et que l'extrême droite attire une part importante de la classe moyenne.",
+    "stance": "supports",
+    "stance_target": "les conditions de vie/services de proximité, pas les catégories territoriales figées, structurent le vote RN à maille fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, ~70 000 bureaux de vote, 2017-2024",
+    "quoted_support": "le vote RN s'ancre moins dans des territoires définis que dans des configurations de vie : distance aux services, isolement des mobilités, absence d'expériences quotidiennes de cohabitation avec des populations immigrées.",
+    "numbers": [],
+    "entities": ["Rassemblement National", "Youssef Souidi", "Thomas Vonderscher"],
+    "time_period": "2017-2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "cartographie-bureaux-de-vote-rn-et-conditions-de-vie"
+  }
+]

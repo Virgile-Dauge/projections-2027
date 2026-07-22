@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Le dispositif méthodologique central de King (1997) est la 'tomography line', dérivée des bornes déterministes de Duncan-Davis (1953) combinées à une densité normale bivariée tronquée sur les paramètres au niveau du bureau, qui permet d'extraire de l'information probabiliste au-delà de simples bornes.",
+    "stance": "neutral",
+    "stance_target": "mécanisme technique fondateur de la méthode King's EI",
+    "evidence_type": "theoretical",
+    "scope_conditions": "cas 2x2 originel",
+    "quoted_support": "assumptions or loss of information, as what King called a 'tomography' line within the unit... a tomography line like that in Figure 0.1 exhausts all this available information.",
+    "numbers": [],
+    "entities": ["King (1997)", "tomography line", "Duncan-Davis bounds"],
+    "time_period": "1997",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "ecological-inference"
+  },
+  {
+    "claim": "L'inférence écologique est le seul recours méthodologique disponible pour reconstruire des comportements individuels historiques quand aucune enquête n'a existé ou ne peut exister (exemple: vote pour le parti nazi sous la République de Weimar).",
+    "stance": "supports",
+    "stance_target": "nécessité de l'inférence écologique en l'absence de données de sondage individuelles",
+    "evidence_type": "theoretical",
+    "scope_conditions": "reconstruction historique de comportements électoraux",
+    "quoted_support": "sociologists and historians try to learn who voted for the Nazi party in Weimar Germany, where thoughts of survey research are seven decades too late.",
+    "numbers": [],
+    "entities": ["Weimar Germany", "Nazi party"],
+    "time_period": "République de Weimar",
+    "region": "Allemagne",
+    "confidence": "medium",
+    "source_note_id": "ecological-inference"
+  },
+  {
+    "claim": "Le volume King, Rosen & Tanner (2004) consolide un ensemble de 16 chapitres couvrant les extensions spatiales, temporelles/panel et multi-élections de la méthode EI, marquant l'expansion méthodologique post-1997 du champ.",
+    "stance": "neutral",
+    "stance_target": "état de l'art de l'inférence écologique au milieu des années 2000",
+    "evidence_type": "theoretical",
+    "scope_conditions": "ouvrage de référence collectif, 2004",
+    "quoted_support": "we have witnessed an explosion of statistical research into this problem in the last five years – both in substantive applications and in methodological innovations.",
+    "numbers": ["16 chapitres"],
+    "entities": ["King", "Rosen", "Tanner", "Wakefield", "Quinn", "Calvo", "Escolar"],
+    "time_period": "2004",
+    "region": null,
+    "confidence": "medium",
+    "source_note_id": "ecological-inference"
+  }
+]

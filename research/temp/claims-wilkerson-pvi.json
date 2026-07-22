@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le Cook Partisan Voting Index (PVI), introduit en 1997 par Polidata Inc. pour The Cook Political Report, mesure le penchant partisan d'une circonscription ou d'un État en comparant sa performance présidentielle à celle de la nation, et sert de référence historique fondatrice pour les indices partisans locaux aux États-Unis.",
+    "stance": "supports",
+    "stance_target": "les indices partisans locaux basés sur un scrutin de référence unique (présidentielle) existent depuis longtemps comme standard méthodologique",
+    "evidence_type": "historical",
+    "scope_conditions": "circonscriptions et États US, depuis 1997",
+    "quoted_support": "Introduced in 1997, The Cook Partisan Voting Index (PVI) was developed for The Cook Political Report by Polidata Inc. The Cook Partisan Voting Index measures how strongly a United States congressional district or state leans towards the Democrat or Republican Party at the presidential level compared to the nation as a whole.",
+    "numbers": ["introduit en 1997"],
+    "entities": ["Cook Political Report", "Polidata Inc."],
+    "time_period": "1997-present",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "partisan-voting-index-wilkerson-public-affairs"
+  },
+  {
+    "claim": "Le Hybrid Partisan Voting Index (hPVI), variante créée en 2014, combine les résultats présidentiel ET gubernatorial (plutôt que la présidentielle seule) comparés à la moyenne de l'État, et est calculé jusqu'au niveau du precinct (bureau de vote), preuve d'un usage réel d'indice partisan multi-scrutins à la maille la plus fine.",
+    "stance": "supports",
+    "stance_target": "un indice partisan multi-scrutins peut être calculé et publié jusqu'à la maille du bureau de vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "districts, comtés, villes et precincts de l'État de Washington, données 2012",
+    "quoted_support": "Following the presidential and gubernatorial elections, presidential and gubernatorial results are compiled to generate Hybrid Partisan Voting Index scores for statewide offices, congressional districts, and political districts or subdivisions including state legislative districts, counties, cities, and precincts.",
+    "numbers": [],
+    "entities": ["Braedon Wilkerson", "Wilkerson Public Affairs"],
+    "time_period": "2014-present, exemple 2012",
+    "region": "Washington State, United States",
+    "confidence": "high",
+    "source_note_id": "partisan-voting-index-wilkerson-public-affairs"
+  },
+  {
+    "claim": "Le calcul du hPVI compare la moyenne du partage bipartisan des voix présidentielle+gubernatoriale d'une unité géographique à la moyenne de l'État sur le même scrutin combiné : exemple concret, le 43e district législatif de Washington obtient D+31 (85.85% démocrate local vs 54.57% de moyenne d'État), le 13e district obtient R+19 (64.73% républicain local vs 45.43% de moyenne d'État).",
+    "stance": "neutral",
+    "stance_target": "méthode de calcul d'un indice partisan combinant deux types de scrutins",
+    "evidence_type": "empirical",
+    "scope_conditions": "Washington State, élections 2012",
+    "quoted_support": "in Washington's 43rd Legislative District, Democrat candidates won an average 85.85% of the two-party share in the 2012 presidential and gubernatorial elections... the district voted approximately 31 percentage points more Democrat, or D+31.",
+    "numbers": ["D+31 (43e district)", "R+19 (13e district)", "moyenne d'État 2012 : 54.57% Dem / 45.43% Rep"],
+    "entities": ["Washington's 43rd Legislative District", "Washington's 13th Legislative District"],
+    "time_period": "2012",
+    "region": "Washington State, United States",
+    "confidence": "high",
+    "source_note_id": "partisan-voting-index-wilkerson-public-affairs"
+  },
+  {
+    "claim": "La grille de compétitivité standard des indices PVI classe les circonscriptions en quatre catégories selon l'écart bipartisan : Solid (>56% pour un parti), Likely (54-55%), Lean (52-53%), Swing (49-51%), fournissant une typologie opérationnelle de priorisation d'action politique.",
+    "stance": "neutral",
+    "stance_target": "typologie de classement de compétitivité électorale à partir d'un indice partisan",
+    "evidence_type": "theoretical",
+    "scope_conditions": "grille Cook/Wilkerson PVI",
+    "quoted_support": "Solid... R + D > 56%... Likely... R + D = 55% - 54%... Lean... R + D = 53% - 52%... Swing... R + D = 51% - 49%.",
+    "numbers": ["Solid >56%", "Likely 54-55%", "Lean 52-53%", "Swing 49-51%"],
+    "entities": [],
+    "time_period": null,
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "partisan-voting-index-wilkerson-public-affairs"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Une chute apparente de 5 points du soutien à Obama entre deux vagues de sondage Pew (12-16 sept. vs 4-7 oct. 2012) s'accompagne d'une chute strictement identique dans le rappel du vote 2008 des répondants (47% à 42% se souvenant avoir voté Obama en 2008), preuve que le changement observé reflète un changement de composition de l'échantillon et non un vrai revirement d'opinion.",
+    "stance": "refutes",
+    "stance_target": "les swings observés dans des vagues de sondages successives reflètent de véritables changements d'intention de vote chez les mêmes électeurs",
+    "evidence_type": "empirical",
+    "scope_conditions": "sondages Pew Research, campagne présidentielle US 2012, autour du premier débat Obama-Romney",
+    "quoted_support": "In the September 12–16 sample, 47% recalled voting for Obama in 2008, but this dropped to 42% in the October 4–7 sample. Recalled vote for McCain also rose by 5% in this pair of surveys (from 32% to 37%). The swing toward Romney in the two polls was identical to the increase in recalled voting for McCain.",
+    "numbers": ["swing apparent Obama-Romney 5%", "rappel vote Obama 2008 : 47%→42%", "rappel vote McCain 2008 : 32%→37%"],
+    "entities": ["Pew Research", "Barack Obama", "Mitt Romney"],
+    "time_period": "sept.-oct. 2012",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "quarterly-journal-of-political-science-2016-11-103130"
+  },
+  {
+    "claim": "À travers organismes de sondage et vagues successives, le soutien apparent à Obama est positivement corrélé à la proportion de répondants s'identifiant démocrates dans l'échantillon de chaque sondage, ce qui indique que les swings de polling reflètent principalement des variations de non-réponse partisane différentielle plutôt que des changements d'opinion réels.",
+    "stance": "refutes",
+    "stance_target": "les swings de sondages électoraux mesurent fidèlement l'évolution réelle des intentions de vote",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondages multi-organismes, campagne présidentielle US 2012, avant/après le premier débat",
+    "quoted_support": "The estimated support for Obama is positively correlated with the proportion of Democratic party identifiers in each sample... the sharp drop in measured support for Obama around the first debate is strikingly correlated with a drop in the fraction of Democrats responding to major media polls.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2012",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "quarterly-journal-of-political-science-2016-11-103130"
+  },
+  {
+    "claim": "La stratification post-hoc (MRP) sur les seules démographies standards (âge, race, genre, éducation) est insuffisante pour éliminer le biais de sélection dans les sondages, mais l'ajout de variables attitudinales (identification partisane, idéologie autodéclarée, vote passé) au modèle de post-stratification élimine quasiment ce biais.",
+    "stance": "supports",
+    "stance_target": "les variables attitudinales (parti, idéologie, vote passé) sont indispensables en complément des démographies standards pour corriger le biais de non-réponse dans un modèle de post-stratification",
+    "evidence_type": "statistical",
+    "scope_conditions": "panel Xbox, campagne présidentielle US 2012",
+    "quoted_support": "Demographic post-stratification, similar to that used in most academic and media polls, is inadequate, but the addition of attitudinal variables (party identification, ideological self-placement, and past vote) appears to make selection ignorable in our data.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2012",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "quarterly-journal-of-political-science-2016-11-103130"
+  },
+  {
+    "claim": "L'étude s'appuie sur un panel Xbox de grande échelle (750 148 interviews, 345 858 répondants uniques sur 45 jours précédant l'élection 2012, ~7500 répondants par jour en moyenne) pour observer directement les changements individuels d'intention de vote, contrairement aux sondages transversaux classiques qui ne peuvent qu'inférer le changement agrégé.",
+    "stance": "neutral",
+    "stance_target": "méthode empirique pour distinguer changement réel d'opinion et artefact d'échantillonnage",
+    "evidence_type": "empirical",
+    "scope_conditions": "panel Xbox Live, campagne présidentielle US 2012",
+    "quoted_support": "we conducted 750,148 interviews with 345,858 unique respondents on the Xbox gaming platform during the 45 days preceding the election... The average number of respondents in our analysis sample each day was about 7,500.",
+    "numbers": ["750 148 interviews", "345 858 répondants uniques", "45 jours", "~7500 répondants/jour"],
+    "entities": ["Xbox Live"],
+    "time_period": "2012",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "quarterly-journal-of-political-science-2016-11-103130"
+  }
+]

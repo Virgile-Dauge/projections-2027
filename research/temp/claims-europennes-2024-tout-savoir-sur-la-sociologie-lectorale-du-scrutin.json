@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "48% des électeurs LR-Bellamy 2019 ont basculé vers le RN aux européennes 2024, tandis que 48% des électeurs Dupont-Aignan/DLF 2019 ont voté Bardella et 25% Reconquête (Maréchal).",
+    "stance": "neutral",
+    "stance_target": "reports de voix depuis les listes de droite/extrême droite entre européennes 2019 et 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondage jour du vote Ipsos, européennes 2024, comparaison avec le vote déclaré aux européennes 2019",
+    "quoted_support": "Ceux qui avaient choisi Nicolas Dupont-Aignan et Debout la France en 2019 sont 48 % à avoir glissé un bulletin Jordan Bardella et 25 % un bulletin Marion Maréchal à la tête de la liste Reconquête.",
+    "numbers": ["26%", "48%", "25%"],
+    "entities": ["François-Xavier Bellamy", "Nicolas Dupont-Aignan", "Jordan Bardella", "Marion Maréchal"],
+    "time_period": "juin 2024, comparé à 2019",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "europennes-2024-tout-savoir-sur-la-sociologie-lectorale-du-scrutin"
+  },
+  {
+    "claim": "96% des sympathisants déclarés du RN ont voté pour la liste Bardella aux européennes 2024, indiquant une fidélité électorale quasi-totale du socle partisan RN.",
+    "stance": "supports",
+    "stance_target": "fidélité électorale très élevée du socle partisan RN aux européennes 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondage jour du vote Ipsos, européennes 2024, sympathisants RN",
+    "quoted_support": "96 % des personnes qui se disent proches du RN ont voté pour la liste du président de la formation d'extrême-droite. Seules 2 % ont choisi la liste Reconquête.",
+    "numbers": ["96%", "2%"],
+    "entities": ["Rassemblement National", "Jordan Bardella"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "europennes-2024-tout-savoir-sur-la-sociologie-lectorale-du-scrutin"
+  },
+  {
+    "claim": "La sociologie du vote RN aux européennes 2024 montre une forte polarisation par catégorie socioprofessionnelle : 54% des ouvriers, 40% des employés et 36% des retraités CSP- votants ont choisi le RN.",
+    "stance": "supports",
+    "stance_target": "surreprésentation du vote RN chez les catégories populaires (ouvriers, employés) aux européennes 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "sondage jour du vote Ipsos, européennes 2024, votants par CSP",
+    "quoted_support": "Le Rassemblement National a séduit 54 % des ouvriers, 40 % des employés et 36 % des retraités CSP- qui se sont déplacés pour voter.",
+    "numbers": ["54%", "40%", "36%"],
+    "entities": ["Rassemblement National"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "europennes-2024-tout-savoir-sur-la-sociologie-lectorale-du-scrutin"
+  },
+  {
+    "claim": "L'abstention aux européennes 2024 (48,6% des inscrits) présente un fort gradient d'âge inversé : 60% chez les 18-24 ans et 66% chez les 25-34 ans, contre seulement 29% chez les 70 ans et plus (soit 71% de participation).",
+    "stance": "supports",
+    "stance_target": "gradient d'âge marqué dans l'abstention aux élections européennes, les jeunes s'abstenant le plus",
+    "evidence_type": "statistical",
+    "scope_conditions": "européennes 2024, France, par tranche d'âge",
+    "quoted_support": "60 % des 18-24 ans ne se sont pas déplacés. Chez les 25-34 ans, ils sont 66 % à avoir boudé les urnes. La tendance s'inverse passé 35 ans. Ceux qui ont le plus participé se situent dans la tranche 70 ans et plus. 71 % d'entre eux sont allés voter.",
+    "numbers": ["48.6%", "60%", "66%", "71%"],
+    "entities": ["élections européennes 2024"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "europennes-2024-tout-savoir-sur-la-sociologie-lectorale-du-scrutin"
+  }
+]

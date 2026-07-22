@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Ehin & Talving (2021) testent le modèle des élections de second ordre (SOE) sur les 175 élections européennes tenues entre 1979 et 2019 au niveau parti et concluent que le modèle SOE conserve un pouvoir explicatif significatif à l'Est comme à l'Ouest de l'Europe, malgré la montée des partis populistes, extrémistes et eurosceptiques.",
+    "stance": "supports",
+    "stance_target": "persistance de la validité de la théorie SOE (Reif & Schmitt) face à la critique de son obsolescence à l'ère du populisme",
+    "evidence_type": "statistical",
+    "scope_conditions": "toutes les élections du Parlement européen 1979-2019, données au niveau des partis",
+    "quoted_support": "This article tests the SOE model with party-level data from all 175 EP elections held between 1979 and 2019... All in all, the SOE model continues to wield significant explanatory power in both the West and the East.",
+    "numbers": ["175 élections", "1979-2019"],
+    "entities": ["Parlement européen", "second-order elections theory"],
+    "time_period": "1979-2019",
+    "region": "Europe",
+    "confidence": "high",
+    "source_note_id": "still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros"
+  },
+  {
+    "claim": "L'écart de participation entre élections européennes et élections nationales, bien que persistant sur l'ensemble de la période 1979-2019, s'est significativement réduit lors des élections européennes de 2019 par rapport aux scrutins précédents.",
+    "stance": "neutral",
+    "stance_target": "évolution de l'écart de turnout entre scrutins de premier et second ordre en Europe",
+    "evidence_type": "statistical",
+    "scope_conditions": "élections européennes, comparaison 1979-2019, particulièrement 2019",
+    "quoted_support": "While turnout in EP elections remains well below participation rates in national elections, the 2019 EP elections were marked by a significant reduction in the average turnout gap.",
+    "numbers": ["2019"],
+    "entities": ["Parlement européen"],
+    "time_period": "1979-2019",
+    "region": "Europe",
+    "confidence": "high",
+    "source_note_id": "still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros"
+  },
+  {
+    "claim": "À travers toutes les années d'élection européenne étudiées (1979-2019), la taille du parti est le prédicteur le plus puissant des gains et pertes électoraux, et l'incumbency (statut de parti au pouvoir national) est associée à des pertes électorales la plupart des années — mais l'hypothèse que le modèle SOE performerait moins bien dans les systèmes partisans fragmentés n'a PAS été confirmée.",
+    "stance": "neutral",
+    "stance_target": "mécanismes explicatifs centraux du modèle SOE (taille de parti, incumbency) et robustesse face à la fragmentation partisane",
+    "evidence_type": "statistical",
+    "scope_conditions": "élections européennes 1979-2019, données par parti",
+    "quoted_support": "Across all election years, party size is the most potent predictor of electoral gains and losses in EP elections. Incumbency is associated with electoral losses in most EP election years... The expectation that the SOE model performs worse in countries with fragmented party systems was not confirmed.",
+    "numbers": [],
+    "entities": ["Parlement européen"],
+    "time_period": "1979-2019",
+    "region": "Europe",
+    "confidence": "high",
+    "source_note_id": "still-second-order-european-elections-in-the-era-of-populism-extremism-and-euros"
+  }
+]

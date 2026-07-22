@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "More in Common's April 2025 MRP poll (Reform 180 seats, Labour 165, Conservatives 165, Lib Dems 67) was explicitly caveated by its own publisher as not representing a projection of the eventual election result, given 4.5 years remained before the next mandatory general election.",
+    "stance": "refutes",
+    "stance_target": "MRP polls conducted years before an election should be read as outcome projections",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, April 2025, MRP conducted years ahead of the statutory election date",
+    "quoted_support": "With four and a half years before the next general election must be called this model is unlikely to represent anything close to the ultimate result and should not be seen as a projection of the election.",
+    "numbers": ["Reform 180 seats", "Labour 165 seats", "Conservatives 165 seats", "Lib Dems 67 seats", "4.5 years to next election"],
+    "entities": ["More in Common", "Reform UK", "Labour Party", "Conservative Party", "Liberal Democrats"],
+    "time_period": "2025",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should"
+  },
+  {
+    "claim": "MRP surveys typically achieve an average sample size of only about 25 respondents per constituency across Great Britain's 632 constituencies, relying on demographic priors from census/other sources to compensate for this sparse direct data.",
+    "stance": "neutral",
+    "stance_target": "typical raw sample density underlying UK constituency-level MRP",
+    "evidence_type": "statistical",
+    "scope_conditions": "UK, contemporary MRP practice, 632 GB constituencies",
+    "quoted_support": "Agencies ask a very large sample of electors about their voting intentions – enough to have an average sample size of about 25 respondents in each of the 632 constituencies in Great Britain.",
+    "numbers": ["~25 respondents per constituency", "632 constituencies"],
+    "entities": ["More in Common"],
+    "time_period": "2025",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should"
+  },
+  {
+    "claim": "In practice, MRP's accuracy assumptions are not always met: a peer-reviewed Cambridge Political Analysis study found that the conditions required for MRP to perform well with conventional national surveys are 'not always met by practitioners.'",
+    "stance": "refutes",
+    "stance_target": "MRP reliably meets its theoretical accuracy conditions in applied political-polling practice",
+    "evidence_type": "empirical",
+    "scope_conditions": "general MRP applied practice, conventional (non-massive) national survey samples",
+    "quoted_support": "the conditions required for MRP to work well are not always met by practitioners.",
+    "numbers": [],
+    "entities": ["Cambridge University Press", "Political Analysis journal"],
+    "time_period": null,
+    "region": null,
+    "confidence": "medium",
+    "source_note_id": "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should"
+  },
+  {
+    "claim": "MRP's constituency-level demographic poststratification variables (notably social class) have lost most of their predictive power in Britain: the strong positive relationship between working-class share and Labour vote share at constituency level, clearly visible in 1964, had 'largely disappeared' by the 2019 general election.",
+    "stance": "refutes",
+    "stance_target": "demographic covariates (esp. class) remain strong predictors of constituency vote share for MRP poststratification in contemporary Britain",
+    "evidence_type": "statistical",
+    "scope_conditions": "Britain, constituency-level analysis comparing 1964 and 2019 general elections",
+    "quoted_support": "By then the relationship between the size of the working class and Labour voting at the constituency level had largely disappeared.",
+    "numbers": ["1964 vs 2019 comparison"],
+    "entities": ["Labour Party", "Peter Pulzer"],
+    "time_period": "1964-2019",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should"
+  },
+  {
+    "claim": "More in Common's own regular (non-MRP) national poll outperformed its own MRP poll in predicting the actual result of the 2024 UK general election.",
+    "stance": "refutes",
+    "stance_target": "MRP is systematically more accurate than conventional polling at forecasting an imminent election outcome",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2024 general election, single pollster (More in Common) same-house comparison",
+    "quoted_support": "Just prior to polling day it conducted a regular poll alongside an MRP poll, and it turned out that the regular one was more accurate in predicting the result than the MRP poll.",
+    "numbers": [],
+    "entities": ["More in Common"],
+    "time_period": "2024",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should"
+  }
+]

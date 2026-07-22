@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Journalist's Resource summary flags two scope caveats on the Pons (2018) canvassing result: most French voters had never been canvassed before (novelty effect), and France's multiparty system produces weaker partisan affiliation and more frequent vote-switching than bipartisan systems like the US.",
+    "stance": "neutral",
+    "stance_target": "external validity of extrapolating 2012 canvassing effect sizes to future French elections or other contexts",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, 2012 presidential campaign, generalizability discussion",
+    "quoted_support": "the diversity of political parties and platforms in France results in weaker partisan affiliations and more frequent changes in vote choice than in bipartisan contexts, such as in the United States.",
+    "numbers": [],
+    "entities": ["Vincent Pons", "France"],
+    "time_period": "2012",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "door-to-door-canvassing-campaigns-sway-voter-decisions"
+  },
+  {
+    "claim": "Canvassing accounted for approximately one-half of Hollande's first-round lead and one-fourth of his second-round victory margin in the 2012 French presidential election.",
+    "stance": "supports",
+    "stance_target": "door-to-door canvassing has electorally decisive, not merely marginal, effects on vote share at scale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2012 presidential election, national aggregate",
+    "quoted_support": "Multiplying these estimates by the fraction of French doors knocked, I obtain that the canvassing campaign accounted for approximately one-half of Hollande's lead in the first round and one-fourth of his victory margin at the second round.",
+    "numbers": ["one-half of round-1 lead", "one-fourth of round-2 margin"],
+    "entities": ["François Hollande", "Vincent Pons"],
+    "time_period": "2012",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "door-to-door-canvassing-campaigns-sway-voter-decisions"
+  }
+]

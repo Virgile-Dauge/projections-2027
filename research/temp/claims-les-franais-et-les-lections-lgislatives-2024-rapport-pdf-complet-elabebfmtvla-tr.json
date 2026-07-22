@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "La table de marges d'erreur Elabe (95% de confiance, échantillon n=1400 pour les questions d'intention de vote) donne des intervalles précis : à 30% de résultat, marge +/-2,4 points (fourchette 27,6-32,4%) ; à 50%, marge +/-2,6 points (47,4-52,6%) ; à 5%, marge +/-1,1 point (3,9-6,1%).",
+    "stance": "neutral",
+    "stance_target": "précision statistique atteignable par un sondage national français pour une intention de vote de bloc",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, sondage Elabe législatives 2024, questions d'intention de vote (n=1400)",
+    "quoted_support": "Marges d'erreur (niveau de confiance 95%) pour un échantillon de 1 400 personnes [...] Pour un pourcentage de : 30 / La marge d'erreur est de : +/- 2,4 / Le résultat réel se situe dans une fourchette entre : 27,6 et 32,4.",
+    "numbers": ["1400", "30%", "2.4", "27.6", "32.4", "50%", "2.6", "47.4", "52.6", "5%", "1.1", "3.9", "6.1"],
+    "entities": ["Elabe"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives-2024-rapport-pdf-complet-elabebfmtvla-tr"
+  },
+  {
+    "claim": "L'étude Elabe repose sur un échantillon de 2002 personnes recruté par la méthode des quotas (sexe, âge, profession, région, catégorie d'agglomération), interrogées par Internet du 19 au 21 juin 2024, avec administration de l'offre électorale réelle par circonscription.",
+    "stance": "neutral",
+    "stance_target": "protocole d'échantillonnage des instituts français pour les législatives 2024",
+    "evidence_type": "empirical",
+    "scope_conditions": "France métropolitaine, résidents 18 ans et plus",
+    "quoted_support": "La représentativité de l'échantillon a été assurée selon la méthode des quotas appliquée aux variables suivantes : sexe, âge, profession, région et catégorie d'agglomération. [...] Interrogation par Internet du 19 au 21 juin 2024. Intentions de vote réalisées d'après l'offre électorale réelle dans chaque circonscription.",
+    "numbers": ["2002", "1870"],
+    "entities": ["Elabe", "BFMTV", "La Tribune Dimanche"],
+    "time_period": "19-21 juin 2024",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-les-lections-lgislatives-2024-rapport-pdf-complet-elabebfmtvla-tr"
+  }
+]

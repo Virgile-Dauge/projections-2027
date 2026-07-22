@@ -1,0 +1,181 @@
+{
+  "recommendations": [
+    {
+      "id": "rec-1",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 1. Le problème : projeter un rapport de force 2027 au bureau de vote",
+      "current": "\n\n---\n\n## 1. Le problème : projeter un rapport de force 2027 au bureau de vote",
+      "recommended": "\n\n## 1. Le problème : projeter un rapport de force 2027 au bureau de vote",
+      "rationale": "Les articles de référence n'utilisent jamais de filets horizontaux entre sections ; le titre H2 suffit à marquer la rupture et le flux visuel reste continu."
+    },
+    {
+      "id": "rec-2",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 2. Gradation des méthodes : du swing uniforme aux modèles bayésiens",
+      "current": "\n\n---\n\n## 2. Gradation des méthodes : du swing uniforme aux modèles bayésiens",
+      "recommended": "\n\n## 2. Gradation des méthodes : du swing uniforme aux modèles bayésiens",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-3",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 3. Qui fait ça en France, et comment",
+      "current": "\n\n---\n\n## 3. Qui fait ça en France, et comment",
+      "recommended": "\n\n## 3. Qui fait ça en France, et comment",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-4",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 4. Choix des élections sources : biais des législatives, sincérité des européennes, obsolescence de 2022, combinaison de scrutins",
+      "current": "\n\n---\n\n## 4. Choix des élections sources : biais des législatives, sincérité des européennes, obsolescence de 2022, combinaison de scrutins",
+      "recommended": "\n\n## 4. Choix des élections sources : biais des législatives, sincérité des européennes, obsolescence de 2022, combinaison de scrutins",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-5",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 5. Découpages des bureaux de vote : réconciliation et crosswalks entre élections",
+      "current": "\n\n---\n\n## 5. Découpages des bureaux de vote : réconciliation et crosswalks entre élections",
+      "recommended": "\n\n## 5. Découpages des bureaux de vote : réconciliation et crosswalks entre élections",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-6",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 6. Outils open source (aperçu secondaire)",
+      "current": "\n\n---\n\n## 6. Outils open source (aperçu secondaire)",
+      "recommended": "\n\n## 6. Outils open source (aperçu secondaire)",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-7",
+      "category": "remove-hr",
+      "severity": "minor",
+      "section": "## 7. Synthèse argumentée : quelle méthode, quelles données pour des cartes militantes 2027",
+      "current": "\n\n---\n\n## 7. Synthèse argumentée : quelle méthode, quelles données pour des cartes militantes 2027",
+      "recommended": "\n\n## 7. Synthèse argumentée : quelle méthode, quelles données pour des cartes militantes 2027",
+      "rationale": "Suppression du filet horizontal redondant avec le titre H2, qui fragmente inutilement la lecture."
+    },
+    {
+      "id": "rec-8",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 1.B Pourquoi le bon niveau d'ambition est un classement, pas un pourcentage",
+      "current": "à peine mieux qu'un tirage à pile ou face [[models-of-inter-election-change-in]]. Ce découplage est directement observé à la maille infra-district :",
+      "recommended": "à peine mieux qu'un tirage à pile ou face [[models-of-inter-election-change-in]].\n\nCe découplage est directement observé à la maille infra-district :",
+      "rationale": "Ce paragraphe dépasse largement 1500 caractères ; la charnière « Ce découplage est directement observé » sépare l'énoncé des trois résultats de leur confirmation empirique SBC."
+    },
+    {
+      "id": "rec-9",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 1.B Pourquoi le bon niveau d'ambition est un classement, pas un pourcentage",
+      "current": "à la valeur de l'allocation. Trois bornes doivent toutefois être assumées.",
+      "recommended": "à la valeur de l'allocation.\n\nTrois bornes doivent toutefois être assumées.",
+      "rationale": "Paragraphe de plus de 2000 caractères ; « Trois bornes doivent toutefois être assumées » marque le passage du théorème positif à ses limites, un point de coupure naturel."
+    },
+    {
+      "id": "rec-10",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 1.A Ce que la finalité militante impose au produit",
+      "current": "[[door-to-door-canvassing-campaigns-sway-voter-decisions]]. Or cet effet est **hétérogène** :",
+      "recommended": "[[door-to-door-canvassing-campaigns-sway-voter-decisions]].\n\nOr cet effet est **hétérogène** :",
+      "rationale": "Paragraphe long ; la charnière « Or cet effet est hétérogène » sépare l'effet moyen du porte-à-porte de sa variabilité spatiale, deux sous-arguments distincts."
+    },
+    {
+      "id": "rec-11",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 2.D Matrices de transfert et inférence écologique",
+      "current": "en écartant le Thomsen 2×2 nu comme le Dirichlet nu. La précision se dégrade avec un faible nombre d'unités,",
+      "recommended": "en écartant le Thomsen 2×2 nu comme le Dirichlet nu.\n\nLa précision se dégrade avec un faible nombre d'unités,",
+      "rationale": "Paragraphe long ; « La précision se dégrade » ouvre la discussion des conditions de dégradation et du poste légitime de l'EI, distincte du débat de méthodes qui précède."
+    },
+    {
+      "id": "rec-12",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 2.E MRP : le mauvais outil en pur",
+      "current": "circonscription [[model-based-pre-election-polling-for-national-and]]. La critique empirique de fond est plus dure :",
+      "recommended": "circonscription [[model-based-pre-election-polling-for-national-and]].\n\nLa critique empirique de fond est plus dure :",
+      "rationale": "Paragraphe de plus de 2000 caractères ; la charnière sépare la validation YouGov de la critique empirique adverse du MRP."
+    },
+    {
+      "id": "rec-13",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 2.E MRP : le mauvais outil en pur",
+      "current": "réduit l'erreur d'environ 60 % [[improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat]]. Le point qui décide de l'architecture :",
+      "recommended": "réduit l'erreur d'environ 60 % [[improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat]].\n\nLe point qui décide de l'architecture :",
+      "rationale": "Paragraphe long ; « Le point qui décide de l'architecture » isole l'interprétation décisive de la preuve Marble-Clinton, une transition evidence→interprétation nette."
+    },
+    {
+      "id": "rec-14",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 2.H Le pivot : construire sophistiqué, publier ordinal",
+      "current": "seulement préserver un classement robuste. La résolution est donc un séquencement, pas une contradiction.",
+      "recommended": "seulement préserver un classement robuste.\n\nLa résolution est donc un séquencement, pas une contradiction.",
+      "rationale": "Paragraphe long ; « La résolution est donc un séquencement » sépare l'exposé du dilemme de sa résolution, la partie la plus mémorisable de la section."
+    },
+    {
+      "id": "rec-15",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 4.A Le biais des législatives",
+      "current": "seulement ~73 % des électeurs Ensemble ont voté NFP [[un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs]]. Ces coefficients de *comportement* mesurés après coup",
+      "recommended": "seulement ~73 % des électeurs Ensemble ont voté NFP [[un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs]].\n\nCes coefficients de *comportement* mesurés après coup",
+      "rationale": "Paragraphe de plus de 2000 caractères ; la charnière sépare le constat d'asymétrie du barrage de l'écart intention/comportement, deux sous-arguments enchaînés."
+    },
+    {
+      "id": "rec-16",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 4.D Combiner les scrutins : la baseline composite",
+      "current": "un écart de *type de scrutin* comparable à celui produit par vingt mois d'érosion politique. La projection prospective va dans le même sens :",
+      "recommended": "un écart de *type de scrutin* comparable à celui produit par vingt mois d'érosion politique.\n\nLa projection prospective va dans le même sens :",
+      "rationale": "Paragraphe long ; « La projection prospective va dans le même sens » sépare la preuve rétrospective (2022) de la preuve prospective (matrice Elabe 2027)."
+    },
+    {
+      "id": "rec-17",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 5.B Fiable dans un instantané, non démontré dans le temps",
+      "current": "sans laisser de trace homogène sur longue période » [[thomas-piketty]]. Les analogues américains bornent le risque :",
+      "recommended": "sans laisser de trace homogène sur longue période » [[thomas-piketty]].\n\nLes analogues américains bornent le risque :",
+      "rationale": "Paragraphe de plus de 2000 caractères ; la charnière sépare les preuves françaises du churn des analogues américains qui bornent quantitativement le risque."
+    },
+    {
+      "id": "rec-18",
+      "category": "break-paragraph",
+      "severity": "moderate",
+      "section": "## 5.D Les covariables : une seconde jointure",
+      "current": "parce que Filosofi est fiscal, pas le recensement. Ces covariables ne suffisent d'ailleurs jamais à elles seules :",
+      "recommended": "parce que Filosofi est fiscal, pas le recensement.\n\nCes covariables ne suffisent d'ailleurs jamais à elles seules :",
+      "rationale": "Paragraphe long ; « Ces covariables ne suffisent d'ailleurs jamais à elles seules » ouvre le second sous-argument (résidu géographique) distinct de la description des sources de données."
+    }
+  ],
+  "summary": {
+    "total_recommendations": 18,
+    "by_category": {
+      "merge-paragraphs": 0,
+      "break-paragraph": 11,
+      "make-list": 0,
+      "make-table": 0,
+      "bold-keyterms": 0,
+      "split-sentence": 0,
+      "remove-hr": 7,
+      "add-whitespace": 0
+    },
+    "highest_severity": "moderate",
+    "expected_net_char_delta": -24
+  }
+}

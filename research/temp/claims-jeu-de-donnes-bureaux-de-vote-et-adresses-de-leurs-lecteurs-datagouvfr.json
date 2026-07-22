@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le Répertoire Électoral Unique (REU), géré par l'INSEE, est la source légale des correspondances adresses-bureaux de vote ; il a été institué par la loi n°2016-1048 du 1er août 2016 et mis en œuvre à partir du 1er janvier 2019.",
+    "stance": "neutral",
+    "stance_target": "base légale et institutionnelle des données de bureaux de vote françaises",
+    "evidence_type": "legal",
+    "scope_conditions": "France entière",
+    "quoted_support": "Ces fichiers sont élaborés à partir du Répertoire électoral unique (REU), institué par la loi n°2016-1048 du 1er août 2016 rénovant les modalités d'inscription sur les listes électorales, et qui a été mis en œuvre à partir du 1er janvier 2019.",
+    "numbers": ["loi n°2016-1048"],
+    "entities": ["INSEE", "REU"],
+    "time_period": "2016-2019",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr"
+  },
+  {
+    "claim": "La numérotation des bureaux de vote relève de la compétence des communes, sans norme de codage stricte, ce qui constitue une source documentée de difficulté de réconciliation des identifiants de bureaux entre jeux de données et entre scrutins.",
+    "stance": "supports",
+    "stance_target": "problèmes de réconciliation des identifiants de bureaux de vote entre scrutins et entre jeux de données",
+    "evidence_type": "legal",
+    "scope_conditions": "France entière, toutes communes",
+    "quoted_support": "La numérotation des bureaux de vote relève de la compétence des communes, sans norme de codage stricte.",
+    "numbers": [],
+    "entities": ["INSEE", "communes"],
+    "time_period": "actuel",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr"
+  },
+  {
+    "claim": "Le jeu de données REU est basé sur une extraction figée de septembre 2022 et ne sera actualisé que tous les cinq ans, limitant sa capacité à refléter les changements récents de découpage de bureaux de vote.",
+    "stance": "supports",
+    "stance_target": "obsolescence rapide des données géographiques de bureaux de vote au regard du rythme réel des changements de découpage",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Les données brutes utilisées par l'Insee correspondent à une extraction des adresses du Répertoire Électoral Unique réalisée en septembre 2022. [...] Ce jeu de données sera actualisé tous les cinq ans.",
+    "numbers": ["septembre 2022", "5 ans"],
+    "entities": ["INSEE"],
+    "time_period": "2022-2027+",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr"
+  },
+  {
+    "claim": "L'INSEE a développé, avec avis favorable de la CADA et en concertation avec le ministère de l'Intérieur, une méthode de publication en open data de la correspondance adresses-bureaux de vote sans divulguer d'informations nominatives, en collaboration avec la DINUM/Etalab.",
+    "stance": "neutral",
+    "stance_target": "gouvernance et protection des données personnelles dans la publication du REU",
+    "evidence_type": "legal",
+    "scope_conditions": "France entière",
+    "quoted_support": "À la suite de l'avis favorable rendu par la Commission d'accès aux documents administratifs sur la publication des adresses... l'Insee a développé une méthode permettant de publier cette correspondance adresses-bureaux de vote en données ouvertes... tout en ne divulguant aucune information sur les noms et prénoms des personnes.",
+    "numbers": [],
+    "entities": ["CADA", "INSEE", "DINUM", "Etalab", "ministère de l'Intérieur"],
+    "time_period": "2022-2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Le crosswalk officiel du Census Bureau entre blocs de recensement 2010 et 2020 ne fournit que la part de surface d'un bloc 2010 appartenant à un bloc 2020 en cas de scission, sans tenir compte de la répartition réelle de la population — d'où le besoin d'une méthode d'amélioration par occupation du sol.",
+    "stance": "supports",
+    "stance_target": "les crosswalks géographiques officiels bruts (fondés sur la seule surface) sont insuffisants pour une allocation démographique fine",
+    "evidence_type": "theoretical",
+    "scope_conditions": "Census Bureau, blocs 2010-2020, États-Unis",
+    "quoted_support": "The Census provides crosswalks between 2010 and 2020 block geography, but the only measure that is given of what share of a 2010 block belongs to a 2020 block in the case of a split is area.",
+    "numbers": [],
+    "entities": ["Census Bureau"],
+    "time_period": "2010-2020",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "2020-census-block-crosswalk-data-uf-election-lab"
+  },
+  {
+    "claim": "La méthode Amos-McDonald utilise le National Land Cover Database (occupation du sol) pour prédire où vivent réellement les habitants d'un bloc de recensement scindé, améliorant ainsi l'allocation par rapport à une simple pondération surfacique.",
+    "stance": "supports",
+    "stance_target": "l'usage de données d'occupation du sol améliore la précision des crosswalks géographiques électoraux/démographiques",
+    "evidence_type": "theoretical",
+    "scope_conditions": "États-Unis, méthode publiée dans Public Opinion Quarterly 2017",
+    "quoted_support": "the files on this dataverse were made using the method outlined in our (Brian Amos and Michael McDonald) 2017 paper in Public Opinion Quarterly... where the National Land Cover Database is used to better predict where people live in the case of a split block.",
+    "numbers": [],
+    "entities": ["Brian Amos", "Michael McDonald", "National Land Cover Database", "Public Opinion Quarterly"],
+    "time_period": "2017-2021",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "2020-census-block-crosswalk-data-uf-election-lab"
+  }
+]

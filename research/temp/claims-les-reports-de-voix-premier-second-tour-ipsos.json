@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "En cas de duel gauche/FN au second tour avec la droite éliminée, seuls 26% des électeurs UMP-UDI se reporteraient sur la gauche pour faire barrage au FN, contre 30% qui voteraient FN et 44% qui s'abstiendraient.",
+    "stance": "supports",
+    "stance_target": "affaiblissement du front républicain à droite dès le milieu des années 2010",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, départementales 2015, sondage Ipsos post-électoral hypothétique (triangulaire simulée)",
+    "quoted_support": "les électeurs UMP-UDI ne seraient ainsi que 26% à choisir de voter à gauche pour faire barrage au FN, contre 30% qui voteraient FN et 44% qui s'abstiendraient.",
+    "numbers": ["26%", "30%", "44%"],
+    "entities": ["UMP", "UDI", "FN", "Ipsos"],
+    "time_period": "2015",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-reports-de-voix-premier-second-tour-ipsos"
+  },
+  {
+    "claim": "Le front républicain reste plus solide à gauche qu'à droite face au FN : 55% des électeurs PS/PRG/DVG voteraient à droite pour faire barrage au FN en cas de duel Droite/FN, contre 42% d'abstention et 3% de vote FN.",
+    "stance": "neutral",
+    "stance_target": "asymétrie gauche/droite du front républicain",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, départementales 2015",
+    "quoted_support": "en cas de duel Droite / FN au second tour, 55% des électeurs PS/PRG/DVG choisiraient de voter à droite pour faire barrage au FN, mais tout de même 42% préfèreraient s'abstenir",
+    "numbers": ["55%", "42%", "3%"],
+    "entities": ["PS", "PRG", "DVG", "FN"],
+    "time_period": "2015",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-reports-de-voix-premier-second-tour-ipsos"
+  },
+  {
+    "claim": "Les matrices de reports de voix par sondage post-électoral déclaratif sont une méthode utilisée par les instituts (Ipsos) depuis au moins 2015 pour estimer les transferts au niveau national/agrégé, distincte de l'inférence à partir des résultats électoraux bruts.",
+    "stance": "neutral",
+    "stance_target": "typologie des méthodes de report de voix",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, instituts de sondage",
+    "quoted_support": "Les matrices de reports de voix en vue du second tour des Départementales confirment le reflux du front républicain et la porosité entre les électorats UMP et FN.",
+    "numbers": [],
+    "entities": ["Ipsos"],
+    "time_period": "2015",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-reports-de-voix-premier-second-tour-ipsos"
+  }
+]

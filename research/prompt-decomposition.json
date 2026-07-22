@@ -1,0 +1,66 @@
+{
+  "sub_questions": [
+    "Quelles sont les familles de méthodes de projection de résultats électoraux passés sur un scrutin futur, ordonnées du plus simple au plus sophistiqué (swing uniforme, swing proportionnel, matrices de transfert / inférence écologique, MRP, modèles bayésiens de forecasting électoral, autres) ?",
+    "Pour chaque famille de méthode : quelle précision attendue à maille fine (bureau de vote), quelle complexité de mise en œuvre, quelles données requises, quelles limites documentées, quels usages réels (médias, académiques, campagnes) ?",
+    "Qui pratique ces projections en France (instituts de sondage, chercheurs, médias) et comment ?",
+    "Pour chaque méthode, quelles élections passées sont pertinentes comme données sources et pourquoi ?",
+    "Comment traiter le biais des législatives (offre incomplète : tous les blocs ne se présentent pas partout, candidatures uniques, front républicain, désistements) — corrections ou contournements ?",
+    "Quelle est la valeur des européennes 2024 comme mesure « sincère » du rapport de force à la proportionnelle ?",
+    "Dans quelle mesure la présidentielle 2022 est-elle obsolète face aux recompositions politiques ?",
+    "Comment combiner plusieurs scrutins passés dans une même projection ?",
+    "Comment réconcilier les découpages de bureaux de vote qui changent entre élections (méthodes de crosswalk documentées, jeux de données existants type INSEE / data.gouv) ?",
+    "Quelle méthode et quelles données sources recommander pour le cas d'usage : cartes militantes de priorisation locale face au RN pour 2027, où le critère est la pertinence locale et non la prédiction nationale ?",
+    "(Secondaire, ne pas creuser) Quels outils open source implémentent ces méthodes (packages R/Python d'inférence écologique, de MRP, etc.) ?"
+  ],
+  "entities": [
+    {"name": "swing uniforme", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "swing proportionnel", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "matrices de transfert / inférence écologique", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "MRP (multilevel regression with poststratification)", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "modèles bayésiens de forecasting électoral", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "autres méthodes identifiées par la littérature", "type": "méthode", "required_fields": ["précision à maille fine", "complexité de mise en œuvre", "données requises", "limites documentées", "usages réels"]},
+    {"name": "présidentielle française 2022", "type": "élection source", "required_fields": ["pertinence comme donnée source", "obsolescence face aux recompositions"]},
+    {"name": "législatives françaises 2022", "type": "élection source", "required_fields": ["pertinence", "biais d'offre incomplète"]},
+    {"name": "législatives françaises 2024", "type": "élection source", "required_fields": ["pertinence", "biais d'offre incomplète", "front républicain / désistements"]},
+    {"name": "européennes 2024", "type": "élection source", "required_fields": ["valeur comme mesure sincère à la proportionnelle"]},
+    {"name": "présidentielle française 2027", "type": "scrutin cible", "required_fields": ["horizon", "rapport de force à projeter"]},
+    {"name": "bureaux de vote (~70 000 en France)", "type": "maille géographique", "required_fields": ["changement des découpages entre élections", "crosswalk / réconciliation", "jeux de données INSEE / data.gouv"]},
+    {"name": "résultats officiels du ministère de l'Intérieur", "type": "source de données", "required_fields": []},
+    {"name": "sondages nationaux (dynamiques)", "type": "source de données", "required_fields": ["intégration dans la projection locale"]},
+    {"name": "Rassemblement national", "type": "acteur", "required_fields": []},
+    {"name": "instituts de sondage / chercheurs / médias français", "type": "praticiens", "required_fields": ["qui", "comment"]},
+    {"name": "packages R/Python d'inférence écologique et de MRP", "type": "outils open source", "required_fields": []}
+  ],
+  "required_formats": [
+    "gradation des méthodes du plus simple au plus sophistiqué (structure comparative ordonnée, tableau comparatif attendu)",
+    "champs nommés par méthode : précision à maille fine, complexité, données requises, limites, usages réels"
+  ],
+  "required_sections": [],
+  "required_section_headings": [
+    "## 1. Le problème : projeter un rapport de force 2027 au bureau de vote",
+    "## 2. Gradation des méthodes : du swing uniforme aux modèles bayésiens",
+    "## 3. Qui fait ça en France, et comment",
+    "## 4. Choix des élections sources : biais des législatives, sincérité des européennes, obsolescence de 2022, combinaison de scrutins",
+    "## 5. Découpages des bureaux de vote : réconciliation et crosswalks entre élections",
+    "## 6. Outils open source (aperçu secondaire)",
+    "## 7. Synthèse argumentée : quelle méthode, quelles données pour des cartes militantes 2027"
+  ],
+  "time_horizons": ["élection présidentielle française de 2027 (avril-mai 2027)"],
+  "time_periods": [
+    {"period": "avril 2022", "type": "event-anchored", "primary_source": "Résultats officiels ministère de l'Intérieur, présidentielle 2022 (data.gouv.fr), niveau bureau de vote", "issuer": "Ministère de l'Intérieur"},
+    {"period": "juin 2022", "type": "event-anchored", "primary_source": "Résultats officiels législatives 2022 (data.gouv.fr), niveau bureau de vote", "issuer": "Ministère de l'Intérieur"},
+    {"period": "juin 2024", "type": "event-anchored", "primary_source": "Résultats officiels européennes 2024 (data.gouv.fr), niveau bureau de vote", "issuer": "Ministère de l'Intérieur"},
+    {"period": "juin-juillet 2024", "type": "event-anchored", "primary_source": "Résultats officiels législatives anticipées 2024 (data.gouv.fr), niveau bureau de vote", "issuer": "Ministère de l'Intérieur"},
+    {"period": "2022-2026", "type": "reference-datasets", "primary_source": "Répertoire des bureaux de vote / REU (INSEE), contours des bureaux de vote (data.gouv.fr)", "issuer": "INSEE / data.gouv.fr"}
+  ],
+  "scope_conditions": [
+    "maille bureau de vote (~70 000 bureaux), France",
+    "critère de qualité = pertinence locale (où l'action militante a de l'impact), PAS la prédiction du résultat national",
+    "finalité : cartes open source pour militant·es de terrain, priorisation face au RN",
+    "outils open source : ouverture secondaire, ne pas creuser",
+    "HORS SCOPE : stack de visualisation et de diffusion des cartes (tuiles, bibliothèques carto, hébergement)"
+  ],
+  "pipeline_tier": "full",
+  "response_format": "argumentative",
+  "citation_style": "wikilink"
+}

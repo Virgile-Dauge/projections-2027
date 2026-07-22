@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "FiveThirtyEight calcule son indice de partisan lean par État/circonscription comme une pondération de 50% de l'écart de marge à la nation lors de la présidentielle la plus récente, 25% lors de la présidentielle précédente, et 25% d'un lean législatif d'État basé sur le vote populaire cumulé des 4 dernières élections à la chambre basse.",
+    "stance": "supports",
+    "stance_target": "les indices partisans locaux robustes combinent plusieurs scrutins passés pondérés plutôt qu'un seul scrutin de référence",
+    "evidence_type": "empirical",
+    "scope_conditions": "États et circonscriptions US, cycle 2022",
+    "quoted_support": "This version of partisan lean... is calculated as 50 percent the state or district's lean relative to the nation in the most recent presidential election, 25 percent its relative lean in the second-most-recent presidential election and 25 percent a custom state-legislative lean based on the statewide popular vote in the four most recent state House elections.",
+    "numbers": ["50% présidentielle t", "25% présidentielle t-1", "25% lean législatif (4 dernières élections chambre basse)"],
+    "entities": ["FiveThirtyEight"],
+    "time_period": "2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "datapartisan-leanreadmemd-at-master-fivethirtyeightdata-github"
+  },
+  {
+    "claim": "FiveThirtyEight affirme explicitement que ses indices de partisan lean ne sont pas comparables d'une année à l'autre en raison du redécoupage électoral (redistricting) et des changements de méthodologie, et publie des versions distinctes 2018, 2020, 2021 (pré-redécoupage) et 2022 (post-redécoupage).",
+    "stance": "supports",
+    "stance_target": "le changement de découpage électoral entre scrutins complique la comparabilité temporelle des indices partisans locaux",
+    "evidence_type": "empirical",
+    "scope_conditions": "États et circonscriptions US, cycles 2018-2022",
+    "quoted_support": "Due to redistricting and changes in methodology, partisan leans are not comparable across years.",
+    "numbers": ["4 versions distinctes : 2018, 2020, 2021, 2022"],
+    "entities": ["FiveThirtyEight"],
+    "time_period": "2018-2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "datapartisan-leanreadmemd-at-master-fivethirtyeightdata-github"
+  }
+]

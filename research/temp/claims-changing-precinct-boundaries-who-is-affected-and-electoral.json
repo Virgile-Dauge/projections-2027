@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Entre deux élections présidentielles américaines consécutives (2016-2020), 81,2% des bureaux de vote n'ont subi aucun changement de périmètre affectant leur population, mais les changements restants touchent de façon disproportionnée les zones denses et les populations noires/hispaniques.",
+    "stance": "neutral",
+    "stance_target": "fréquence et nature des changements de découpage des bureaux de vote entre deux scrutins",
+    "evidence_type": "empirical",
+    "scope_conditions": "États-Unis, précincts nationaux, comparaison élections présidentielles 2016 et 2020",
+    "quoted_support": "Of the 175,426 precincts election officials created for the 2020 general election, 142,408 or 81.2% had no change from the 2016 general election affecting population.",
+    "numbers": ["175,426 precincts", "142,408 unchanged", "81.2%", "33,018 changed precincts", "14,113 precincts retained ≥95% population continuity"],
+    "entities": ["Brian Amos", "Steve Gerontakis", "Michael McDonald"],
+    "time_period": "2016-2020",
+    "region": "États-Unis (national)",
+    "confidence": "high",
+    "source_note_id": "changing-precinct-boundaries-who-is-affected-and-electoral"
+  },
+  {
+    "claim": "La méthode de dasymetric mapping permet d'allouer des statistiques agrégées de recensement à des géométries de bureaux de vote qui ne coïncident pas avec les mailles du recensement, en pondérant par la densité de logements estimée à partir de données d'occupation du sol.",
+    "stance": "neutral",
+    "stance_target": "méthodes de crosswalk géographique pour harmoniser bureaux de vote et données socio-démographiques",
+    "evidence_type": "theoretical",
+    "scope_conditions": "applicable à toute juridiction où les limites administratives de vote ne s'alignent pas avec la géographie statistique",
+    "quoted_support": "We devise a solution to apportioning aggregate statistics to geographic units that intersect and split one another employing a method known as dasymetric mapping... measuring housing density within the fragments, which we estimate from the National Land Cover Database.",
+    "numbers": [],
+    "entities": ["National Land Cover Database", "Census Bureau"],
+    "time_period": "2016-2020",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "changing-precinct-boundaries-who-is-affected-and-electoral"
+  },
+  {
+    "claim": "Un score de 'Precinct Continuity' — part de la population 2020 d'un bureau provenant du bureau 2016 avec lequel il a le plus grand chevauchement spatial — sert de variable indépendante clé pour mesurer le degré de changement de découpage électoral d'une élection à l'autre.",
+    "stance": "neutral",
+    "stance_target": "méthodes de quantification des changements de découpage électoral",
+    "evidence_type": "theoretical",
+    "scope_conditions": "précincts américains, comparaison 2016-2020",
+    "quoted_support": "we compute the Precinct Continuity of a 2020 precinct's population with the 2016 precinct that has the largest population overlap, which is the key independent variable in our analyses.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2016-2020",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "changing-precinct-boundaries-who-is-affected-and-electoral"
+  },
+  {
+    "claim": "Les bureaux de vote ayant subi un changement majeur de périmètre entre 2016 et 2020 ont connu une hausse de participation en moyenne plus faible que les bureaux stables, un effet attribué à la confusion des électeurs et au changement de lieu de vote.",
+    "stance": "supports",
+    "stance_target": "les changements de découpage des bureaux de vote biaisent la comparabilité temporelle des résultats électoraux au niveau fin",
+    "evidence_type": "empirical",
+    "scope_conditions": "modèle de régression contrôlant race, âge, éducation, revenu, ancienneté de résidence",
+    "quoted_support": "We find precincts that underwent major changes on average experienced lower turnout rate increases in 2020 compared to 2016 than those that did not change.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2016-2020",
+    "region": "États-Unis",
+    "confidence": "medium",
+    "source_note_id": "changing-precinct-boundaries-who-is-affected-and-electoral"
+  },
+  {
+    "claim": "Identifier les changements de périmètre de bureaux de vote par le nom du bureau est peu fiable : les administrations renomment ou renumérotent les bureaux indépendamment de tout changement de géométrie, d'où la nécessité d'une superposition géométrique (overlay) directe des polygones.",
+    "stance": "neutral",
+    "stance_target": "fiabilité des identifiants de bureaux de vote pour le suivi longitudinal",
+    "evidence_type": "theoretical",
+    "scope_conditions": "administration électorale américaine par comté",
+    "quoted_support": "We cannot rely on identifying changing precincts by examining precincts' names because election officials may name and rename precincts for reasons apart from changing their boundaries.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2016-2020",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "changing-precinct-boundaries-who-is-affected-and-electoral"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "A systematic literature review of published MRP visualisations found that uncertainty is rarely displayed alongside MRP point estimates, despite uncertainty quantification being central to survey inference.",
+    "stance": "refutes",
+    "stance_target": "published MRP practice adequately communicates estimation uncertainty to readers",
+    "evidence_type": "empirical",
+    "scope_conditions": "systematic literature review of published MRP studies, methodology as of 2022",
+    "quoted_support": "We ﬁnd that uncertainty is not often displayed in the current practice, despite its importance for survey inference.",
+    "numbers": [],
+    "entities": ["Dewi Lestari Amaliah", "Lauren Kennedy", "Shiro Kuriwaki"],
+    "time_period": "2022",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "visualising-multilevel-regression"
+  },
+  {
+    "claim": "The choropleth map is the most frequently used visualisation format for MRP estimates in the published literature, even though it displays only point estimates and can hinder the information conveyed to readers (obscuring uncertainty and model sensitivity).",
+    "stance": "refutes",
+    "stance_target": "choropleth maps are an adequate primary format for communicating MRP-based electoral estimates",
+    "evidence_type": "empirical",
+    "scope_conditions": "systematic literature review of published MRP visualisation practice",
+    "quoted_support": "The choropleth map is the most frequently used to display MRP estimates even though it only shows point estimates and could hinder the information conveyed.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2022",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "visualising-multilevel-regression"
+  },
+  {
+    "claim": "The report proposes a visualisation strategy for MRP results that jointly displays point estimates, estimation uncertainty, and the bias-variance trade-off across alternative model specifications, using a Trump 2016 vote-share case study built on CCES (Cooperative Congressional Election Study) data.",
+    "stance": "neutral",
+    "stance_target": "alternative to standard MRP choropleth-only mapping practice",
+    "evidence_type": "theoretical",
+    "scope_conditions": "case study, US 2016 presidential election, CCES data",
+    "quoted_support": "this study also proposes a visualisation strategy to also take the bias-variance trade-off into account when evaluating MRP models.",
+    "numbers": [],
+    "entities": ["CCES", "Donald Trump"],
+    "time_period": "2016",
+    "region": "US",
+    "confidence": "medium",
+    "source_note_id": "visualising-multilevel-regression"
+  }
+]

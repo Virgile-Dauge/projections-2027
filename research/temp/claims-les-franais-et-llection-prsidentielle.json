@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "In an Elabe/BFMTV poll (2027 presidential election, wave IV2, ~March 2026), a Bardella/Philippe second-round duel would result in Philippe winning 51.5% to 48.5%, and Bardella beating Mélenchon 71.5% to 28.5%.",
+    "stance": "supports",
+    "stance_target": "existence of an independent (non-Elabe-IV3, non-Ipsos) second-round presidential transfer matrix for 2027",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, 2027 presidential second round hypothetical, Elabe wave IV2 fieldwork ~March 2026",
+    "quoted_support": "A contrario, Edouard Philippe l'emporterait d'une courte tête face à Jordan Bardella (51,5% vs 48,5%) et avec une avance plus confortable face à Marine Le Pen (53% vs 47%). Jordan Bardella l'emporterait face à Jean-Luc Mélenchon (71,5% vs 28,5%), Raphaël Glucksmann (58,5% vs 41,5%) et Bruno Retailleau (58% vs 42%).",
+    "numbers": ["51.5%", "48.5%", "53%", "47%", "71.5%", "28.5%", "58.5%", "41.5%", "58%", "42%"],
+    "entities": ["Elabe", "Jordan Bardella", "Édouard Philippe", "Marine Le Pen", "Jean-Luc Mélenchon", "Raphaël Glucksmann", "Bruno Retailleau"],
+    "time_period": "March 2026 (wave IV2)",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-llection-prsidentielle"
+  },
+  {
+    "claim": "In a Philippe/Bardella second-round duel (Elabe IV2), Philippe captures 3 out of 4 Glucksmann voters, 2 out of 3 Tondelier voters, and 1 out of 2 Mélenchon voters, while Bardella gets nearly all Zemmour voters and Retailleau's electorate splits exactly 50/50.",
+    "stance": "supports",
+    "stance_target": "detailed transfer-matrix percentages for centre/left electorates in a presidential-camp-vs-RN duel",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, Elabe IV2 poll, Philippe/Bardella hypothetical duel",
+    "quoted_support": "En cas de duel E. Philippe / J. Bardella, le maire du Havre bénéficierait d'excellents reports de voix à gauche (3 électeurs sur 4 de R. Glucksmann, 2 sur 3 de Marine Tondelier et 1 sur 2 de Jean-Luc Mélenchon) tandis que J. Bardella aurait le soutien de la quasi-totalité des électeurs d'Éric Zemmour. Les électeurs de Bruno Retailleau seraient très divisés (la moitié voterait pour E. Philippe, l'autre moitié pour J. Bardella).",
+    "numbers": ["3/4", "2/3", "1/2", "50/50"],
+    "entities": ["Édouard Philippe", "Jordan Bardella", "Raphaël Glucksmann", "Marine Tondelier", "Jean-Luc Mélenchon", "Éric Zemmour", "Bruno Retailleau"],
+    "time_period": "March 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-llection-prsidentielle"
+  },
+  {
+    "claim": "Gabriel Attal underperforms Édouard Philippe against Marine Le Pen in second-round hypothetical duels (49% vs 51% for Attal, compared to Philippe's 53% vs 47% against Le Pen).",
+    "stance": "supports",
+    "stance_target": "the presidential-camp candidate identity (not just bloc) materially affects RN second-round transfer outcomes",
+    "evidence_type": "statistical",
+    "scope_conditions": "Elabe IV2 poll, Attal/Le Pen and Philippe/Le Pen hypothetical duels",
+    "quoted_support": "Gabriel Attal réaliserait un moins bon score qu'Edouard Philippe face à Marine Le Pen (49% vs 51%).",
+    "numbers": ["49%", "51%"],
+    "entities": ["Gabriel Attal", "Marine Le Pen", "Édouard Philippe"],
+    "time_period": "March 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-llection-prsidentielle"
+  }
+]

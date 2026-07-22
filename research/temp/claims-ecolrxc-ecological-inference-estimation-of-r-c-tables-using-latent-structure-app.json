@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Le package ecolRxC, extension RxC générale de l'approche à structure latente de Thomsen (1987) et Park (2008), atteint une précision comparable aux deux méthodes considérées jusque-là comme les plus précises de la littérature (ei.MD.bayes et nslphom), validée sur 493 élections réelles à vérité terrain connue.",
+    "stance": "supports",
+    "stance_target": "compétitivité de l'approche à structure latente (Thomsen/Park) étendue au cas RxC face aux méthodes bayésiennes et de programmation linéaire les plus réputées",
+    "evidence_type": "empirical",
+    "scope_conditions": "565 datasets de ei.Datasets, élections générales de Nouvelle-Zélande (2002-2020) et du Parlement écossais (2007), système à vote mixte permettant de connaître la vraie distribution croisée parti/candidat",
+    "quoted_support": "ecolRxC, with default options, records an average EI error of 9.78, a figure quite similar to the numbers 10.52 and 9.77 reported in Pavía and Romero (2023) for ei.MD.bayes and nslphom, respectively.",
+    "numbers": ["EI error baseline (indépendance) = 36.98", "ecolRxC = 9.78", "ei.MD.bayes = 10.52", "nslphom = 9.77", "565 datasets", "493 élections comparées"],
+    "entities": ["ecolRxC", "ei.MD.bayes", "nslphom", "Thomsen", "Park", "New Zealand", "Scotland"],
+    "time_period": "2002-2020 (NZ), 2007 (Écosse)",
+    "region": "Nouvelle-Zélande, Écosse",
+    "confidence": "high",
+    "source_note_id": "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-latent-structure-app"
+  },
+  {
+    "claim": "La précision de l'inférence écologique de type RxC se dégrade avec un faible nombre d'unités locales, une taille de table de contingence élevée, une hétérogénéité accrue entre unités locales, et une relation plus faible entre lignes et colonnes — ce qui explique la moins bonne performance en Écosse qu'en Nouvelle-Zélande.",
+    "stance": "supports",
+    "stance_target": "facteurs structurels déterminant la précision de l'inférence écologique à maille fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "comparaison Nouvelle-Zélande vs Écosse",
+    "quoted_support": "An analysis of the features affecting the accuracy of estimates reveals that ecolRxC, like other ecological inference models, faces challenges when the number of polling stations is small and the dimension of the contingency tables... increases.",
+    "numbers": ["diversité intra-district moyenne Écosse: 0.13-0.17", "Nouvelle-Zélande: 0.20-0.25"],
+    "entities": ["ecolRxC", "Scotland", "New Zealand"],
+    "time_period": null,
+    "region": "Écosse, Nouvelle-Zélande",
+    "confidence": "high",
+    "source_note_id": "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-latent-structure-app"
+  },
+  {
+    "claim": "Contrairement aux autres méthodes RxC (eiPack, ei.MD.bayes, nslphom) qui modélisent les conséquences attendues du comportement électoral, l'approche de Thomsen/ecolRxC modélise le processus causal du choix électoral (position idéologique du votant + valence des partis), ce qui la distingue théoriquement.",
+    "stance": "neutral",
+    "stance_target": "fondement théorique distinctif de l'approche à structure latente pour l'inférence écologique",
+    "evidence_type": "theoretical",
+    "scope_conditions": "modèles de choix discret économétriques",
+    "quoted_support": "ecolRxC stands up for modeling a causal theory of political behavior to build its algorithm. This distinguishes it from other procedures proposed from different frameworks... which model expected behaviors, instead of modeling how voters make choices based on their underlying preferences",
+    "numbers": [],
+    "entities": ["ecolRxC", "Thomsen", "directional model", "proximity model"],
+    "time_period": null,
+    "region": null,
+    "confidence": "medium",
+    "source_note_id": "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-latent-structure-app"
+  }
+]

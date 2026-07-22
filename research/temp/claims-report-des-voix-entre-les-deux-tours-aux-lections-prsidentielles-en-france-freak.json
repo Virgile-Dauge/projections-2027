@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Les données officielles de résultats de la présidentielle française par département et par commune sont disponibles en open data sur data.gouv.fr, avec des fichiers séparés pour le premier et le second tour, permettant une analyse de régression des reports de voix sur résultats agrégés sans recourir au sondage.",
+    "stance": "neutral",
+    "stance_target": "disponibilité des données officielles pour l'inférence par régression sur résultats agrégés",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, présidentielle 2022, ~100 départements, ~36000 communes",
+    "quoted_support": "On peut avoir les données par département (une centaine) ou par commune (36000)",
+    "numbers": ["100", "36000"],
+    "entities": ["data.gouv.fr"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "report-des-voix-entre-les-deux-tours-aux-lections-prsidentielles-en-france-freak"
+  },
+  {
+    "claim": "Au niveau commune (>5000-10000 inscrits) et département, le score de Marine Le Pen au premier tour 2022 est fortement corrélé positivement à son score au second tour, alors que le score de Macron au premier tour est corrélé négativement au score de Le Pen au second tour, mais cette corrélation n'est pas parfaite : de nombreuses communes ayant peu voté Macron au T1 n'ont pas voté Le Pen au T2.",
+    "stance": "supports",
+    "stance_target": "utilité mais imperfection de la régression sur résultats agrégés pour estimer les reports de voix",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2022, niveau département et commune",
+    "quoted_support": "beaucoup de communes qui n'ont pas voté Macron au premier tour n'ont pas pour autant voté Le Pen au second.",
+    "numbers": ["5000", "10000"],
+    "entities": ["Marine Le Pen", "Emmanuel Macron"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "report-des-voix-entre-les-deux-tours-aux-lections-prsidentielles-en-france-freak"
+  },
+  {
+    "claim": "Le vote écologiste au premier tour de la présidentielle 2022 est fortement et négativement corrélé au vote Le Pen au second tour au niveau agrégé (commune et département), ce que l'auteur qualifie explicitement de risque de 'ecological fallacy' si on l'interprète comme un comportement individuel de transfert.",
+    "stance": "refutes",
+    "stance_target": "interprétation causale directe des corrélations agrégées comme reports de voix individuels",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, présidentielle 2022, niveau agrégé (département/commune)",
+    "quoted_support": "quand on a voté écologiste au premier tour, on avait peu tendance à voter Le Pen (ou disons les départements où on votait fortement écologiste n'ont pas voté Le Pen au second #ecologicalfallacy, etc).",
+    "numbers": [],
+    "entities": ["Arthur Charpentier"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "report-des-voix-entre-les-deux-tours-aux-lections-prsidentielles-en-france-freak"
+  },
+  {
+    "claim": "L'appariement des données communales entre deux fichiers de résultats électoraux nécessite parfois de fusionner par nom de commune plutôt que par code officiel en raison de divergences de format entre sources, ce qui introduit un risque d'erreur de fusion (accents, tirets) -- un problème directement lié à la question des crosswalks entre découpages de bureaux de vote.",
+    "stance": "supports",
+    "stance_target": "difficulté technique de l'appariement de données électorales entre scrutins/sources (analogue au problème des crosswalks bureaux de vote)",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, données communales data.gouv.fr, présidentielle 2022",
+    "quoted_support": "Mon seul soucis a été que les codes communes dans les deux bases étaient différents, donc j'ai utilisé les noms des communes, ce que je n'aime pas faire (avec les accents, les tirets, etc, la fusion peut être assez mauvaises",
+    "numbers": [],
+    "entities": ["data.gouv.fr"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "report-des-voix-entre-les-deux-tours-aux-lections-prsidentielles-en-france-freak"
+  }
+]

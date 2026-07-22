@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Le jeu de données 'Données des élections agrégées' de data.gouv.fr fournit les résultats officiels du Ministère de l'Intérieur au niveau bureau de vote pour l'ensemble des scrutins (présidentielle, législatives, européennes, municipales, régionales, départementales, cantonales), sous forme de deux tables jointes par identifiant d'élection.",
+    "stance": "neutral",
+    "stance_target": "existence d'une source unifiée de résultats électoraux par bureau de vote en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière, multi-scrutins",
+    "quoted_support": "Ce jeu de données contient deux fichiers créés à partir des fichiers contenant les résultats des élections, publiés par le Ministère de l'Intérieur et des Outre-mer : Résultats généraux (general-results.csv)... Résultats par candidat (candidats-results.csv)",
+    "numbers": [],
+    "entities": ["data.gouv.fr", "Ministère de l'Intérieur"],
+    "time_period": "multi-scrutins, actualisé jusqu'en 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+  },
+  {
+    "claim": "L'identifiant d'élection id_election encode l'année, le type de scrutin et le tour (ex. 2022_pres_t1 pour le 1er tour de la présidentielle 2022), et sert de clé de jointure entre les tables de résultats généraux et de résultats par candidat via id_brut_miom.",
+    "stance": "neutral",
+    "stance_target": "structure d'identification des scrutins dans le jeu de données agrégé",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "La colonne id_election contient l'information de l'élection concernée (année, type, tour), par exemple : 2022_pres_t1 pour le premier tour de l'élection présidentielle de 2022. Les deux tables sont rapprochables par les colonnes id_election et id_brut_miom.",
+    "numbers": ["2022_pres_t1"],
+    "entities": ["id_election", "id_brut_miom"],
+    "time_period": "présent",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+  },
+  {
+    "claim": "Le jeu de données agrégé documente explicitement un crosswalk officiel entre les identifiants de bureaux de vote du Ministère de l'Intérieur et ceux du REU de l'INSEE, via une table de conversion nommée table-bv-reu.csv.",
+    "stance": "supports",
+    "stance_target": "existence d'un mécanisme officiel de réconciliation des identifiants de bureaux de vote entre sources (résultats électoraux vs REU/adresses)",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Ces données sont également rapprochables du Répertoire électoral unique publié par l'INSEE. Les jointures se font par l'intermédiaire de la table de conversion des identifiants des bureaux de vote (table-bv-reu.csv).",
+    "numbers": [],
+    "entities": ["table-bv-reu.csv", "REU", "INSEE"],
+    "time_period": "présent",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+  },
+  {
+    "claim": "La structure du jeu de données agrégé a été modifiée en janvier 2026, ce qui constitue une rupture de schéma documentée à prendre en compte pour tout pipeline de traitement s'appuyant sur des versions antérieures.",
+    "stance": "supports",
+    "stance_target": "instabilité de schéma des jeux de données électoraux agrégés dans le temps",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, à partir de janvier 2026",
+    "quoted_support": "/!\\ la structure des données a évolué en janvier 2026",
+    "numbers": ["janvier 2026"],
+    "entities": ["data.gouv.fr"],
+    "time_period": "janvier 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+  },
+  {
+    "claim": "Certains scrutins historiques agrégés dans ce jeu de données ne disposent pas de résultats au niveau bureau de vote (ex. départementales 2021 T1/T2, municipales 2008 hors communes de plus de 3500 habitants), limitant la profondeur temporelle utilisable pour une analyse fine par bureau.",
+    "stance": "supports",
+    "stance_target": "hétérogénéité de la granularité disponible selon les scrutins et les années dans les données électorales françaises",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, scrutins départementaux et municipaux",
+    "quoted_support": "Départementales 2021 T2... Départementales 2021 T1... (pas de données au niveau bureau de vote) — Municipales 2008 (uniquement les communes de plus de 3500 habitants ; votes blancs et nuls réunis dans la colonne Nuls)",
+    "numbers": ["2021", "2008", "3500 habitants"],
+    "entities": ["départementales 2021", "municipales 2008"],
+    "time_period": "2008-2021",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-donnes-des-lections-agrges-datagouvfr"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "critic_type": "instruction",
+  "structural_mirror_check": "PASS — all 7 required H2 headings present verbatim and in order; no restructure required.",
+  "findings": [
+    {
+      "severity": "major",
+      "atomic_item": "pour chacune : ... usages réels (médias, académiques, campagnes)",
+      "failure_mode": "under-covered",
+      "location": "Section 2, comparison table 'Usages réels' column, and per-method subsections 2.A-2.G",
+      "issue": "The prompt names three usage audiences for each method — médias, académiques, campagnes. The draft's 'Usages réels' column and subsections cover media outlets (swingometers, Grenier, Electoral Calculus, Cook/538/Inside Elections, YouGov, Votamatic/Economist) and academic/legal use well, but campaign/party use of each projection method is essentially absent from the per-method breakdown; canvassing-targeting evidence (LMP/Liégey-Muller-Pons, Hollande 2012, NationBuilder-style targeting) sits only in §1.A as GOTV efficacy, not mapped to the method families as a documented usage.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Populate the 'campagnes' facet of the 'Usages réels' column (or a sentence per relevant subsection) using vault evidence: composite/PVI-style baselines and swing-on-baseline as the backbone of campaign field-targeting tools (Liégey-Muller-Pons / '50+1', the LMP tradition already cited in §1.A), US campaign use of Catalist/VAN-style precinct scores where the vault supports it, and note explicitly which families have NO documented campaign use (EI, dynamic Bayesian forecasting) so the field is completed honestly rather than left blank."
+    },
+    {
+      "severity": "minor",
+      "atomic_item": "modèles bayésiens type forecasting électoral ... usages réels (médias, académiques, campagnes)",
+      "failure_mode": "under-covered",
+      "location": "Section 2.F 'Forecasting bayésien dynamique' and its table row (Usages réels = 'Votamatic, Economist (US)')",
+      "issue": "The forecasting-bayésien row lists only US media/academic instances; the prompt's 'usages réels' implies noting whether campaigns use dynamic forecasting. The vault likely supports only 'no documented sub-national campaign use', which is itself the informative answer.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add a half-sentence noting dynamic Bayesian forecasting has no documented campaign field-targeting use (its outputs are national/state media products), so the 'campagnes' facet is explicitly answered as negative rather than silently omitted. Do not fabricate a campaign use the vault does not attest."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "In the 2022 presidential runoff (a genuine presidential-type second round, not legislative), 42% of Mélenchon's first-round electorate transferred to Macron and 17% to Le Pen, with 41% not expressing a vote (24% abstention + 17% blank/null) — down from a roughly two-thirds barrage rate for the equivalent electorate in 2017.",
+    "stance": "refutes",
+    "stance_target": "vote-transfer/barrage coefficients are stable across election type (legislative vs presidential) or robust to being applied unchanged across a five-year span",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential second round, Mélenchon 2022 first-round electorate, compared to 2017",
+    "quoted_support": "Un tiers (42%) des électeurs de Jean-Luc Mélenchon a choisi Emmanuel Macron pour 17% Marine Le Pen [...] avec 41% des électeurs de Jean-Luc Mélenchon qui ne s'est pas exprimé cette année (24% d'abstention, 17% de vote blancs ou nuls), pour un tiers en 2017 (17% d'abstention, 15% de vote blanc et nul).",
+    "numbers": ["42%", "17%", "41%", "24%", "17%", "33%"],
+    "entities": ["Ipsos", "Sopra Steria", "Jean-Luc Mélenchon", "Emmanuel Macron", "Marine Le Pen"],
+    "time_period": "April 2022, compared to 2017",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos"
+  },
+  {
+    "claim": "The 2022 presidential runoff barrage/report-de-voix rate for the LR (Pécresse) electorate toward Macron was 53%, versus 18% to Le Pen, notably lower than the ~97% legislative NFP-to-Ensemble transfer rate cited for 2024 duels, showing barrage strength differs by election type even in the same direction.",
+    "stance": "refutes",
+    "stance_target": "the 2024 legislative front-républicain transfer matrix (e.g. 97% NFP-to-Ensemble in Ensemble/RN duels) is a reliable proxy for presidential-runoff-type transfer behavior",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential second round 2022, centre-right (LR/Pécresse) electorate",
+    "quoted_support": "plus de la moitié (53%) des électeurs de Valérie Pécresse ont aussi fait le choix du Président sortant, pour 18% Marine Le Pen.",
+    "numbers": ["53%", "18%"],
+    "entities": ["Ipsos", "Valérie Pécresse", "Emmanuel Macron", "Marine Le Pen"],
+    "time_period": "April 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos"
+  },
+  {
+    "claim": "Own-camp retention was highly asymmetric in the 2022 runoff: 98% of Macron's first-round voters reiterated their vote for him versus 91% of Le Pen's own first-round voters reiterating for her, meaning even 'core' vote retention (not cross-bloc transfer) varies and is not simply 100% by assumption.",
+    "stance": "neutral",
+    "stance_target": "modeling assumptions used in transfer-matrix-based projections",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential second round 2022",
+    "quoted_support": "une meilleure mobilisation de l'électorat premier tour d'Emmanuel Macron (98% ont réitéré leur choix pour 91% dans l'électorat de Marine Le Pen)",
+    "numbers": ["98%", "91%"],
+    "entities": ["Ipsos", "Emmanuel Macron", "Marine Le Pen"],
+    "time_period": "April 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos"
+  },
+  {
+    "claim": "Between 2017 and 2022, Marine Le Pen's presidential-runoff vote share rose 11 points among workers (to 67%), 11 points among employees (to 57%), 8 points among intermediate professions, and 5 points among executives, indicating multi-year secular erosion of anti-RN transfer patterns predates the 2024-2025 window entirely.",
+    "stance": "supports",
+    "stance_target": "erosion of anti-RN transfer coefficients is a longer-run secular trend, not a sudden 2024-2025 phenomenon",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential runoffs 2017 vs 2022, by socio-professional category",
+    "quoted_support": "L'assise de Marine Le Pen s'est quand même bien élargie par rapport à 2017, avec 11 points gagnés chez les ouvriers (elle était à 56% en 2017), 11 points chez les employés (46% en 2017), 8 points au sein des professions intermédiaires (33%), 5 points chez les cadres (18% en 2017).",
+    "numbers": ["11 points", "67%", "56%", "57%", "46%", "8 points", "5 points", "18%"],
+    "entities": ["Ipsos", "Marine Le Pen"],
+    "time_period": "2017-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos"
+  }
+]

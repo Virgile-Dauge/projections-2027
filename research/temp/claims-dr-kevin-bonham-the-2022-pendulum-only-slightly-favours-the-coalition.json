@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Plain uniform swing applied to an electoral pendulum ignores that one side's marginal seats can be systematically closer than the other's, producing a biased seat-count estimate even at zero net national swing: in the 2022 Australian pendulum, Labor's ten closest seats averaged a 1.34% margin versus the Coalition's 2.72%, so Labor was expected to lose about 5 seats to random variation at zero swing versus only 2 for the Coalition.",
+    "stance": "refutes",
+    "stance_target": "uniform swing applied to a seat pendulum gives an unbiased seat-count estimate at zero net swing",
+    "evidence_type": "empirical",
+    "scope_conditions": "Australian federal election 2022 pendulum, pre-redistribution seat margins",
+    "quoted_support": "Labor's average margin in its ten closest seats is 1.34% while the Coalition's is 2.72% - a remarkable difference... if there is zero swing, then just based on this difference between how close each side's marginals are, Labor would be expected to drop around five of its seats to the Coalition, while the Coalition would only drop around two back the other way.",
+    "numbers": ["Labor closest-10 average margin 1.34%", "Coalition closest-10 average margin 2.72%", "Labor expected losses at zero swing ~5 seats", "Coalition expected losses at zero swing ~2 seats"],
+    "entities": ["Kevin Bonham", "Labor", "Coalition"],
+    "time_period": "2021-2022",
+    "region": "Australia",
+    "confidence": "high",
+    "source_note_id": "dr-kevin-bonham-the-2022-pendulum-only-slightly-favours-the-coalition"
+  },
+  {
+    "claim": "A conditional-probability pendulum model converts each seat's uniform-swing-implied margin into a win probability using an empirically measured standard deviation of two-party-preferred swing (3.3%, measured across the last six Australian federal elections), rather than deterministically calling every seat above/below the swing threshold.",
+    "stance": "neutral",
+    "stance_target": "how to convert a deterministic swing pendulum into a probabilistic seat forecast",
+    "evidence_type": "statistical",
+    "scope_conditions": "Australian federal elections, six-election historical baseline",
+    "quoted_support": "I get the standard deviation in 2PP swings across the last six federal elections at around 3.3%.",
+    "numbers": ["3.3% standard deviation of seat-level 2PP swing"],
+    "entities": ["Kevin Bonham"],
+    "time_period": "2001-2019",
+    "region": "Australia",
+    "confidence": "high",
+    "source_note_id": "dr-kevin-bonham-the-2022-pendulum-only-slightly-favours-the-coalition"
+  },
+  {
+    "claim": "Under a plain uniform-swing pendulum, the Coalition needed 51.2% two-party-preferred for a majority and only 48.5% to win more seats than Labor (an asymmetric threshold caused by seat distribution, not vote share alone), illustrating that uniform swing thresholds for 'winning' differ meaningfully by party even holding methodology fixed.",
+    "stance": "neutral",
+    "stance_target": "vote-share thresholds for winning a majority are symmetric between major parties under uniform swing",
+    "evidence_type": "empirical",
+    "scope_conditions": "Australian federal election, 2022 pendulum",
+    "quoted_support": "If we apply uniform swing, then the Coalition needs 51.2% for a majority, 48.5% to win more seats than Labor and 48.3% to prevent Labor winning a majority, so Labor wins a majority with 51.8%.",
+    "numbers": ["Coalition majority threshold 51.2% 2PP", "Coalition plurality threshold 48.5% 2PP", "Labor majority threshold 51.8% 2PP"],
+    "entities": ["Coalition", "Labor", "Kevin Bonham"],
+    "time_period": "2021-2022",
+    "region": "Australia",
+    "confidence": "high",
+    "source_note_id": "dr-kevin-bonham-the-2022-pendulum-only-slightly-favours-the-coalition"
+  }
+]

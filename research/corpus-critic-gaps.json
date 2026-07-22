@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "type": "overturning",
+      "target_position": "Tension 5 / locus mécanique (confiance HIGH) : « aucun acteur français visible n'a jamais fait d'estimation small-area sous la circonscription » — le constat de primauté qui cadre tout le rapport ('assemblage inédit de briques validées' plutôt que méthode connue à répliquer).",
+      "search_queries": [
+        "carte prédictive élections bureau de vote France 2026 open data github projet",
+        "data journalism projection RN circonscription bureau de vote 2027 France",
+        "swing model précinct France estimation locale open source Datawrapper 2026"
+      ],
+      "source_type": "investigative",
+      "priority": "critical",
+      "rationale": "La recherche négative existante (note dédiée 'absence-de-mrp-publié') a fait 5 requêtes ciblées mais toutes autour du terme MRP spécifiquement. Elle ne couvre pas les approches non-MRP (swing calibré, EI, projets hobbyistes/data-journalisme open source) publiées en 2025-2026, qui sont exactement le type de projet que ce livrable rejoint. Si une telle source existe et n'a pas été trouvée, le framing 'primauté' du rapport (Tension 5, la conclusion la mieux calibrée du corpus selon comparisons.md) doit être révisé en 'réplication/amélioration d'un précédent', pas en 'premier du genre'. Si la recherche confirme l'absence, la position se durcit et peut être affirmée sans réserve dans le draft final."
+    },
+    {
+      "type": "overturning",
+      "target_position": "Tension 1 (comparisons.md) et locus sophistication : le classement/quantile dégrade 'quadratiquement plus gracieusement' que le point estimé (Casacuberta & Hardt) — pilier théorique de toute l'architecture 'sortie ordinale'.",
+      "search_queries": [
+        "Spearman rank correlation precinct-level election forecast validation Europe",
+        "backtest classement bureau de vote méthode projection France Espagne Allemagne",
+        "ranking accuracy versus point estimate small area election prediction empirical test"
+      ],
+      "source_type": "academic",
+      "priority": "critical",
+      "rationale": "Vérification du texte intégral confirme que Casacuberta & Hardt (arXiv 2026) est un papier CS théorique pur, sans réplication électorale, et que Marble & Clinton (Political Analysis 2026) n'a qu'UN cas réel (référendum Michigan 2022, comté→précinct). Trois loci indépendants (sophistication, baseline, tension 1) nomment ce même trou comme 'le plus important restant' : aucune source ne teste la corrélation de rang d'une méthode de projection contre des résultats de bureau de vote réels, en France ou ailleurs en Europe. C'est le maillon le plus fragile de la recommandation centrale du rapport (sortie ordinale) — le trouver renforcerait fortement la position, ne pas le trouver doit être dit explicitement comme limite structurelle du draft."
+    },
+    {
+      "type": "strengthening",
+      "target_position": "Locus baseline (committed, confiance medium) : utiliser la structure spatiale relative des européennes 2024 comme composante de la baseline RN, par analogie avec la corrélation 0,89 CEVIPOF mesurée pour la GAUCHE (pas le RN).",
+      "search_queries": [
+        "corrélation vote RN européennes 2024 présidentielle 2022 département circonscription",
+        "geographic correlation far-right vote European election national election France Le Pen Bardella",
+        "CEVIPOF structure spatiale vote RN scrutin transposition"
+      ],
+      "source_type": "academic",
+      "priority": "high",
+      "rationale": "Le locus baseline nomme explicitement ce gap comme 'un calcul original... à forte valeur ajoutée pour trancher définitivement' : aucune source du corpus ne chiffre une corrélation géographique européennes↔présidentielle spécifique au RN/bloc droite radicale, alors que la position s'appuie par analogie sur un coefficient mesuré pour la gauche. Une étude montrant une corrélation RN nettement plus faible (<0,5, régime où le corpus dit lui-même que cela invaliderait l'usage) casserait la composante européennes de la baseline composite ; une étude la confirmant proche de 0,89 fermerait le point faible identifié comme 'What would change this position'."
+    },
+    {
+      "type": "overturning",
+      "target_position": "Locus baseline : le modèle SOE (second-order election) s'applique de façon spatialement homogène — postulat implicite qui permet de traiter le biais de niveau des européennes comme corrigible globalement plutôt que différemment par territoire.",
+      "search_queries": [
+        "Bartels 2023 Swiss Political Science Review second-order election subnational variation",
+        "second order election theory regional heterogeneity Europe empirical test 2023",
+        "\"second-order\" European elections subnational variation turnout differential regions"
+      ],
+      "source_type": "academic",
+      "priority": "high",
+      "rationale": "Nommé explicitement par le locus baseline comme 'potentiellement le chaînon manquant testant directement la validité géographique infranationale du modèle SOE' — non récupéré (paywall Wiley/ResearchGate) lors du sweep initial. S'il montre que le caractère second-order varie fortement selon le territoire (urbain/rural, bastions RN vs zones neutres), cela invaliderait l'hypothèse implicite d'un biais SOE uniforme et forcerait une correction régionale du poids donné aux européennes dans la baseline composite."
+    },
+    {
+      "type": "independent-verification",
+      "target_position": "Locus matrices (confiance medium-high 65-75%) : la matrice de transfert présidentielle Elabe 2027 (fuite LR→RN 50-70%, effondrement du barrage face à un duel Le Pen/Mélenchon) — seule source du corpus pour scénariser les niveaux de report au second tour 2027.",
+      "search_queries": [
+        "Ifop matrice report de voix présidentielle 2027 second tour Le Pen sondage",
+        "Cluster17 OpinionWay sondage second tour 2027 hypothèses duel intentions",
+        "Harris Interactive présidentielle 2027 intentions vote second tour transfert électeurs"
+      ],
+      "source_type": "industry",
+      "priority": "high",
+      "rationale": "Le locus matrices nomme lui-même comme condition de bascule 'une réplication indépendante (Ifop, Cluster17, Harris Interactive, OpinionWay) de la matrice présidentielle Elabe 2027 montrant des niveaux substantiellement différents'. C'est actuellement un point de mesure UNIQUE et non répliqué pour le paramètre le plus sensible du pipeline (le report de voix pilote directement le scénario second tour). Le redundancy audit n'a pas couvert cette matrice spécifiquement (il documente la robustesse du taux 2024 ENEF, pas la projection 2027 elle-même) — support fragile à vérifier avant le draft."
+    },
+    {
+      "type": "strengthening",
+      "target_position": "Locus implémentation-EI (committed) : les covariables IRIS (CSP/diplôme) complètent les covariables carreau 200m (revenu/âge/ménage) pour réduire le biais directionnel de l'EI à structure latente — mais le crosswalk IRIS→bureau n'est documenté nulle part dans le corpus, contrairement au crosswalk carreau→bureau.",
+      "search_queries": [
+        "table de passage IRIS bureau de vote INSEE correspondance géographique",
+        "IRIS to polling station crosswalk French census tract France",
+        "INSEE IRIS géométrie bureau de vote intersection surfacique méthode"
+      ],
+      "source_type": "government",
+      "priority": "high",
+      "rationale": "Recherche vault ciblée ('IRIS bureau de vote crosswalk') ne retourne aucun résultat pertinent — confirmation que ce trou documenté par le locus lui-même ('la qualité d'un crosswalk IRIS→bureau... reste ouvert') n'a pas été comblé. Sans ce crosswalk, les covariables CSP/diplôme (recensement, disponibles seulement à l'IRIS) ne peuvent pas alimenter le pipeline EI — ce qui réduirait la position committée à 'covariables carreau seules (revenu/âge/ménage)' et affaiblirait le paradoxe résolu en Tension 4. Documentation officielle INSEE/data.gouv sur la géométrie IRIS vs bureau réglerait directement ce point à faible coût de recherche."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Au second tour des législatives 2024, en duel front-républicain-vs-RN, 97% des électeurs NFP ont voté pour un candidat Ensemble/LR et 73% des électeurs Ensemble ont voté pour un candidat NFP, le RN étant battu dans près des trois quarts des duels de front républicain.",
+    "stance": "supports",
+    "stance_target": "efficacité mesurable des matrices de report/transfert appliquées aux législatives 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "duels front-républicain-vs-RN, second tour législatives 2024, Enquête électorale française vague 7 (Ipsos, 10 000+ répondants)",
+    "quoted_support": "Lorsqu'ils ont voté dans des duels entre le front républicain et le RN, 97% des électeurs du NFP ont choisi un candidat Ensemble (ou, le cas échéant, Les Républicains) et 73% des électeurs Ensemble ont choisi un candidat NFP. Le RN a ainsi été battu dans près des trois quarts des duels — bien davantage qu'en 2022.",
+    "numbers": ["97%", "73%", "210 désistements", "130 NFP", "80 Ensemble"],
+    "entities": ["NFP", "Ensemble", "RN", "front républicain"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs"
+  },
+  {
+    "claim": "Le sursaut de juillet 2024 n'était techniquement pas un 'front républicain' au sens strict mais un 'front anti-RN' : 85% des électeurs Ensemble ayant voté NFP jugeaient quand même LFI 'dangereux pour la démocratie' (chiffres proches de ceux sur le RN), la distinction relevant de l'imminence perçue du danger plutôt que de sa nature.",
+    "stance": "refutes",
+    "stance_target": "l'idée que le front républicain 2024 traduit une adhésion positive à un bloc plutôt qu'un rejet tactique/négatif du RN",
+    "evidence_type": "statistical",
+    "scope_conditions": "électeurs Ensemble ayant voté NFP au 2e tour 2024",
+    "quoted_support": "85% estiment que LFI est «un parti dangereux pour la démocratie», 90% qu'il «attise la violence» et qu'il est «d'extrême gauche», 7% qu'il est «capable de gouverner». Tous ces chiffres sont proches de ceux concernant le RN.",
+    "numbers": ["85%", "90%", "7%", "15 points d'écart"],
+    "entities": ["LFI", "Ensemble", "RN", "NFP"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs"
+  },
+  {
+    "claim": "Chez les sympathisants LR restés fidèles à LR, 47% ont préféré l'abstention (21%) ou le vote RN (26%) même en duel avec Ensemble, et 56% jugent le front républicain une simple tactique des partis traditionnels pour garder le pouvoir.",
+    "stance": "supports",
+    "stance_target": "hétérogénéité forte du taux de report selon la famille politique d'origine, limitant l'usage d'un coefficient de transfert unique",
+    "evidence_type": "statistical",
+    "scope_conditions": "électeurs sympathisants LR restés fidèles à LR, second tour législatives 2024",
+    "quoted_support": "même en cas de duel avec Ensemble, ils sont 47% à avoir choisi soit l'abstention (21%) soit le vote RN (26%)",
+    "numbers": ["47%", "21%", "26%", "56%", "30%"],
+    "entities": ["LR", "Ensemble", "RN"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs"
+  },
+  {
+    "claim": "L'auteur estime que le coup d'arrêt donné au RN par le front républicain de juillet 2024 ne se transposera pas mécaniquement à un second tour de présidentielle, notamment un hypothétique duel Le Pen/Mélenchon.",
+    "stance": "refutes",
+    "stance_target": "extrapolation directe des taux de report législatives 2024 à un scénario présidentiel 2027",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "hypothèse d'un second tour présidentiel Le Pen vs Mélenchon",
+    "quoted_support": "À moyen terme, on doit mesurer que le coup d'arrêt brutal donné à la progression du RN ne résistera pas mécaniquement à toutes les configurations d'un second tour d'élection présidentielle et notamment à un hypothétique affrontement entre Marine Le Pen et Jean-Luc Mélenchon.",
+    "numbers": [],
+    "entities": ["Marine Le Pen", "Jean-Luc Mélenchon", "front républicain"],
+    "time_period": "2024, projection 2027",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs"
+  }
+]

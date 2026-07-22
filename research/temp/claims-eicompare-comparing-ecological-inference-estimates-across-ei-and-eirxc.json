@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Depuis Thornburg v. Gingles (1986), les tribunaux américains recommandent explicitement l'inférence écologique comme méthode statistique centrale pour établir un vote racialement polarisé dans les contentieux électoraux, ce qui explique sa prééminence en science politique malgré les critiques méthodologiques dans d'autres disciplines.",
+    "stance": "neutral",
+    "stance_target": "légitimité institutionnelle de l'inférence écologique dans le champ électoral américain",
+    "evidence_type": "legal",
+    "scope_conditions": "contentieux du Voting Rights Act aux États-Unis",
+    "quoted_support": "the United States Supreme Courts directly recommended ecological inference analysis as the main statistical method to estimate voting preference by racial group (e.g. Thornburg v. Gingles 478 U.S. 30, 1986).",
+    "numbers": [],
+    "entities": ["Thornburg v. Gingles", "Voting Rights Act", "US Supreme Court"],
+    "time_period": "1986-présent",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "eicompare-comparing-ecological-inference-estimates-across-ei-and-eirxc"
+  },
+  {
+    "claim": "Sur un cas réel à 4 candidats et 2 groupes raciaux, les estimations King's EI et RxC EI convergent (écart maximal ~2.7 points de pourcentage) et mènent aux mêmes conclusions substantielles.",
+    "stance": "supports",
+    "stance_target": "convergence pratique entre King's EI et RxC EI sur données électorales réelles",
+    "evidence_type": "empirical",
+    "scope_conditions": "élection municipale 2006 de Corona, Californie, 4 candidats x 2 groupes (Latino/non-Latino)",
+    "quoted_support": "The results are presented in Table 3, and look remarkably similar to those presented in Table 2. Indeed, the exact same conclusions would be drawn from an analysis of both tables.",
+    "numbers": ["écart maximal EI-RxC: -2.66 points (total Latino)", "0.88 points (total Other)"],
+    "entities": ["eiCompare", "King's EI", "eiPack RxC", "Corona CA"],
+    "time_period": "2006",
+    "region": "Corona, Californie",
+    "confidence": "medium",
+    "source_note_id": "eicompare-comparing-ecological-inference-estimates-across-ei-and-eirxc"
+  },
+  {
+    "claim": "Des critiques méthodologiques soutiennent que l'approche itérative de King's EI (comparer un candidat à tous les autres réunis) biaise structurellement l'analyse en faveur de la détection d'un vote en bloc (bloc-voting), particulièrement problématique avec plus de deux candidats ou groupes.",
+    "stance": "refutes",
+    "stance_target": "neutralité méthodologique de King's EI dans les contextes multi-candidats/multi-groupes",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "contexte multi-candidats, multi-groupes raciaux",
+    "quoted_support": "Katz (2014) claims that EI biases the findings in favor of bloc-voting stating 'this jerry rigged approach to dealing with more than two vote choices stacks the deck in favor of finding statistical evidence for racially polarized.'",
+    "numbers": [],
+    "entities": ["King's EI", "Katz (2014)"],
+    "time_period": null,
+    "region": "États-Unis",
+    "confidence": "medium",
+    "source_note_id": "eicompare-comparing-ecological-inference-estimates-across-ei-and-eirxc"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Ghitza & Gelman's 'deep MRP' extends standard MRP by adding deep interactions between demographic and geographic covariates (income x ethnicity x state, plus two- and three-way interaction terms with their own variance components), improving estimation of small demographic-geographic subgroups relative to standard MRP.",
+    "stance": "neutral",
+    "stance_target": "does methodological sophistication improve small-area accuracy",
+    "evidence_type": "theoretical",
+    "scope_conditions": "US presidential elections 2004 and 2008, state-level and within-state demographic subgroups",
+    "quoted_support": "We improve upon this process by deriving estimates for demographic categories within states... Methodologically, we improve upon the existing MRP literature in five ways: (1) modeling deeper levels of interaction between geographic and demographic covariates, (2) allowing for the relationship between covariates to be nonlinear and even non-monotonic.",
+    "numbers": ["5x4x51=1020 cells in simple example"],
+    "entities": ["Yair Ghitza", "Andrew Gelman", "MRP", "Columbia University"],
+    "time_period": "2004, 2008 US presidential elections",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "deep-interactions-with-mrp"
+  },
+  {
+    "claim": "Ghitza & Gelman's deep MRP paper validates the method by demonstrating finer DEMOGRAPHIC subgroup granularity within states, not finer GEOGRAPHIC granularity below the state/district level -- it contains no precinct- or polling-station-level validation.",
+    "stance": "refutes",
+    "stance_target": "deep MRP has been validated for sub-district geographic granularity",
+    "evidence_type": "theoretical",
+    "scope_conditions": "Entire paper scope: state x demographic cells only",
+    "quoted_support": "This work is in the forefront of statistical analysis of survey data... we use multilevel regression and poststratification (MRP) to derive precise vote choice and turnout estimates for small subgroups of the population.",
+    "numbers": [],
+    "entities": ["Ghitza", "Gelman", "MRP", "state-level estimation"],
+    "time_period": "2004-2012",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "deep-interactions-with-mrp"
+  },
+  {
+    "claim": "The canonical MRP methodology paper (181 citations, AJPS 2013) that underlies most 'sophistication helps at fine grain' claims is itself only tested at the state level, meaning the load-bearing citation for that claim does not actually contain sub-district evidence.",
+    "stance": "supports",
+    "stance_target": "the crux gap is real: almost no MRP literature tests below electoral-district level",
+    "evidence_type": "theoretical",
+    "scope_conditions": "citation-chain analysis of the field's foundational MRP paper",
+    "quoted_support": "Following Gelman and Little (1997) and Park, Gelman and Bafumi (2004), Lax and Phillips estimated public opinion in small subsets of the population but used these only as intermediate quantities to be summed (in the poststratification step) to get averages for each state.",
+    "numbers": ["181 citations", "doi:10.1111/AJPS.12004"],
+    "entities": ["Ghitza", "Gelman", "Lax", "Phillips", "Park", "Bafumi"],
+    "time_period": "2013",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "deep-interactions-with-mrp"
+  }
+]

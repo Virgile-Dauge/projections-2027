@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Le site unehistoireduconflitpolitique.fr met en accès libre les résultats électoraux numérisés des 36 000 communes françaises pour toutes les élections législatives et présidentielles de 1848 à 2022 ainsi que les principaux référendums de 1793 à 2005.",
+    "stance": "neutral",
+    "stance_target": "existence d'une base de données électorales françaises longitudinales en accès ouvert à l'échelle communale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 1793-2022, échelle communale",
+    "quoted_support": "Grâce à la numérisation des archives électorales au niveau des 36000 communes pour toutes les élections législatives et présidentielles de 1848 à 2022 et les principaux référendums de 1793 à 2005, il devient possible pour la première fois de comparer précisément qui vote pour qui.",
+    "numbers": ["36 000 communes", "1848-2022", "1793-2005"],
+    "entities": ["unehistoireduconflitpolitique.fr", "Julia Cagé", "Thomas Piketty"],
+    "time_period": "1793-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "cartographie-numrique-une-histoire-du-conflit-politique-lections-et-ingalits-soc"
+  }
+]

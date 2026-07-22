@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "A simple unweighted average of a statistical poll-and-fundamentals model and prediction-market prices produced more accurate daily state-level probabilistic forecasts overall than either source alone in the 2020 US presidential election, even though no single average dominated both components for every state-date pair.",
+    "stance": "supports",
+    "stance_target": "ensembling structurally different forecast types (model-based vs market/crowd-based) improves aggregate accuracy over either method alone",
+    "evidence_type": "empirical",
+    "scope_conditions": "2020 US presidential election, battleground states, daily data over 7 months",
+    "quoted_support": "A simple average of the two forecasts performs better than either one of them overall, even though no average can outperform both component forecasts for any given state-date pair.",
+    "numbers": ["7 months of daily data", "2 forecast sources"],
+    "entities": ["The Economist model", "PredictIt", "G. Elliott Morris"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "models-markets-and-the-forecasting-of-elections"
+  },
+  {
+    "claim": "Prediction markets outperformed the statistical model months before the election, while the statistical model became more accurate as election day approached, indicating the relative reliability of each forecast type shifts systematically over the election cycle.",
+    "stance": "supports",
+    "stance_target": "different forecasting methods have time-varying relative reliability over the election cycle, relevant to choosing which method to weight at different points before a vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "2020 US presidential election",
+    "quoted_support": "We find systematic differences in accuracy over time with the market performing better months before the election, and the model performing better as the election approached.",
+    "numbers": [],
+    "entities": ["The Economist model", "PredictIt"],
+    "time_period": "2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "models-markets-and-the-forecasting-of-elections"
+  }
+]

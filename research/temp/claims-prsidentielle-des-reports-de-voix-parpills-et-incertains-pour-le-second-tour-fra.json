@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Les reports de voix des électeurs de Jean-Luc Mélenchon (21,95% au premier tour 2022) vers le second tour étaient très dispersés et non alignés sur une consigne claire : 34% Macron, 30% Le Pen, 36% indécis selon Ipsos Sopra Steria, contre 27% Macron et 21% Le Pen selon OpinionWay.",
+    "stance": "supports",
+    "stance_target": "les reports de voix ne suivent pas mécaniquement les consignes des candidats éliminés",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2022, entre-deux-tours (10-11 avril 2022)",
+    "quoted_support": "34 % pour Emmanuel Macron, 30 % pour Marine Le Pen et 36 % d'indécis, selon l'enquête Ipsos Sopra Steria. Il serait de 27 % pour le président sortant et de 21 % pour Marine Le Pen, selon OpinionWay.",
+    "numbers": ["21.95%", "34%", "30%", "36%", "27%", "21%"],
+    "entities": ["Jean-Luc Mélenchon", "Emmanuel Macron", "Marine Le Pen", "Ipsos Sopra Steria", "OpinionWay"],
+    "time_period": "avril 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-des-reports-de-voix-parpills-et-incertains-pour-le-second-tour-fra"
+  },
+  {
+    "claim": "85% des électeurs d'Éric Zemmour au premier tour 2022 déclaraient vouloir voter Marine Le Pen au second tour, contre seulement 9% pour Emmanuel Macron, cohérent avec la consigne de vote explicite de Zemmour.",
+    "stance": "supports",
+    "stance_target": "les consignes de vote explicites sont suivies quand elles sont cohérentes avec la proximité idéologique",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2022",
+    "quoted_support": "85 % des électeurs du polémiste d'extrême droite Éric Zemmour disent vouloir voter pour la candidate RN, contre 9 % seulement pour le président sortant, selon l'étude Ipsos Sopra Steria.",
+    "numbers": ["85%", "9%"],
+    "entities": ["Éric Zemmour", "Marine Le Pen", "Ipsos Sopra Steria"],
+    "time_period": "avril 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-des-reports-de-voix-parpills-et-incertains-pour-le-second-tour-fra"
+  },
+  {
+    "claim": "Les électeurs de Valérie Pécresse (4,8% au premier tour 2022) se sont reportés de façon éclatée malgré son vote personnel annoncé pour Macron : 45% Macron, 28% Le Pen, 27% indécis.",
+    "stance": "neutral",
+    "stance_target": "faiblesse du report de voix des petits candidats de droite classique",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2022",
+    "quoted_support": "45 % d'entre eux comptent voter Emmanuel Macron, 28 % pour Marine Le Pen et 27 % sont toujours indécis, selon les données de l'institut Ipsos Sopra Steria.",
+    "numbers": ["4.8%", "45%", "28%", "27%"],
+    "entities": ["Valérie Pécresse", "Emmanuel Macron", "Marine Le Pen"],
+    "time_period": "avril 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-des-reports-de-voix-parpills-et-incertains-pour-le-second-tour-fra"
+  },
+  {
+    "claim": "Seuls 88% des électeurs sondés entre les deux tours de la présidentielle 2022 déclaraient un choix de vote définitif, 12% pouvant encore changer d'avis, ce qui limite la fiabilité prédictive des sondages de reports à J-1 du second tour.",
+    "stance": "refutes",
+    "stance_target": "fiabilité forte des sondages de reports de voix mesurés en léger différé du premier tour",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2022, entre-deux-tours",
+    "quoted_support": "il s'avère qu'il n'est \"définitif qu'à 88 % pour l'ensemble des électeurs sondés, tandis que 12 % assurent qu'\"ils peuvent encore changer d'avis\".",
+    "numbers": ["88%", "12%"],
+    "entities": ["Ipsos"],
+    "time_period": "avril 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "prsidentielle-des-reports-de-voix-parpills-et-incertains-pour-le-second-tour-fra"
+  }
+]

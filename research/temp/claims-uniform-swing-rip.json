@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Uniform national swing works historically not because swing is literally identical in every constituency but because deviations from the average swing tend to cancel out symmetrically across seats; when that symmetry breaks, UNS becomes actively misleading rather than merely imprecise.",
+    "stance": "refutes",
+    "stance_target": "uniform swing's historical accuracy validates its underlying literal assumption",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK general elections, general mechanism",
+    "quoted_support": "The real statistical assumption underlying uniform swing, then, is not the obviously absurd notion that the swing in each seat is identical, but that deviations from the average are symmetrical.",
+    "numbers": [],
+    "entities": ["Peter Kellner", "YouGov"],
+    "time_period": null,
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "uniform-swing-rip"
+  },
+  {
+    "claim": "Ahead of the UK 2015 election, Scotland diverged sharply and asymmetrically from England/Wales -- SNP led Labour by 16 points in a late-2014 poll versus Labour's 22-point lead over the SNP in 2010 -- and modeling Scotland separately from a single GB-wide uniform swing reduced Labour's projected seat total by about 20 net seats (11 extra English/Welsh gains swamped by 31 Scottish losses).",
+    "stance": "refutes",
+    "stance_target": "a single nationwide uniform swing correctly captures regionally divergent partisan realignment",
+    "evidence_type": "empirical",
+    "scope_conditions": "United Kingdom, Scotland vs England/Wales, 2010-2014",
+    "quoted_support": "Labour's 11 extra gains south of the border are swamped by its 31 losses north of the border. The overall effect is to reduce Labour's GB-wide total by 20 seats.",
+    "numbers": ["SNP lead over Labour 16 points (late 2014)", "Labour lead over SNP 22 points (2010)", "+11 England/Wales gains", "-31 Scottish losses", "net -20 seats"],
+    "entities": ["SNP", "Labour", "Scotland", "YouGov"],
+    "time_period": "2010-2015",
+    "region": "Scotland, United Kingdom",
+    "confidence": "high",
+    "source_note_id": "uniform-swing-rip"
+  },
+  {
+    "claim": "A well-documented incumbency/sophomore-surge effect worth roughly 2 percentage points of vote share for first-term MPs seeking re-election means marginal seats held by incumbents see below-average swing against them, which can save an incumbent party around 20 seats it would otherwise lose under a plain uniform-swing projection.",
+    "stance": "refutes",
+    "stance_target": "uniform swing correctly treats incumbent-held marginal seats the same as open seats",
+    "evidence_type": "empirical",
+    "scope_conditions": "United Kingdom, first-term MPs, three decades of historical pattern",
+    "quoted_support": "For the past three decades, there has been a consistent trend for new MPs to do slightly better than the average, the first time they seek re-election. On average, the bonus is worth 2%... this would allow the Tories to hold on to around 20 seats they would otherwise lose.",
+    "numbers": ["~2% average incumbency/sophomore bonus", "~20 seats saved from projected losses"],
+    "entities": ["Conservatives", "Peter Kellner"],
+    "time_period": "1980s-2014",
+    "region": "United Kingdom",
+    "confidence": "high",
+    "source_note_id": "uniform-swing-rip"
+  }
+]

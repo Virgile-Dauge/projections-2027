@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "UK broadcast exit polls re-survey voters at the SAME polling stations used in the previous election specifically to derive a station-level swing estimate, not to build a nationally representative cross-sectional sample.",
+    "stance": "supports",
+    "stance_target": "matched-panel-of-polling-stations design is central to accurate swing estimation, more than raw sample representativeness",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK general elections, BBC/ITV/Sky joint exit poll, 2005-2015",
+    "quoted_support": "wherever possible, we poll outside the same polling locations as we did at the previous election. That means that for each location we can derive an estimate of the change in each party's support and can paint a picture of how the ups and downs of party support are varying from one kind of constituency to another.",
+    "numbers": [],
+    "entities": ["John Curtice", "BBC", "ITV", "Sky News", "Oxford", "Plymouth", "Manchester", "LSE"],
+    "time_period": "2005-2015",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "john-curtice-how-we-called-the-election-right-on-polling-night-more-or-less"
+  },
+  {
+    "claim": "The 2015 UK exit poll forecast 316 Conservative seats against an actual result of 331, a documented margin of error even in a well-regarded, methodologically stable exit-poll design.",
+    "stance": "neutral",
+    "stance_target": "accuracy bounds of station-panel exit poll methodology",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK 2015 general election",
+    "quoted_support": "We said 316 seats for the Conservatives, but in the end it was 331.",
+    "numbers": ["316 forecast", "331 actual"],
+    "entities": ["Conservative Party"],
+    "time_period": "2015",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "john-curtice-how-we-called-the-election-right-on-polling-night-more-or-less"
+  },
+  {
+    "claim": "New polling stations are added to a matched panel design only to cover specific new dynamics expected in an upcoming election (e.g., a regional party surge or a new entrant party), while most of the panel is kept identical across elections for comparability.",
+    "stance": "supports",
+    "stance_target": "matched-panel designs require periodic targeted additions to track emerging political dynamics without breaking comparability",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK 2010 to 2015 exit poll panel",
+    "quoted_support": "We were able to poll at nearly all of the polling stations at which we also polled in 2010. To these we simply added some new ones to meet the two new key challenges posed by this election – what might happen in Scotland and how well were UKIP were doing.",
+    "numbers": [],
+    "entities": ["SNP", "UKIP", "Scotland"],
+    "time_period": "2010-2015",
+    "region": "UK",
+    "confidence": "medium",
+    "source_note_id": "john-curtice-how-we-called-the-election-right-on-polling-night-more-or-less"
+  }
+]

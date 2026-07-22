@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Sur données réelles à vérité terrain (résultats de vote panaché officiellement publiés en Nouvelle-Zélande et en Écosse), les intervalles de confiance à 95% des trois principales méthodes d'inférence écologique RxC (Goodman, EI-MD/eiPack, EI-ML/Greiner-Quinn) ne contiennent la vraie valeur que 30 à 40% du temps, loin de la couverture nominale attendue de 95%.",
+    "stance": "refutes",
+    "stance_target": "fiabilité de la quantification d'incertitude (intervalles de confiance) des méthodes d'inférence écologique RxC standard",
+    "evidence_type": "empirical",
+    "scope_conditions": "élections générales de Nouvelle-Zélande (2002, 2005, 2008) et du Parlement écossais (2007), niveau bureau de vote, tables de contingence de 10x4 à 19x14",
+    "quoted_support": "The confidence intervals of the EI-MD in its full form cover the true value only in about 30–40% of the cases... these results cast serious doubts on the ability of such techniques to live up to their promises of accuracy.",
+    "numbers": ["couverture EI-MD forme complète: 30-40%", "couverture Goodman: ~30%", "meilleur cas (ratio bureaux/coefficients > 2): EI-MD ~53%", "attendu: 95%"],
+    "entities": ["Goodman regression", "EI-MD", "EI-ML", "eiPack", "Greiner and Quinn", "New Zealand", "Scotland"],
+    "time_period": "2002-2008 (NZ), 2007 (Écosse)",
+    "region": "Nouvelle-Zélande, Écosse",
+    "confidence": "high",
+    "source_note_id": "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in"
+  },
+  {
+    "claim": "La fiabilité des estimations d'inférence écologique RxC se dégrade pour les partis plus larges (grande part de vote) et pour les tables de contingence de plus grande dimension, et s'améliore avec un ratio bureaux de vote/coefficients à estimer plus élevé.",
+    "stance": "supports",
+    "stance_target": "facteurs déterminant la fiabilité de l'inférence écologique RxC à maille fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "régression logistique sur les prédicteurs de couverture des IC à 95%, Nouvelle-Zélande et Écosse",
+    "quoted_support": "the estimated 95% confidence interval is less likely to contain the true values in the case of larger contingency tables both in terms of number of columns and rows... the number of polling stations is positively correlated with precise confidence intervals.",
+    "numbers": ["critère recommandé: au moins 2 bureaux de vote par coefficient estimé"],
+    "entities": ["EI-MD", "Goodman", "EI-ML"],
+    "time_period": null,
+    "region": "Nouvelle-Zélande, Écosse",
+    "confidence": "high",
+    "source_note_id": "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in"
+  },
+  {
+    "claim": "Contrairement aux méthodes d'inférence écologique 2x2 qui ont fait l'objet d'évaluations empiriques poussées (Wakefield 2004, Hudson et al. 2010), les méthodes RxC pour tables de contingence plus larges restaient quasiment non évaluées empiriquement avant cette étude de 2017, malgré leur usage fréquent dans les systèmes multipartites.",
+    "stance": "neutral",
+    "stance_target": "lacune de validation empirique des méthodes RxC pour l'inférence écologique en contexte multipartite",
+    "evidence_type": "theoretical",
+    "scope_conditions": "revue de littérature",
+    "quoted_support": "While today 2 × 2 methods have been empirically evaluated... almost no empirical evaluations have characterized methods that face the issue of estimating larger tables.",
+    "numbers": [],
+    "entities": ["Wakefield (2004)", "Hudson et al. (2010)"],
+    "time_period": null,
+    "region": null,
+    "confidence": "medium",
+    "source_note_id": "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in"
+  }
+]

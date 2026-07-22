@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "NSPPolls agrège les sondages présidentielle/régionales sous licence MIT en flux JSON/CSV structurés par région, sondage, tour, hypothèse et candidat.",
+    "stance": "neutral",
+    "stance_target": "outils open source de suivi des dynamiques nationales par sondages",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, élections présidentielle et régionales, jusqu'à mai 2022",
+    "quoted_support": "Des flux JSON proposant l'ensemble des données compilées sont disponibles sous licence MIT ci-dessous. [...] L'architecture est plutôt simple et se décline par région (dans le cas des élections régionales), puis par sondage, par tour, par hypothèse et par candidat.",
+    "numbers": [],
+    "entities": ["NSPPolls", "Alexandre Léchenet"],
+    "time_period": "2021-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-nsppollsnsppolls-compilation-des-sondages-produits-loccasion-des-lections"
+  },
+  {
+    "claim": "NSPPolls ne compile que les sondages effectivement publiés avec notice réglementaire déposée sur le site de la Commission des sondages, excluant les 'souhaits de victoire' et prédictions non fondées sur une question d'intention de vote.",
+    "stance": "supports",
+    "stance_target": "rigueur méthodologique dans la sélection des sondages sources pour objectiver une dynamique nationale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, cadre légal des sondages électoraux depuis 1977/2016",
+    "quoted_support": "Seuls les sondages ayant été publiés sont compilés ici. [...] Sont rassemblés ici les sondages ayant traits aux élections présidentielle et régionales demandant des intentions de vote [...]. Ne sont pas compilés les souhaits de victoire, les chances de l'emporter ou les prédictions.",
+    "numbers": [],
+    "entities": ["Commission des sondages", "NSPPolls"],
+    "time_period": "depuis 1977",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-nsppollsnsppolls-compilation-des-sondages-produits-loccasion-des-lections"
+  },
+  {
+    "claim": "Le dépôt NSPPolls a été repris comme source de sondages agrégés par des médias majeurs (Le Figaro, The Economist, Le Monde, The Guardian) pour la présidentielle 2022, indiquant sa crédibilité comme agrégateur.",
+    "stance": "neutral",
+    "stance_target": "existence d'agrégateurs open source de sondages français utilisables comme brique de dynamique nationale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, présidentielle 2022",
+    "quoted_support": "Les chiffres relatifs à l'élection présidentielle sont repris par plusieurs médias, dont Le Figaro, Contexte, The Guardian, The Economist, Le Télégramme ou Le Monde.",
+    "numbers": [],
+    "entities": ["Le Figaro", "The Economist", "Le Monde", "The Guardian", "NSPPolls"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "github-nsppollsnsppolls-compilation-des-sondages-produits-loccasion-des-lections"
+  },
+  {
+    "claim": "Le dépôt NSPPolls est inactif depuis mai 2022 (dernier commit ddcd5ce, 23 mai 2022), avant les présidentielle/législatives suivantes, limitant sa couverture des cycles 2024.",
+    "stance": "refutes",
+    "stance_target": "NSPPolls comme source à jour pour dynamique nationale 2024-2027",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, dépôt GitHub nsppolls/nsppolls",
+    "quoted_support": "## Latest commit\nMay 23, 2022 ddcd5ce",
+    "numbers": ["2022-05-23"],
+    "entities": ["NSPPolls"],
+    "time_period": "2021-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-nsppollsnsppolls-compilation-des-sondages-produits-loccasion-des-lections"
+  }
+]

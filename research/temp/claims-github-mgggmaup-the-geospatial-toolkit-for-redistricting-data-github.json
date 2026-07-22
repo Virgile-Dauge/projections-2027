@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "maup's assign() function crosswalks source geometries (e.g. census blocks, precincts) to target geometries (e.g. districts, redrawn precincts) by covering-area rule: a source unit is assigned to whichever target geometry covers the largest portion of its area when it isn't fully covered by one.",
+    "stance": "neutral",
+    "stance_target": "geospatial crosswalk methodology for reconciling electoral geography across redistricting cycles",
+    "evidence_type": "empirical",
+    "scope_conditions": "US redistricting data; general spatial-crosswalk technique, portable to any jurisdiction with polygon precinct/block shapefiles",
+    "quoted_support": "The Series maps each geometry in sources to the geometry in targets that covers it. ... If a source geometry is not covered by one single target geometry, it is assigned to the target geometry that covers the largest portion of its area.",
+    "numbers": [],
+    "entities": ["maup", "MGGG", "Data and Democracy Lab", "geopandas"],
+    "time_period": "2019-2025",
+    "region": "United States (methodology is general)",
+    "confidence": "high",
+    "source_note_id": "github-mgggmaup-the-geospatial-toolkit-for-redistricting-data-github"
+  },
+  {
+    "claim": "maup's official documentation explicitly warns against prorating election/demographic data by area, since larger census blocks are less populous than smaller ones (correlation runs opposite to naive area-weighting intuition); population-based weights should be used instead.",
+    "stance": "supports",
+    "stance_target": "population-weighted (not area-weighted) proration is the correct method for redistributing vote/demographic data across mismatched geographic units",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "any areal interpolation of electoral or demographic data between non-nesting precinct/block geometries",
+    "quoted_support": "We strongly urge you not to prorate by area! The area of a census block is not a good predictor of its population. In fact, the correlation goes in the other direction: larger census blocks are less populous than smaller ones.",
+    "numbers": [],
+    "entities": ["maup", "MGGG"],
+    "time_period": "2019-2025",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-mgggmaup-the-geospatial-toolkit-for-redistricting-data-github"
+  },
+  {
+    "claim": "In a real-world maup worked example, disaggregating vote totals from old precincts to census blocks and reaggregating to new (redrawn) precinct boundaries lost roughly 12% of Democratic votes (23,401 to 20,566) and 11% of Republican votes (3,302 to 2,947) purely due to boundary mismatch between old-precinct and new-precinct shapefiles -- 884 and 1,227 of 3,014 total blocks respectively were unassigned to any precinct in each shapefile.",
+    "stance": "supports",
+    "stance_target": "precinct/bureau-de-vote boundary redrawing between election cycles introduces material data loss/error in crosswalked election results unless topology is explicitly repaired",
+    "evidence_type": "empirical",
+    "scope_conditions": "Providence, Rhode Island test dataset; illustrative of a general boundary-mismatch failure mode relevant to French bureau-de-vote redecoupage between 2022 and 2027",
+    "quoted_support": "So, out of 3,014 total Census blocks, 884 were not assigned to any old precinct and 1,227 were not assigned to any new precinct.",
+    "numbers": ["23,401 to 20,566 (SEN18D)", "3,302 to 2,947 (SEN18R)", "884/3,014 blocks", "1,227/3,014 blocks"],
+    "entities": ["maup", "Rhode Island", "Providence"],
+    "time_period": "2018 election data, example published 2019-2023",
+    "region": "Rhode Island, USA",
+    "confidence": "high",
+    "source_note_id": "github-mgggmaup-the-geospatial-toolkit-for-redistricting-data-github"
+  },
+  {
+    "claim": "maup's smart_repair() function can enforce that repaired precinct geometries nest cleanly within a secondary set of region boundaries (e.g. counties), via the nest_within_regions parameter, addressing the common real-world case where precincts are supposed to nest into higher administrative units but don't due to shapefile stitching artifacts.",
+    "stance": "neutral",
+    "stance_target": "tooling capability for enforcing administrative-hierarchy consistency in crosswalked geographies (analogous to needing bureau de vote to commune/canton consistency in France)",
+    "evidence_type": "empirical",
+    "scope_conditions": "maup v2.0.0+ (Nov 2023 onward)",
+    "quoted_support": "smart_repair allows the user to optionally specify a second shapefile---e.g., a shapefile of county boundaries within a state---and then performs the repair process so that the repaired geometries nest cleanly into the units in the second shapefile.",
+    "numbers": ["v2.0.0 released Nov 30, 2023", "v2.0.3 latest release Aug 20, 2025"],
+    "entities": ["maup", "smart_repair"],
+    "time_period": "2023-2025",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "github-mgggmaup-the-geospatial-toolkit-for-redistricting-data-github"
+  },
+  {
+    "claim": "The maup package name and design philosophy is explicitly grounded in the Modifiable Areal Unit Problem (MAUP), the statistical-geography principle that the same underlying spatial data yields different aggregate results depending on how the space is partitioned.",
+    "stance": "neutral",
+    "stance_target": "theoretical grounding for why bureau-de-vote-level projection methods are sensitive to boundary choice/redecoupage",
+    "evidence_type": "theoretical",
+    "scope_conditions": "general spatial statistics principle, not France-specific",
+    "quoted_support": "The name of this package comes from the modifiable areal unit problem (MAUP): the same spatial data will look different depending on how you divide up the space.",
+    "numbers": [],
+    "entities": ["maup", "Modifiable Areal Unit Problem"],
+    "time_period": "n/a",
+    "region": "general",
+    "confidence": "high",
+    "source_note_id": "github-mgggmaup-the-geospatial-toolkit-for-redistricting-data-github"
+  }
+]

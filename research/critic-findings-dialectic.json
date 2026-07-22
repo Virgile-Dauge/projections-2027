@@ -1,0 +1,47 @@
+{
+  "critic_type": "dialectic",
+  "findings": [
+    {
+      "severity": "major",
+      "location": "Section 2.H (Le pivot) — la phrase « le résultat de 2024 au bureau X est la meilleure covariable de son résultat en 2027 » (et l'écho §2.E « le bon outil est un swing ancré sur baseline bureau réelle »)",
+      "issue": "Le pivot dialectique répond à l'échec de la prévision démographique en invoquant l'ancrage sur baseline réelle, mais il ne concède pas que le résultat corpus le plus dur — sign accuracy ~0,5 sur la DIRECTION du changement local — est justement mesuré sur des swings partant d'une baseline réelle : il mord donc sur la méthode recommandée, pas seulement sur le MRP démographique aveugle.",
+      "evidence": "interim-report-sophistication-vs-degradation-maille-fine (« son hypothèse structurante — que la structure de corrélation infra-comté reproduit la structure comté — est exactement l'hypothèse d'homogénéité locale que les modèles de swing font aussi, et que le reste du corpus (Wilson & Grofman, sign accuracy ~0,5) montre casser à maille fine ») ; models-of-inter-election-change-in",
+      "recommendation": "Après la phrase du pivot, insérer une concession explicite : l'ancrage sur baseline réelle sauve le NIVEAU/rang de départ (2024 est bien la meilleure covariable du niveau 2027), mais la projection du MOUVEMENT 2024→2027 reste un swing, exposé au sign-accuracy ~0,5 que le corpus documente précisément sur baselines réelles. Préciser que c'est exactement cette faille que la sortie ordinale + le backtest sont censés borner — pas nier — de sorte que le pivot ne se lise pas comme si l'ancrage local neutralisait la critique du camp sophistication-échoue."
+    },
+    {
+      "severity": "major",
+      "location": "Section 2.E (MRP) — « Marble et Clinton montrent... calibrer un MRP de comté contre un résultat connu réduit l'erreur des deux tiers, et l'extension au precinct réduit l'erreur d'environ 60 % » puis « c'est exactement l'atout dont dispose la France »",
+      "issue": "La seule preuve positive réelle sous le district est une méthode de CALIBRATION-sur-résultat-connu, pas de PROJECTION : elle présuppose le résultat de la maille cible déjà observé. Le draft reconnaît ce présupposé mais glisse ensuite vers « l'atout français » sans dire que pour la cible 2027 ce résultat n'existe pas — Marble & Clinton valide donc l'étape backtest/interpolation, jamais l'étape de projection vers un scrutin non observé.",
+      "evidence": "improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat ; interim-report-sophistication-vs-degradation-maille-fine (« la méthode PRÉSUPPOSE que le résultat électoral réel de la maille cible est DÉJÀ connu — ce n'est pas un modèle prédictif »)",
+      "recommendation": "Ajouter une phrase distinguant les deux tâches : le -60% de Marble & Clinton borne l'erreur quand on cale sur un résultat local CONNU (donc soutient le backtest 2022→2024 et le passage IRIS→bureau), mais ne valide pas le saut vers 2027, où l'on ne dispose que de la baseline 2022/2024 comme point de départ d'un swing non calibré sur la vérité cible. Éviter que « exactement l'atout dont dispose la France » se lise comme un transfert direct de la garantie -60% à la projection présidentielle."
+    },
+    {
+      "severity": "major",
+      "location": "Section 1.B et Section 7.B — l'usage de Casacuberta & Hardt (« séparation quadratique classer/estimer », « condition satisfaite par les gaussiennes, bêtas et uniformes, donc par la quasi-totalité des distributions réalistes »)",
+      "issue": "Le pilier ordinal sur-vend le théorème sur trois points : (1) la garantie porte sur la VALEUR d'une allocation top-K sous budget et tolère explicitement de confondre les unités proches du seuil — or ces unités-là sont précisément les bureaux disputés/basculables que la carte militante veut distinguer ; (2) le « bad case » du papier est justement une masse d'unités agglutinée autour du seuil, scénario plausible pour la nappe de bureaux péri-urbains compétitifs, donc la ρ-régularité est affirmée sans être vérifiée contre la distribution française réelle ; (3) le théorème classe par effet de traitement (impact marginal d'une action), alors que la carte classe par rapport de force comme proxy — un pont assumé, pas prouvé.",
+      "evidence": "good-allocations-from-bad-estimates (« The only bad case arises when all units cluster around the threshold » ; ρ-regularity ; value V/V* d'une allocation top-K) ; interim-report-sophistication-vs-degradation-maille-fine",
+      "recommendation": "Qualifier le pilier : préciser que la garantie est de VALEUR d'allocation (top-K) et non de fidélité de rang unité par unité, qu'elle autorise de brouiller les bureaux les plus serrés — donc la carte ne doit pas promettre de trancher finement entre deux bureaux quasi à égalité — et que la ρ-régularité (« quasi-totalité des distributions réalistes ») est à vérifier empiriquement sur la distribution française, le cas défavorable du papier (agglutination au seuil) étant précisément le cas militant. Mentionner le glissement effet-de-traitement → rapport-de-force comme hypothèse-pont explicite."
+    },
+    {
+      "severity": "major",
+      "location": "Section 7.C (Le programme de validation) — « Backtest de corrélation de rang 2022→2024 [...] le seul moyen de valider empiriquement [...] la thèse le classement dégrade gracieusement »",
+      "issue": "Le backtest est présenté comme une validation qui confirmera la thèse, sans jamais poser le scénario d'échec ni de seuil de falsification — alors que le corpus donne de solides raisons de craindre une corrélation de rang faible là où ça compte : sign accuracy ~0,5 et une géographie RN en pleine DIFFUSION (+16-18 pts hors bastions 2017→2024), c'est-à-dire une instabilité de rang concentrée dans les zones disputées, exactement celles que la carte cible.",
+      "evidence": "models-of-inter-election-change-in ; comprendre-la-gographie-du-vote-rn-en-2024-institut-terram ; interim-report-baseline-election-source-2027",
+      "recommendation": "Ajouter une phrase indiquant ce qu'un backtest FAIBLE impliquerait (un seuil indicatif de corrélation de rang Spearman/Kendall en-dessous duquel le classement ne serait pas défendable, notamment un test séparé sur les seuls bureaux compétitifs/en diffusion), pour que le backtest se lise comme un vrai test réfutable et non comme une formalité vouée à confirmer la thèse."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 3 (fin) — « une présidentielle simplifie radicalement le problème [...] Le facteur qui a fait échouer 2024 (la modélisation de l'offre) disparaît au premier tour d'une présidentielle »",
+      "issue": "Le mot « disparaît » sur-affirme : au premier tour présidentiel l'offre ne disparaît pas, elle change de forme — champ de candidats large et incertain (12 en 2022), fragmentation d'un bloc (gauche à 1 vs 3+ candidats) qui reconfigure la cartographie de baseline par bloc. Le pari est correctement borné plus loin (risque de rupture d'offre, éclatement du bloc central), mais l'assertion centrale du milieu de §3 est plus forte que son propre encadrement.",
+      "evidence": "interim-report-baseline-election-source-2027 (scénario de rupture : éclatement du bloc central, primaire RN à issue disputée)",
+      "recommendation": "Adoucir « disparaît » en « change de nature » ou « se simplifie sans s'annuler » : la difficulté d'offre passe de 577 configurations de duels locaux à l'incertitude nationale sur le champ de candidats et la fragmentation intra-bloc — ce qui reste favorable mais n'est pas une disparition, cohérent avec le paragraphe de bornage qui suit."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4.B (européennes) — « la corrélation au niveau circonscription entre européennes et législatives 2024 est de 0,89 pour la gauche [...] et la géographie du RN est stable en base »",
+      "issue": "L'argument de transférabilité du rang spatial pour un produit centré RN s'appuie sur un chiffre de corrélation mesuré pour la GAUCHE, complété par un « stable en base » qualitatif ; le coefficient RN équivalent européennes↔présidentielle n'existe nulle part dans le corpus. Le draft le reconnaît en calcul de validation §7.C n°3, mais l'assertion §4B, prise sur place, laisse croire que la transférabilité RN est déjà établie.",
+      "evidence": "interim-report-baseline-election-source-2027 (« Le corpus ne fournit pas l'équivalent RN/droite pour ce couple de scrutins, ce qui est un vrai trou ») ; note-de-recherche-2",
+      "recommendation": "Insérer un incise rappelant sur place que le 0,89 est un chiffre gauche et que la transférabilité de rang pour le RN reste non chiffrée (renvoi au calcul §7.C n°3), pour ne pas emprunter la robustesse d'une corrélation gauche au profit d'une conclusion RN."
+    }
+  ]
+}

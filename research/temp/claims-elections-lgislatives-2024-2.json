@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "L'Enquête électorale française vague 7 (Ipsos, août 2024) repose sur un échantillon de 11 204 personnes interrogées en ligne du 26 juillet au 1er août 2024, avec une marge d'erreur de ±0,7 point pour un score de 20% (IC 95%) — taille d'échantillon nettement supérieure aux sondages électoraux classiques (souvent 1000-2000 personnes).",
+    "stance": "neutral",
+    "stance_target": "rigueur méthodologique de l'échantillon utilisé pour mesurer les taux de report de voix du front républicain 2024",
+    "evidence_type": "empirical",
+    "scope_conditions": "Ipsos, Enquête électorale française vague 7, France, août 2024",
+    "quoted_support": "11 204 personnes, constituant un échantillon national représentatif de la population française... pour un échantillon de 11 204 personnes, si le score mesuré est de 20%, il y a 95% de chances pour que la valeur réelle se situe aujourd'hui entre 19,3% et 20,7% (plus ou moins 0,7 point).",
+    "numbers": ["11 204 personnes", "±0,7 point", "26 juillet - 1er août 2024"],
+    "entities": ["Ipsos", "ISO 20252"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "elections-lgislatives-2024-2"
+  },
+  {
+    "claim": "La facilité perçue du choix de vote au second tour 2024 variait fortement selon le camp d'origine et la configuration de duel : en moyenne 83% des électeurs jugeaient leur choix 'facile', mais ce taux tombait à des niveaux bien plus bas (11-30%) chez certains électeurs devant faire un choix de barrage entre blocs opposés.",
+    "stance": "supports",
+    "stance_target": "hétérogénéité du comportement de report selon le sous-groupe électoral, argument contre un coefficient de transfert unique",
+    "evidence_type": "statistical",
+    "scope_conditions": "second tour législatives 2024, électeurs inscrits dans une circonscription avec second tour",
+    "quoted_support": "% Facile : 83 % Difficile : 17",
+    "numbers": ["83%", "17%", "11-30%"],
+    "entities": ["NFP", "Ensemble", "LR", "RN", "front républicain"],
+    "time_period": "juillet 2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "elections-lgislatives-2024-2"
+  }
+]

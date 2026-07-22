@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "The geography of the RN vote observed in the 2024 legislative first round shows no structural change relative to the traditional RN electoral map, and the same is true of the RN map in the 2024 European elections.",
+    "stance": "supports",
+    "stance_target": "European election geography as a valid predictor of national election geography for RN vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2024 European and legislative elections, departmental/communal scale",
+    "quoted_support": "La géographie du vote observée au soir du premier tour des législatives ne révèle pas de modification structurelle par rapport à la traditionnelle carte du vote RN. C'est également vrai de la carte du vote RN au soir des élections européennes.",
+    "numbers": ["RN 31.4% European elections 2024", "Renaissance 14.6%", "RN+allies 33.2% legislative round 1 2024", "18.7% legislative round 1 2022"],
+    "entities": ["Rassemblement National", "Jérôme Fourquet", "Sylvain Manternach", "Institut Terram"],
+    "time_period": "2024",
+    "region": "France (departmental)",
+    "confidence": "high",
+    "source_note_id": "comprendre-la-gographie-du-vote-rn-en-2024-institut-terram"
+  },
+  {
+    "claim": "RN vote intensity follows a stable traditional east-west opposition: strongholds in the northeast (Hauts-de-France, former Champagne-Ardenne, Île-de-France fringes) and the Mediterranean coast to the Garonne valley, versus weak RN support along the 'diagonale bucolique' from the Massif Central to Brittany, in Paris, the Alps, and major metropolises.",
+    "stance": "supports",
+    "stance_target": "existence of a stable RN geographic structure across elections",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2024 legislative elections, departmental scale",
+    "quoted_support": "Géographiquement, l'intensité du vote RN lors des élections législatives de 2024 se décline selon une opposition est-ouest traditionnelle, avec des zones de force dans ses bastions du nord-est... et du littoral méditerranéen se connectant à la vallée de la Garonne.",
+    "numbers": [],
+    "entities": ["Rassemblement National", "Hauts-de-France", "diagonale bucolique"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comprendre-la-gographie-du-vote-rn-en-2024-institut-terram"
+  },
+  {
+    "claim": "RN vote share correlates strongly and consistently with commune size, exceeding 40% in communes under 2,000 inhabitants and being markedly lower in large metropolises, a pattern described as a structural constant of RN's electoral geography.",
+    "stance": "supports",
+    "stance_target": "existence of stable structural (non-election-specific) predictors of RN vote geography",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2024 legislative elections, communal scale",
+    "quoted_support": "Une autre constante de la géographie du vote RN a subsisté pour ces élections législatives de 2024 : sa très inégale intensité selon la variable du nombre d'habitants dans la commune... plus de 40% dans les communes de 2000 habitants et moins.",
+    "numbers": ["40% RN in communes <2,000 inhabitants"],
+    "entities": ["Rassemblement National"],
+    "time_period": "2024",
+    "region": "France (communal)",
+    "confidence": "high",
+    "source_note_id": "comprendre-la-gographie-du-vote-rn-en-2024-institut-terram"
+  },
+  {
+    "claim": "Fourquet and Manternach construct a synthetic departmental index 'Immigration, Pauvreté et Insécurité' (IPI) aggregating the main self-reported motivations of RN voters, used alongside communal/polling-station-level mapping of 'capital résidentiel' (housing market status) to explain RN vote geography.",
+    "stance": "neutral",
+    "stance_target": "methodology for explaining RN vote geography",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2024, multiscalar (department to bureau de vote)",
+    "quoted_support": "Ils présentent tout d'abord une cartographie départementale innovante à travers la création d'un nouvel indice synthétique, « Immigration, Pauvreté et Insécurité » (IPI)... Leur cartographie à l'échelle des communes et des bureaux de vote permet ensuite d'identifier d'autres facteurs explicatifs du vote RN, en particulier le capital résidentiel.",
+    "numbers": [],
+    "entities": ["IPI index", "Jérôme Fourquet", "Sylvain Manternach"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "comprendre-la-gographie-du-vote-rn-en-2024-institut-terram"
+  },
+  {
+    "claim": "RN's seat count rose from 8 seats (2017) to 89 (2022) to 142 (2024), reflecting a sequence across three legislative elections useful for tracking geographic entrenchment over time.",
+    "stance": "neutral",
+    "stance_target": "temporal trajectory of RN electoral strength usable as baseline sequence",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, legislative elections 2017, 2022, 2024",
+    "quoted_support": "le RN enregistre une puissante progression en nombre de sièges : 142 en 2024, contre 89 en 2022 et seulement 8 en 2017.",
+    "numbers": ["8 seats 2017", "89 seats 2022", "142 seats 2024"],
+    "entities": ["Rassemblement National"],
+    "time_period": "2017-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "comprendre-la-gographie-du-vote-rn-en-2024-institut-terram"
+  }
+]

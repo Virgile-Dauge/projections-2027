@@ -1,0 +1,52 @@
+[
+  {
+    "claim": "À maille fine (circonscription et en-dessous), AUCUNE famille de méthodes ne produit d'intervalles de confiance calibrés : MRP sous-couvre (Lauderdale et al. ; Buttice & Highton : 28% de couverture au mieux pour des IC à 90%), les IC des méthodes EI RxC couvrent la vérité 30-53% du temps (validation NZ/Écosse), et tous les modèles de swing échouent sur la direction du changement local (sign accuracy ~0,5, Wilson & Grofman).",
+    "independent_sources": ["model-based-pre-election-polling-for-national-and", "uc-davis-previously-published-works", "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in", "models-of-inter-election-change-in"],
+    "implication": "Le livrable doit vendre des CLASSEMENTS et des ORDRES DE GRANDEUR, jamais des points de pourcentage à IC affichés au bureau."
+  },
+  {
+    "claim": "Les législatives françaises sont structurellement biaisées comme mesure du rapport de force national : offre incomplète (7,5 candidats/circo en 2024 vs 11,5 en 2022), candidatures uniques, désistements massifs (210+ en 2024), et le codage des circonscriptions sans candidat d'un bloc change matériellement toute mesure d'évolution (leçon générale : Wilson & Grofman sur les uncontested districts).",
+    "independent_sources": ["rsultats-du-premier-tour-des-lgislatives-de-2024", "sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-proj", "les-franais-et-les-lections-lgislatives", "models-of-inter-election-change-in"],
+    "implication": "Le T1 des législatives est utilisable seulement avec correction d'offre ; le T2 ne mesure pas un rapport de force mais un comportement de barrage conditionnel."
+  },
+  {
+    "claim": "Le front républicain 2024 a fonctionné mais asymétriquement : les reports vers un candidat Ensemble/LR (~97% des électeurs NFP) ont été bien meilleurs que vers un candidat NFP (~73%, et nettement moins si LFI — pénalité d'étiquette mesurée expérimentalement).",
+    "independent_sources": ["elections-lgislatives-2024", "rsultats-du-premier-tour-des-lgislatives-de-2024", "lgislatives-2024-comment-les-reports-de-voix-du-front-rpubli"],
+    "implication": "Toute matrice de transfert 2027 doit être conditionnelle à l'identité du candidat, pas seulement au bloc."
+  },
+  {
+    "claim": "Les résultats officiels par bureau de vote existent en open data (numérisation ministère de l'Intérieur depuis ~2002), avec un crosswalk officiel identifiants électoraux ↔ REU (table-bv-reu.csv, pipeline actif), mais les CONTOURS géographiques des bureaux n'ont aucune existence officielle : les arrêtés définissent des listes d'adresses, et les 3 reconstructions publiques (Etalab, INSEE mapvotr, Makina) sont explicitement approximatives et non-autoritaires.",
+    "independent_sources": ["jeu-de-donnes-donnes-des-lections-agrges-datagouvfr", "jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr", "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa", "une-approche-de-reconstruction-automatique-de-la-gomtrie-des-bureaux-de-vote-mak", "thomas-piketty"],
+    "implication": "La jointure inter-scrutins se fait par IDENTIFIANTS + crosswalk REU, pas par géométrie ; les contours ne servent qu'à l'affichage."
+  },
+  {
+    "claim": "Le découpage des bureaux change réellement entre scrutins (numérotation communale sans norme, redécoupages locaux) — toute comparaison inter-élections à cette maille exige une table de réconciliation, et les analogues internationaux quantifient le coût de l'ignorer (US : ~1/6 des comtés touchés par cycle ; mismatch de contours → jusqu'à 11-12% des voix mal allouées).",
+    "independent_sources": ["jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr", "thomas-piketty", "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient", "github-mgggmaup-the-geospatial-toolkit-for-redistricting-dat", "changing-precinct-boundaries-who-is-affected-and-electoral"],
+    "implication": "Le crosswalk est un composant de premier ordre du projet, pas un détail d'implémentation."
+  },
+  {
+    "claim": "Aucun institut, média ou laboratoire n'a publié de MRP pour une élection française ; la pratique française = matrices de transfert déclaratives (sondages jour du vote / intentions) + ajustements locaux ad hoc pour les projections en sièges, et estimations 20h par panel de bureaux dépouillés comparés aux scrutins antérieurs.",
+    "independent_sources": ["absence-de-mrp-publi-pour-une-lection-franaise-constat-document-juillet-2026", "comment-les-instituts-de-sondage-estiment-les-rsultats-des-lections-lgislatives", "les-franais-et-les-lections-lgislatives", "prsidentielle-la-mthode-des-sondeurs-pour-estimer-les-rsultats-dimanche-20-heure"],
+    "implication": "Le projet ne peut copier aucune implémentation française existante à maille bureau — le plus proche parent méthodologique est l'écosystème anglo-saxon (PVI/baseline, MRP UK, VEST US)."
+  },
+  {
+    "claim": "Entre swing uniforme et proportionnel, aucune supériorité empirique consistante n'existe ; les praticiens sérieux blendent les deux et ajoutent des couches d'ajustement ; les différences deviennent importantes uniquement aux grandes amplitudes de swing (violations de bornes).",
+    "independent_sources": ["uniform-swing-versus-proportional-swing-which-is-best", "vote-and-seat-projection-methodology-by-ric-grenier", "models-of-inter-election-change-in", "swingometrics-methodology-swingometer"],
+    "implication": "Le choix uniforme/proportionnel n'est pas le vrai enjeu ; le comportement aux bornes (RN en forte hausse projetée) l'est."
+  },
+  {
+    "claim": "Le porte-à-porte a des effets électoraux réels, persistants et HÉTÉROGÈNES (persuasion ~1/4 de la marge Hollande 2012, randomisé par bureau de vote ; mobilisation +3,4pp chez les immigrés vs 0 ailleurs) — c'est l'hétérogénéité qui justifie le ciblage, donc les cartes.",
+    "independent_sources": ["will-a-five-minute-discussion", "increasing-the-electoral-participation-of-immigrants-experimental-evidence-from", "door-to-door-canvassing-campaigns-sway-voter-decisions", "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"],
+    "implication": "La carte a une base causale : l'effet marginal d'une heure de militantisme varie selon le bureau — c'est exactement ce que le livrable doit estimer."
+  },
+  {
+    "claim": "La recomposition 2017-2024 est réelle et documentée : tripartition installée (≈32/32/32 en 2022), bloc central effondré sous 15% aux européennes 2024, électorat RN homogène et stable, gauche hétérogène (LFI/PS/EELV), droite LR en voie d'absorption partielle par le RN — la présidentielle 2022 seule est une baseline datée.",
+    "independent_sources": ["the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit", "note-obe-n2025-14-dissolution-un-an-aprs-cepremap-algan-finchelstein-de-laubier", "rsultats-du-premier-tour-des-lgislatives-de-2024", "thomas-piketty"],
+    "implication": "Une baseline multi-scrutins pondérée vers 2024 est mieux fondée qu'une baseline présidentielle 2022 pure."
+  },
+  {
+    "claim": "Les projections en sièges publiées par les instituts français en 2024 ont collectivement échoué (les 24 donnaient le RN en tête) parce qu'elles ne pouvaient pas anticiper les désistements ni les reports du front républicain — un échec de DONNÉES D'OFFRE, pas de méthode statistique.",
+    "independent_sources": ["lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats", "rsultats-des-lgislatives-2024-on-vous-explique-pourquoi-il-faut-prendre-les-proj", "comment-les-instituts-de-sondage-estiment-les-rsultats-des-lections-lgislatives"],
+    "implication": "La qualité d'une projection française dépend d'abord de la modélisation de l'OFFRE (qui est au second tour, qui se désiste) — heureusement, une présidentielle simplifie radicalement ce problème (offre nationale unique)."
+  }
+]

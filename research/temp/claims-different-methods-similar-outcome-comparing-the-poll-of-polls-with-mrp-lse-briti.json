@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Comparing YouGov's 2019 MRP against a simple national poll-of-polls fed through a uniform-swing swingometer, national vote-share estimates for every party differed by at most 2 percentage points, suggesting MRP's national-level added value over uniform swing is modest.",
+    "stance": "refutes",
+    "stance_target": "MRP is dramatically more accurate than simple swing methods at the national vote-share level",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2019 general election, national vote share only",
+    "quoted_support": "None of the party vote share estimates given by the MRP differ from the equivalent figures in the poll of polls by more than 2%. The MRP gives the Conservative and Labour parties each a 1% higher vote share than the poll of polls, whilst it estimates a 2% lower share for the Brexit Party and a 1% lower share for the SNP.",
+    "numbers": ["max 2 percentage point difference", "Conservative +1%", "Labour +1%", "Brexit Party -2%", "SNP -1%"],
+    "entities": ["YouGov", "BBC poll of polls", "Conservative Party", "Labour Party", "Brexit Party", "SNP"],
+    "time_period": "2019",
+    "region": "UK",
+    "confidence": "medium",
+    "source_note_id": "different-methods-similar-outcome-comparing-the-poll-of-polls-with-mrp-lse-briti"
+  },
+  {
+    "claim": "MRP's principal value-add over uniform swing applied to national poll averages is at the seat level, not the national vote-share level: MRP gave the Conservatives 359 seats vs 346 from a Scotland-adjusted uniform swing applied to the same underlying national vote shares, a 13-seat gap.",
+    "stance": "supports",
+    "stance_target": "MRP adds most value at fine geographic (seat/constituency) granularity rather than at the national aggregate",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2019 general election",
+    "quoted_support": "The largest difference is that the MRP model's estimate of Conservative seats (359) is 13 higher than the estimate (346) stemming from the Scotland-adjusted swing.",
+    "numbers": ["359 seats MRP", "346 seats Scotland-adjusted uniform swing", "13-seat gap"],
+    "entities": ["YouGov", "Conservative Party", "Electoral Calculus"],
+    "time_period": "2019",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "different-methods-similar-outcome-comparing-the-poll-of-polls-with-mrp-lse-briti"
+  },
+  {
+    "claim": "The 2017 YouGov MRP model correctly predicted 93% of individual constituency results, including shock outcomes in Canterbury and Kensington.",
+    "stance": "supports",
+    "stance_target": "MRP achieves high constituency-level predictive accuracy",
+    "evidence_type": "empirical",
+    "scope_conditions": "UK, 2017 general election, 650 constituencies",
+    "quoted_support": "It predicted 93% of the constituency results correctly and anticipated shock outcomes such as those in Canterbury and Kensington.",
+    "numbers": ["93% of constituency results correct"],
+    "entities": ["YouGov", "Canterbury", "Kensington"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "different-methods-similar-outcome-comparing-the-poll-of-polls-with-mrp-lse-briti"
+  }
+]

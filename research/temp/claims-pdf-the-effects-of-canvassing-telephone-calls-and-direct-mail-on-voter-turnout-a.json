@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Gerber & Green (2000) effect sizes: personal canvassing raised turnout by 9.8 percentage points; direct mail raised turnout by 0.6 percentage points per mailing; telephone calls had no effect and may have slightly decreased turnout.",
+    "stance": "supports",
+    "stance_target": "relative cost-effectiveness ranking of field-contact channels used to justify prioritizing door-to-door in militant targeting strategy",
+    "evidence_type": "empirical",
+    "scope_conditions": "New Haven, Connecticut, USA, 1998 election; figures as summarized on an academia.edu preview page, not independently verified against original tables",
+    "quoted_support": "Personal canvassing increases voter turnout by 9.8 percentage points, emphasizing its effectiveness over other methods... Direct mail raised turnout by 0.6 percentage points per mailing, suggesting limited effectiveness.",
+    "numbers": ["+9.8 pp personal canvassing", "+0.6 pp per direct-mail piece", "0 pp telephone calls"],
+    "entities": ["Alan S. Gerber", "Donald P. Green"],
+    "time_period": "1998",
+    "region": "United States (Connecticut)",
+    "confidence": "low",
+    "source_note_id": "pdf-the-effects-of-canvassing-telephone-calls-and-direct-mail-on-voter-turnout-a"
+  }
+]

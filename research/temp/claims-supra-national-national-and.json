@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Under the second-order election framework, EP elections are considered 'second-order national elections' precisely because they debate and reflect essentially national politics, rather than distinct European-level political dynamics.",
+    "stance": "supports",
+    "stance_target": "European election geography as a proxy for national political structure",
+    "evidence_type": "theoretical",
+    "scope_conditions": "EU-14, EP elections framework, Reif and Schmitt 1980 theory",
+    "quoted_support": "In this view, EP elections are second-order national elections because they debate and reflect essentially national politics (Reif and Schmitt, 1980).",
+    "numbers": [],
+    "entities": ["Reif and Schmitt", "European Parliament"],
+    "time_period": "1980-2017 (theory through empirical application)",
+    "region": "EU-14",
+    "confidence": "high",
+    "source_note_id": "supra-national-national-and"
+  },
+  {
+    "claim": "A multilevel model of EP election turnout across 164 NUTS2 regions in the EU-14 finds turnout is driven significantly by compulsory voting, domestic political cleavages, labor market conditions, and trust in the EU, with no significant effect of GDP per capita, and higher turnout among older cohorts.",
+    "stance": "neutral",
+    "stance_target": "determinants of subnational variation in EP election turnout",
+    "evidence_type": "empirical",
+    "scope_conditions": "EU-14, 164 NUTS2 regions, last four EP elections as of 2017",
+    "quoted_support": "The results indicate a significant role of compulsory voting, domestic political cleavages, labor market conditions and trust in the EU. No evidence is found that GDP per capita affects turnout.",
+    "numbers": ["164 regions", "EU-14", "4 EP elections analyzed"],
+    "entities": ["Nadia Fiorino", "Nicola Pontarollo", "Roberto Ricciuti", "Joint Research Centre"],
+    "time_period": "up to 2017 (last four EP elections)",
+    "region": "EU-14 (regional/NUTS2)",
+    "confidence": "high",
+    "source_note_id": "supra-national-national-and"
+  },
+  {
+    "claim": "The paper frames voter turnout decisions in EP elections as lying at the intersection of three political dimensions -- supranational (EU attitudes), national (domestic political cleavages), and local (socio-economic conditions) -- implying subnational EP election variation is substantially shaped by pre-existing domestic political structure rather than EU-specific dynamics.",
+    "stance": "supports",
+    "stance_target": "hypothesis that geographic structure of EP vote reflects underlying domestic political geography",
+    "evidence_type": "theoretical",
+    "scope_conditions": "EU-14, EP elections, multilevel governance framework",
+    "quoted_support": "We argue that the decision to vote in European Parliamentary (EP) elections lies at the intersection of three political dimensions: one related to the attitude of citizens towards the European Union, one to the characteristics of the national political system, and the third associated with socio-economic variables observed by voters at the local level.",
+    "numbers": [],
+    "entities": ["Nadia Fiorino", "Nicola Pontarollo", "Roberto Ricciuti"],
+    "time_period": "2017 publication",
+    "region": "EU-14",
+    "confidence": "medium",
+    "source_note_id": "supra-national-national-and"
+  },
+  {
+    "claim": "This JRC report models EP election turnout, not party vote choice or geographic vote-share correlation with national elections, so it does not directly test predictive validity of EP vote geography for national election outcomes -- a methodological gap for the research question at hand.",
+    "stance": "neutral",
+    "stance_target": "scope limitation of available academic literature on EP-national geographic predictive validity",
+    "evidence_type": "theoretical",
+    "scope_conditions": "EU-14, EP elections, turnout modeling only",
+    "quoted_support": "We test a multilevel model. The results indicate a significant role of compulsory voting, domestic political cleavages, labor market conditions and trust in the EU.",
+    "numbers": [],
+    "entities": ["Joint Research Centre"],
+    "time_period": "2017",
+    "region": "EU-14",
+    "confidence": "medium",
+    "source_note_id": "supra-national-national-and"
+  }
+]

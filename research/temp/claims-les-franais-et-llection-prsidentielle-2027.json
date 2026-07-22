@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "In an Elabe July 2026 poll, an Attal/Philippe-vs-Le Pen presidential runoff shows Retailleau (LR) voters splitting only 4/10 to the presidential-camp candidate versus 5/10 to Le Pen.",
+    "stance": "supports",
+    "stance_target": "front républicain / barrage transfer coefficients have eroded on the right compared to 2024 legislative baseline",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, hypothetical 2027 presidential second round, LR/Retailleau electorate",
+    "quoted_support": "les électeurs de Bruno Retailleau seraient partagés : 4 sur 10 voteraient pour le candidat du camp présidentiel, 5 sur 10 pour Marine Le Pen.",
+    "numbers": ["40%", "50%"],
+    "entities": ["Elabe", "Bruno Retailleau", "Marine Le Pen", "Gabriel Attal", "Edouard Philippe"],
+    "time_period": "July 2026 (wave IV3)",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-franais-et-llection-prsidentielle-2027"
+  },
+  {
+    "claim": "In a Mélenchon/Le Pen presidential runoff hypothesis, 7 in 10 Retailleau (LR) voters and 1 in 3 centrist voters would vote for Le Pen, while PS and centrist voters abstain massively (6 in 10).",
+    "stance": "supports",
+    "stance_target": "presidential-runoff transfer coefficients diverge sharply from the 2024 legislative front-républicain matrix depending on which candidate faces RN",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, hypothetical 2027 presidential second round, Mélenchon vs Le Pen configuration",
+    "quoted_support": "1 électeurs du centre sur 3 et 7 électeurs de Bruno Retailleau sur 10 voteraient Marine Le Pen.",
+    "numbers": ["33%", "70%", "60%"],
+    "entities": ["Elabe", "Jean-Luc Mélenchon", "Marine Le Pen", "Bruno Retailleau"],
+    "time_period": "July 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-franais-et-llection-prsidentielle-2027"
+  },
+  {
+    "claim": "Marine Le Pen would beat every tested 2027 presidential runoff opponent, from 52-48% against Edouard Philippe to 67.5-32.5% against Jean-Luc Mélenchon.",
+    "stance": "neutral",
+    "stance_target": "2027 presidential second-round outcome forecasts",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, hypothetical July 2026 second round",
+    "quoted_support": "Marine Le Pen l'emporterait nettement face à Jean-Luc Mélenchon (67,5 vs 32,5%) [...] Marine Le Pen [...] devancerait, avec un écart plus resserré, Édouard Philippe (52 vs 48%).",
+    "numbers": ["67.5%", "32.5%", "58.5%", "41.5%", "54%", "46%", "52%", "48%", "56%", "44%"],
+    "entities": ["Elabe", "Marine Le Pen", "Jean-Luc Mélenchon", "Raphaël Glucksmann", "Gabriel Attal", "Edouard Philippe", "Bruno Retailleau"],
+    "time_period": "July 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-franais-et-llection-prsidentielle-2027"
+  },
+  {
+    "claim": "In Philippe/Attal-vs-Le Pen scenarios, the presidential-camp candidate gets only 4/10 transfer from Mélenchon voters versus 7/10 from Glucksmann voters, showing left-bloc transfer rates are not uniform but depend heavily on which left figure is the source electorate.",
+    "stance": "refutes",
+    "stance_target": "a single fixed NFP-to-barrage transfer coefficient can be applied uniformly across all left subgroups",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, hypothetical 2027 presidential second round",
+    "quoted_support": "le candidat du camp présidentiel bénéficierait de très bons reports de voix à gauche (7 sur 10 de Raphaël Glucksmann, 4 sur 10 de Jean-Luc Mélenchon)",
+    "numbers": ["70%", "40%"],
+    "entities": ["Raphaël Glucksmann", "Jean-Luc Mélenchon", "Edouard Philippe", "Gabriel Attal"],
+    "time_period": "July 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-franais-et-llection-prsidentielle-2027"
+  },
+  {
+    "claim": "Marine Le Pen would capture 1 in 5 (1 sur 5) LR voters in the first round against Edouard Philippe as an example of RN's erosion of the traditional right electorate even before any runoff transfer.",
+    "stance": "supports",
+    "stance_target": "erosion of the right's barrier against RN is visible even in first-round vote intention, not just second-round transfers",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, first round 2027 presidential hypothesis",
+    "quoted_support": "Marine Le Pen ferait quasiment le plein auprès des électeurs du Rassemblement National lors des élections législatives 2024 (84%), et capterait 1 électeur LR sur 5.",
+    "numbers": ["84%", "20%"],
+    "entities": ["Marine Le Pen", "LR"],
+    "time_period": "July 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-franais-et-llection-prsidentielle-2027"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Cagé et Piketty indiquent explicitement qu'une analyse électorale et socio-économique au niveau du bureau de vote serait idéale mais reste impossible sur longue période, car le ministère de l'Intérieur ne numérise systématiquement les données électorales par bureau de vote que depuis 2002.",
+    "stance": "supports",
+    "stance_target": "obstacles structurels à la construction de séries électorales longues au niveau du bureau de vote en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France métropolitaine, historique jusqu'à 2002",
+    "quoted_support": "Idéalement, cette méthode à base de données électorales et socio-économiques localisées devrait être menée au niveau du bureau de vote. Malheureusement, de telles données ne sont pas disponibles sur longue période. Les données électorales au niveau du bureau de vote ne sont systématiquement numérisées par le ministère de l'Intérieur que depuis 2002 en France.",
+    "numbers": ["depuis 2002", "36 000 communes"],
+    "entities": ["Julia Cagé", "Thomas Piketty", "ministère de l'Intérieur"],
+    "time_period": "avant 2002 / 1848-2022",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "thomas-piketty"
+  },
+  {
+    "claim": "La cartographie des bureaux de vote a beaucoup changé au fil du temps sans laisser de trace homogène sur longue période, ce qui empêche la construction d'un crosswalk fiable entre découpages successifs avant l'ère récente ; les procès-verbaux électoraux antérieurs aux Archives nationales ne portent que sur les communes.",
+    "stance": "supports",
+    "stance_target": "faisabilité d'un crosswalk historique des bureaux de vote pour l'analyse électorale fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, période historique (avant 2002), à l'exception de rares données sur les quartiers parisiens",
+    "quoted_support": "En tout état de cause, la cartographie locale des bureaux de vote a beaucoup changé et ne semble pas avoir laissé de trace homogène sur longue période, sans compter que les données socio-économiques susceptibles d'être utilisées pour analyser les votes ne sont généralement pas disponibles à cet échelon (à l'exception de la période très récente).",
+    "numbers": [],
+    "entities": ["Archives nationales", "ministère de l'Intérieur"],
+    "time_period": "avant 2002",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "thomas-piketty"
+  },
+  {
+    "claim": "Faute de données homogènes sur les arrondissements de Lyon et Marseille, Cagé et Piketty ont dû traiter ces deux villes comme des communes entières (contrairement aux 20 arrondissements parisiens traités séparément), ce qu'ils reconnaissent comme une limite importante de leur analyse.",
+    "stance": "neutral",
+    "stance_target": "granularité infra-communale disponible pour l'analyse électorale historique française",
+    "evidence_type": "empirical",
+    "scope_conditions": "Lyon, Marseille, Paris",
+    "quoted_support": "les données portant sur les arrondissements de Lyon et Marseille ne sont pas disponibles de façon homogène sur longue période, et nous avons donc dû traiter ces deux villes comme des communes entières, comme d'ailleurs l'ensemble des autres grandes villes, ce qui constitue une limite importante de l'analyse.",
+    "numbers": ["20 arrondissements parisiens"],
+    "entities": ["Paris", "Lyon", "Marseille"],
+    "time_period": "1848-2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "thomas-piketty"
+  },
+  {
+    "claim": "Selon Cagé et Piketty, la tripartition électorale de 2022 partage environ un tiers des voix au premier tour de la présidentielle entre bloc social-écologique (32%, LFI/PS/PCF/EELV/LO/NPA), bloc central libéral-progressiste (32%, LREM sortant + candidate LR) et bloc national-patriote (32%, RN/Reconquête/DLF).",
+    "stance": "neutral",
+    "stance_target": "structure du rapport de force électoral français en 2022 par bloc politique",
+    "evidence_type": "statistical",
+    "scope_conditions": "présidentielle 2022, 1er tour, France",
+    "quoted_support": "Si l'on additionne les candidats issus des partis de gauche et écologiques (LFI, PS, PCF, EELV, LO, NPA), on obtient 32 % des voix exprimées au premier tour de la présidentielle. En rassemblant les voix portées sur le président sortant (issu du parti LREM) et la candidate du parti LR, on obtient également 32 % des voix. On arrive exactement au même score de 32 % en additionnant les trois candidats du bloc national-patriote (RN, Reconquête, DLF).",
+    "numbers": ["32%", "32%", "32%", "3% Jean Lassalle"],
+    "entities": ["LFI", "PS", "PCF", "EELV", "LREM", "LR", "RN", "Reconquête", "DLF", "Jean Lassalle"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "thomas-piketty"
+  },
+  {
+    "claim": "Le vote pour le bloc central libéral-progressiste ('Ensemble') en 2022 est le plus corrélé au revenu communal moyen de toute l'histoire électorale française mesurée par Cagé et Piketty, ce qu'ils résument par la formule 'vote le plus bourgeois de l'histoire'.",
+    "stance": "supports",
+    "stance_target": "lien entre appartenance de bloc politique et niveau de richesse communal en France",
+    "evidence_type": "statistical",
+    "scope_conditions": "présidentielle 2022, échelle communale, France",
+    "quoted_support": "Le vote pour le bloc central libéral-progressiste enregistré lors du scrutin de 2022 apparaît ainsi dans les données disponibles comme l'un des plus « bourgeois » observés depuis deux siècles (sans doute même le plus « bourgeois » de toute l'histoire électorale française)",
+    "numbers": [],
+    "entities": ["Ensemble", "LREM"],
+    "time_period": "2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "thomas-piketty"
+  }
+]

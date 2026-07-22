@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Le code de reconstruction Makina Corpus a été mis à jour en juillet 2023 pour supporter le format des données REU de l'INSEE, montrant que l'outil, initialement construit sur des données 2016 partielles, a ensuite été adapté à la source nationale ouverte du REU.",
+    "stance": "neutral",
+    "stance_target": "adaptation des méthodes de contourage tierces à l'ouverture des données REU",
+    "evidence_type": "empirical",
+    "scope_conditions": "France",
+    "quoted_support": "Update to support INSEE REU data format",
+    "numbers": ["juillet 2023"],
+    "entities": ["Makina Corpus", "REU", "INSEE"],
+    "time_period": "juillet 2023",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "github-makinacorpusbureaux-de-vote-reconstruction-une-approche-de-la-reconstruct"
+  },
+  {
+    "claim": "Le pipeline technique Makina Corpus s'appuie sur PostgreSQL/PostGIS pour le calcul géométrique (blocs de voirie, Voronoï, union), sur les données de voirie OpenStreetMap (import via imposm3), sur les contours communaux 2022 de data.gouv.fr, et exporte le résultat final en format PMTiles via l'outil tippecanoe.",
+    "stance": "neutral",
+    "stance_target": "stack technique open source utilisée pour la reconstruction de contours de bureaux de vote en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France",
+    "quoted_support": "docker run -it --rm -v /tmp:/data tippecanoe:latest tippecanoe -Z8 -z14 --attribution \"INSEE REU 2022 - OpenStreetMap 2023\" /data/bureau.fgb -o /data/bureau.pmtiles",
+    "numbers": [],
+    "entities": ["PostGIS", "OpenStreetMap", "imposm3", "tippecanoe", "PMTiles"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-makinacorpusbureaux-de-vote-reconstruction-une-approche-de-la-reconstruct"
+  }
+]

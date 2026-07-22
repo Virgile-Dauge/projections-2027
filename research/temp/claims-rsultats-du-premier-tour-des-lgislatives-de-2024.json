@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "L'offre électorale au premier tour des législatives 2024 était réduite à 7,5 candidats en moyenne par circonscription, contre 11,5 en 2022, ce qui a mécaniquement réduit les réserves de voix disponibles au second tour pour le RN.",
+    "stance": "supports",
+    "stance_target": "biais d'offre incomplète des législatives comme limite documentée pour l'utiliser comme source de calibration d'une matrice de transfert",
+    "evidence_type": "statistical",
+    "scope_conditions": "577 circonscriptions, comparaison législatives 2022 vs 2024",
+    "quoted_support": "les réserves de voix pour le second restent très minces en raison d'une offre électorale rétrécie en 2024 (7,5 candidats en moyenne par circonscription contre 11,5 en 2022).",
+    "numbers": ["7,5 candidats", "11,5 candidats", "577 circonscriptions"],
+    "entities": ["RN", "législatives 2022", "législatives 2024"],
+    "time_period": "2022, 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-du-premier-tour-des-lgislatives-de-2024"
+  },
+  {
+    "claim": "Le panel électoral Ipsos-CEVIPOF vague 6 mesure les taux de report suivants au second tour 2024 : en duel RN vs NFP, 41% RN, 32% NFP, 23% abstention ; en duel Ensemble vs RN, 40% Ensemble, 35% RN, 22% abstention.",
+    "stance": "neutral",
+    "stance_target": "valeurs numériques de référence pour une matrice de transfert calibrée sur les législatives 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "panel électoral IPSOS pour CEVIPOF/Institut Montaigne/Fondation Jean-Jaurès/Le Monde, vague 6, juin 2024",
+    "quoted_support": "Dans le cas d'un duel RN vs NFP, 41% des électeurs choisissent le RN, 32% le NFP et 23% l'abstention. Dans le cas d'un duel Ensemble ! vs RN, 40% des voix se reporteraient sur Ensemble !, 35% vers le RN 22% vers l'abstention.",
+    "numbers": ["41%", "32%", "23%", "40%", "35%", "22%"],
+    "entities": ["RN", "NFP", "Ensemble", "CEVIPOF", "IPSOS"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-du-premier-tour-des-lgislatives-de-2024"
+  },
+  {
+    "claim": "Le RN était en moyenne à moins de 3000 voix de son adversaire de 2e position dans près de 50 circonscriptions, rendant la clé de la majorité absolue très sensible aux stratégies de désistement locales des candidats Ensemble/NFP/LR arrivés en 1re ou 2e position.",
+    "stance": "supports",
+    "stance_target": "sensibilité fine-grained (bureau/circonscription) des résultats face aux décisions de désistement individuelles, argument pour la pertinence locale plutôt que nationale",
+    "evidence_type": "statistical",
+    "scope_conditions": "circonscriptions à second tour serré, législatives 2024",
+    "quoted_support": "augmentant les chances de victoire du RN dans près de 50 circonscriptions où le RN est en moyenne à moins de 3000 voix de ces adversaires en ballotage.",
+    "numbers": ["50 circonscriptions", "3000 voix", "251 circonscriptions pour majorité absolue", "258 circonscriptions en tête"],
+    "entities": ["RN", "Ensemble", "NFP", "LR"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-du-premier-tour-des-lgislatives-de-2024"
+  },
+  {
+    "claim": "Penser le front républicain uniquement dans les configurations RN-1er/adversaire-3e est un 'barrage friable' — l'analyse doit couvrir toutes les configurations de duels et triangulaires, pas seulement le cas canonique.",
+    "stance": "refutes",
+    "stance_target": "simplification excessive d'un modèle de swing uniforme qui ne considérerait qu'une seule configuration de second tour",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "second tour législatives 2024, analyse de Martial Foucault (Sciences Po)",
+    "quoted_support": "Penser le front républicain seulement dans les cas où le RN est en tête et la majorité présidentielle ou coalition de gauche en troisième place est un barrage friable pour contrer l'arrivée du RN au pouvoir.",
+    "numbers": [],
+    "entities": ["RN", "front républicain", "Martial Foucault"],
+    "time_period": "juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-du-premier-tour-des-lgislatives-de-2024"
+  },
+  {
+    "claim": "Le RN a progressé de 18,68% (législatives 2022) à 33,2% (législatives 2024, avec alliés), soit +14,8 points en deux ans, une progression sans précédent comparable historiquement seulement au score du PS de 1993 (19%) comme précédent de délitement du pouvoir sortant.",
+    "stance": "neutral",
+    "stance_target": "obsolescence rapide des scores de référence 2022 pour calibrer une projection 2027",
+    "evidence_type": "statistical",
+    "scope_conditions": "comparaison scores nationaux 1er tour législatives 2022 vs 2024",
+    "quoted_support": "Elle connaît ainsi, en deux ans, une progression vertigineuse de plus de six millions de voix (soit +14,8% des suffrages exprimés).",
+    "numbers": ["18,68%", "33,2%", "+14,8 points", "23,15% présidentielle 2022 T1", "10 millions et demi de voix"],
+    "entities": ["RN", "PS 1993"],
+    "time_period": "2022-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rsultats-du-premier-tour-des-lgislatives-de-2024"
+  }
+]

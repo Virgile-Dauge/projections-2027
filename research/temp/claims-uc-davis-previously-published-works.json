@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "In a Monte Carlo simulation of MRP with typical national survey sample sizes (N=1,500), the average correlation between MRP estimates and true state-level values ranged from 0.17 (weak geographic covariates, low between-state variance) up to 0.87 (strong geographic covariates, high between-state variance) — a more than 5x swing purely from data-quality conditions, not sample size.",
+    "stance": "refutes",
+    "stance_target": "MRP delivers consistently high-quality sub-national estimates with conventional national survey sample sizes regardless of the underlying opinion structure",
+    "evidence_type": "statistical",
+    "scope_conditions": "US, Monte Carlo simulation, N=1500 sample size, four combinations of covariate strength and population ICC",
+    "quoted_support": "Correlation with true values Average 0.17 [low covariates, low ICC] ... 0.87 [high covariates, high ICC]",
+    "numbers": ["0.17 correlation worst case", "0.87 correlation best case", "N=1500", "500 trials per condition"],
+    "entities": [],
+    "time_period": "2013",
+    "region": "US",
+    "confidence": "high",
+    "source_note_id": "uc-davis-previously-published-works"
+  },
+  {
+    "claim": "Even under the single Monte Carlo condition where MRP performed best on correlation, bias, and error metrics (strong state covariates, high population ICC), only 28% of states achieved the nominal 90% confidence-interval coverage rate; across all four simulated conditions, more than 50% of states had coverage rates that were either too high or too low.",
+    "stance": "refutes",
+    "stance_target": "MRP's reported confidence/uncertainty intervals are well-calibrated even under favorable conditions",
+    "evidence_type": "statistical",
+    "scope_conditions": "US, Monte Carlo simulation, N=1500",
+    "quoted_support": "In the condition where MRP performs best with regard to the correlation with true values, standardized mean absolute bias, and standardized MAE, only 28% of the states have coverage rates close to the nominal rate of 90%. Across all four conditions, more than 50% of the states have coverage rates that are too high or too low.",
+    "numbers": ["28% coverage in best-case condition", "50%+ miscoverage across all conditions", "nominal 90% CI target"],
+    "entities": [],
+    "time_period": "2013",
+    "region": "US",
+    "confidence": "high",
+    "source_note_id": "uc-davis-previously-published-works"
+  },
+  {
+    "claim": "Buttice & Highton identify two conditions necessary (but not individually sufficient) for MRP to perform well with conventional national survey samples: (1) strong geographic-level covariates that explain a substantial share of true geographic opinion variation, and (2) a high population intraclass correlation (substantial between-unit heterogeneity relative to within-unit heterogeneity) — and note that neither condition can be empirically verified by the analyst from the sample data alone, since the population ground truth is by definition unavailable.",
+    "stance": "refutes",
+    "stance_target": "practitioners can reliably assess in advance whether their MRP application will perform well",
+    "evidence_type": "theoretical",
+    "scope_conditions": "MRP applied to conventional national survey samples, general applicability across issue domains",
+    "quoted_support": "Strong state-level predictors emerge as a necessary but not suﬃcient condition for MRP to perform well... Substantial interstate heterogeneity in preferences relative to the amount of intrastate preference heterogeneity appears necessary for MRP to produce high-quality estimates... reliably estimating the population ICC from a single sample is not possible.",
+    "numbers": [],
+    "entities": [],
+    "time_period": "2013",
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "uc-davis-previously-published-works"
+  },
+  {
+    "claim": "MRP performs particularly well for US cultural-policy issues because those issues exhibit unusually high geographic heterogeneity that is well captured by the geographic covariates typically used in MRP models — a favorable structural condition that does not generalize automatically to other issue domains or, by extension, to electoral vote-choice modelling in other countries.",
+    "stance": "neutral",
+    "stance_target": "generalizability of MRP performance across issue/geographic domains",
+    "evidence_type": "empirical",
+    "scope_conditions": "US, cultural policy issues vs other policy domains",
+    "quoted_support": "In contemporary American politics, there is greater geographic heterogeneity on cultural issues than on other issues, and this variation is more readily accounted for by the sort of geographic covariates typically used in MRP analyses.",
+    "numbers": [],
+    "entities": ["Lax and Phillips 2009", "Warshaw and Rodden 2012"],
+    "time_period": "2013",
+    "region": "US",
+    "confidence": "medium",
+    "source_note_id": "uc-davis-previously-published-works"
+  },
+  {
+    "claim": "The authors caution that when researchers apply an identical MRP covariate set across many different opinion items or policies (as is common practice for convenience), apparent variation in how strongly opinion predicts an outcome may actually reflect variation in MRP estimate quality across those items rather than true variation in the underlying relationship being studied.",
+    "stance": "refutes",
+    "stance_target": "using a single generic MRP covariate specification across many different survey items/outcomes yields comparably reliable estimates for all of them",
+    "evidence_type": "theoretical",
+    "scope_conditions": "MRP applied uniformly across a diverse set of opinion/policy items",
+    "quoted_support": "when Lax and Phillips (2012) report that the relationship between MRP opinion estimates and policy adoption varies in strength across the policies, it is unclear whether it represents true variation in responsiveness, as Lax and Phillips (2012) conclude, or whether it only appears that responsiveness varies because of the variation in the quality of the MRP estimates across policies.",
+    "numbers": [],
+    "entities": ["Lax and Phillips 2012"],
+    "time_period": "2013",
+    "region": "US",
+    "confidence": "medium",
+    "source_note_id": "uc-davis-previously-published-works"
+  }
+]

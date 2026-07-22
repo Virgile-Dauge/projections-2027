@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "PyEI's JOSS paper (Knudson, Schoenbach & Becker 2021) underwent formal peer review with a named editor and two named reviewers before publication, and the software is separately archived at Zenodo (doi:10.5281/zenodo.5245632) for long-term citability/reproducibility.",
+    "stance": "neutral",
+    "stance_target": "provenance and quality-assurance level of the PyEI ecological-inference tool",
+    "evidence_type": "empirical",
+    "scope_conditions": "software publication record, 2021",
+    "quoted_support": "Submitted 10 May 2021 - Published 25 August 2021 ... Editor: @drvinceknight ... Reviewers: @matt-graham, @pmyteh",
+    "numbers": ["submitted 10 May 2021", "published 25 Aug 2021", "doi:10.5281/zenodo.5245632"],
+    "entities": ["PyEI", "Journal of Open Source Software", "Karin C. Knudson", "Gabe Schoenbach", "Amariah Becker"],
+    "time_period": "2021",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "journal-of-open-source-software-pyei-a-python-package-for-ecological-inference"
+  }
+]

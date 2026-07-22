@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Le Rassemblement national est arrivé clairement en tête des élections européennes de 2024 en France, un résultat que Cagé et Piketty analysent en le replaçant dans trente ans d'évolution des clivages sociaux et électoraux au niveau communal.",
+    "stance": "neutral",
+    "stance_target": "position du RN dans le rapport de force électoral français après 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, élections européennes 2024",
+    "quoted_support": "The Rassemblent national came out clearly on top in the 2024 European elections in France.",
+    "numbers": [],
+    "entities": ["Rassemblement national"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit"
+  },
+  {
+    "claim": "Un processus d'embourgeoisement du bloc national-libéral (RN, LR, Reconquête) observé aux européennes 2024 renforce l'hypothèse d'une rebipolarisation droite-gauche opposant une union des droites à une union des gauches (PS-PCF-LFI-EELV).",
+    "stance": "supports",
+    "stance_target": "hypothèse d'une recomposition bipolaire droite-gauche post-tripartition en France",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, élections européennes 2024",
+    "quoted_support": "A process of \"embourgeoisement\" of the liberal-national bloc (RN, LR, Reconquête), reinforcing the possibility of a right-left rebipolarization opposing a new form of union of the right (liberal-national bloc RN-LR-Reconquête) and union of the left (social-ecological bloc PS-PCF-LFI-EELV).",
+    "numbers": [],
+    "entities": ["RN", "LR", "Reconquête", "PS", "PCF", "LFI", "EELV"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit"
+  },
+  {
+    "claim": "Un clivage territorial entre le bloc de droite et le bloc de gauche s'est approfondi lors du scrutin européen de 2024 en France, condition qui contraint la possibilité d'une rebipolarisation gauche-droite complète.",
+    "stance": "refutes",
+    "stance_target": "réalisation immédiate et complète d'une rebipolarisation gauche-droite en France",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, élections européennes 2024",
+    "quoted_support": "A deepening territorial divide between the right-wing bloc and the left-wing bloc.",
+    "numbers": [],
+    "entities": ["bloc de droite", "bloc de gauche"],
+    "time_period": "2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit"
+  }
+]

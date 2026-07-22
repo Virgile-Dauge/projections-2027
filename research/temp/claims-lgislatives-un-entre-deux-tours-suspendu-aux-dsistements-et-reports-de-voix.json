@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le premier tour des législatives 2024 a produit 306 triangulaires et 4 quadrangulaires, contre seulement 8 triangulaires en 2022, une configuration inédite qui invalide toute méthode de projection fondée sur une hypothèse de duel simple.",
+    "stance": "supports",
+    "stance_target": "limite documentée de l'utilisation des législatives 2024 comme base directe de projection : configuration atypique de second tour",
+    "evidence_type": "statistical",
+    "scope_conditions": "577 circonscriptions, 1er tour législatives 2024 vs 2022",
+    "quoted_support": "on comptait 76 élus dès le premier tour et, avant les premières consignes et annonces de désistement, plus de 300 triangulaires potentielles - voire de quadrangulaires dans une poignée de cas -, une situation complètement inédite qui renforce le flou sur les projections.",
+    "numbers": ["306 triangulaires", "4 quadrangulaires", "8 triangulaires en 2022", "76 élus au 1er tour"],
+    "entities": ["législatives 2024", "législatives 2022"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-un-entre-deux-tours-suspendu-aux-dsistements-et-reports-de-voix"
+  },
+  {
+    "claim": "Les consignes de désistement au second tour 2024 étaient à géométrie variable par bloc : la gauche a appelé au retrait systématique des candidats 3es dès le soir du 1er tour, le camp présidentiel était divisé entre désistement systématique et logique 'ni RN ni LFI' (portée par Édouard Philippe), et LR n'a donné aucune consigne de vote nationale.",
+    "stance": "supports",
+    "stance_target": "hétérogénéité des règles de désistement entre partis, source de biais si on modélise un taux de report unique national",
+    "evidence_type": "empirical",
+    "scope_conditions": "entre-deux-tours législatives 2024, France",
+    "quoted_support": "Les responsables des partis de gauche ont demandé à leurs candidats arrivés en troisième position de se désister quand les candidats du Rassemblement national sont arrivés en tête. Le camp présidentiel hésite encore entre une position analogue et un principe de \"ni RN, ni LFI\"... Les Républicains ont refusé de donner des consignes de vote.",
+    "numbers": [],
+    "entities": ["NFP", "Ensemble", "LR", "RN", "Édouard Philippe"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-un-entre-deux-tours-suspendu-aux-dsistements-et-reports-de-voix"
+  },
+  {
+    "claim": "Les premières projections en sièges du 1er tour 2024 anticipaient entre 240 et 295 sièges pour le RN (large majorité relative à courte majorité absolue), un ordre de grandeur qui s'est révélé faux au 2e tour où le RN n'a obtenu que 143 sièges avec alliés.",
+    "stance": "refutes",
+    "stance_target": "fiabilité des projections en sièges réalisées uniquement sur les résultats du 1er tour, sans intégration des désistements",
+    "evidence_type": "statistical",
+    "scope_conditions": "projections en sièges publiées le soir du 1er tour, 30 juin 2024",
+    "quoted_support": "Les premières projections en sièges des instituts de sondage anticipent une large majorité relative d'au moins 240 sièges pour le RN, voire une courte majorité absolue jusqu'à 295 sièges, mais sont évidemment à prendre avec beaucoup de précautions.",
+    "numbers": ["240 sièges", "295 sièges", "143 sièges finaux avec alliés"],
+    "entities": ["RN"],
+    "time_period": "30 juin - 7 juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-un-entre-deux-tours-suspendu-aux-dsistements-et-reports-de-voix"
+  },
+  {
+    "claim": "Malgré un score national réduit à 9-10% (score pratiquement inchangé par rapport à 2022), LR a conservé 30 à 50 sièges sur les 61 dont elle disposait, grâce à son ancrage local — illustration que les scores nationaux masquent d'importantes disparités locales.",
+    "stance": "supports",
+    "stance_target": "pertinence locale plutôt que nationale des projections, cas d'école d'un parti dont le poids local (bureau/circonscription) diverge fortement de son score national",
+    "evidence_type": "empirical",
+    "scope_conditions": "LR, législatives 2024, France",
+    "quoted_support": "Avec 9 à 10% des voix, la droite obtiendrait un score pratiquement inchangé par rapport à 2022 et parviendrait à conserver 30 à 50 sièges au second tour sur les 61 dont elle disposait, malgré la dissidence d'Éric Ciotti.",
+    "numbers": ["9-10%", "30-50 sièges", "61 sièges sortants"],
+    "entities": ["LR", "Éric Ciotti"],
+    "time_period": "juin-juillet 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "lgislatives-un-entre-deux-tours-suspendu-aux-dsistements-et-reports-de-voix"
+  }
+]

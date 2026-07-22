@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "An official IRIS-to-bureau-de-vote crosswalk table for 2024 boundaries exists and is published on data.gouv.fr under Licence Ouverte 2.0.",
+    "stance": "supports",
+    "stance_target": "existence of a documented IRIS↔bureau de vote correspondence method for attaching census data to bureau-level electoral results",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, 2024 bureau-de-vote boundaries, IRIS boundaries as published by INSEE",
+    "quoted_support": "Cette table permet de passer des IRIS aux bureaux de vote de 2024 et inversement. Elle permet ainsi de corréler les données électorales (publiées par le ministère de l'Intérieur à l'échelle du bureau de vote) et les données socio-économiques des quartiers (publiées par l'Insee à l'échelle de l'IRIS).",
+    "numbers": ["2024 boundaries", "200m grid (FiLoSoFi 2019)"],
+    "entities": ["Jérémy Perrin", "Etalab", "INSEE", "data.gouv.fr", "FiLoSoFi"],
+    "time_period": "2024 bureau-de-vote boundaries; table updated 2 April 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-liaison-iris-bureaux-de-vote-de-2024-datagouvfr"
+  },
+  {
+    "claim": "The 2024 IRIS/bureau liaison table is built by allocating each 200m FiLoSoFi population grid cell's voting-age population to overlapping IRIS and bureaux pro-rata to area, then deriving the IRIS-bureau matrix from these population-weighted shares, rather than from raw area overlap alone.",
+    "stance": "supports",
+    "stance_target": "population-weighted (dasymetric) crosswalk methods outperform simple area-based apportionment",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France metropolitan, INSEE FiLoSoFi 2019 200m grid",
+    "quoted_support": "Elle consiste à répartir la population en âge de voter de chaque carreau FiLoSoFi entre les IRIS et bureaux de vote coïncidents au prorata de la superficie, puis à en déduire la matrice de liaison IRIS-bureaux de vote. Le passage par les carreaux en population permet de fiabiliser l'estimation finale, puisqu'une petite partie d'un IRIS peut parfaitement contenir une grande partie de sa population.",
+    "numbers": ["200 metres grid resolution"],
+    "entities": ["INSEE", "FiLoSoFi"],
+    "time_period": "2019 population grid basis",
+    "region": "France metropolitan",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-liaison-iris-bureaux-de-vote-de-2024-datagouvfr"
+  },
+  {
+    "claim": "The crosswalk table has known numbering-mismatch limitations between the INSEE bureau-de-vote contour file and the Ministry of the Interior's official bureau numbering used in election results, with central Bordeaux and Paris's first four arrondissements flagged as particularly problematic.",
+    "stance": "neutral",
+    "stance_target": "reliability/limitations of the IRIS↔bureau crosswalk for downstream analysis",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, bureau-de-vote numbering conventions",
+    "quoted_support": "La table est tributaire de la numérotation d'origine des bureaux de vote dans le jeu de contours publié par l'Insee, qui ne coïncide pas toujours avec les numéros de bureaux utilisés par l'Intérieur dans les résultats électoraux. D'expérience, lors de l'utilisation, une attention particulière doit être apportée au centre de Bordeaux ainsi qu'aux quatre premiers arrondissements de Paris.",
+    "numbers": ["4 premiers arrondissements de Paris"],
+    "entities": ["INSEE", "Ministère de l'Intérieur", "Bordeaux", "Paris"],
+    "time_period": "2024-2026",
+    "region": "Bordeaux, Paris (specific caveat); France (general)",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-liaison-iris-bureaux-de-vote-de-2024-datagouvfr"
+  },
+  {
+    "claim": "The IRIS/bureau liaison table has already been used in production to build infra-communal electoral graphs on the 'Le carré social' site, estimating IRIS-level electoral scores by weighting political-family results across corresponding bureaux.",
+    "stance": "supports",
+    "stance_target": "feasibility of using the crosswalk for bureau-level or IRIS-level electoral-demographic analysis at scale",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, infra-communal (sub-municipal) scale",
+    "quoted_support": "Cette table a permis la réalisation de graphes électoraux infra-communaux, publiés sur Le carré social. Ces graphes reposent notamment sur le calcul de niveaux électoraux estimés au niveau de l'IRIS, par pondération des résultats des familles politiques sur les bureaux de vote correspondants.",
+    "numbers": [],
+    "entities": ["Le carré social"],
+    "time_period": "2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "jeu-de-donnes-liaison-iris-bureaux-de-vote-de-2024-datagouvfr"
+  }
+]

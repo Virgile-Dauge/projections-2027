@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "In the independent Institut Bona Fide n=1500 poll (Oct 2025), willingness to enact a front républicain splits sharply by 2022 presidential first-round electorate: 60% of Macron voters, 61% of Mélenchon voters, but only 15% of Le Pen voters and 5% of Zemmour voters.",
+    "stance": "supports",
+    "stance_target": "front-républicain willingness/transfer propensity remains a bloc-asymmetric phenomenon, independently confirmed outside the Ipsos survey family",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, national sample n=1500, 23-27 October 2025",
+    "quoted_support": "60% des électeurs centristes, et 60% des électeurs Macron 22, sont prêts au front républicain. [...] 61% des électeurs 2022 de Jean-Luc Mélenchon y sont favorables.",
+    "numbers": ["60%", "61%", "15%", "5%"],
+    "entities": ["Institut Bona Fide", "Emmanuel Macron", "Jean-Luc Mélenchon", "Marine Le Pen", "Éric Zemmour"],
+    "time_period": "October 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "institut-bona-fid-x-politis-les-franais-et-le-front-rpublicain"
+  },
+  {
+    "claim": "By party proximity, only 34% of Les Républicains-aligned respondents say they are willing to vote front républicain (66% opposed), compared to 73% of France Insoumise sympathizers and 71% of PS sympathizers — an independent, non-Ipsos confirmation of the asymmetric right-side erosion documented by Ipsos's Fractures françaises v13 (LR voters' RN transfer rising to 56%).",
+    "stance": "supports",
+    "stance_target": "the LR/right-side erosion of front-républicain transfer behavior documented by Ipsos is not a mono-source artifact",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, party-proximity subsample, October 2025",
+    "quoted_support": "Les Républicains* 34% [Oui] [...] 66% [Non] [...] France Insoumise 73% [Oui] [...] Parti Socialiste 71% [Oui]",
+    "numbers": ["34%", "66%", "73%", "71%"],
+    "entities": ["Institut Bona Fide", "Les Républicains", "France Insoumise", "Parti Socialiste"],
+    "time_period": "October 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "institut-bona-fid-x-politis-les-franais-et-le-front-rpublicain"
+  },
+  {
+    "claim": "Willingness to enact a front républicain shows a sharp age gradient: 52% of under-35s favorable versus only 37% of those 35 and older, with the 50-64 age bracket the least favorable at 34%.",
+    "stance": "neutral",
+    "stance_target": "demographic drivers of front-républicain erosion beyond partisan bloc",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, by age bracket, October 2025",
+    "quoted_support": "52% des moins de 35 ans se disent prêts à ce front républicain, alors que 63% des plus de 35 ans s'y disent opposés.",
+    "numbers": ["52%", "63%", "37%", "34%"],
+    "entities": ["Institut Bona Fide"],
+    "time_period": "October 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "institut-bona-fid-x-politis-les-franais-et-le-front-rpublicain"
+  },
+  {
+    "claim": "Institut Bona Fide is methodologically independent of the Ipsos survey family, uses online quota sampling (sex/age/occupation/region strata) with published 95% margins of error (±1.4 to ±3.1pts), and follows the ICC/ESOMAR code, meaning this dataset is a genuinely separate methodological lineage from the Ipsos Fractures françaises series used for the 2024/2025 erosion comparison.",
+    "stance": "neutral",
+    "stance_target": "mono-source dependency concern regarding the Ipsos-only erosion evidence base",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, October 2025 fieldwork",
+    "quoted_support": "L'enquête a été réalisée en ligne par l'institut Bona Fide auprès d'un échantillon représentatif de 1500 Français âgés de 18 ans et plus du 23 au 27 octobre 2025. [...] Cette enquête a été réalisée dans le strict respect du code ICC/ESOMAR",
+    "numbers": ["1500", "±1.4 points", "±3.1 points"],
+    "entities": ["Institut Bona Fide", "ESOMAR", "Ipsos"],
+    "time_period": "23-27 October 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "institut-bona-fid-x-politis-les-franais-et-le-front-rpublicain"
+  }
+]

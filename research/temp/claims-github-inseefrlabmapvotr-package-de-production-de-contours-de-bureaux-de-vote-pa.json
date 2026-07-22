@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "L'INSEE maintient officiellement un package R (mapvotr) équivalent institutionnel de l'outil Python d'Etalab pour produire des contours approximés de bureaux de vote à partir des adresses géolocalisées du REU.",
+    "stance": "neutral",
+    "stance_target": "acteurs institutionnels produisant des contours de bureaux de vote en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Production de contours approximés de bureaux de votes (BV) à partir de la base des adresses géolocalisées du Répertoire électoral unique (REU) diffusée par l'Insee. [...] Outil similaire développé en python par Etalab.",
+    "numbers": [],
+    "entities": ["InseeFrLab", "mapvotr", "REU", "Etalab"],
+    "time_period": "2023-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa"
+  },
+  {
+    "claim": "Une mise à jour de juillet 2024 du package mapvotr a ajouté la gestion de Mayotte dans la fonction de détermination du système de projection (epsg_from_cog), révélant que les méthodes de contourage standard nécessitent une adaptation spécifique pour les territoires ultramarins.",
+    "stance": "supports",
+    "stance_target": "limites documentées des outils de contourage géographique concernant les territoires d'outre-mer",
+    "evidence_type": "empirical",
+    "scope_conditions": "Mayotte, territoires ultramarins français",
+    "quoted_support": "Merge pull request #10 from cedricr/add_mayotte — Ajout de Mayotte à epsg_from_cog",
+    "numbers": ["juillet 2024"],
+    "entities": ["Mayotte", "InseeFrLab", "mapvotr"],
+    "time_period": "juillet 2024",
+    "region": "Mayotte",
+    "confidence": "medium",
+    "source_note_id": "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa"
+  }
+]

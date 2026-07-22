@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Predicting individual-level ethnicity from voter registration records and Census surname data via Bayes' rule (BISG) achieves 6% false-positive rate for Black voters and 3% for Latino voters while maintaining true-positive rate above 80%, validated against 9 million real Florida voter records with self-reported ethnicity.",
+    "stance": "neutral",
+    "stance_target": "accuracy of individual-level covariate-based prediction methods as an alternative to classical ecological inference",
+    "evidence_type": "empirical",
+    "scope_conditions": "9 million Florida voter registration records with self-reported ethnicity ground truth",
+    "quoted_support": "We find that it is possible to reduce the false positive rate among Black and Latino voters to 6% and 3%, respectively, while maintaining the true positive rate above 80%.",
+    "numbers": ["9 million records", "6% FPR Black", "3% FPR Latino", ">80% TPR"],
+    "entities": ["Kosuke Imai", "Kabir Khanna", "Princeton", "Florida", "BISG", "wru package"],
+    "time_period": "2016",
+    "region": "Florida, USA",
+    "confidence": "high",
+    "source_note_id": "improving-ecological-inference-by-predicting-individual"
+  },
+  {
+    "claim": "Turnout-by-race estimates derived from individual-level ethnicity prediction (BISG) yield substantially less bias and lower root mean squared error than standard ecological-inference estimates when validated against real self-reported ethnicity ground truth.",
+    "stance": "supports",
+    "stance_target": "individual-level prediction methods outperform classical aggregate ecological inference on point-estimate accuracy",
+    "evidence_type": "empirical",
+    "scope_conditions": "Florida voter file, real (not simulated) self-reported ethnicity",
+    "quoted_support": "We use our predictions to estimate turnout by race and find that our estimates yields substantially less amounts of bias and root mean squared error than standard ecological inference estimates.",
+    "numbers": [],
+    "entities": ["Imai", "Khanna", "ecological inference", "King 1997"],
+    "time_period": "2016",
+    "region": "Florida, USA",
+    "confidence": "high",
+    "source_note_id": "improving-ecological-inference-by-predicting-individual"
+  },
+  {
+    "claim": "All classical ecological-inference methods (Goodman 1953, King 1997, King/Rosen/Tanner 2004, Wakefield 2004) suffer from a fundamental indeterminacy problem, which has motivated the field's shift toward combining aggregate data with individual-level covariates rather than relying on aggregate-to-aggregate regression alone.",
+    "stance": "supports",
+    "stance_target": "classical ecological inference has known structural accuracy limitations independent of geographic scale",
+    "evidence_type": "theoretical",
+    "scope_conditions": "general EI methodology, voting rights litigation and political behavior research context",
+    "quoted_support": "Nevertheless, all of these methods suffer from a fundamental problem of indeterminacy, and as a result, in recent years, methodologists have turned to the idea of combining aggregate data with individual-level data.",
+    "numbers": [],
+    "entities": ["Goodman", "King", "Rosen", "Tanner", "Wakefield", "Greiner", "Quinn"],
+    "time_period": "1953-2010",
+    "region": "USA",
+    "confidence": "high",
+    "source_note_id": "improving-ecological-inference-by-predicting-individual"
+  }
+]

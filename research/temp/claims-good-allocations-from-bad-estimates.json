@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "There is a formal quadratic separation between the sample complexity of accurate treatment-effect estimation (CATE) and near-optimal treatment allocation: CATE estimation to error epsilon across M groups requires Theta(M/epsilon^2) samples, while (1-epsilon)-optimal allocation only requires O(M/epsilon) samples under smoothness (rho-regularity) of the treatment-effect distribution.",
+    "stance": "supports",
+    "stance_target": "ranking/allocation accuracy degrades more gracefully than point-estimate accuracy under noisy small-area data",
+    "evidence_type": "theoretical",
+    "scope_conditions": "M non-overlapping groups/units, budget K<=M, rho-regular (smooth, non-degenerate) distribution of treatment effects; applies to any resource-allocation-by-ranking problem including CATE and by direct analogy geographic targeting",
+    "quoted_support": "Our work highlights the fundamental distinction between treatment effect estimation and treatment allocation: the latter requires far fewer samples... Theorem 1 (Informal). If the distribution of treatment effect values tau(u) is 'smooth', we can obtain a (1-epsilon)-optimal allocation for any budget K<=M with O(M/epsilon) many samples.",
+    "numbers": ["O(M/epsilon) vs O(M/epsilon^2)", "rho = Theta(sqrt(epsilon))"],
+    "entities": ["Silvia Casacuberta", "Moritz Hardt", "Stanford", "Max Planck Institute for Intelligent Systems", "CATE"],
+    "time_period": "2026",
+    "region": "general/theoretical, not geography-specific",
+    "confidence": "high",
+    "source_note_id": "good-allocations-from-bad-estimates"
+  },
+  {
+    "claim": "The reason ranking-based allocation needs far less precise estimates than point-estimation is that units far from the allocation cutoff threshold can be correctly classified as 'in' or 'out' even with coarse estimates, while only units close to the threshold matter for precision -- and misranking two units near the threshold barely changes total allocation value.",
+    "stance": "supports",
+    "stance_target": "mechanism explaining why ordinal/ranking accuracy can survive noisy point estimates",
+    "evidence_type": "theoretical",
+    "scope_conditions": "any treatment/resource allocation problem selecting top-K units by estimated effect",
+    "quoted_support": "For the purposes of treatment allocation, we do not require highly-accurate CATE estimates for groups that have treatment effect values bounded away from the allocation threshold tau_K... For the units that are close to the threshold tau_K, mistakenly selecting one unit for another does not change the value of the allocation much.",
+    "numbers": ["rho-regularity: any interval of length rho contains at most O(rho*M) units"],
+    "entities": ["Casacuberta", "Hardt", "treatment allocation", "CATE"],
+    "time_period": "2026",
+    "region": "general/theoretical",
+    "confidence": "high",
+    "source_note_id": "good-allocations-from-bad-estimates"
+  },
+  {
+    "claim": "Even under the favorable smoothness (rho-regularity) condition that makes allocation cheap, accurate CATE point estimation remains provably hard, requiring the full Omega(M/epsilon^2) samples -- confirming the separation is not an artifact of unrealistic distributions.",
+    "stance": "supports",
+    "stance_target": "point-estimate accuracy is fundamentally harder to achieve than ranking accuracy, even in the best case for the distribution shape",
+    "evidence_type": "theoretical",
+    "scope_conditions": "uniform and other rho-regular distributions of treatment effects",
+    "quoted_support": "We prove that even in this case CATE estimation remains hard, requiring Omega(M/epsilon^2) samples. This formally proves a quadratic separation between treatment allocation and CATE estimation.",
+    "numbers": ["Omega(M/epsilon^2)"],
+    "entities": ["Casacuberta", "Hardt"],
+    "time_period": "2026",
+    "region": "general/theoretical",
+    "confidence": "high",
+    "source_note_id": "good-allocations-from-bad-estimates"
+  },
+  {
+    "claim": "The theoretical sample-complexity separation between allocation and estimation was empirically confirmed on five real-world RCT datasets across education, economic development, labor economics, and healthcare, where near-optimal allocations were found with even fewer samples than the theoretical upper bound predicted.",
+    "stance": "supports",
+    "stance_target": "the ranking-vs-point-estimate gap is empirically real, not just a theoretical artifact",
+    "evidence_type": "empirical",
+    "scope_conditions": "5 real-world RCT datasets (education, economic development, labor economics, healthcare domains)",
+    "quoted_support": "We thoroughly verify this prediction in five real-world RCT datasets. In all cases, we can find near-optimal allocations with even fewer samples than our upper bound suggests.",
+    "numbers": ["5 RCT datasets"],
+    "entities": ["Casacuberta", "Hardt"],
+    "time_period": "2026",
+    "region": "not geography-specific (RCT domains: education, econ dev, labor, health)",
+    "confidence": "medium",
+    "source_note_id": "good-allocations-from-bad-estimates"
+  }
+]

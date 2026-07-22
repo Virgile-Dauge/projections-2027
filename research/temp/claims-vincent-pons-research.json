@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Pons's working-paper archive includes 'Pitfalls of Demographic Forecasts of US Elections' (with Calvo & Shapiro, NBER WP 33016, Oct 2024), a methodological critique of demographic-based electoral forecasting directly relevant to axis 1 of this research query.",
+    "stance": "neutral",
+    "stance_target": "lead for a primary methodological source on the limits of demographic/compositional projection methods",
+    "evidence_type": "theoretical",
+    "scope_conditions": "United States, but explicitly framed as a general critique of demographic-forecast methodology",
+    "quoted_support": "Pitfalls of Demographic Forecasts of US Elections. (with Richard Calvo and Jesse Shapiro), NBER Working Paper 33016, October 2024",
+    "numbers": ["NBER WP 33016"],
+    "entities": ["Vincent Pons", "Richard Calvo", "Jesse Shapiro"],
+    "time_period": "2024",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "vincent-pons-research"
+  },
+  {
+    "claim": "Guillaume Liégey, co-author with Pons of 'Increasing the Electoral Participation of Immigrants: Experimental Evidence from France' (Economic Journal 2019) and the book 'Porte à porte', co-founded the field-campaign consultancy behind the PS's 2012 door-to-door operation.",
+    "stance": "neutral",
+    "stance_target": "identifying the operational/consulting link between the academic canvassing literature and actual French campaign practice",
+    "evidence_type": "historical",
+    "scope_conditions": "France, PS field campaigns",
+    "quoted_support": "Increasing the Electoral Participation of Immigrants: Experimental Evidence from France. (with Guillaume Liegey), Economic Journal 129, no. 617 (January 2019): 481-508.",
+    "numbers": [],
+    "entities": ["Guillaume Liégey", "Vincent Pons", "Parti Socialiste"],
+    "time_period": "2013-2019",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "vincent-pons-research"
+  }
+]

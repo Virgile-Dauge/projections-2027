@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "The Data and Democracy Lab (formerly MGGG, the Metric Geometry and Gerrymandering Group) positions its research explicitly for three audiences relevant to grassroots electoral-targeting applications: communities, policymakers, and courts of law, alongside peer-reviewed academic output.",
+    "stance": "neutral",
+    "stance_target": "existence of an academic lab whose civic-tech open-source tooling (maup, PyEI) is applicable to electoral-geography crosswalk and ecological-inference problems outside the US",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "lab mission statement, current as of fetch date",
+    "quoted_support": "We develop computational methods to understand how electoral systems function and build tools that make those insights accessible to a wide audience. We aim to make the work useful for audiences like communities, policymakers, and courts of law.",
+    "numbers": [],
+    "entities": ["Data and Democracy Lab", "MGGG"],
+    "time_period": "current",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "our-work-data-and-democracy-lab"
+  }
+]

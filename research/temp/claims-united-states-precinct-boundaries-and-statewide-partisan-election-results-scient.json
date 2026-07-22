@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "VEST (Voting and Election Science Team) edits at least one precinct boundary (splitting, merging, or redrawing) in roughly one-sixth of all US geographic units (mostly counties) in every general election cycle, demonstrating that precinct boundary churn between election cycles is a structural, recurring feature of election administration rather than a rare exception.",
+    "stance": "supports",
+    "stance_target": "bureau-de-vote boundary instability between election cycles (e.g. France 2022 to 2027) is a general phenomenon requiring systematic crosswalk methodology, not an edge case",
+    "evidence_type": "empirical",
+    "scope_conditions": "United States, 2016/2018/2020 November general elections",
+    "quoted_support": "In a given election, we edit at least one precinct -- and often more -- in about one-sixth of the geographical units. These are the geographic units where we make changes.",
+    "numbers": ["~1/6 of geographic units edited per cycle", "170,098 precincts (2020)", "152,217 precincts (2018)", "177,202 precincts (2016)"],
+    "entities": ["VEST", "Voting and Election Science Team", "Brian Amos", "Michael McDonald"],
+    "time_period": "2016-2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"
+  },
+  {
+    "claim": "VEST disaggregates 'at-large' vote totals (covering an entire county, state, or mail/early/provisional-ballot subcategory) to geographically-bound precincts using proportional allocation based on each candidate's existing vote share within the surrounding bound precincts, with a largest-remainder rounding rule to preserve exact county-level totals as whole numbers.",
+    "stance": "neutral",
+    "stance_target": "concrete precedent algorithm for disaggregating non-geographic vote categories (e.g. postal/proxy/expatriate votes) into a geographically bounded precinct/bureau-de-vote panel",
+    "evidence_type": "empirical",
+    "scope_conditions": "United States precinct-level election reporting; general proration technique",
+    "quoted_support": "Typically, we apportion a candidate's at-large votes to geographically-bound precincts proportional to the candidate's votes within the geographically-bound precincts. For example, if Joe Biden receives 100 votes in an at-large precinct and two geographically-bound precincts within it have 600 and 400 votes for Biden, we apportion 60 of the at-large Biden votes to the first precinct and 40 to the second.",
+    "numbers": ["example: 100 at-large votes split 60/40 by existing 600/400 vote ratio"],
+    "entities": ["VEST"],
+    "time_period": "2016-2020",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"
+  },
+  {
+    "claim": "VEST's precinct database methodologically diverges from the competing MIT Election Data and Science Lab (MEDSL) database specifically on how at-large/reporting-unit votes are handled: VEST disaggregates them into geographically-bound precincts (geography-first) while MEDSL reports them as separate at-large rows (reporting-unit-first) -- because VEST's downstream use case (ecological inference, redistricting) requires precisely geolocated votes.",
+    "stance": "neutral",
+    "stance_target": "there is no single canonical way to build a precinct-level election panel -- design choices depend on downstream analytical use case (geographic precision vs. faithful reporting-unit fidelity)",
+    "evidence_type": "empirical",
+    "scope_conditions": "United States, comparison of VEST vs. MIT Election Data and Science Lab precinct databases",
+    "quoted_support": "An important distinction between our database and other precinct databases, such as the database produced by the MIT Election Data and Science Lab, is that these other data providers report at-large precincts as separate rows and do not disaggregate to geographically-bound precincts as we do.",
+    "numbers": [],
+    "entities": ["VEST", "MIT Election Data and Science Lab", "MEDSL"],
+    "time_period": "current",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"
+  },
+  {
+    "claim": "VEST precinct-level databases have been used as evidentiary input in US Supreme Court redistricting litigation, including the successful racial-gerrymander challenge to Alabama's congressional districts, Allen v. Milligan, 599 U.S. 1 (2023), where experts used ecological inference on VEST precinct data to estimate racial voting patterns.",
+    "stance": "supports",
+    "stance_target": "harmonized precinct-level election panels are a load-bearing input for ecological-inference-based legal and advocacy analysis, not just academic exercises",
+    "evidence_type": "legal",
+    "scope_conditions": "United States, Alabama congressional redistricting, decided 2023",
+    "quoted_support": "A related use case is voting rights litigation, where experts analyze precinct data to estimate racial voting patterns using a technique known as ecological inference. Among the court cases using our databases was a successful challenge to Alabama's congressional districts as a racial gerrymander decided by the U.S. Supreme Court in Allen v. Milligan 599 U.S. 1 (2023).",
+    "numbers": ["Allen v. Milligan, 599 U.S. 1 (2023)"],
+    "entities": ["VEST", "Allen v. Milligan", "U.S. Supreme Court", "Alabama"],
+    "time_period": "2023",
+    "region": "Alabama, United States",
+    "confidence": "high",
+    "source_note_id": "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"
+  },
+  {
+    "claim": "No standardized national format exists for US precinct boundary data: local election officials provide GIS shapefiles, map images (including hand-drawn maps and cell-phone photos), or written/verbal street-range descriptions, requiring VEST to manually reconstruct boundaries from ~3,000 local election offices for each election cycle.",
+    "stance": "supports",
+    "stance_target": "manual, labor-intensive precinct-boundary reconciliation is inherent to any decentralized election-administration system, not specific to France or the US",
+    "evidence_type": "empirical",
+    "scope_conditions": "United States, decentralized (county/township-level) election administration",
+    "quoted_support": "There is no standard format for precinct boundary data. ... The third-most frequent map format election officials provide us with is a written or verbal description. We encounter this situation in rural counties or small townships that have few precincts and little GIS capacity.",
+    "numbers": ["~3,000 local election officials nationwide"],
+    "entities": ["VEST"],
+    "time_period": "current",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"
+  }
+]

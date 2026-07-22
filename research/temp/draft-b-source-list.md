@@ -1,0 +1,44 @@
+# Draft B — must_read_note_ids (n=41)
+Angle : steelman-contrarian (viser plus sophistiqué que le plancher).
+
+- interim-report-baseline-election-source-2027
+- interim-report-crosswalk-bureaux-fiabilite
+- interim-report-implementation-bureau-ei-et-covariables
+- interim-report-matrices-front-republicain-reutilisation-2027
+- interim-report-mecanique-fine-estimation-francaise
+- interim-report-sophistication-vs-degradation-maille-fine
+- how-the-yougov-model-for-the-2017-general-election-works
+- yougov-called-the-election-right-how-by-max-nathan-medium
+- this-is-the-election-of-mrp-polls-but-what-are-they-and-why-are-they-showing-suc
+- how-mrp-modelling-works-and-what-it-means-for-the-general-election-the-week
+- different-methods-similar-outcome-comparing-the-poll-of-polls-with-mrp-lse-briti
+- deep-interactions-with-mrp
+- american-political-science-review-2024-118-1-529536
+- political-analysis-2004-12375385
+- visualising-multilevel-regression
+- model-based-pre-election-polling-for-national-and
+- ecolrxc-ecological-inference-estimation-of-r-c-tables-using-latent-structure-app
+- ecological-inference-under-unfavorable-conditions-straight
+- estimation-of-voter-transitions-based-on-ecological-inference-an-empirical-asses
+- improving-ecological-inference-by-predicting-individual
+- putting-ecological-inference-to-the-test-part-1
+- a-small-area-ecological-approach-for-estimating-vote-changes
+- eicompare-comparing-ecological-inference-estimates-across-ei-and-eirxc
+- pyei-a-python-package-for-ecological-inference
+- ecological-inference
+- the-future-of-ecological-inference-research-a-reply-to-freedman-et-al-gary-king
+- areal-disaggregation-a-small-area-estimation-perspective
+- dynamic-bayesian-forecasting-of-presidential
+- harvard-data-science-review-issue-24-fall-2020
+- github-theeconomistus-potus-model-code-for-a-dynamic-multilevel-bayesian-model-t
+- models-markets-and-the-forecasting-of-elections
+- improving-small-area-estimates-of-public-opinion-by-calibrating-to-known-populat
+- good-allocations-from-bad-estimates
+- uc-davis-previously-published-works
+- on-solutions-to-the-ecological-inference-problem
+- a-rejoinder-to-king
+- mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-why-the-finding-should
+- pitfalls-of-demographic-forecasts-of-us-elections
+- documentation-donnes-carroyes
+- jeu-de-donnes-liaison-iris-bureaux-de-vote-de-2024-datagouvfr
+- github-raphaeljoliveteu2024-stats-iris-croisement-des-rsultats-aux-lections

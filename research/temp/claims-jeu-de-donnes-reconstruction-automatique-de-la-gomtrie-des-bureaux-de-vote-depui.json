@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Makina Corpus (Frédéric Rodrigo) propose une méthode alternative de reconstruction de géométrie de bureaux de vote combinant diagrammes de Voronoï contraints par la voirie OpenStreetMap et complétion par des zones environnantes sans adresses, distincte de la méthode Voronoï pure d'Etalab/data.gouv.fr et du package INSEE mapvotr.",
+    "stance": "neutral",
+    "stance_target": "diversité des méthodes non officielles de contourage de bureaux de vote en France",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Utilise une approche basée sur des diagrammes de Voronoï sous contraintes des limites de la voirie d'OpenStreetMap. Les géométries des bureaux sont ensuite complétées par des zones environnantes sans adresses.",
+    "numbers": [],
+    "entities": ["Makina Corpus", "Frédéric Rodrigo", "OpenStreetMap", "REU"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-reconstruction-automatique-de-la-gomtrie-des-bureaux-de-vote-depui"
+  },
+  {
+    "claim": "Pour les communes ayant plusieurs bureaux de vote, la méthode Makina Corpus ne couvre que les zones comportant effectivement des adresses d'électeurs, laissant des zones non couvertes dans la géométrie communale reconstruite.",
+    "stance": "supports",
+    "stance_target": "incomplétude documentée des méthodes de reconstruction géographique de bureaux de vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "communes multi-bureaux de vote, France",
+    "quoted_support": "La méthode de construction utilise les limites de commune pour les communes avec uniquement un seul bureau de vote et une reconstruction de polygones pour les autres. De ce fait les communes avec plusieurs bureaux de votes, seules les zones comportant des adresses d'électeurs sont couvertes.",
+    "numbers": [],
+    "entities": ["Makina Corpus"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-reconstruction-automatique-de-la-gomtrie-des-bureaux-de-vote-depui"
+  }
+]

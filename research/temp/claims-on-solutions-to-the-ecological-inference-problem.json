@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "On real (non-artificial) test datasets where individual-level ground truth is known, the crude neighborhood model consistently outperforms Gary King's ecological inference (EI) method, which King's own 1997 book claimed was validated in thousands of comparisons.",
+    "stance": "refutes",
+    "stance_target": "Reliability of King-style ecological inference for fine-grained (precinct/tract-level) estimation",
+    "evidence_type": "empirical",
+    "scope_conditions": "US voting/demographic data, precinct and census-tract level, 1988-1998 test datasets",
+    "quoted_support": "In all the real data sets, even those selected to pass the diagnostics, the neighborhood model prevails.",
+    "numbers": ["Number of wins: neighborhood model 7, ecological regression 1, King's method 2 (out of 9 real+artificial data sets in Table 2)"],
+    "entities": ["Gary King", "D.A. Freedman", "EZIDOS software"],
+    "time_period": "1988-1998",
+    "region": "United States (Stockton CA, Los Angeles CA, South Carolina)",
+    "confidence": "high",
+    "source_note_id": "on-solutions-to-the-ecological-inference-problem"
+  },
+  {
+    "claim": "King's EI method produced an estimate of hispanic high-school graduation rate in Los Angeles that was off from ground truth by 23.2 standard errors, despite his method's own reported confidence intervals implying much smaller uncertainty.",
+    "stance": "refutes",
+    "stance_target": "Claim that King's EI diagnostics offer 'realistic estimates of the uncertainty of ecological estimates'",
+    "evidence_type": "empirical",
+    "scope_conditions": "1980 census tracts, Los Angeles County",
+    "quoted_support": "King's model estimates 30.1%, with an SE of 1.1%: the model is off by 23.2 SEs... The ecological regression estimate of 30.7% is virtually the same as King's, while the neighborhood model does noticeably better at 65.1%.",
+    "numbers": ["Truth 55.6%", "King's estimate 30.1% +/- 1.1%", "Z = -23.2", "Neighborhood model 65.1%", "Ecological regression 30.7%"],
+    "entities": ["Gary King", "Los Angeles County"],
+    "time_period": "1980",
+    "region": "Los Angeles County, California",
+    "confidence": "high",
+    "source_note_id": "on-solutions-to-the-ecological-inference-problem"
+  },
+  {
+    "claim": "King's EI method's diagnostic plots do not reliably distinguish between cases where his model succeeds and cases where it fails: diagnostics are sometimes 'passed' on data where estimates are seriously wrong, and sometimes flag problems in artificial data generated exactly according to the model's own assumptions.",
+    "stance": "refutes",
+    "stance_target": "Claim that King's diagnostic tests can validate EI estimates before applying them to real data",
+    "evidence_type": "empirical",
+    "scope_conditions": "US EI test datasets",
+    "quoted_support": "The diagnostics are quite subjective, with no clear guidelines as to when King's model should not be used... In several data sets where estimates are far from truth, diagnostics are passed.",
+    "numbers": [],
+    "entities": ["Gary King", "EZIDOS"],
+    "time_period": "1997-1999",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "on-solutions-to-the-ecological-inference-problem"
+  },
+  {
+    "claim": "King's claim of '16,000' validating comparisons for his EI method is a misleading counting procedure that double-counts each geographic area once per demographic group rather than reflecting 16,000 independent tests.",
+    "stance": "refutes",
+    "stance_target": "King's claimed empirical validation scale for EI",
+    "evidence_type": "empirical",
+    "scope_conditions": "King (1997) book validation claims",
+    "quoted_support": "if our arithmetic is correct, to arrive at sixteen thousand comparisons, King must count each area twice—once for each of the two groups about whom inferences are being made.",
+    "numbers": ["Claimed 16,000 comparisons", "3262 Louisiana precincts", "1133 of 1409 LA education tracts where neighborhood model beat King's method"],
+    "entities": ["Gary King"],
+    "time_period": "1997",
+    "region": "United States (Louisiana, Los Angeles)",
+    "confidence": "medium",
+    "source_note_id": "on-solutions-to-the-ecological-inference-problem"
+  },
+  {
+    "claim": "King's EI software (EZIDOS) generated warning messages about parameters falling far from the distribution mean even on data specifically constructed to satisfy the model's assumptions, indicating unreliable software/diagnostic behavior independent of real-world model misspecification.",
+    "stance": "refutes",
+    "stance_target": "Robustness and reliability of King's EI diagnostic software",
+    "evidence_type": "empirical",
+    "scope_conditions": "Artificial data generated from King's fitted model, Stockton exit poll parameters",
+    "quoted_support": "Warning: Some bounds are very far from distribution mean. Forcing 36 simulations to their closest bound.",
+    "numbers": ["36 simulations forced to closest bound", "39 precincts"],
+    "entities": ["Gary King", "EZIDOS"],
+    "time_period": "1997-1999",
+    "region": "Stockton, California",
+    "confidence": "medium",
+    "source_note_id": "on-solutions-to-the-ecological-inference-problem"
+  }
+]

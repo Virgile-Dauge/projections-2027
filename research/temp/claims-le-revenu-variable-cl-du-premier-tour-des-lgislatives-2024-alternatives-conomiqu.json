@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Au 1er tour des législatives 2024, le taux de participation passe de 49% dans le centile de bureaux de vote au niveau de vie le plus faible à 76% dans le centile au niveau de vie le plus élevé, soit un écart de 27 points de pourcentage et une probabilité de voter environ 55% plus élevée dans les bureaux les plus riches.",
+    "stance": "supports",
+    "stance_target": "corrélation forte entre niveau de vie du bureau de vote et participation électorale",
+    "evidence_type": "statistical",
+    "scope_conditions": "1er tour législatives 2024, France, centiles de bureaux de vote par niveau de vie estimé",
+    "quoted_support": "D'un niveau de 49 % dans le 1 % des bureaux de vote au niveau de vie le plus faible, le taux de participation augmente régulièrement avec le revenu pour culminer à 76 % parmi le 1 % au niveau de vie le plus élevé, soit un écart de 27 points de pourcentage.",
+    "numbers": ["49%", "76%", "27 points", "55%"],
+    "entities": ["élections législatives 2024"],
+    "time_period": "30 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "le-revenu-variable-cl-du-premier-tour-des-lgislatives-2024-alternatives-conomiqu"
+  },
+  {
+    "claim": "Le RN recrute ses électeurs dans pratiquement tous les niveaux de vie, avec des scores relativement modestes (15-25% des voix) seulement aux deux extrêmes de la distribution de revenu — pattern décrit comme celui de la 'toupie' de Mendras, contrairement au NFP dont le score dépasse 50% dans le décile le plus pauvre et à Ensemble concentré dans les 15% les plus riches.",
+    "stance": "refutes",
+    "stance_target": "l'idée que le vote RN serait concentré chez les plus pauvres ou les plus riches plutôt que largement diffusé socialement",
+    "evidence_type": "statistical",
+    "scope_conditions": "1er tour législatives 2024, par centile de niveau de vie du bureau de vote",
+    "quoted_support": "le Rassemblement national recrute ses électeurs dans pratiquement tous les types de bureaux de vote. Seuls les plus populaires et les mieux lotis enregistrent des scores relativement modestes au regard de sa performance nationale – de l'ordre de 15 à 25 % des voix.",
+    "numbers": ["15-25%", "33%", "28%", "20%", "7%"],
+    "entities": ["Rassemblement National", "NFP", "Ensemble", "LR"],
+    "time_period": "30 juin 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "le-revenu-variable-cl-du-premier-tour-des-lgislatives-2024-alternatives-conomiqu"
+  },
+  {
+    "claim": "Entre 2022 et 2024, le RN a progressé dans toutes les catégories de revenu mais particulièrement au sein d'une large classe moyenne, tandis qu'Ensemble n'a gagné des électeurs que parmi les revenus les plus élevés, en perdant légèrement ailleurs.",
+    "stance": "supports",
+    "stance_target": "dynamique de progression du RN concentrée sur la classe moyenne entre les deux scrutins législatifs 2022 et 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "comparaison 1er tour législatives 2022 vs 2024, par centile de niveau de vie",
+    "quoted_support": "Il apparaît que le Rassemblement national a gagné des électeurs dans toutes les catégories de revenu, mais particulièrement au sein d'une large classe moyenne... c'est parmi les revenus les plus élevés que la coalition présidentielle gagne des électeurs, tandis qu'elle en perd légèrement dans les autres types de bureaux de vote.",
+    "numbers": [],
+    "entities": ["Rassemblement National", "Ensemble", "NFP"],
+    "time_period": "2022-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "le-revenu-variable-cl-du-premier-tour-des-lgislatives-2024-alternatives-conomiqu"
+  }
+]

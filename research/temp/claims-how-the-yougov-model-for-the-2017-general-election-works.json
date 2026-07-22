@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "YouGov's 2017 MRP model pooled ~7,000 daily panellist interviews (about 50,000 per week) but this only yielded ~75 respondents per constituency per week, too sparse for direct constituency-level estimates without modelling.",
+    "stance": "neutral",
+    "stance_target": "data requirements of MRP at fine geographic granularity",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2017 general election, 650 parliamentary constituencies",
+    "quoted_support": "While this is a much larger sample than our usual polls, the samples in each of the 650 Parliamentary constituencies are too small (on average, only 75 voters per constituency per week) to produce reliable estimates.",
+    "numbers": ["7000 daily panellists", "50000 per week", "75 voters per constituency per week", "650 constituencies"],
+    "entities": ["YouGov", "Doug Rivers"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-the-yougov-model-for-the-2017-general-election-works"
+  },
+  {
+    "claim": "MRP post-stratification requires an independent population frame — YouGov combined ONS census data, British Election Study data, and past election results to estimate the count of each voter type per constituency.",
+    "stance": "neutral",
+    "stance_target": "data sources required for MRP poststratification",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2017",
+    "quoted_support": "Using data from the UK Office of National Statistics, the British Election Study, and past election results, YouGov has estimated the number of each type of voter in each constituency.",
+    "numbers": [],
+    "entities": ["ONS", "British Election Study", "YouGov"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-the-yougov-model-for-the-2017-general-election-works"
+  },
+  {
+    "claim": "YouGov explicitly frames MRP output as an estimate of current voting intention, not a forecast of the eventual election result, and does not attempt to quantify the probability that panellists change their minds before polling day.",
+    "stance": "neutral",
+    "stance_target": "interpretation limits of MRP output",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2017",
+    "quoted_support": "First, they are estimates of current voting intentions, not a forecast of how people will vote on 8 June. Panellists tell us how they intend to vote, but they may change their minds and we do not attempt to quantify this uncertainty.",
+    "numbers": [],
+    "entities": ["YouGov"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-the-yougov-model-for-the-2017-general-election-works"
+  },
+  {
+    "claim": "YouGov's 2017 MRP model reported 95% confidence intervals per constituency but stated it would still expect the interval to be wrong (miss the true outcome) in 30 to 40 of the ~650 constituencies.",
+    "stance": "neutral",
+    "stance_target": "expected error rate of MRP confidence intervals",
+    "evidence_type": "statistical",
+    "scope_conditions": "UK, 2017, 650 constituencies",
+    "quoted_support": "Even these are not fail-safe: we would still expect the interval to be wrong in 30 to 40 constituencies.",
+    "numbers": ["30 to 40 constituencies", "95% confidence interval"],
+    "entities": ["YouGov"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-the-yougov-model-for-the-2017-general-election-works"
+  },
+  {
+    "claim": "YouGov's 2017 MRP model was developed by Ben Lauderdale (LSE) with YouGov's Data Science team led by Doug Rivers (Stanford), fit via Hamiltonian Monte Carlo in the Stan software developed by Andrew Gelman's group at Columbia.",
+    "stance": "neutral",
+    "stance_target": "provenance and computational implementation of MRP for election forecasting",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "UK, 2017",
+    "quoted_support": "The model was developed primarily by Professor Ben Lauderdale of the London School of Economics in conjunction with YouGov's Data Science team, headed by Doug Rivers of Stanford University... the models are fit using Hamiltonian Monte Carlo with the open source software Stan.",
+    "numbers": [],
+    "entities": ["Ben Lauderdale", "Doug Rivers", "Andrew Gelman", "Stan", "YouGov", "LSE", "Stanford", "Columbia University"],
+    "time_period": "2017",
+    "region": "UK",
+    "confidence": "high",
+    "source_note_id": "how-the-yougov-model-for-the-2017-general-election-works"
+  }
+]

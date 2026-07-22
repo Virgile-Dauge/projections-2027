@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Malgré l'usage médiatique et académique qui qualifie plus souvent le RN d'extrême droite que LFI d'extrême gauche, l'opinion française fait l'inverse : 74% des sondés attribuent le qualificatif d'extrême gauche à LFI contre seulement 69% pour l'extrême droite au RN.",
+    "stance": "refutes",
+    "stance_target": "concordance entre le traitement médiatique/académique et la perception populaire du degré d'extrémisme du RN vs LFI",
+    "evidence_type": "statistical",
+    "scope_conditions": "Enquête électorale française vague 7, août 2024, panel Ipsos/CEVIPOF/Le Monde/Institut Montaigne",
+    "quoted_support": "alors que 74% des personnes interrogées attribuent le qualificatif « d'extrême gauche » à LFI, elles ne sont que 69% pour accorder la mention « d'extrême droite » au RN. Alors que l'immense majorité des commentateurs utilisent le qualificatif « extrême droite » pour situer le RN et beaucoup moins celui « d'extrême gauche » pour situer LFI, les électeurs agissent en sens inverse.",
+    "numbers": ["74%", "69%"],
+    "entities": ["LFI", "Rassemblement National"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche"
+  },
+  {
+    "claim": "Le RN bénéficie d'une image de 'capacité gouvernante' bien supérieure à celle de LFI dans l'opinion post-législatives 2024 : 45% des Français jugent le RN 'capable de gouverner un pays' contre seulement 22% pour LFI.",
+    "stance": "supports",
+    "stance_target": "processus de dédiabolisation du RN se traduisant par une crédibilité gouvernementale accrue dans l'opinion, contrastant avec LFI",
+    "evidence_type": "statistical",
+    "scope_conditions": "Enquête électorale française vague 7, août 2024",
+    "quoted_support": "la capacité gouvernante est très chichement comptée pour LFI (22% pensent que c'est un parti « capable de gouverner un pays ») alors qu'elle est beaucoup plus largement accordée au RN (45%).",
+    "numbers": ["45%", "22%"],
+    "entities": ["Rassemblement National", "LFI"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche"
+  },
+  {
+    "claim": "48% des Français jugent le RN 'souvent injustement diabolisé' contre seulement 25% pour LFI, y compris jusqu'au cœur de l'électorat socialiste où 38% seulement des sympathisants PS jugent LFI injustement diabolisé.",
+    "stance": "supports",
+    "stance_target": "dédiabolisation du RN dans l'opinion française, y compris à gauche modérée",
+    "evidence_type": "statistical",
+    "scope_conditions": "Enquête électorale française vague 7, août 2024",
+    "quoted_support": "48% des personnes interrogées pensent que le RN est un « parti souvent injustement diabolisé ». Ils ne sont que 25% à penser de même pour la formation de Jean-Luc Mélenchon.",
+    "numbers": ["48%", "25%", "38%"],
+    "entities": ["Rassemblement National", "LFI", "Parti Socialiste"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche"
+  },
+  {
+    "claim": "Une majorité relative de Français rejette à la fois une coalition NFP (53% pas souhaitable) et une coalition RN et alliés (47% pas souhaitable) — les deux blocs extrêmes sont rejetés majoritairement, mais le RN un peu moins que le NFP.",
+    "stance": "neutral",
+    "stance_target": "acceptabilité comparée des coalitions gouvernementales potentielles NFP vs RN dans l'opinion post-législatives 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "Enquête électorale française vague 7, août 2024",
+    "quoted_support": "Une majorité absolue de Français (53%) considère d'ailleurs qu'une coalition gouvernementale du Nouveau Front populaire n'est pas souhaitable... il n'y a pas non plus de désir majoritaire dans l'opinion de coalition du RN avec ses alliés ciottistes : 45% des personnes interrogées pensent qu'une telle coalition serait souhaitable, 47% qu'elle ne le serait pas.",
+    "numbers": ["53%", "45%", "47%"],
+    "entities": ["Nouveau Front Populaire", "Rassemblement National"],
+    "time_period": "juillet-août 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche"
+  }
+]

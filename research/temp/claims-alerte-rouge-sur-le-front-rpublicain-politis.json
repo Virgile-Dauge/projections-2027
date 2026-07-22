@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "An independent (non-Ipsos) October 2025 poll commissioned by Politis from Institut Bona Fide found only 41% of French respondents willing to enact a front républicain in a future national election, with 59% opposed.",
+    "stance": "supports",
+    "stance_target": "the 2024-to-2025 front-républicain erosion pattern is corroborated by a non-Ipsos-family pollster",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, national sample, October 2025",
+    "quoted_support": "seuls 41 % des Français se déclarent favorables au front républicain. Autrement dit, près de six sur dix refusent aujourd'hui l'idée même d'un barrage face au RN.",
+    "numbers": ["41%", "59%"],
+    "entities": ["Institut Bona Fide", "Politis"],
+    "time_period": "October 2025",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "alerte-rouge-sur-le-front-rpublicain-politis"
+  },
+  {
+    "claim": "Roughly 30% of left-wing sympathizers and 40% of Jean-Luc Mélenchon's 2022 electorate are now opposed to the front républicain barrage, framing it as an elite-imposed 'chantage' rather than a civic reflex.",
+    "stance": "supports",
+    "stance_target": "erosion of front-républicain transfer coefficients is occurring on the left electorate too, not only the LR/right side documented by Ipsos",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, left-wing electorate, 2025",
+    "quoted_support": "30 % des sympathisants de gauche et 40 % des électeurs de Jean-Luc Mélenchon y sont désormais opposés. Le barrage leur apparaît comme un chantage",
+    "numbers": ["30%", "40%"],
+    "entities": ["Jean-Luc Mélenchon", "Politis"],
+    "time_period": "2025",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "alerte-rouge-sur-le-front-rpublicain-politis"
+  },
+  {
+    "claim": "The article attributes the right's earlier and faster erosion of the barrage to LR's thematic mimicry of RN on immigration, insecurity and national identity, framed as a specific causal mechanism distinct from generic 'time decay'.",
+    "stance": "neutral",
+    "stance_target": "mechanisms behind differential erosion rates by bloc",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, LR/right electorate, post-2024",
+    "quoted_support": "À droite, la digue a cédé la première. L'héritage gaulliste du refus de toute alliance avec l'extrême droite a été remplacé par une course au mimétisme",
+    "numbers": [],
+    "entities": ["Les Républicains", "Bruno Retailleau", "Rassemblement National"],
+    "time_period": "2024-2025",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "alerte-rouge-sur-le-front-rpublicain-politis"
+  }
+]

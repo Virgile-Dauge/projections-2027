@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "An Odoxa poll for BFM TV/L'Express (fieldwork 7-8 April 2026, n~1000, quota method) found Édouard Philippe beating Jordan Bardella 52% to 48% in a second-round duel, while Raphaël Glucksmann loses to Bardella 46% to 54%.",
+    "stance": "supports",
+    "stance_target": "independent (Odoxa) replication of the Elabe-style finding that the presidential-camp candidate, not a PS candidate, is the strongest challenger to RN in a 2027 second round",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, Odoxa poll fieldwork 7-8 April 2026",
+    "quoted_support": "Selon le sondage Odoxa du 8 avril 2026, Édouard Philippe est le seul candidat capable de battre Jordan Bardella au second tour de la présidentielle 2027, avec 52 % contre 48 %.",
+    "numbers": ["52%", "48%", "46%", "54%", "n~1000"],
+    "entities": ["Odoxa", "Édouard Philippe", "Jordan Bardella", "Raphaël Glucksmann", "BFM TV", "L'Express"],
+    "time_period": "7-8 April 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "sondage-prsidentielle-2027-odoxa-8-avril-2026-philippe-bat-bardella-au-second-to"
+  },
+  {
+    "claim": "In the same Odoxa poll's first round, Bardella leads with ~26%, Philippe ~21%, and Glucksmann ~14% of intentions.",
+    "stance": "neutral",
+    "stance_target": "first-round baseline against which second-round transfer scenarios are measured",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, Odoxa poll, April 2026",
+    "quoted_support": "Jordan Bardella reste en tête avec environ 26 % des intentions de vote, tandis qu'Édouard Philippe se positionne en deuxième place avec environ 21 %. Raphaël Glucksmann... suit avec environ 14 %.",
+    "numbers": ["26%", "21%", "14%"],
+    "entities": ["Jordan Bardella", "Édouard Philippe", "Raphaël Glucksmann"],
+    "time_period": "April 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "sondage-prsidentielle-2027-odoxa-8-avril-2026-philippe-bat-bardella-au-second-to"
+  }
+]

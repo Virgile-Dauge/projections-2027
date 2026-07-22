@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Prior claims that machine-learning methods (e.g. BART) substantially outperform MRP for small-area opinion estimation are unfair to MRP because they compare against simple additive hierarchical models rather than 'deep MRP' models with explicit interactions and non-linear/spline terms; when deep MRP is used, it nearly matches or outperforms state-of-the-art ML.",
+    "stance": "supports",
+    "stance_target": "methodological sophistication (deep interactions) improves MRP accuracy",
+    "evidence_type": "empirical",
+    "scope_conditions": "reanalyses of Bisbee (2019) and Ornstein (2020) MRP-vs-ML comparison papers",
+    "quoted_support": "I show that complex ('deep') hierarchical models that include interactions can nearly match or outperform state-of-the-art machine learning methods... deep multilevel models (i) are given considerable weight in an ensemble of machine learning methods and (ii) are competitive with Bayesian additive regression trees (BART) in terms of performance.",
+    "numbers": [],
+    "entities": ["Max Goplerud", "University of Pittsburgh", "BART", "Bisbee 2019", "Ornstein 2020"],
+    "time_period": "2023-2024",
+    "region": "not geography-specific (reanalysis of US political science MRP datasets)",
+    "confidence": "high",
+    "source_note_id": "american-political-science-review-2024-118-1-529536"
+  },
+  {
+    "claim": "Contrary to Bisbee (2019)'s claim that BART clearly outperforms traditional MRP, Goplerud shows BART only slightly outperforms even traditional (non-deep) MRP at moderate sample sizes.",
+    "stance": "refutes",
+    "stance_target": "machine learning methods substantially and reliably outperform MRP",
+    "evidence_type": "empirical",
+    "scope_conditions": "moderate sample sizes, reanalysis of Bisbee 2019 dataset",
+    "quoted_support": "While recent work reports that BART performs noticeably better than traditional MRP (Bisbee 2019), I demonstrate that this is not the case. I show that, especially at moderate sample sizes, BART usually only slightly outperforms even traditional MRP.",
+    "numbers": [],
+    "entities": ["Goplerud", "BART", "Bisbee"],
+    "time_period": "2023-2024",
+    "region": "not geography-specific",
+    "confidence": "high",
+    "source_note_id": "american-political-science-review-2024-118-1-529536"
+  },
+  {
+    "claim": "The estimation-speed barrier to using deep MRP (previously hours for ~20 random effects) is addressed by a new variational-inference algorithm with a properly calibrated weakly-informative prior and spline support for non-linear continuous covariates, fitting deep MRP in minutes.",
+    "stance": "neutral",
+    "stance_target": "practical feasibility of sophisticated MRP methods",
+    "evidence_type": "theoretical",
+    "scope_conditions": "computational method, not accuracy claim",
+    "quoted_support": "Those algorithms fit an extremely complex hierarchical model in around 1 minute-versus hour(s) for existing approaches... the accompanying open-source software can fit highly flexible deep MRP in minutes-rather than the hours possibly needed for traditional approaches.",
+    "numbers": ["~1 minute vs hours", "~20 random effects"],
+    "entities": ["Goplerud", "variational inference", "Huang and Wand prior"],
+    "time_period": "2023",
+    "region": "not geography-specific",
+    "confidence": "high",
+    "source_note_id": "american-political-science-review-2024-118-1-529536"
+  }
+]

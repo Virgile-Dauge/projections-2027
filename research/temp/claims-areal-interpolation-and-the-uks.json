@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Hanretty (2017) valide son modèle de régression de Poisson à l'échelle (small-area estimation par interpolation aréale) pour ré-estimer le vote Leave/Remain à la maille des circonscriptions de Westminster contre des résultats infra-locaux réellement connus pour 27 circonscriptions britanniques, obtenant une erreur médiane de 1,62 point de pourcentage contre 5,22 points pour l'interpolation dasymétrique simple.",
+    "stance": "supports",
+    "stance_target": "GAP2 : existence d'un backtest de validation d'une méthode small-area contre vérité-terrain infra-agrégat en Europe",
+    "evidence_type": "empirical",
+    "scope_conditions": "Royaume-Uni, référendum Brexit 2016, 27 circonscriptions (majoritairement urbaines, plus de la moitié écossaises) où un détail infra-local du vote a été publié par les conseils locaux",
+    "quoted_support": "half of constituencies had errors equal to or less than 1.62%, compared to an equivalent figure of 5.22% for dasymmetric interpolation",
+    "numbers": ["1.62%", "5.22%", "27 constituencies"],
+    "entities": ["Chris Hanretty", "Brexit", "Westminster"],
+    "time_period": "référendum 2016, publication 2017",
+    "region": "Royaume-Uni",
+    "confidence": "high",
+    "source_note_id": "areal-interpolation-and-the-uks"
+  },
+  {
+    "claim": "La validation empirique de Hanretty est mesurée en erreur absolue médiane (MAE-like), pas en corrélation de rang (Spearman/Kendall) — le texte ne contient aucune occurrence de ces termes — ce qui signifie que même ce cas européen ne comble pas exactement le pilier théorique 'sortie ordinale/classement' visé par le projet, bien qu'il en soit le complément empirique le plus proche identifié en Europe.",
+    "stance": "neutral",
+    "stance_target": "le pilier 'sortie ordinale' du projet français repose toujours essentiellement sur la théorie (Casacuberta & Hardt) et un seul backtest de précision ponctuelle US (Marble & Clinton) ; ce cas UK ajoute une validation ponctuelle européenne mais pas une validation de rang stricte",
+    "evidence_type": "empirical",
+    "scope_conditions": "lecture intégrale du texte, recherche de 'Spearman', 'Kendall', 'rank' — 0 occurrence",
+    "quoted_support": "As the table demonstrates, the correlation between all of the different functional forms is extremely high, and above 0.9 in all cases.",
+    "numbers": ["0 occurrences de Spearman/Kendall/rank"],
+    "entities": ["Chris Hanretty"],
+    "time_period": "2017",
+    "region": "Royaume-Uni",
+    "confidence": "high",
+    "source_note_id": "areal-interpolation-and-the-uks"
+  },
+  {
+    "claim": "L'auteur reconnaît lui-même que les 27 circonscriptions test ne sont pas représentatives de l'ensemble du pays (majoritairement urbaines, plus de la moitié en Écosse, aucune ne coïncidant parfaitement avec les limites d'autorité locale utilisées comme source), ce qui tend à SOUS-ESTIMER l'erreur réelle du modèle sur l'ensemble du Royaume-Uni.",
+    "stance": "refutes",
+    "stance_target": "généralisabilité directe des chiffres d'erreur (1,62 point) à l'ensemble du territoire",
+    "evidence_type": "empirical",
+    "scope_conditions": "27 circonscriptions test, Royaume-Uni",
+    "quoted_support": "These constituencies are not representative of the UK as a whole. All are urban. More than half are Scottish. None overlap entirely with local authorities.",
+    "numbers": ["27 constituencies"],
+    "entities": ["Chris Hanretty"],
+    "time_period": "2017",
+    "region": "Royaume-Uni",
+    "confidence": "high",
+    "source_note_id": "areal-interpolation-and-the-uks"
+  },
+  {
+    "claim": "Les cinq formes fonctionnelles alternatives testées par Hanretty (Poisson, binomiale négative, log-linéaire, pourcentage, interpolation dasymétrique) produisent des estimations toutes corrélées à plus de 0,9 entre elles, mais les méthodes à base de modèle démographique corrèlent nettement plus fort entre elles (>0,98) qu'avec la dasymétrique simple (~0,93), isolant l'apport spécifique de la modélisation par rapport à une simple répartition proportionnelle de la population.",
+    "stance": "supports",
+    "stance_target": "robustesse du choix de forme fonctionnelle dans un modèle de small-area estimation basé sur covariables démographiques",
+    "evidence_type": "statistical",
+    "scope_conditions": "Royaume-Uni, référendum Brexit 2016, comparaison de 5 formes fonctionnelles",
+    "quoted_support": "correlations between the model-based methods are always higher than the correlations between any model-based method and dasymmetric interpolation.",
+    "numbers": ["Poisson-Negative binomial: 0.999", "Poisson-Percent: 0.996", "Poisson-Dasymmetric: 0.928"],
+    "entities": ["Chris Hanretty"],
+    "time_period": "2017",
+    "region": "Royaume-Uni",
+    "confidence": "high",
+    "source_note_id": "areal-interpolation-and-the-uks"
+  }
+]

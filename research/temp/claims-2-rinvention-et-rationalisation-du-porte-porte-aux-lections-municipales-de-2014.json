@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Les études randomisées de Gerber et Green (2000) sur les techniques de campagne électorale aux États-Unis estiment que le porte-à-porte convainc un électeur sur 14, contre un sur 100 000 pour l'affichage — chiffres repris par les praticiens français bien qu'issus du contexte américain.",
+    "stance": "supports",
+    "stance_target": "efficacité comparative du porte-à-porte face à d'autres techniques de campagne",
+    "evidence_type": "empirical",
+    "scope_conditions": "études randomisées américaines (Gerber & Green 2000), reprises comme référence par des acteurs de campagne français",
+    "quoted_support": "Les Bostoniens reprennent les chiffres d'Alan Gerber (le porte-à-porte permettrait de convaincre un électeur sur quatorze là où l'affichage en convaincrait un sur 100 000), et ce, bien qu'ils soient produits dans le contexte américain.",
+    "numbers": ["1 sur 14 (porte-à-porte)", "1 sur 100 000 (affichage)"],
+    "entities": ["Alan Gerber", "Donald Green"],
+    "time_period": "2000",
+    "region": "États-Unis (chiffres), France (usage)",
+    "confidence": "medium",
+    "source_note_id": "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"
+  },
+  {
+    "claim": "Une opération de porte-à-porte ciblée sur l'inscription électorale a frappé à 8 000 portes et a permis de convaincre environ 500 personnes de s'inscrire sur les listes électorales, un ratio d'environ 1 inscription pour 16 portes.",
+    "stance": "supports",
+    "stance_target": "impact mesurable du porte-à-porte ciblé sur la mobilisation électorale (inscription)",
+    "evidence_type": "anecdotal",
+    "scope_conditions": "France, municipales 2014, cas cité par Michel Calvo au Figaro",
+    "quoted_support": "Nous avons frappé à 8 000 portes. Nous estimons que nous avons convaincu 500 personnes de s'inscrire sur les listes, qui sans nous ne l'auraient pas fait, estime Michel Calvo. Le Figaro, le 27 février 2014.",
+    "numbers": ["8 000 portes", "500 inscriptions"],
+    "entities": ["Michel Calvo"],
+    "time_period": "2014",
+    "region": "France",
+    "confidence": "low",
+    "source_note_id": "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"
+  },
+  {
+    "claim": "L'agence de conseil politique 50+1, fondée par Guillaume Liegey et Arthur Muller (avec Vincent Pons), a piloté la campagne de François Hollande en 2012 et a développé un logiciel de ciblage du porte-à-porte inspiré des pratiques américaines, avec un coût d'achat représentant en moyenne 4,6% des budgets de campagne municipale.",
+    "stance": "neutral",
+    "stance_target": "acteurs professionnels du ciblage data-driven des campagnes électorales en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France, campagnes municipales 2014, présidentielle 2012",
+    "quoted_support": "L'achat du logiciel a représenté en moyenne 4,6% des budgets de campagne (chiffres de 50+1).",
+    "numbers": ["4,6% des budgets de campagne"],
+    "entities": ["Guillaume Liegey", "Arthur Muller", "Vincent Pons", "50+1", "NationBuilder"],
+    "time_period": "2012-2014",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"
+  },
+  {
+    "claim": "Le logiciel américain NationBuilder utilisé pour le ciblage de campagne est mal adapté au cadre légal français car il comprend des champs (appartenance ethnique, religion, orientation sexuelle) dont la collecte est interdite en France, contrairement aux États-Unis.",
+    "stance": "supports",
+    "stance_target": "limites du transfert direct des outils américains de ciblage électoral vers le contexte légal français",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, cadre légal de protection des données appliqué aux bases militantes",
+    "quoted_support": "Le logiciel comprend des entrées qui ne sont pas adaptées à la France (appartenance ethnique, religion, niveau social, revenus...). Contrairement aux États-Unis, il n'est pas autorisé en France de renseigner, par exemple, l'orientation sexuelle ou la pratique religieuse de ses contacts dans les bases de données.",
+    "numbers": [],
+    "entities": ["NationBuilder"],
+    "time_period": "2014",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"
+  },
+  {
+    "claim": "Le porte-à-porte du Parti socialiste à Toulouse en 2014 s'est concentré dans le centre-ville plutôt que dans les quartiers populaires (Mirail, Reynerie, Izards) faute d'implantation militante suffisante dans ces derniers, ce qui limite la prétention du porte-à-porte à un ciblage stratégique réel des zones à enjeu électoral.",
+    "stance": "refutes",
+    "stance_target": "capacité du porte-à-porte militant à cibler effectivement les zones électoralement stratégiques indépendamment de la géographie de l'implantation partisane préexistante",
+    "evidence_type": "empirical",
+    "scope_conditions": "Toulouse, municipales 2014, étude de Quentin Schnapper",
+    "quoted_support": "Si le porte-à-porte traduit une forte prétention à l'encadrement des populations, l'implantation et l'organisation du PS à Toulouse limitent très fortement cette ambition.",
+    "numbers": [],
+    "entities": ["Quentin Schnapper", "Parti socialiste", "Toulouse"],
+    "time_period": "2014",
+    "region": "Toulouse, France",
+    "confidence": "medium",
+    "source_note_id": "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"
+  }
+]

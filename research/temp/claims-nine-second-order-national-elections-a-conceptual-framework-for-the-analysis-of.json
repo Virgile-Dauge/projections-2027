@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Reif & Schmitt (1980) postulent que les élections européennes sont des élections nationales de 'second ordre' parce que tant que les systèmes politiques nationaux décident de l'essentiel des enjeux réellement importants, la composition du Parlement européen ne reflète pas précisément le rapport de force politique 'réel' de la Communauté européenne.",
+    "stance": "neutral",
+    "stance_target": "définition théorique du caractère de second ordre des élections européennes",
+    "evidence_type": "theoretical",
+    "scope_conditions": "neuf pays membres de la Communauté économique européenne, premières élections européennes de 1979",
+    "quoted_support": "As long as the national political systems decide most of what there is to be decided politically, and everything really important, European elections are additional national second-order elections.",
+    "numbers": [],
+    "entities": ["Parlement européen", "Communauté économique européenne"],
+    "time_period": "1979-1980",
+    "region": "Europe (9 États membres CEE)",
+    "confidence": "high",
+    "source_note_id": "nine-second-order-national-elections-a-conceptual-framework-for-the-analysis-of"
+  },
+  {
+    "claim": "Selon Reif & Schmitt, les résultats des élections européennes sont déterminés davantage par les clivages politiques domestiques que par des enjeux propres à la construction communautaire, mais différemment de ce que produiraient neuf élections nationales de premier ordre simultanées, car chaque élection européenne survient à un stade différent du cycle électoral national de chaque pays.",
+    "stance": "neutral",
+    "stance_target": "mécanisme par lequel le calendrier électoral national module les résultats des élections européennes",
+    "evidence_type": "theoretical",
+    "scope_conditions": "neuf pays membres CEE, 1979",
+    "quoted_support": "They are determined more by the domestic political cleavages than by alternatives originating in the EC, but in a different way than if nine first-order national elections took place simultaneously. This is the case because European elections occur at different stages of the national political systems' respective electoral cycles.",
+    "numbers": [],
+    "entities": ["Parlement européen"],
+    "time_period": "1979-1980",
+    "region": "Europe (9 États membres CEE)",
+    "confidence": "high",
+    "source_note_id": "nine-second-order-national-elections-a-conceptual-framework-for-the-analysis-of"
+  }
+]

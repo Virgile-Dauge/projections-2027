@@ -1,0 +1,139 @@
+[
+  {
+    "cluster_id": "election-source-baseline",
+    "fight": "Quelle élection passée est la bonne baseline pour projeter 2027 au bureau de vote : européennes 2024 « sincères », législatives 2024 locales mais biaisées par l'offre, ou présidentielle 2022 comparable mais obsolète ?",
+    "side_a": {
+      "position": "Les européennes 2024 sont la meilleure photographie : proportionnelle nationale à un tour, offre complète partout, chaque voix compte — directement transposable à une présidentielle multipolaire.",
+      "claims": ["Les législatives sont 'une élection avant tout locale' (577 circonscriptions), contrairement aux européennes, proportionnelle nationale à un tour", "Cagé-Piketty utilisent les européennes 1994-2024 comme série de référence pour mesurer la tripartition"],
+      "sources": ["sondages-lgislatives-2024-pourquoi-il-faut-se-mfier-des-proj", "the-beginning-of-the-end-of-tripartition-european-elections-and-social-inequalit"]
+    },
+    "side_b": {
+      "position": "Les européennes restent un scrutin de second ordre (Reif & Schmitt) : abstention différentielle massive (~50% vs ~72% présidentielle), vote sanction, prime aux petits partis — le niveau ET la géographie de la participation diffèrent structurellement d'une présidentielle.",
+      "claims": ["Le modèle SOE conserve un pouvoir explicatif significatif sur les 175 élections européennes 1979-2019", "Intérêt déclaré pour les européennes 2024 : 18% très intéressés contre 74% en 2019"],
+      "sources": ["still-second-order-european-elections-in-the-era-of-populism", "nine-second-order-national-elections-a-conceptual-framework-", "les-dynamiques-dintention-de-vote-aux-lections-europennes-de"]
+    },
+    "evidence_quality_delta": "Side B a la littérature académique (SOE testé sur 175 élections) ; side A a la pratique française récente (pondérations Ipsos calées sur européennes 2024, usage Cagé-Piketty). Fight serré — probablement résoluble en distinguant niveau absolu (side B gagne) et structure spatiale relative (side A gagne).",
+    "scope_overlap": "Partiellement scopé différemment : side B parle du NIVEAU national des blocs, side A de la GÉOGRAPHIE relative. Les deux peuvent être vrais — c'est la résolution probable, à creuser en depth.",
+    "decision_relevance": "high"
+  },
+  {
+    "cluster_id": "sophistication-paie-maille-fine",
+    "fight": "La sophistication méthodologique (MRP, EI, bayésien) améliore-t-elle réellement la projection à maille fine, ou le gain s'évapore-t-il (voire s'inverse) sous le niveau circonscription ?",
+    "side_a": {
+      "position": "Oui : MRP YouGov 2017 a prédit 93% des sièges et les chocs locaux (Canterbury, Kensington) ; la valeur ajoutée du MRP est précisément au niveau siège (écart de 13 sièges vs swing uniforme, LSE) ; ecolRxC/Thomsen atteignent des précisions de transfert bien supérieures à la baseline naïve.",
+      "claims": ["MRP correctly predicted 93% of seats in 2017 including shock results", "MRP vs Scotland-adjusted uniform swing: 359 vs 346 Conservative seats, gap of 13 — value-add is at seat level", "ecolRxC error 9.78 vs 36.98 baseline indépendance"],
+      "sources": ["how-the-yougov-model-for-the-2017-general-election-works", "different-methods-similar-outcome-comparing-the-poll-of-poll", "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-"],
+      "note": "MRP infère au niveau circonscription (~70k électeurs) — AUCUNE méthode par sondage ne descend au bureau (~1k inscrits)."
+    },
+    "side_b": {
+      "position": "Non : la corrélation MRP↔vérité varie de 0,17 à 0,87 selon les covariables (Buttice & Highton) ; le sondage classique de More in Common a battu son propre MRP en 2024 ; les modèles de flux BES 2015 ont hérité du biais national ; les 24 projections en sièges publiées en France en 2024 se sont toutes trompées de vainqueur ; les prévisions démographiques sous-performent un 50-50 et la granularité fine AGGRAVE (Pons et al.) ; les IC sont sous-couvrants à maille fine dans toutes les familles (MRP, EI, swing).",
+      "claims": ["Correlation with truth 0.17-0.87; only 28% of units hit nominal 90% CI coverage in best condition", "More in Common's regular poll outperformed its own MRP in 2024", "Demographic forecasts perform worse than a 50-50 guess, worse at county level", "Nominal 95% CIs of RxC EI methods cover truth only 30-53% of the time"],
+      "sources": ["uc-davis-previously-published-works", "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-wh", "pitfalls-of-demographic-forecasts-of-us-elections", "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in", "british-election-study-2015-general-election-constituency-fo", "lgislatives-2024-pourquoi-les-instituts-de-sondages-ont-chou-prdire-les-rsultats"]
+    },
+    "evidence_quality_delta": "Side B empiriquement plus fort et plus systématique (Monte Carlo, backtests longs, validations ground-truth) ; side A repose sur des succès saillants mais sélectionnés. MAIS side B ne teste presque jamais la maille bureau — les deux extrapolent.",
+    "scope_overlap": "Vrai désaccord sur la circonscription ; sous le bureau de vote, personne n'a de données — le fight devient : quelle méthode dégrade le plus gracieusement ?",
+    "decision_relevance": "high"
+  },
+  {
+    "cluster_id": "fiabilite-ei-transferts",
+    "fight": "L'inférence écologique donne-t-elle des estimations de transferts de voix fiables, et si oui laquelle : Freedman vs King, puis Thomsen vs Dirichlet-multinomial ?",
+    "side_a": {
+      "position": "L'EI moderne marche : Thomsen robuste même en conditions défavorables (biais <0,02 dès 50 unités), ecolRxC comparable aux meilleures méthodes, eiPack/Dirichlet gagnant sur données allemandes ; avec ~70k bureaux, la France est un terrain idéal en nombre d'unités.",
+      "claims": ["Thomsen fiable dès 30-50 unités agrégées", "Dirichlet-multinomial hiérarchique surpasse toutes les autres approches sur données électorales allemandes réelles"],
+      "sources": ["ecological-inference-under-unfavorable-conditions-straight", "estimation-of-voter-transitions-based-on-ecological-inferenc", "ecolrxc-ecological-inference-estimation-of-r-c-tables-using-"]
+    },
+    "side_b": {
+      "position": "Non-identifiabilité fondamentale (les DEUX camps Freedman-King en conviennent) : le modèle « neighborhood » naïf bat King 7/9 sur données réelles ; toutes les méthodes EI sous-estiment le panachage avec des biais directionnels systématiques ; IC nominaux 95% couvrant 30-53% ; l'identification exige une condition CAR invérifiable.",
+      "claims": ["Neighborhood model wins 7/9 real-data comparisons vs King's 2/9", "Both sides agree subgroup parameters are generally not identifiable from aggregate data alone", "All EI methods underestimate true ticket-splitting; mean absolute error ~3.4 points at district level"],
+      "sources": ["on-solutions-to-the-ecological-inference-problem", "a-rejoinder-to-king", "the-role-of-confounders-and-linearity-in", "an-evaluation-of-the-performance-and-suitability-of-rc-methods-for-ecological-in"]
+    },
+    "evidence_quality_delta": "Side B (critique) tient les validations ground-truth les plus propres ; side A tient les comparaisons intra-EI récentes. Fight interne à side A non résolu (Klima: Thomsen incohérent ; Park/Kuriwaki: Thomsen le moins biaisé) — la littérature se contredit selon le jeu de données de validation.",
+    "scope_overlap": "Vrai désaccord empirique. Résolution probable : l'EI est utilisable pour des ORDRES DE GRANDEUR de transferts agrégés, pas pour des estimations bureau par bureau à IC crédibles.",
+    "decision_relevance": "high"
+  },
+  {
+    "cluster_id": "reutilisabilite-matrices-2024",
+    "fight": "Les matrices de transfert mesurées en 2024 (front républicain) sont-elles réutilisables pour projeter 2027 ?",
+    "side_a": {
+      "position": "Oui en structure : les taux 2024 sont mesurés avec une précision inédite (ENEF n=11 204, ±0,7pt) ; l'asymétrie NFP→Ens (97%) vs Ens→NFP (73%) est un invariant comportemental documenté depuis 2015.",
+      "claims": ["97% des électeurs NFP ont fait barrage dans les duels Ensemble-RN, 73% des Ensemble dans les duels NFP-RN", "L'asymétrie gauche/droite du barrage est documentée dès 2015 (55% PS→droite vs 26% UMP→gauche)"],
+      "sources": ["elections-lgislatives-2024", "un-front-rpublicain-efficace-mais-illusoire-fondation-jean-jaurs", "les-reports-de-voix-premier-second-tour-ipsos"]
+    },
+    "side_b": {
+      "position": "Non en niveau : l'érosion est rapide et mesurée (2025 : report LR vers barrage effondré, 56% de l'électorat LR irait au RN dans certaines configurations) ; une présidentielle n'est pas une législative (personnalisation, participation +25pts) ; les taux dépendent du candidat exact (pénalité LFI mesurée expérimentalement 40%→32%).",
+      "claims": ["Barrage fissuré 2025 : les reports anti-RN s'effondrent chez LR et se dégradent chez NFP (72%→44%)", "Test randomisé : l'étiquette du candidat NFP change le report de 40% à 32%", "La participation présidentielle (~72-74%) vs législatives 2022 (~47%) change la composition de l'électorat mobilisé"],
+      "sources": ["un-barrage-fissur-mais-pas-encore-bris-ltat-du-front-rpublic", "elections-lgislatives-2024", "octobre-2025-13me-edition"]
+    },
+    "evidence_quality_delta": "Les deux côtés s'appuient sur la même famille d'enquêtes Ipsos (redondance partielle) mais à des vagues différentes — le désaccord est surtout TEMPOREL : structure stable, niveaux dérivants. Données d'excellente qualité des deux côtés.",
+    "scope_overlap": "Scopé différemment (2024 vs 2025-2027, législatives vs présidentielle) : résolution = utiliser la structure, pas les niveaux ; paramétrer l'érosion comme incertitude scénarisée.",
+    "decision_relevance": "high"
+  },
+  {
+    "cluster_id": "swing-uniforme-vs-proportionnel",
+    "fight": "Entre swing uniforme, proportionnel et piecewise, lequel projeter localement — et le choix importe-t-il ?",
+    "side_a": {
+      "position": "Aucune supériorité empirique consistante : backtests UK 1997-2005 sans vainqueur ; en pratique les projecteurs blendent (Grenier 50/50) ; l'écart final en sièges est faible comparé à l'erreur sur l'input national.",
+      "claims": ["Backtesting UNS vs proportional 1997/2001/2005: no consistent superiority", "Production model blends 50/50 uniform + proportional with adjustment layers"],
+      "sources": ["uniform-swing-versus-proportional-swing-which-is-best", "vote-and-seat-projection-methodology-by-ric-grenier"]
+    },
+    "side_b": {
+      "position": "Le choix importe théoriquement et aux extrêmes : aucun modèle linéaire ne satisfait bornage + swing moyen (Wilson & Grofman) ; uniforme viole les bornes dans 83-100% des cas extrêmes — précisément là où le RN à 37% national vs 2022 à 23% place la projection 2027 ; le piecewise est le plus simple modèle cohérent ; TOUS échouent sur la DIRECTION du changement local (sign accuracy ~0,5).",
+      "claims": ["Piecewise 100% bounds-compliant; uniform violates bounds in up to 83-100% of cases", "All swing models: winner accuracy 0.85-0.95 but sign accuracy as low as ~0.497", "Uncontested-district coding conventions materially change reported accuracy"],
+      "sources": ["models-of-inter-election-change-in", "predicting-regional-swing", "uniform-swing-rip"]
+    },
+    "evidence_quality_delta": "Side B plus rigoureux (axiomatique + backtest 1968-2016 massif). Side A décrit la pratique réelle. Non contradictoires sur le fond : le swing 2022→2027 attendu du RN (+10-14pts) est exactement le régime où uniforme casse.",
+    "scope_overlap": "Genuine, mais résoluble : à grande amplitude de swing, proportionnel/piecewise par bloc ; l'important est le comportement aux bornes, pas la moyenne.",
+    "decision_relevance": "medium"
+  },
+  {
+    "cluster_id": "contours-bureaux-utilisables",
+    "fight": "Les contours et identifiants de bureaux de vote français permettent-ils une jointure inter-scrutins fiable, ou la maille bureau est-elle structurellement instable ?",
+    "side_a": {
+      "position": "Utilisable : le crosswalk officiel table-bv-reu.csv relie identifiants électoraux ↔ REU, pipeline data.gouv actif (juil. 2026) ; 3 reconstructions de contours indépendantes convergent ; le blog INSEE valide empiriquement contre Strasbourg (~plateau 80% de correspondance).",
+      "claims": ["table-bv-reu.csv : crosswalk officiel documenté, pipeline actif", "3 méthodes indépendantes de contours (Etalab Voronoï, INSEE mapvotr, Makina OSM)"],
+      "sources": ["jeu-de-donnes-donnes-des-lections-agrges-datagouvfr", "github-inseefrlabmapvotr-package-de-production-de-contours-de-bureaux-de-vote-pa", "a-vot-chaque-bureau-de-vote-ses-lecteurs"]
+    },
+    "side_b": {
+      "position": "Structurellement fragile : la numérotation est communale SANS norme ; les arrêtés définissent les bureaux par listes d'adresses, pas par géométrie ; REU publié à basse fréquence ; Cagé-Piketty, l'équipe la plus outillée de France, a renoncé au crosswalk long et s'est repliée sur la commune ; analogie US : ~1/6 des comtés modifient leurs précincts chaque cycle, et un mismatch de contours peut perdre 11-12% des voix (maup).",
+      "claims": ["Numérotation des bureaux : compétence communale sans norme de codage stricte", "Cagé-Piketty : pas d'historique homogène des contours, agrégation communale par défaut", "maup worked example: 11-12% of votes lost from precinct boundary mismatch"],
+      "sources": ["jeu-de-donnes-bureaux-de-vote-et-adresses-de-leurs-lecteurs-datagouvfr", "thomas-piketty", "github-mgggmaup-the-geospatial-toolkit-for-redistricting-dat", "united-states-precinct-boundaries-and-statewide-partisan-election-results-scient"]
+    },
+    "evidence_quality_delta": "Les deux côtés sont solides et PAS symétriques : side A vaut pour 2022→2024 (fenêtre courte, REU stable), side B pour les séries longues. Le taux de churn 2022→2024 français précis n'est chiffré nulle part dans le corpus — gap à traiter en depth (ou à mesurer soi-même dans le projet).",
+    "scope_overlap": "Scopé par horizon temporel — résolution attendue : crosswalk court faisable avec perte contrôlée + stratégie de repli (agrégation commune/cluster de bureaux stables).",
+    "decision_relevance": "high"
+  },
+  {
+    "cluster_id": "sondages-vers-local",
+    "fight": "Peut-on décliner honnêtement une dynamique nationale de sondage en variation locale, alors que la mesure même du swing par sondage est confondue ?",
+    "side_a": {
+      "position": "Oui, prudemment : c'est la pratique universelle (PVI + swing national, élasticité 538, projections des instituts calées sur l'offre locale réelle — Elabe documente un swing depuis le résultat antérieur avec transferts intra-bloc différenciés).",
+      "claims": ["Elabe : projection par swing depuis résultat antérieur ajusté à l'offre réelle par circonscription", "538 elasticity : réponse locale différenciée au mouvement national"],
+      "sources": ["les-franais-et-les-lections-lgislatives", "datapolitical-elasticity-scores-at-master-fivethirtyeightdata-github", "2026-forecast-methodology"]
+    },
+    "side_b": {
+      "position": "La non-réponse partisane différentielle fabrique du swing artificiel dans les sondages (Mythical Swing Voter) ; l'écart type des vagues surestime le vrai mouvement ; à 9+ mois de l'élection, les MRP eux-mêmes se déclarent non-prédictifs ; les élasticités locales estimées sur données US ne se transposent pas.",
+      "claims": ["Differential partisan nonresponse confounds naive swing measurement", "More in Common's own MRP explicitly caveated as not a projection 4.5 years out"],
+      "sources": ["quarterly-journal-of-political-science-2016-11-103130", "mrp-poll-puts-reform-ahead-of-labour-and-the-tories-heres-wh", "why-polls-fail-to-predict-elections"]
+    },
+    "evidence_quality_delta": "Side B académiquement plus solide sur la mesure ; side A pragmatiquement incontournable (il FAUT bien intégrer la dynamique). Résolution : scénarios de swing plutôt que point estimate, et découplage niveau/géographie.",
+    "scope_overlap": "Genuine mais complémentaire — side B borne ce que side A peut promettre.",
+    "decision_relevance": "medium"
+  },
+  {
+    "cluster_id": "cible-militante",
+    "fight": "Que doit optimiser une carte militante : les marges serrées (persuasion) ou les gisements d'abstention favorables (mobilisation) ?",
+    "side_a": {
+      "position": "Persuasion dans les zones contestées : Pons 2018 montre un effet de persuasion (pas de mobilisation) du porte-à-porte, qui a compté pour ~1/4 de la marge de victoire 2012 — cibler là où le rapport de force est basculable.",
+      "claims": ["Visits did not affect turnout but increased vote share; one-fourth of victory margin", "Effet persistant aux élections suivantes"],
+      "sources": ["will-a-five-minute-discussion", "door-to-door-canvassing-campaigns-sway-voter-decisions"]
+    },
+    "side_b": {
+      "position": "Mobilisation ciblée des soutiens démobilisés : les effets sont hétérogènes (+3,4pp chez les immigrés, 0 ailleurs — Pons & Liégey 2019) ; la stratégie LMP historique cible les abstentionnistes favorables, pas les indécis ; à la présidentielle (scrutin national), chaque voix compte partout — la notion de « bureau pivot » n'existe pas.",
+      "claims": ["Canvassing moved immigrant turnout +3.4pp with zero effect on non-immigrants", "Ciblage des abstentionnistes favorables = doctrine LMP documentée"],
+      "sources": ["increasing-the-electoral-participation-of-immigrants-experimental-evidence-from", "2-rinvention-et-rationalisation-du-porte-porte-aux-lections-municipales-de-2014"]
+    },
+    "evidence_quality_delta": "Expériences randomisées des deux côtés, même école (Pons). Pas un vrai conflit : deux cibles complémentaires — mais l'arbitrage détermine QUELLES variables la carte doit afficher (marge projetée vs réserve d'abstention par bloc).",
+    "scope_overlap": "Complémentaire ; à trancher par la finalité (présidentielle = pas de seuil local, donc mobilisation pèse partout, MAIS les législatives qui suivront en ont un).",
+    "decision_relevance": "medium"
+  }
+]

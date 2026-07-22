@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "En comparant le plan de redécoupage congressionnel adopté en 2022 à un ensemble de plans simulés non-partisans par Monte Carlo, le gerrymandering partisan net à l'échelle nationale ne représente qu'un avantage de 2.3 sièges pour les Républicains (8.6 sièges de biais pro-R contre 6.2 sièges de biais pro-D à travers les États, qui s'annulent presque).",
+    "stance": "supports",
+    "stance_target": "les effets du gerrymandering partisan des deux côtés tendent à s'annuler au niveau agrégé national malgré des effets locaux importants et statistiquement significatifs",
+    "evidence_type": "statistical",
+    "scope_conditions": "44 États ayant redécoupé après le recensement 2020, élections à la Chambre des représentants US",
+    "quoted_support": "partisan effects are expected to contribute to 8.6 Republican seats and 6.2 Democratic seats over a non-partisan baseline. This nets out to a Republican advantage worth around 2.3 congressional seats.",
+    "numbers": ["8.6 sièges biais pro-R", "6.2 sièges biais pro-D", "avantage net 2.3 sièges", "20/44 États avec écart significatif à 5%"],
+    "entities": ["Republican Party", "Democratic Party"],
+    "time_period": "cycle de redécoupage 2020-2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "widespread-partisan-gerrymandering-mostly-cancels"
+  },
+  {
+    "claim": "Le redécoupage partisan réduit la réactivité (élasticité) sièges-votes de la Chambre des représentants au vote national : un point de pourcentage supplémentaire de vote populaire national ne rapporte que 7.8 sièges en moyenne sous le plan adopté, contre 9.2 sièges sous le plan non-partisan de référence.",
+    "stance": "supports",
+    "stance_target": "le découpage électoral affecte directement l'élasticité (réactivité) sièges-votes d'un système électoral, indépendamment du biais net",
+    "evidence_type": "statistical",
+    "scope_conditions": "Chambre des représentants US, plans 2022 vs simulations non-partisanes",
+    "quoted_support": "we find that an additional percentage point increase in national popular vote nets each party only 7.8 seats, on average, versus 9.2 under the non-partisan baseline.",
+    "numbers": ["7.8 sièges/point (plan adopté)", "9.2 sièges/point (baseline non-partisane)", "baisse d'environ 15% de réactivité"],
+    "entities": [],
+    "time_period": "cycle 2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "widespread-partisan-gerrymandering-mostly-cancels"
+  },
+  {
+    "claim": "Pour obtenir la majorité à la Chambre sous le plan de découpage adopté en 2022, les démocrates ont besoin d'au moins 51.1% du vote populaire bipartisan national, contre un seuil à peine inférieur (0.14 point de moins) sous le plan non-partisan de référence, ce qui montre que le biais structurel imputable au seul découpage reste faible comparé au biais géographique préexistant.",
+    "stance": "refutes",
+    "stance_target": "le redécoupage électoral est la cause principale du désavantage structurel démocrate dans la traduction voix-sièges",
+    "evidence_type": "statistical",
+    "scope_conditions": "Chambre des représentants US, cycle 2022",
+    "quoted_support": "To win a majority in the US House of Representatives under the enacted plan, Democrats need more than 51.1% of the national two-party popular vote, just 0.14 percentage points more than under the non-partisan baseline.",
+    "numbers": ["seuil de majorité 51.1% (plan adopté)", "0.14 point d'écart avec baseline non-partisane"],
+    "entities": ["Democratic Party"],
+    "time_period": "2022",
+    "region": "United States",
+    "confidence": "high",
+    "source_note_id": "widespread-partisan-gerrymandering-mostly-cancels"
+  }
+]

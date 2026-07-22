@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "L'inférence écologique n'est identifiée que sous une condition de 'coarsening at random' (CAR) analogue à l'ignorabilité en inférence causale ; sans elle, aucune méthode d'EI (Goodman, King, RxC, Thomsen) ne peut estimer de façon cohérente la quantité d'intérêt.",
+    "stance": "neutral",
+    "stance_target": "conditions formelles d'identification de l'inférence écologique",
+    "evidence_type": "theoretical",
+    "scope_conditions": "cadre général, reformulation en données manquantes / inférence causale",
+    "quoted_support": "All methods of ecological inference fail to consistently estimate the quantity of interest when this condition does not hold.",
+    "numbers": [],
+    "entities": ["CAR", "CCAR", "Goodman regression", "King (1997)"],
+    "time_period": null,
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "the-role-of-confounders-and-linearity-in"
+  },
+  {
+    "claim": "Sur données de vérité terrain, toutes les méthodes d'EI testées surestiment systématiquement le degré de polarisation raciale du vote.",
+    "stance": "refutes",
+    "stance_target": "fiabilité générale des méthodes classiques d'inférence écologique pour estimer les écarts entre sous-groupes",
+    "evidence_type": "empirical",
+    "scope_conditions": "données de vote/enregistrement partisan par race, écart Blancs/Noirs, comparaison King's EI, Goodman, méthode 'seine' doublement robuste",
+    "quoted_support": "In truth, there is a 54 point gap in Democratic party registration between White voters (19.5% registered Democrat) vs. Black voters (73.8%)... However, King's model estimates the White-Black gap to be 72 points.",
+    "numbers": ["écart vrai: 54 points", "écart estimé King: 72 points", "sous-estimation du vote démocrate blanc de 6 points", "surestimation du vote démocrate noir de 12 points", "surestimation générale de 10-20 points selon les méthodes"],
+    "entities": ["King's EI", "Goodman regression", "seine (McCartan & Kuriwaki 2025)", "Rosen et al. multinomial-Dirichlet"],
+    "time_period": null,
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "the-role-of-confounders-and-linearity-in"
+  },
+  {
+    "claim": "Toutes les méthodes d'EI testées sous-estiment le taux réel de vote panaché (ticket-splitting) entre deux scrutins simultanés (présidentielle / chambre), le modèle de Thomsen étant le moins biaisé mais limité au cas 2x2 sans covariables ni estimation locale.",
+    "stance": "supports",
+    "stance_target": "biais systématique de sous-estimation du vote panaché par les méthodes d'inférence écologique classiques",
+    "evidence_type": "empirical",
+    "scope_conditions": "données de bulletins individuels (cast vote records) de 2020, 63 circonscriptions pour la Chambre des représentants américaine, vérité terrain observée",
+    "quoted_support": "The Thomsen model, shown in the third facet, does quite well, achieving the lowest mean absolute error... However, this method is restricted to the 2×2 case, does not support covariates, and does not produce local estimates. It too tends to underestimate ticket splitting.",
+    "numbers": ["taux vrai de panachage 5.2% (national)", "16% dans le 8e district du Wisconsin vs 9% estimé par régression naïve", "erreur absolue moyenne ~3.4 points au niveau district"],
+    "entities": ["Thomsen model", "King's EI", "Rosen et al. multinomial-Dirichlet", "Wisconsin's 8th congressional district"],
+    "time_period": "2020",
+    "region": "États-Unis",
+    "confidence": "high",
+    "source_note_id": "the-role-of-confounders-and-linearity-in"
+  },
+  {
+    "claim": "Le biais des méthodes d'EI classiques provient typiquement de facteurs de confusion géographiques non contrôlés (ex: urbanité) corrélés à la fois à la composition démographique et au comportement électoral au sein des groupes.",
+    "stance": "supports",
+    "stance_target": "mécanisme causal expliquant les biais systématiques observés dans l'inférence écologique électorale",
+    "evidence_type": "empirical",
+    "scope_conditions": "confondeur 'distance à la ville/université la plus proche' comme proxy d'urbanité",
+    "quoted_support": "White and Hispanic voters in the urban core are systematically less Republican than in distant areas... This suggests that allowing covariates to enter the model in a flexible functional form as we do with seine's bases is important.",
+    "numbers": [],
+    "entities": ["seine", "urbanicity"],
+    "time_period": null,
+    "region": "États-Unis",
+    "confidence": "medium",
+    "source_note_id": "the-role-of-confounders-and-linearity-in"
+  },
+  {
+    "claim": "L'identité comptable exacte de l'inférence écologique impose une structure partiellement linéaire à la fonction d'espérance conditionnelle, ce qui justifie théoriquement d'entrer les covariables par interaction avec les variables catégorielles dans une régression linéaire.",
+    "stance": "neutral",
+    "stance_target": "fondement méthodologique du nouvel estimateur doublement robuste 'seine'",
+    "evidence_type": "theoretical",
+    "scope_conditions": "cadre CAR (coarsening at random)",
+    "quoted_support": "the accounting identity Eq. 3, combined with CAR, restricts the true regression function of Y on Z and X to be partially linear in X. This proves helpful in estimation.",
+    "numbers": [],
+    "entities": ["seine", "King (1997)"],
+    "time_period": null,
+    "region": null,
+    "confidence": "high",
+    "source_note_id": "the-role-of-confounders-and-linearity-in"
+  }
+]

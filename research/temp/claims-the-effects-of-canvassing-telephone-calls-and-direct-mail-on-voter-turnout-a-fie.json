@@ -1,0 +1,16 @@
+[
+  {
+    "claim": "Gerber & Green (2000) found personal canvassing substantially increased voter turnout, direct mail had a small effect, and telephone calls had no effect, in a randomized field experiment of ~30,000 New Haven voters ahead of the November 1998 election.",
+    "stance": "supports",
+    "stance_target": "foundational empirical basis for treating door-to-door canvassing as the most effective GOTV/persuasion channel, motivating France's continued reliance on it",
+    "evidence_type": "empirical",
+    "scope_conditions": "New Haven, Connecticut, USA, November 1998 election",
+    "quoted_support": "Voter turnout was increased substantially by personal canvassing, slightly by direct mail, and not at all by telephone calls. These findings support our hypothesis that the long-term retrenchment in voter turnout is partly attributable to the decline in face-to-face political mobilization.",
+    "numbers": ["~30,000 registered voters"],
+    "entities": ["Alan S. Gerber", "Donald P. Green", "New Haven"],
+    "time_period": "November 1998",
+    "region": "United States (Connecticut)",
+    "confidence": "high",
+    "source_note_id": "the-effects-of-canvassing-telephone-calls-and-direct-mail-on-voter-turnout-a-fie"
+  }
+]

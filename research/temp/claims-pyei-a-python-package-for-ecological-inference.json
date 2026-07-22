@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Modern open-source EI tooling (PyEI) treats ecological inference as fundamentally underdetermined ('R by C' table problem) requiring statistical assumptions to resolve, and offers multiple competing model families (Goodman regression, King's truncated normal, Binomial-Beta and Dirichlet-Multinomial hierarchical models, Wakefield 2004) precisely because no single method is considered definitively reliable across contexts.",
+    "stance": "neutral",
+    "stance_target": "State of the art in open-source ecological inference tooling as of 2021",
+    "evidence_type": "theoretical",
+    "scope_conditions": "US voting rights litigation and redistricting practice",
+    "quoted_support": "PyEI brings together the following ecological inference methods in a common framework alongside plotting, reporting, and diagnostic tools... facilitates exploration and benchmarking for researchers who are seeking to understand properties of existing ecological inference methods in different settings.",
+    "numbers": [],
+    "entities": ["Karin Knudson", "MGGG Redistricting Lab", "Tufts University", "King 1997", "Goodman 1953", "Rosen et al. 2001", "Wakefield 2004"],
+    "time_period": "2021",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "pyei-a-python-package-for-ecological-inference"
+  },
+  {
+    "claim": "PyEI is built and used specifically for two-group (racial bloc voting) or small-R-by-C precinct-level EI problems in US legal contexts, using modern gradient-based MCMC (NUTS) for faster convergence than older R-based EI implementations.",
+    "stance": "neutral",
+    "stance_target": "Applicability of existing open-source EI tools to multi-party European elections at the bureau-de-vote level",
+    "evidence_type": "empirical",
+    "scope_conditions": "US voting rights and redistricting cases",
+    "quoted_support": "the Bayesian hierarchical methods implemented in PyEI rest on modern probabilistic programming tooling (Salvatier et al., 2016) and gradient-based MCMC methods such as the No U-Turn Sampler (NUTS)... Using NUTS where possible should allow for faster convergence than existing implementations.",
+    "numbers": [],
+    "entities": ["PyEI", "PyMC3", "NUTS"],
+    "time_period": "2021",
+    "region": "United States",
+    "confidence": "medium",
+    "source_note_id": "pyei-a-python-package-for-ecological-inference"
+  }
+]

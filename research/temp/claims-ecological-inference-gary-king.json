@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "The RxC (rows-by-columns) ecological inference case -- used by both PyEI's ei_rxc() and eiCompare's ei_rxc() for simultaneous multi-candidate/multi-group estimation -- traces to King, Rosen & Tanner (2001), 'Bayesian and Frequentist Inference for Ecological Inference: The RxC Case,' establishing the RxC model as an extension beyond King's original 1997 2x2 method.",
+    "stance": "neutral",
+    "stance_target": "methodological lineage of the RxC ecological-inference estimator implemented in both PyEI and eiCompare",
+    "evidence_type": "theoretical",
+    "scope_conditions": "statistical methodology literature, general applicability beyond the US racial-voting context",
+    "quoted_support": "[Paper] Bayesian and Frequentist Inference for Ecological Inference: The RxC Case (2001)",
+    "numbers": ["2001 publication"],
+    "entities": ["Gary King", "Ori Rosen", "Martin Tanner", "RxC ecological inference"],
+    "time_period": "2001",
+    "region": "general",
+    "confidence": "medium",
+    "source_note_id": "ecological-inference-gary-king"
+  },
+  {
+    "claim": "Ecological inference methodology has continued to develop after King's original 1997 solution, including a 2019 refinement ('Ecological Regression With Partial Identification') addressing partial (non-point) identification of aggregate-to-individual inference -- indicating the field treats EI as having inherent identification limits that later work tries to formally bound rather than eliminate.",
+    "stance": "neutral",
+    "stance_target": "ecological inference remains a methodologically contested/evolving technique with acknowledged identification limits, relevant to assessing its reliability for bureau-de-vote-level projection",
+    "evidence_type": "theoretical",
+    "scope_conditions": "statistical methodology literature",
+    "quoted_support": "[Paper] Ecological Regression With Partial Identification (2019)",
+    "numbers": ["2019 publication"],
+    "entities": ["Gary King", "Ecological Regression With Partial Identification"],
+    "time_period": "2019",
+    "region": "general",
+    "confidence": "low",
+    "source_note_id": "ecological-inference-gary-king"
+  }
+]

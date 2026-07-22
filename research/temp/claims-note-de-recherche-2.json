@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Au niveau des circonscriptions législatives, la corrélation entre les scores obtenus par la gauche (NFP) aux européennes 2024 et au 1er tour des législatives 2024 est de 0,89, avec des corrélations par parti variant fortement (0,86 pour LFI, 0,82 pour les Verts, 0,64 pour le PS, 0,42 pour le PC).",
+    "stance": "neutral",
+    "stance_target": "degré de comparabilité entre résultats électoraux à des scrutins différents (européennes vs législatives) au niveau infranational",
+    "evidence_type": "statistical",
+    "scope_conditions": "circonscriptions législatives françaises, 2024, coalition NFP et ses composantes",
+    "quoted_support": "Entre les scores réalisés dans les circonscriptions législatives aux Européennes 2024 au premier tour des législatives, on enregistre une corrélation de 0,89. Si l'on considère les partis qui le composent, les corrélations sont de 0,86 pour LFI, 0,42 pour le PC dont la structure s'affaiblit d'élection en élection, 0,64 pour le Parti Socialiste qui perd des territoires où R. Glucksmann avait remporté un certain succès et 0,82 pour les Verts.",
+    "numbers": ["0.89", "0.86", "0.42", "0.64", "0.82"],
+    "entities": ["NFP", "LFI", "PC", "Parti Socialiste", "Les Verts/EELV"],
+    "time_period": "juin-juillet 2024",
+    "region": "France, circonscriptions législatives",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-2"
+  },
+  {
+    "claim": "Le partage des circonscriptions entre partis de gauche coalisés ne reflète que partiellement le rapport de force du scrutin de référence utilisé pour la négociation : en 2022, LFI reçoit 59,9% des circonscriptions NUPES pour 71,8% du score de la gauche à la présidentielle 2022, tandis que le PS, à seulement 5,6% du score gauche, obtient quand même 12,7% des circonscriptions.",
+    "stance": "neutral",
+    "stance_target": "fidélité de la répartition ex-ante des circonscriptions à la proportionnalité stricte du dernier scrutin de référence",
+    "evidence_type": "statistical",
+    "scope_conditions": "négociation NUPES avant les législatives 2022, France métropolitaine, 539 circonscriptions",
+    "quoted_support": "LFI, dopé, par le très bon score de J-L. Mélenchon (71,8% en part des suffrages de gauche) obtient la part du lion avec près de 60% des circonscriptions (59,9%). Mais le PS largement dominé avec 5,6% lors de la présidentielle se voit attribuer 12,7% des circonscriptions.",
+    "numbers": ["59.9%", "71.8%", "5.6%", "12.7%"],
+    "entities": ["LFI", "NUPES", "Parti Socialiste", "Jean-Luc Mélenchon"],
+    "time_period": "2022",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-2"
+  },
+  {
+    "claim": "En 2024, malgré le bon score de Raphaël Glucksmann aux européennes (43,8% du score de la gauche), le PS n'obtient que 31,5% des circonscriptions NFP aux législatives (contre 12,7% en 2022), tandis que LFI obtient 42,4% des circonscriptions pour seulement 31,3% du score gauche aux européennes.",
+    "stance": "neutral",
+    "stance_target": "impact du bon score PS aux européennes 2024 sur son poids dans la négociation des circonscriptions NFP",
+    "evidence_type": "statistical",
+    "scope_conditions": "négociation NFP avant les législatives 2024, France métropolitaine",
+    "quoted_support": "le PS obtient-il une proportion de circonscriptions bien supérieure à ce qu'il avait obtenu en 2022 : 31,5% contre 12,7%. Mais cette proportion est bien inférieure à ce qu'il aurait obtenu en considérant son score dans la gauche aux élections européennes : 43,8%. Inversement, LFI reçoit en partage plus de circonscriptions que ne l'aurait voulu la prise en compte de son score dans la gauche aux européennes : 42,4% contre 31,3%.",
+    "numbers": ["31.5%", "12.7%", "43.8%", "42.4%", "31.3%"],
+    "entities": ["Parti Socialiste", "LFI", "NFP", "Raphaël Glucksmann"],
+    "time_period": "2024",
+    "region": "France métropolitaine",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-2"
+  },
+  {
+    "claim": "La part de LFI parmi les élus de la coalition de gauche chute de 49,7% en 2022 (NUPES) à 37,3% en 2024 (NFP), contre 34,2% pour le PS, indiquant un rééquilibrage entre LFI et le PS post-européennes 2024.",
+    "stance": "supports",
+    "stance_target": "rééquilibrage du rapport de force interne à la gauche entre LFI et le PS suite aux européennes 2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "élus de la coalition de gauche à l'Assemblée nationale, législatives 2022 et 2024",
+    "quoted_support": "si l'on prend le nombre d'élus comme critère du rapport de force au sein de la gauche, on est passé d'une domination massive de LFI en 2022 (près de la moitié des élus de gauche, 49,7%) à une situation plus équilibrée aujourd'hui puisque LFI n'a plus que 6 députés de plus que le PS soit un rapport de 37,3% contre 34,2%.",
+    "numbers": ["49.7%", "37.3%", "34.2%"],
+    "entities": ["LFI", "Parti Socialiste", "NUPES", "NFP"],
+    "time_period": "2022 et 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-2"
+  },
+  {
+    "claim": "La série longue des scores électoraux de la gauche française (source ministère de l'Intérieur, codages CEVIPOF) de 2017 à 2024 montre l'échec relatif structurel de la coalition de gauche jamais repassée sous 30% des suffrages depuis les législatives 2017, son meilleur score récent étant réalisé aux européennes de juin 2024 (31,6% pour NUPES/NFP).",
+    "stance": "neutral",
+    "stance_target": "trajectoire électorale de la gauche coalisée française 2017-2024",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, scrutins nationaux 2017-2024",
+    "quoted_support": "La gauche coalisée en NUPES ou NFP a assez peu évolué en pourcentages des suffrages exprimés depuis le premier tour des élections législatives de 2017. Elle a réalisé son meilleur score aux élections européennes de juin 2024.",
+    "numbers": ["31.6%", "26.0%", "25.5%", "28.5%", "30.5%", "26.4%", "28.62%"],
+    "entities": ["NUPES", "NFP", "gauche"],
+    "time_period": "2017-2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "note-de-recherche-2"
+  }
+]

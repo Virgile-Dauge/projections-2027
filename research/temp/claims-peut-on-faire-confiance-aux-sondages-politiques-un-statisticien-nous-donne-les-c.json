@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "The 2024 legislative election polling failure (institutes projected RN+allies at 170-230 seats, actual result 143 seats) is presented as direct evidence that vote-transfer-between-blocs redressment assumptions, shared across multiple institutes, can create a systematic, correlated 'community of bias' rather than independent random error.",
+    "stance": "refutes",
+    "stance_target": "convergence of multiple pollsters' estimates is a marker of reliability for vote-transfer-based projections",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, legislative elections, June-July 2024",
+    "quoted_support": "Lorsque plusieurs instituts utilisent des méthodes similaires et des redressements basés sur les mêmes hypothèses (comme le report de voix entre blocs), une erreur commune peut se produire. La stabilité des chiffres n'est alors pas un gage de fiabilité, mais le symptôme d'une confiance collective dans une erreur collective.",
+    "numbers": ["170", "230", "143"],
+    "entities": ["Rassemblement National", "Commission des sondages"],
+    "time_period": "June-July 2024",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "peut-on-faire-confiance-aux-sondages-politiques-un-statisticien-nous-donne-les-c"
+  },
+  {
+    "claim": "France's seat-projection exercises, which depend on assumptions about second-round vote transfers/report de voix across 577 local races, receive NO methodological control or certification from the Commission des sondages, unlike the underlying voting-intention surveys which are legally regulated under loi n°2016-508.",
+    "stance": "supports",
+    "stance_target": "vote-transfer-matrix-based seat/runoff projections carry a specific, named methodological reliability gap versus raw polling",
+    "evidence_type": "legal",
+    "scope_conditions": "France, all national elections using local seat/runoff projections, post-2016",
+    "quoted_support": "La projection en sièges (non contrôlée) : c'est un exercice de « traduction » du vote national en sièges parlementaires. La commission est formelle : elle n'exerce aucun contrôle sur ces chiffres et recommande la prudence.",
+    "numbers": [],
+    "entities": ["Commission des sondages"],
+    "time_period": "since 2016 (loi n°2016-508)",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "peut-on-faire-confiance-aux-sondages-politiques-un-statisticien-nous-donne-les-c"
+  },
+  {
+    "claim": "Empirically, for the 2012 presidential election, the true total error (bias + variance) of pre-election vote-intention estimates was 4-6 points versus a displayed theoretical margin of error of 1.8-2.7 points, i.e. roughly double the stated precision, once redressment biases are accounted for.",
+    "stance": "supports",
+    "stance_target": "official/displayed margins of error understate true forecasting uncertainty in French quota-method polling, a caution directly applicable to transfer-matrix-derived projections",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, presidential election 2012",
+    "quoted_support": "pour une intention de vote de 25 %, les marges d'erreur « théoriques » affichées étaient de l'ordre de 1,8 à 2,7 points [...] elles se situaient en réalité entre 4 et 6 points.",
+    "numbers": ["25%", "1.8-2.7 points", "4-6 points"],
+    "entities": ["INSEE", "Pascal Ardilly", "Commission des sondages"],
+    "time_period": "2012",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "peut-on-faire-confiance-aux-sondages-politiques-un-statisticien-nous-donne-les-c"
+  },
+  {
+    "claim": "The near-totality of French polling institutes use quota-based sampling, for which the mathematical concept of 'margin of error' has, strictly speaking, no formal statistical basis, per the institutes' own admission before the French Senate.",
+    "stance": "neutral",
+    "stance_target": "the underlying statistical validity of published confidence intervals for French election polls",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, quota-method polling institutes",
+    "quoted_support": "la quasi-totalité des instituts français utilise la méthode des quotas, une technique sur laquelle la notion mathématique de marge d'erreur n'a techniquement « pas de sens », comme les instituts l'admettaient eux-mêmes devant le Sénat.",
+    "numbers": [],
+    "entities": ["Sénat", "Commission des sondages"],
+    "time_period": "referencing 2010 Sénat report no.54",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "peut-on-faire-confiance-aux-sondages-politiques-un-statisticien-nous-donne-les-c"
+  }
+]

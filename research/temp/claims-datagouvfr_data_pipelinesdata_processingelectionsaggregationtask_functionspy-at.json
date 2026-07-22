@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "The data.gouv.fr aggregated-elections Airflow DAG (task_functions.py, process_election_data task) does not perform the bureau-de-vote to REU identifier crosswalk itself; it merely concatenates already-standardized per-source 'general-results.csv'/'candidats-results.csv' files pulled from a data.gouv.fr organization's community_resources, meaning the actual bureau-ID reconciliation logic ('the magic') is produced upstream by a decentralized, uninspected process.",
+    "stance": "supports",
+    "stance_target": "table-bv-reu.csv / bureau ID crosswalk is not a single unified, per-cycle audited process but a decentralized ad hoc one",
+    "evidence_type": "empirical",
+    "scope_conditions": "as of code commit 5e28b04, July 2, 2026; data_processing/elections/aggregation/task_functions.py in datagouv/datagouvfr_data_pipelines",
+    "quoted_support": "# getting preprocessed resources, the magic is there (when creating standardized files), here we only concatenate them",
+    "numbers": ["204 lines / 7.39 KB file", "organization id 646b7187b50b2a93b1ae3d45"],
+    "entities": ["datagouv/datagouvfr_data_pipelines", "community_resources", "general-results.csv", "candidats-results.csv"],
+    "time_period": "as of July 2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "datagouvfr_data_pipelinesdata_processingelectionsaggregationtask_functionspy-at"
+  },
+  {
+    "claim": "The aggregated dataset schema fixes only a set of column names (id_election, id_brut_miom, code_bv, code_circonscription, etc.) for concatenation typing purposes; it enforces no validation, constraint, or lookup requiring that a given code_bv/id_brut_miom value be stable, unique, or resolvable to a REU entry across election cycles.",
+    "stance": "supports",
+    "stance_target": "no strict national coding norm enforced programmatically at the aggregation layer",
+    "evidence_type": "empirical",
+    "scope_conditions": "task_functions.py dtypes dict, general and candidats schemas",
+    "quoted_support": "assert all(col in dtypes[scope].keys() for col in df.columns)",
+    "numbers": [],
+    "entities": ["id_brut_miom", "code_bv", "code_circonscription"],
+    "time_period": "as of July 2026",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "datagouvfr_data_pipelinesdata_processingelectionsaggregationtask_functionspy-at"
+  },
+  {
+    "claim": "The elections aggregation pipeline is triggered manually, not on an automated schedule, run by the data.gouv.fr team each time the Ministry of Interior publishes new election results, rather than continuously validated against a versioned REU crosswalk.",
+    "stance": "supports",
+    "stance_target": "table-bv-reu.csv crosswalk maintenance is reactive/manual, not a systematically re-validated static schema",
+    "evidence_type": "empirical",
+    "scope_conditions": "README.md for data_processing_elections job",
+    "quoted_support": "Fréquence de mise à jour | Manuelle | Données sources | Toutes les données des élections publiées par le MIOM sur data.gouv.fr",
+    "numbers": [],
+    "entities": ["MIOM", "data.gouv.fr", "dag.py"],
+    "time_period": "as of April 1, 2026 (last README commit)",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "datagouvfr_data_pipelinesdata_processingelectionsaggregationtask_functionspy-at"
+  }
+]

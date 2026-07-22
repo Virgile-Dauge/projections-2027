@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "Bracalente, Forcina & Falocci construisent 19 'petites zones' homogènes dans la région Umbria (Italie) à partir de données officielles au niveau du bureau de vote, précisément pour minimiser le biais écologique (ecological fallacy) qu'une inférence écologique directe au bureau isolé produirait.",
+    "stance": "supports",
+    "stance_target": "l'agrégation de bureaux en zones homogènes réduit le risque de biais écologique par rapport à l'EI au bureau isolé",
+    "evidence_type": "theoretical",
+    "scope_conditions": "Umbria, Italie, élections régionales/nationales récentes",
+    "quoted_support": "Using official electoral data recorded at the polling station level inside small homogeneous areas, the risk of bias (ecological fallacy) that has often discouraged the use of ecological inference it is minimized.",
+    "numbers": ["19 small areas"],
+    "entities": ["Bracalente", "Forcina", "Falocci", "Umbria", "Lega"],
+    "time_period": "2025",
+    "region": "Italie (Umbria)",
+    "confidence": "medium",
+    "source_note_id": "a-small-area-ecological-approach-for-estimating-vote-changes"
+  },
+  {
+    "claim": "Le papier ne rapporte aucune métrique de corrélation de rang (Spearman/Kendall) ni de backtest de validation contre une vérité-terrain externe ; c'est un travail de mesure/explication rétrospective des transitions de vote, pas un exercice de validation prédictive.",
+    "stance": "neutral",
+    "stance_target": "existence d'un backtest européen de corrélation de rang à maille infra-district (GAP2)",
+    "evidence_type": "empirical",
+    "scope_conditions": "lecture intégrale du texte, recherche de 'Spearman', 'Kendall', 'rank', 'backtest' — 0 occurrence de chacun",
+    "quoted_support": "we propose an ecological inference methodology to estimate the number of vote transitions within small homogeneous areas and to assess the relationships between these counts and local characteristics through multinomial logistic models",
+    "numbers": ["0 occurrences de 'Spearman'", "0 de 'Kendall'", "0 de 'rank'", "0 de 'backtest'"],
+    "entities": ["Bracalente", "Forcina", "Falocci"],
+    "time_period": "2025",
+    "region": "Italie (Umbria)",
+    "confidence": "high",
+    "source_note_id": "a-small-area-ecological-approach-for-estimating-vote-changes"
+  },
+  {
+    "claim": "Les désavantages économiques (précarité, isolement géographique) expliquent principalement les transitions des anciens abstentionnistes et des électeurs Lega vers le parti nationaliste de droite montant, tandis que les transitions venant du camp opposé sont surtout influencées par des facteurs culturels (faible capital social, attitude anti-UE, tradition politique).",
+    "stance": "neutral",
+    "stance_target": "déterminants locaux du vote populiste/RN par condition de vie plutôt que par territoire administratif",
+    "evidence_type": "empirical",
+    "scope_conditions": "Umbria, Italie, élections régionales analysées",
+    "quoted_support": "economic disadvantages mainly pushed previous abstainers and far-right Lega voters to change their choices in favor of the rising right-wing party, while transitions from the opposite political camp were mostly influenced by cultural factors",
+    "numbers": [],
+    "entities": ["Lega", "Umbria"],
+    "time_period": "2025",
+    "region": "Italie (Umbria)",
+    "confidence": "medium",
+    "source_note_id": "a-small-area-ecological-approach-for-estimating-vote-changes"
+  },
+  {
+    "claim": "La volatilité électorale déclarée (vote switching) a fortement augmenté dans le temps, passant d'environ 13% dans les années 1960 à 43% lors des élections de 2015 selon des données individuelles comparatives internationales.",
+    "stance": "neutral",
+    "stance_target": "hausse de la volatilité électorale rend les hypothèses de swing homogène de plus en plus fragiles",
+    "evidence_type": "statistical",
+    "scope_conditions": "données comparatives internationales (Comparative Study of Electoral Systems), 1960s-2015",
+    "quoted_support": "switching increased from about 13% in the 1960s to 43% in the 2015 elections",
+    "numbers": ["13%", "43%"],
+    "entities": [],
+    "time_period": "1960s-2015",
+    "region": "international (pays couverts par CSES)",
+    "confidence": "medium",
+    "source_note_id": "a-small-area-ecological-approach-for-estimating-vote-changes"
+  },
+  {
+    "claim": "Les données de rappel de vote issues d'enquêtes post-électorales sont fortement inexactes : environ 25% des répondants donnent une réponse inexacte, un taux qui monte à 40% chez les switchers et 70% chez les primo-non-votants, ce qui invalide l'usage de ces enquêtes pour calibrer un modèle de transition de vote fin.",
+    "stance": "supports",
+    "stance_target": "nécessité de méthodes écologiques (données officielles agrégées) plutôt que des enquêtes de rappel pour estimer les transitions de vote à maille fine",
+    "evidence_type": "empirical",
+    "scope_conditions": "panels d'études électorales, comparaison déclaration immédiate vs rappel 4 ans après",
+    "quoted_support": "about 25% of respondents gave inaccurate answers, rising to 40% among party switchers and 70% among prior non-voters",
+    "numbers": ["25%", "40%", "70%"],
+    "entities": [],
+    "time_period": "non précisé (panel sur 4 ans)",
+    "region": "non précisé",
+    "confidence": "medium",
+    "source_note_id": "a-small-area-ecological-approach-for-estimating-vote-changes"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "Selon l'enquête Participation électorale de l'INSEE, 78% des ouvriers non qualifiés se sont rendus aux urnes au premier tour de la présidentielle 2017, contredisant l'équation classes populaires = abstention.",
+    "stance": "refutes",
+    "stance_target": "assimilation des classes populaires françaises à l'abstention électorale",
+    "evidence_type": "statistical",
+    "scope_conditions": "France, présidentielle 2017, 1er tour",
+    "quoted_support": "au premier tour de 2017, selon l'enquête Participation électorale de l'INSEE, 78 % des ouvriers non qualifiés s'étaient rendus aux urnes.",
+    "numbers": ["78%"],
+    "entities": ["INSEE"],
+    "time_period": "2017",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-votes-en-milieux-populaires-diversit-lectorale-et-htrognit-sociale-mtropolit"
+  },
+  {
+    "claim": "Dans une étude par questionnaire à la sortie de 18 bureaux de vote de deux villes populaires (Méricourt et Villeneuve-Saint-Georges) en 2017, le collectif Focale montre que le vote FN attire majoritairement les ouvriers du privé sans origine migratoire, tandis que Macron attire des personnes légèrement plus hautes dans la stratification sociale et Mélenchon un électorat hétérogène mêlant précarité/discrimination et stabilité professionnelle.",
+    "stance": "neutral",
+    "stance_target": "hétérogénéité sociale interne des votes populaires en 2017",
+    "evidence_type": "statistical",
+    "scope_conditions": "Méricourt et Villeneuve-Saint-Georges, présidentielle 2017 1er tour",
+    "quoted_support": "L'ouvrage note ainsi que le Front national attire majoritairement les ouvriers du privé sans origine migratoire, contrairement à E. Macron qui attire des personnes légèrement plus hautes dans la stratification sociale.",
+    "numbers": ["2 176 questionnaires", "18 bureaux de vote", "Méricourt 11 700 hab.", "Villeneuve-Saint-Georges 32 620 hab."],
+    "entities": ["Front national", "Emmanuel Macron", "Jean-Luc Mélenchon", "Méricourt", "Villeneuve-Saint-Georges", "collectif Focale"],
+    "time_period": "2017",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "les-votes-en-milieux-populaires-diversit-lectorale-et-htrognit-sociale-mtropolit"
+  },
+  {
+    "claim": "Un parcours migratoire extra-européen agit comme une 'digue' contre le vote FN dans les deux villes étudiées, tandis que le niveau de précarité pour les populations sans parcours migratoire est fortement corrélé au vote Le Pen à Méricourt, et l'appartenance syndicale/associative favorise le vote Mélenchon.",
+    "stance": "supports",
+    "stance_target": "rôle protecteur de l'ancrage social/associatif et migratoire contre le vote d'extrême droite dans les classes populaires",
+    "evidence_type": "statistical",
+    "scope_conditions": "Méricourt, Villeneuve-Saint-Georges, 2017",
+    "quoted_support": "si dans les deux villes le fait d'avoir un parcours migratoire extra-européen fait l'effet d'une « digue » contre le vote FN, les auteur·ices notent que, dans le cas de Méricourt, le niveau de précarité pour les populations sans parcours migratoire est fortement corrélé au vote Le Pen.",
+    "numbers": [],
+    "entities": ["Front national", "Marine Le Pen"],
+    "time_period": "2017",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "les-votes-en-milieux-populaires-diversit-lectorale-et-htrognit-sociale-mtropolit"
+  }
+]

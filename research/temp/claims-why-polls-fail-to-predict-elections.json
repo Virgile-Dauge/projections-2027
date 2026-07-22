@@ -1,0 +1,30 @@
+[
+  {
+    "claim": "Beyond well-known low response rates, analysis of raw survey microdata from Argentina's 2019 election reveals two additional, distinct bias mechanisms: mis-representation of the population in the sampling frame, and social-desirability bias where respondents hide support for the more controversial/anti-establishment candidate.",
+    "stance": "supports",
+    "stance_target": "poll failures to predict populist/anti-establishment surges are driven by identifiable, reproducible bias mechanisms beyond sampling noise",
+    "evidence_type": "empirical",
+    "scope_conditions": "Argentina, 2019 presidential election / PASO primary",
+    "quoted_support": "Analysis of the raw and re-weighted data from longitudinal surveys performed before and after the elections reveals clear biases (beyond well-known low-response rates) related to mis-representation of the population and, most importantly, to social-desirability biases, i.e., the tendency of respondents to hide their intention to vote for controversial candidates.",
+    "numbers": [],
+    "entities": ["Alberto Fernández", "Mauricio Macri", "Argentina PASO primary 2019"],
+    "time_period": "2019",
+    "region": "Argentina",
+    "confidence": "high",
+    "source_note_id": "why-polls-fail-to-predict-elections"
+  },
+  {
+    "claim": "A longitudinal opinion-tracking method using social-media big-data analytics, ML classification, and network theory correctly predicted Fernández's overwhelming 2019 primary victory where all traditional pollsters failed.",
+    "stance": "supports",
+    "stance_target": "social-media-based tracking can serve as an independent, non-poll cross-check on candidate support that is less susceptible to social-desirability bias",
+    "evidence_type": "empirical",
+    "scope_conditions": "Argentina, 2019 PASO primary election",
+    "quoted_support": "We then propose a longitudinal opinion tracking method based on big-data analytics from social media, machine learning, and network theory that overcomes the limits of traditional polls. The model achieves accurate results in the 2019 Argentina elections predicting the overwhelming victory of the candidate Alberto Fernández over the president Mauricio Macri.",
+    "numbers": ["2,252,551 total users collected (Table VIII)", "17,953 bots identified"],
+    "entities": ["Alberto Fernández", "Mauricio Macri"],
+    "time_period": "March-October 2019",
+    "region": "Argentina",
+    "confidence": "medium",
+    "source_note_id": "why-polls-fail-to-predict-elections"
+  }
+]

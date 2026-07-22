@@ -1,0 +1,68 @@
+{
+  "critic_type": "width",
+  "draft_path": "research/notes/final_report_projections-electorales-bureaux-2027-b0b1c4.md",
+  "vault_tag": "projections-electorales-bureaux-2027-b0b1c4",
+  "summary": "Le draft couvre les 7 sections requises et toutes les familles de methodes ; aucun trou critique (aucun cluster explicitement demande n'est totalement absent). Les gaps sont des raffinements et des brins de preuve que le corpus a collectes mais que le draft a laisses de cote : l'elasticite electorale (cluster dedie, 0 mention), le brin academique francais de l'inference ecologique/regression ecologique (Dolez & Laurent, Charpentier) sous le sous-item explicite 'chercheurs francais', la recomposition CEPREMAP 2024-2025, et l'ancrage empirique de la 'reserve d'abstention par bloc' (2e variable-produit du livrable). Deux constats de bloat : redondance de these et recouvrement resume/conclusion.",
+  "findings": [
+    {
+      "severity": "major",
+      "location": "Section 2.C (Swing heterogene et regional) ; renforce aussi 2.G, 7.B",
+      "issue": "L'elasticite electorale (elasticity) est totalement absente du draft (0 occurrence), alors que le corpus en a fait un cluster dedie (tag `elasticity` : FiveThirtyEight political-elasticity-scores ; Kenny/McCartan/Kuriwaki/Imai sur elasticite et seats-votes). L'elasticite est un raffinement distinct du lean partisan : elle mesure de combien une unite bouge par point de swing national (sa reactivite aux marees), independamment de son penchant. C'est exactement le parametre qui decide quelles unites re-classent le plus sous un changement de scenario national. Le draft applique un swing piecewise par bloc mais traite implicitement la reactivite comme uniforme a l'interieur d'un bloc, et l'argument central de robustesse ordinale (7.B : 'recalculer le rang sous trois scenarios') repose precisement sur une hypothese d'elasticite homogene qui n'est jamais nommee ni testee.",
+      "evidence": "Notes vault non citees : [[datapolitical-elasticity-scores-at-master-fivethirtyeightdata-github]] (538 calcule l'elasticite separement du partisan lean, car une unite tres partisane peut etre elastique ou inelastique) ; [[widespread-partisan-gerrymandering-mostly-cancels]] (elasticity / seats-votes). L'axe 1 demande explicitement la gradation et les raffinements des methodes de swing ; le draft a une section 'swing heterogene' ou ce raffinement documente manque.",
+      "recommendation": "Ajouter dans 2.C un paragraphe (ou 2-3 phrases) nommant l'elasticite comme dimension orthogonale au lean : certaines unites bougent plus que d'autres par point de swing national, 538 la mesure separement. Relier a 7.B : l'invariance du classement au scenario n'est robuste que si l'elasticite est ~homogene entre bureaux dans un meme bloc ; sinon les bureaux les plus elastiques re-classent sous scenario, ce qui doit etre teste (variance du rang par bureau sous les trois scenarios), pas suppose."
+    },
+    {
+      "severity": "major",
+      "location": "Section 3 (Qui fait ca en France, et comment)",
+      "issue": "La question pose explicitement 'qui fait ca en France (instituts de sondage, CHERCHEURS, medias)'. Le draft couvre finement les instituts (estimation 20h, projections en sieges) et les medias, mais escamote le brin ACADEMIQUE francais de l'inference ecologique / regression ecologique appliquee aux reports de voix. Le corpus contient ce brin. Du coup la section 3.A affirme 'aucun modele statistique spatial' en France sans mentionner la tradition academique francaise d'estimation ecologique des transferts, ce qui sur-vend le vide.",
+      "evidence": "Notes non citees : [[chapitre-17-les-reports-de-voix-du-premier-au-second-tour]] (Dolez & Laurent 2000, regression ecologique sur les reports legislatives 1997) ; [[report-des-voix-entre-les-deux-tours-aux-lections]] (Charpentier / Freakonometrics, EI sur les reports 2022) ; [[les-reports-de-voix-premier-second-tour-ipsos]] (matrice de transfert Ipsos 2015). Le draft ne les cite pas (Dolez:0, Charpentier:0).",
+      "recommendation": "Dans la section 3, inserer 1-2 phrases reconnaissant le brin academique : la France a une tradition d'estimation ecologique des reports (Dolez & Laurent ; billets de statisticiens type Freakonometrics), mais elle est retrospective et non spatiale-projective — ce qui precise, sans le contredire, le constat de vide (personne ne projette une geographie infra-circonscription vers un scrutin futur)."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4.C (Obsolescence de la presidentielle 2022 : recomposition)",
+      "issue": "La note CEPREMAP sur la recomposition post-dissolution (juin 2025) documente directement les 'aimants et repoussoirs' au sein des blocs gauche et droite (PS-LFI-EELV vs Renaissance ; centre-droit-LR-RN) un an apres la dissolution — c'est-a-dire exactement la dynamique de recomposition 2024->2025 que 4.C affirme. Le fichier coverage-gaps l'avait signalee comme ratee en vague 1 (auth) puis retrouvee en vague 2 ; elle est dans le vault mais n'est pas citee. Le draft appuie l'obsolescence sur WID/tripartition, CEVIPOF, France24 mais laisse de cote cette source qui date et structure la recomposition la plus recente.",
+      "evidence": "[[note-obe-n2025-14-dissolution-un-an-aprs-cepremap-algan-finchelstein-de-laubier]] (Algan/Finchelstein/de Laubier, OBE CEPREMAP, 27/06/2025) : recomposition des blocs, espace politique PS/LR dans la perspective presidentielle.",
+      "recommendation": "Ajouter une reference a cette note en 4.C (ou 4.A pour la conditionnalite des matrices a l'affiche) : la recomposition n'est pas seulement une derive de niveau mais une reconfiguration des aimants/repoussoirs inter-blocs mesuree jusqu'en 2025, ce qui renforce l'argument 'ponderer 2022 avec au moins un scrutin 2024' et la conditionnalite des matrices."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 1.A et 7.A (variable de sortie : reserve d'abstention par bloc)",
+      "issue": "Le draft fait de la 'reserve d'abstention par bloc' l'une de ses DEUX variables-produit phares (persuasion vs mobilisation), mais cette variable est posee de facon quasi purement conceptuelle. Le corpus contient une source directe sur la sociologie de l'abstention par electorat (abstention tres forte dans l'electorat Melenchon au 2e tour 2022) qui rendrait la 'reserve par bloc' concrete et calculable ; elle est droppee. Le draft ne donne que le gradient spatial d'abstention (50%->75% pauvres/riches, 4.B), pas la dimension par-bloc qui fonde la variable de mobilisation.",
+      "evidence": "[[second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos]] (Ipsos-Sopra Steria, 2e tour 2022 : abstention differentielle par electorat d'origine, notamment demobilisation de l'electorat Melenchon). Non citee.",
+      "recommendation": "En 1.A ou 7.A, ancrer la 'reserve d'abstention par bloc' sur cette donnee : la demobilisation est bloc-dependante (ex. forte abstention de l'electorat de gauche radicale au 2e tour 2022), ce qui justifie de mesurer la reserve PAR bloc et non globalement, et donne une methode : croiser participation par bureau et structure de blocs de la baseline."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 2.F (Forecasting bayesien) et etage 3 (niveau national en scenarios)",
+      "issue": "Le choix de traiter le niveau national en scenarios discrets (etage 3) plutot qu'en point recale s'appuie sur le terme d'ajustement de non-reponse partisane de l'Economist, mais le draft omet la reference fondatrice du corpus a ce phenomene : le 'Mythical Swing Voter' (Gelman et al), qui montre qu'une large part du mouvement apparent des sondages est un artefact de non-reponse differentielle, pas un vrai swing d'electeurs. C'est l'argument theorique le plus direct pour ne PAS recaler en continu et preferer des scenarios bornes.",
+      "evidence": "[[quarterly-journal-of-political-science-2016-11-1]] (Gelman, Goel, Rivers & Rothschild, 'The Mythical Swing Voter'). Non citee (Mythical:0).",
+      "recommendation": "Ajouter en 2.F une phrase reliant l'ajustement rho de l'Economist a sa source conceptuelle (Mythical Swing Voter) : le mouvement inter-vagues etant en partie un artefact de non-reponse partisane, les scenarios discrets sont plus honnetes qu'un recalage continu — ce qui renforce l'etage 3 sans allonger."
+    },
+    {
+      "severity": "major",
+      "location": "Ensemble du rapport (redondance de these) — sections intro/Reponse directe, 2 (intro), 2.H, 7.A, 7.D, 7.F",
+      "issue": "Bloat / dilution (B1). Le rapport fait ~64,8 Ko, au-dessus de la bande des rapports les mieux notes (45-55 Ko) et dans la bande basse (65-70 Ko). La these unique ('pas de meilleure methode ; escalier -> postes/boite a outils ; construire sophistique, publier ordinal ; classement plutot que pourcentage') est re-enoncee, en termes legerement differents, dans au moins six passages : le paragraphe 'Reponse directe', l'intro de la section 2, le §2.H ('Le pivot'), le §7.A, le §7.D ('Trajectoire v1->v2') et le §7.F ('Verdict'). La metaphore escalier/boite-a-outils et le couple 'poison en moteur autonome / remede en correcteur' reviennent quasi identiques a chaque fois.",
+      "evidence": "Occurrences repetees de la meme these : intro (l.3), §2 intro (l.35), §2.H (l.82), §7.A/B (l.171-184), §7.D (l.196-198), §7.F (l.208). Le §2.H et le §7.D disent essentiellement la meme chose ('construire sophistique amont, publier ordinal / monter en gamme apres backtest').",
+      "recommendation": "Resserrer 2-3 passages les plus faibles : (1) fusionner l'argument de sequencement du §2.H et du §7.D (ils redisent 'construire haut, publier ordinal') en gardant un seul enonce plein ; (2) alleger l'intro de la section 2 qui re-annonce la boite-a-outils deja posee dans la Reponse directe ; (3) couper la meta-narration ('La question demande...', 'La position defendue ici, engagee des cette section...') qui restate la these sans preuve neuve."
+    },
+    {
+      "severity": "minor",
+      "location": "Paragraphe d'ouverture ('Reponse directe') vs section 7.F ('Verdict')",
+      "issue": "Bloat / repetition de section (B2). Le paragraphe 'Reponse directe' et le §7.F 'Verdict' avancent le meme argument avec un fort recouvrement de formulation : architecture a etages / postes, crosswalk suspensif, baseline composite comme structure, swing piecewise par bloc, matrices scenarisees, EI fournisseur de parametres, sortie ordinale validee par backtest. Cela gonfle la longueur sans apport.",
+      "evidence": "Comparaison intro (l.3) et §7.F (l.208) : liste d'etages et thesis 'pas de meilleure methode / architecture a postes / sortie ordinale' quasi identiques.",
+      "recommendation": "Differencier la conclusion (§7.F) en la recentrant sur l'implication strategique/prospective absente de l'intro (bien commun methodologique versionne facon Cook PVI FR ; re-executabilite a mesure que les scenarios se resserrent ; limite de transposition vers une legislative), et laisser le recap d'architecture uniquement dans l'intro."
+    }
+  ],
+  "unused_substantive_notes": [
+    "datapolitical-elasticity-scores-at-master-fivethirtyeightdata-github (elasticite — cluster non exploite)",
+    "widespread-partisan-gerrymandering-mostly-cancels (elasticity / seats-votes)",
+    "chapitre-17-les-reports-de-voix-du-premier-au-second-tour (Dolez & Laurent, EI academique FR)",
+    "report-des-voix-entre-les-deux-tours-aux-lections (Charpentier/Freakonometrics EI FR)",
+    "note-obe-n2025-14-dissolution-un-an-aprs-cepremap (recomposition 2024-2025)",
+    "second-tour-profil-des-abstentionnistes-et-sociologie-des-lectorats-ipsos (reserve d'abstention par bloc)",
+    "quarterly-journal-of-political-science-2016-11-1 (Mythical Swing Voter / non-reponse differentielle)",
+    "improving-ecological-inference-by-predicting-ind (Imai & Khanna, methode EI — peripherique)",
+    "2026-forecast-methodology + simulateur-de-report-de-voix (forecasters/outils open source FR — NON flagges car ouverture secondaire hors perimetre)"
+  ]
+}

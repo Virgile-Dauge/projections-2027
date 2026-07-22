@@ -1,0 +1,44 @@
+[
+  {
+    "claim": "French press coverage of election polling historically conflated three technically distinct methods: pre-election opinion polls, election-night results estimation before the full count, and 'simulation' of the final seat composition of the Assemblée nationale.",
+    "stance": "neutral",
+    "stance_target": "taxonomy of French electoral estimation methods",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "1967 legislative elections, IFOP and SOFRES",
+    "quoted_support": "En effet trois types de méthodes ont été utilisées : les sondages d'opinion ; l'estimation des résultats d'un scrutin avant son dépouillement exhaustif ; la « simulation » des résultats définitifs d'une élection : elle aboutit à une évaluation du nombre des députés élus pour chacune des grandes formations.",
+    "numbers": [],
+    "entities": ["IFOP", "SOFRES", "Assemblée nationale"],
+    "time_period": "1967",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rfsp_0035-2950_1967_num_17_3_393022"
+  },
+  {
+    "claim": "In pre-election opinion polling ahead of the 1967 legislative elections, national-level polls used 1,500-2,000 interviews while circonscription-level polls used only about 400 interviews each — an explicit historical data point showing sample size per unit shrinks roughly 4-5x when polling granularity moves from national to constituency level.",
+    "stance": "supports",
+    "stance_target": "sample size constraints are the binding factor limiting French polling granularity below the national level",
+    "evidence_type": "empirical",
+    "scope_conditions": "1967 French legislative elections, pre-election opinion polls (not election-night estimation)",
+    "quoted_support": "Dans la période précédant les élections législatives ont été publiés d'une part des sondages concernant l'ensemble de la France métropolitaine, — fondés sur 1 500 à 2 000 interviews, — d'autre part des sondages concernant les circonscriptions électorales — environ 400 interviews.",
+    "numbers": ["1500-2000 interviews nationally", "~400 interviews per circonscription"],
+    "entities": ["IFOP", "SOFRES"],
+    "time_period": "1967",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rfsp_0035-2950_1967_num_17_3_393022"
+  },
+  {
+    "claim": "As early as 1967, both major French polling institutes (IFOP and SOFRES) simultaneously deployed all three estimation methods (national opinion poll, circonscription opinion poll, and election-night ballot-count estimation), showing that circonscription-level electoral polling in France predates the modern 600-bureaux-témoins national estimation model by decades.",
+    "stance": "neutral",
+    "stance_target": "historical precedent for circonscription-level French electoral polling",
+    "evidence_type": "historical",
+    "scope_conditions": "5-12 March 1967",
+    "quoted_support": "Les deux principaux organismes français de sondages (IFOP et SOFRES) ont mis en oeuvre ces trois méthodes.",
+    "numbers": [],
+    "entities": ["IFOP", "SOFRES"],
+    "time_period": "March 1967",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "rfsp_0035-2950_1967_num_17_3_393022"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "claim": "L'estimation des reports de voix par régression linéaire multiple sur les résultats électoraux agrégés (par opposition au sondage) est une méthode académique française établie depuis les élections législatives de mars 1967, via les travaux fondateurs de Lancelot et Weill.",
+    "stance": "supports",
+    "stance_target": "ancienneté et légitimité académique de la méthode par régression sur résultats agrégés",
+    "evidence_type": "historical",
+    "scope_conditions": "France, méthode utilisée de 1967 (Lancelot & Weill) à 1997 (Dolez & Laurent) et au-delà",
+    "quoted_support": "Alain Lancelot, Pierre Weill, « Les transferts de voix du premier au second tour des élections de mars 1967. Une analyse de régression », dans Les élections législatives de mars 1967, Paris, Presses de Sciences Po, 1971, p. 373 et suiv.",
+    "numbers": ["1967", "1971"],
+    "entities": ["Alain Lancelot", "Pierre Weill", "Bernard Dolez", "Annie Laurent"],
+    "time_period": "1967-2000",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "chapitre-17-les-reports-de-voix-du-premier-au-second-tour-des-lgislatives-de-199"
+  },
+  {
+    "claim": "La méthode de régression pour estimer les reports de voix aux législatives 1997 est une régression linéaire multiple sous contrainte, où la somme des coefficients de régression par ligne doit être égale à 100, ce qui impose une constante par famille politique (ex. +0,84 pour PS+DVG, -0,93 pour la droite modérée).",
+    "stance": "neutral",
+    "stance_target": "spécification technique de la méthode de régression contrainte pour les reports de voix",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, législatives 1997, 548 circonscriptions de métropole",
+    "quoted_support": "Dans la mesure où il s'agit d'une régression « sous contraintes » (la somme en ligne des coefficients de régression doit être égale à 100), cette équation comporte nécessairement une constante. Cette constante est de + 0.84 pour le PS + DVG ; – 0.93 pour la droite modérée",
+    "numbers": ["100", "0.84", "0.93", "0.34", "0.24", "548"],
+    "entities": ["PS", "DVG"],
+    "time_period": "1997",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "chapitre-17-les-reports-de-voix-du-premier-au-second-tour-des-lgislatives-de-199"
+  },
+  {
+    "claim": "L'analyse des résidus (écart entre le score attendu par régression et le score observé) permet de détecter, circonscription par circonscription, des anomalies locales de report de voix non expliquées par le modèle national moyen -- une approche pertinente pour la priorisation locale d'actions militantes.",
+    "stance": "supports",
+    "stance_target": "utilité de l'analyse des résidus pour la pertinence locale (vs. prédiction nationale)",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, législatives 1997, niveau circonscription",
+    "quoted_support": "il manque en moyenne 0,93 point à la droite... Il s'agit de la 3e de l'Ardèche, de la 3e du Finistère, de la 3e de Seine-et-Marne et de la 5e de Moselle. Le résidu de la gauche est également supérieur à 3 points",
+    "numbers": ["0.93", "3"],
+    "entities": ["Bernard Dolez", "Annie Laurent"],
+    "time_period": "1997",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "chapitre-17-les-reports-de-voix-du-premier-au-second-tour-des-lgislatives-de-199"
+  },
+  {
+    "claim": "L'utilisation de l'analyse des résidus reste rare dans les analyses électorales françaises courantes malgré son ancienneté ; les auteurs citent seulement trois praticiens réguliers de cette méthode (Bon & Cheylan, Bussi, Le Bras).",
+    "stance": "neutral",
+    "stance_target": "diffusion limitée des méthodes de régression/résidus dans l'analyse électorale française",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France, science politique académique",
+    "quoted_support": "La prise en compte des résidus reste encore rare dans les analyses électorales françaises. Citons cependant trois auteurs qui ont, à plusieurs reprises, utilisé cette méthode",
+    "numbers": ["3"],
+    "entities": ["Frédéric Bon", "Jean-Paul Cheylan", "Michel Bussi", "Hervé Le Bras"],
+    "time_period": "2000",
+    "region": "France",
+    "confidence": "medium",
+    "source_note_id": "chapitre-17-les-reports-de-voix-du-premier-au-second-tour-des-lgislatives-de-199"
+  },
+  {
+    "claim": "Les élections législatives sont un scrutin de circonscription où le second tour donne lieu à autant d'élections locales indépendantes qu'il reste de sièges à pourvoir (548 en 1997), ce qui complique l'estimation d'un report de voix national unique.",
+    "stance": "supports",
+    "stance_target": "biais des législatives comme source d'un swing/report unique et homogène",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France, législatives, système majoritaire à deux tours",
+    "quoted_support": "il ne faudrait pourtant pas oublier qu'aux élections législatives nous sommes en présence d'un scrutin de circonscription, et que le second tour donne lieu à autant d'élections qu'il reste de sièges à pourvoir.",
+    "numbers": ["548"],
+    "entities": [],
+    "time_period": "1997",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "chapitre-17-les-reports-de-voix-du-premier-au-second-tour-des-lgislatives-de-199"
+  }
+]

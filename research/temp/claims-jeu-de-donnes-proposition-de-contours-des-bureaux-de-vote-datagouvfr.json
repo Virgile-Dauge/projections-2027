@@ -1,0 +1,58 @@
+[
+  {
+    "claim": "Le jeu de données 'Proposition de contours des bureaux de vote' publié par Etalab/data.gouv.fr génère les contours géographiques des bureaux de vote français par diagrammes de Voronoï appliqués aux adresses géolocalisées du REU, calqués sur les limites communales.",
+    "stance": "neutral",
+    "stance_target": "méthodes de génération de contours géographiques de bureaux de vote en France",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière, extraction REU de septembre 2022",
+    "quoted_support": "Ceux-ci sont calculés à partir de la méthode des Diagrammes de Voronoï appliqués sur les adresses et calqués sur les contours des communes françaises.",
+    "numbers": [],
+    "entities": ["Etalab", "data.gouv.fr", "INSEE", "REU"],
+    "time_period": "extraction septembre 2022",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr"
+  },
+  {
+    "claim": "Le producteur du jeu de données avertit explicitement que les contours générés sont imprécis et non uniques, et que ce jeu de données n'a pas vocation à faire autorité.",
+    "stance": "supports",
+    "stance_target": "les contours de bureaux de vote dérivés du REU sont des approximations, non des géométries officielles",
+    "evidence_type": "expert-opinion",
+    "scope_conditions": "France entière",
+    "quoted_support": "La génération de ces contours est donc une approche, qui comporte des imprécisions... n'a pas vocation à faire autorité.",
+    "numbers": [],
+    "entities": ["Etalab", "REU"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr"
+  },
+  {
+    "claim": "Le REU ne contient pas nativement une définition de contours géographiques de bureaux de vote, seulement des adresses affiliées à un bureau, ce qui rend toute méthode de contourage une interpolation non unique.",
+    "stance": "supports",
+    "stance_target": "limites méthodologiques de la reconstruction de contours de bureaux de vote depuis le REU",
+    "evidence_type": "theoretical",
+    "scope_conditions": "France entière",
+    "quoted_support": "le REU est constitué d'adresses affiliées à un bureau de vote mais n'est pas en soit une définition de contours géographiques... Des méthodes différentes pourront créer des tracés / interpolations possibles différents, car la donnée source n'implique pas leur unicité.",
+    "numbers": [],
+    "entities": ["REU", "INSEE"],
+    "time_period": "2023",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr"
+  },
+  {
+    "claim": "Ce jeu de contours n'est pas destiné à être mis à jour ; il est présenté comme reproductible avec des extractions REU plus récentes de l'INSEE.",
+    "stance": "neutral",
+    "stance_target": "fraîcheur / maintenance des jeux de contours de bureaux de vote",
+    "evidence_type": "empirical",
+    "scope_conditions": "France entière",
+    "quoted_support": "Il n'est pas prévu de mettre à jour ce jeu de données. La méthode est reproductible avec des données plus récentes publiées par l'INSEE.",
+    "numbers": [],
+    "entities": ["Etalab", "INSEE"],
+    "time_period": "2023-2026",
+    "region": "France",
+    "confidence": "high",
+    "source_note_id": "jeu-de-donnes-proposition-de-contours-des-bureaux-de-vote-datagouvfr"
+  }
+]
