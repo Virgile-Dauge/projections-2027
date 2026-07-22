@@ -18,6 +18,48 @@ instable (CONTEXT.md « Churn »). Pour contexte : cela représente
 compte à part (les communes ont des tailles trop inégales pour être
 comparées directement).
 
+## Réconciliation de Paris (second étage du repli)
+
+Paris (75056, département 75) sort du repli communal (issue #14) : c'est la
+commune la plus lourde en zone instable (voir top 20 ci-dessous), pour un
+outil dont le cœur de cible est le ciblage fin en zone urbaine dense. Ses
+bureaux sont réconciliés un à un entre les 4 scrutins
+sources plutôt qu'agrégés en un seul bloc départemental.
+
+**Méthode.** La grille cible (bureaux + inscrits) est celle du scrutin le
+plus récent (2024_legi_t1). Pour chaque scrutin source, les bureaux
+dont l'`id_bv` figure tel quel dans cette grille passent inchangés (statut
+`reconcilie`). Le reliquat — voix et participation des bureaux orphelins côté
+source — est réalloué **en comptes de voix**, au prorata des inscrits
+(jamais de la surface, CONTEXT.md « Repli ») des bureaux orphelins côté
+cible (statut `realloue`) ; les ratios se recalculent ensuite depuis ces
+comptes, jamais l'inverse. Un bureau cible sans aucun reliquat exploitable
+reste `irresoluble` (statut explicite, voix à `null`, jamais un zéro
+fabriqué) — distinct à la fois de `joint_valide` (commune stable) et de
+`repli` (commune instable non réconciliée).
+
+**Hypothèses et cas non résolus.** Sur les données réelles, l'essentiel du
+désaccord entre scrutins parisiens est une pure renumérotation administrative
+d'une quarantaine de bureaux contigus (ex. `0201`→`0211` entre 2022 et 2024),
+à inscrits quasi identiques : le crosswalk parisien est mécaniquement
+trivial, pas un vrai découpage ou une fusion de zones. La réallocation ne
+cherche pas à retrouver cette bijection cachée (aucun crosswalk adresses/IRIS
+disponible) : elle répartit le reliquat au prorata des inscrits sur
+l'ensemble des bureaux orphelins du même scrutin — une approximation très
+proche de la vérité dans ce cas précis, qui le serait moins sur une commune
+au redécoupage plus disruptif. Le second tour des législatives (ballottage
+partiel, pas de second tour dans toutes les circonscriptions) est exclu de la
+réallocation : les bureaux non appariés y restent silencieusement absents,
+comme pour une commune stable. Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`)
+est générique mais volontairement limité à Paris ici : l'étendre à d'autres
+grandes villes à arrondissements (Lyon, Marseille, également instables) est
+laissé à une itération suivante.
+
+**Gain chiffré.** Avant réconciliation (Paris à 100 % en repli communal,
+comme toute commune instable) : **14.9%** des inscrits en zone
+instable. Après réconciliation bureau de Paris : **12.2%** — gain
+de **2.8 point(s)**.
+
 ## Distribution par département
 
 Triée par inscrits en zone instable décroissant (l'ordre de la charge de
@@ -137,9 +179,10 @@ en moyennant des taux communaux.
 
 ## Top 20 communes instables par inscrits
 
-Cible concrète de la future réallocation dasymétrique (CONTEXT.md
-« Repli ») : où chaque effort récupère le plus d'électorat, à la granularité
-fine.
+Cible concrète de la réconciliation bureau par réallocation dasymétrique
+(CONTEXT.md « Repli ») : où chaque effort récupère le plus d'électorat, à la
+granularité fine. Paris (#1) y est déjà traitée (issue #14, cf. section
+ci-dessus) ; le reste de la liste reste en repli communal classique.
 
 | Commune | Département | Bureaux | Inscrits |
 | --- | --- | --- | --- |
