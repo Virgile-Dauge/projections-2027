@@ -28,7 +28,7 @@ vraie par construction pour la présidentielle et quasi vraie pour les
 européennes (listes nationales), mais PAS pour les législatives T1 : une
 circonscription sans candidat d'un bloc n'a tout simplement pas de ligne pour
 ce bloc, ce qui casse la propriété -- raison d'être de la correction d'offre
-ci-dessous.
+(`corriger_offre_legislatives`, ci-dessous).
 
 ## Correction d'offre des législatives T1 (corriger_offre_legislatives)
 
@@ -50,7 +50,7 @@ le panel actuel.
 
 Analyse de sensibilité (`methode="exclusion"`) : au lieu d'imputer une
 valeur, on exclut purement le bloc de l'unité pour ce scrutin (aucune ligne
-ajoutée). En aval, `composite_pondere` (à venir) renormalise ses poids sur
+ajoutée). En aval, `composite_pondere` renormalise ses poids sur
 les composantes réellement présentes -- la composante manquante ne compte ni
 pour 0 ni pour la valeur européenne, elle est simplement absente du calcul.
 Les deux variantes sont documentées et disponibles ; le choix par défaut
@@ -114,7 +114,7 @@ SCRUTIN_LEGISLATIVES_CORRIGE = f"{SCRUTIN_LEGISLATIVES}_corrige"
 
 # Les 3 scrutins de structure spatiale (HANDOFF.md étape 1) : présidentielle 2022,
 # européennes 2024, législatives 2024 (avant correction d'offre -- la version
-# corrigée est calculée par corriger_offre_legislatives, à venir).
+# corrigée est calculée par corriger_offre_legislatives).
 SCRUTINS_STRUCTURE: tuple[str, ...] = (SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES, SCRUTIN_LEGISLATIVES)
 
 # Point de départ, pas une constante figée : le backtest (#6) calibre ces poids.
