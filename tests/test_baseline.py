@@ -16,7 +16,7 @@ Deux familles de tests :
 import polars as pl
 import pytest
 
-from projections.baseline import calculer_ecart_national
+from projections.baseline import calculer_ecart_national, corriger_offre_legislatives
 
 
 def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69"):
@@ -133,3 +133,64 @@ def test_calculer_ecart_national_filtre_sur_les_scrutins_demandes():
     ]
     resultat = calculer_ecart_national(_panel(lignes), scrutins=["2022_pres_t1"])
     assert resultat.get_column("id_election").unique().to_list() == ["2022_pres_t1"]
+
+
+# --- corriger_offre_legislatives : imputation vs bloc intact -------------------
+
+
+def _table_ecart_offre() -> pl.DataFrame:
+    # 69123_0001 : offre complète aux législatives (Gauche + Extrême droite présents).
+    # 01001_0001 : Extrême droite absente des législatives (pas de candidat) -- doit
+    # être imputée depuis les européennes, jamais mise à zéro.
+    return pl.DataFrame(
+        {
+            "id_election": [
+                "2024_legi_t1", "2024_legi_t1",
+                "2024_legi_t1",
+                "2024_euro_t1", "2024_euro_t1",
+                "2024_euro_t1", "2024_euro_t1",
+            ],
+            "unite_id": [
+                "69123_0001", "69123_0001",
+                "01001_0001",
+                "69123_0001", "69123_0001",
+                "01001_0001", "01001_0001",
+            ],
+            "bloc": [
+                "Gauche", "Extrême droite",
+                "Gauche",
+                "Gauche", "Extrême droite",
+                "Gauche", "Extrême droite",
+            ],
+            "ecart_national": [5.0, -3.0, 12.0, 7.0, -1.0, 9.0, 22.0],
+        }
+    )
+
+
+def test_corriger_offre_legislatives_bloc_absent_impute_depuis_les_europeennes():
+    corrige = corriger_offre_legislatives(_table_ecart_offre())
+    ligne = corrige.filter((pl.col("unite_id") == "01001_0001") & (pl.col("bloc") == "Extrême droite"))
+    assert ligne.height == 1
+    assert ligne.get_column("ecart_national").to_list() == [22.0]  # valeur européenne, pas 0
+    assert ligne.get_column("impute").to_list() == [True]
+
+
+def test_corriger_offre_legislatives_bloc_present_reste_intact():
+    corrige = corriger_offre_legislatives(_table_ecart_offre())
+    ligne = corrige.filter((pl.col("unite_id") == "69123_0001") & (pl.col("bloc") == "Extrême droite"))
+    assert ligne.get_column("ecart_national").to_list() == [-3.0]  # valeur législative d'origine
+    assert ligne.get_column("impute").to_list() == [False]
+
+
+def test_corriger_offre_legislatives_variante_exclusion_n_ajoute_aucune_ligne():
+    # Analyse de sensibilité : au lieu d'imputer, on exclut le bloc de l'unité --
+    # le composite (renormalisation des poids) s'en charge en aval.
+    corrige = corriger_offre_legislatives(_table_ecart_offre(), methode="exclusion")
+    manquant = corrige.filter((pl.col("unite_id") == "01001_0001") & (pl.col("bloc") == "Extrême droite"))
+    assert manquant.height == 0
+    assert corrige.get_column("impute").unique().to_list() == [False]
+
+
+def test_corriger_offre_legislatives_methode_inconnue_leve_une_erreur():
+    with pytest.raises(ValueError, match="méthode inconnue"):
+        corriger_offre_legislatives(_table_ecart_offre(), methode="n_importe_quoi")
