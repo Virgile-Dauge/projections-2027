@@ -367,6 +367,38 @@ def test_generer_rapport_reserve_contient_les_sections_attendues(panel_avec_stat
         assert section in rapport
 
 
+def test_generer_rapport_reserve_bandeau_fail_reference_adr_0003_pas_l_issue_28(
+    panel_avec_statut_reel, baseline_reel
+):
+    # Sur l'extrait réel gelé, la garde anti-hasard participation échoue (n
+    # trop petit) : le bandeau FAIL doit référencer la clause ADR 0003
+    # (relative au plafond), pas l'ancienne formulation "issue #28 pas
+    # tranchée" -- #28 est résolue par l'ADR 0003 embarqué dans cette branche.
+    donnees = calculer_donnees_reserve(panel_avec_statut_reel, baseline_reel)
+    assert donnees["pass_carte_mobilisation"] is False
+    rapport = generer_rapport_reserve(donnees)
+    assert "ADR 0003" in rapport
+    assert "non publiable" in rapport
+    assert "#28" not in rapport
+
+
+def test_generer_rapport_reserve_bandeau_pass_mentionne_adr_0003_et_le_test_2017(
+    panel_avec_statut_reel, baseline_reel
+):
+    # Bandeau vert honnête (revue #30) : doit mentionner la révision ADR 0003
+    # et le test de même enjeu 2017->2022 pré-enregistré, pas seulement "tout
+    # est vert". `pass_carte_mobilisation` est forcé à True ici (l'extrait
+    # gelé réel échoue la garde anti-hasard faute de volume) -- seul le texte
+    # du bandeau est sous test, pas le calcul du verdict (couvert ailleurs).
+    donnees = calculer_donnees_reserve(panel_avec_statut_reel, baseline_reel)
+    donnees_pass = {**donnees, "pass_carte_mobilisation": True}
+    rapport = generer_rapport_reserve(donnees_pass)
+    assert "AUTORISÉE" in rapport
+    assert "ADR 0003" in rapport
+    assert "2017" in rapport
+    assert "#28" not in rapport
+
+
 def test_generer_rapport_reserve_est_deterministe(panel_avec_statut_reel, baseline_reel):
     donnees = calculer_donnees_reserve(panel_avec_statut_reel, baseline_reel)
     rapport_1 = generer_rapport_reserve(donnees)

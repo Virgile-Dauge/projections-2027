@@ -47,8 +47,8 @@ def _(mo):
 
     Couche *estimation* du pivot mobilisation (`docs/adr/0002-pivot-mobilisation-reserve.md`),
     non backtestable par construction : voir le rapport pour le verdict de
-    publication en carte (hérité du gate ADR 0002, actuellement rouge — révision
-    #28 en cours).
+    publication en carte (hérité du gate ADR 0002, clause participation révisée
+    par l'ADR 0003 -- `docs/adr/0003-clause-participation-plafond-relatif.md`).
     """)
     return
 
@@ -112,7 +112,7 @@ def _(donnees):
 
 @app.cell
 def _(donnees):
-    f"publication en carte autorisée (ADR 0002) : {donnees['pass_carte_mobilisation']}"
+    f"publication en carte autorisée (ADR 0002/0003) : {donnees['pass_carte_mobilisation']}"
     return
 
 

@@ -49,15 +49,17 @@ par #24) : `lift_reserve_bureau_vs_departement` réutilise telle quelle
 `garde_anti_hasard_participation`, jamais un nouveau calcul de lift sur la part
 (non backtestable par construction).
 
-## Publication : héritée du verdict carte mobilisation (ADR 0002 point 5)
+## Publication : héritée du verdict carte mobilisation (ADR 0002 point 5, clause révisée ADR 0003)
 
-Le backtest participation est sorti **rouge** (ρ euro = 0,769 < 0,8, voir
-`backtest-2022-2024.md` §4) : la révision d'architecture (#28) est ouverte et
-tranche. `generer_rapport_complet` calcule et affiche ce verdict sans jamais le
-recalculer différemment -- si FAIL, le rapport marque explicitement la réserve
-comme préparatoire, non publiable en carte tant que #28 n'a pas tranché
-(les chiffres restent publiés, jamais cachés : même philosophie que le gate
-ADR 0001/0002 dans `projections.backtest`).
+Le backtest participation absolu est sorti **rouge** (ρ euro = 0,769 < 0,8,
+voir `backtest-2022-2024.md` §4) : la révision d'architecture (#28) a tranché
+-- ADR 0003, clause relative au plafond inter-cibles (`docs/adr/0003-clause-
+participation-plafond-relatif.md`). `generer_rapport_complet` calcule et
+affiche le verdict hérité de `projections.backtest.verdict_carte_mobilisation`
+(désormais sur la clause ADR 0003) sans jamais le recalculer différemment ici
+-- si FAIL, le rapport marque explicitement la réserve comme préparatoire, non
+publiable en carte (les chiffres restent publiés, jamais cachés : même
+philosophie que le gate ADR 0001/0002/0003 dans `projections.backtest`).
 """
 
 from __future__ import annotations
@@ -71,6 +73,7 @@ import polars as pl
 from projections.backtest import (
     correlation_spearman,
     distribution_swing,
+    evaluer_gate_participation_relatif,
     executer_backtest_participation,
     executer_backtests,
     garde_anti_hasard_participation,
@@ -308,7 +311,7 @@ def lift_reserve_bureau_vs_departement(panel: pl.DataFrame, baseline: pl.DataFra
     return garde_anti_hasard_participation(resultats_participation, panel)
 
 
-# --- Orchestration : calcul + verdict de publication (ADR 0002 point 5) --------
+# --- Orchestration : calcul + verdict de publication (ADR 0002 point 5, clause révisée ADR 0003) --
 
 
 def calculer_donnees_reserve(
@@ -327,8 +330,12 @@ def calculer_donnees_reserve(
     resultats_backtest = executer_backtests(panel, baseline)
     resultats_participation = executer_backtest_participation(panel, baseline)
     anti_hasard_structure = garde_anti_hasard_structure(resultats_backtest, panel)
+    # Clause participation ADR 0003 (relative au plafond inter-cibles) : verdict
+    # hérité, jamais recalculé différemment de `projections.backtest` (cf.
+    # docstring du module).
+    verdict_participation_relatif = evaluer_gate_participation_relatif(resultats_participation)
     pass_carte_mobilisation = verdict_carte_mobilisation(
-        resultats_participation["resultats"], anti_hasard_structure, lift_participation
+        verdict_participation_relatif, anti_hasard_structure, lift_participation
     )
 
     distribution = {
@@ -443,17 +450,21 @@ def generer_rapport_reserve(donnees: dict) -> str:
     )
 
     avertissement = (
-        "**Publication en carte : AUTORISÉE** — les clauses pré-enregistrées de l'ADR 0002 "
-        "(backtest participation + garde anti-hasard, cf. `backtest-2022-2024.md`) sont au vert."
+        "**Publication en carte : AUTORISÉE** — la clause participation révisée (ADR 0003, "
+        "relative au plafond inter-cibles — voir `backtest-2022-2024.md` §6) et la garde "
+        "anti-hasard (ADR 0002, §5) sont au vert. Le seuil absolu ρ ≥ 0,8 (ADR 0002, §4) reste "
+        "publié **FAIL** pour la cible européennes (0,769 < 0,8) — il ne gouverne plus cette "
+        "publication depuis la révision ADR 0003, post-hoc et datée. Le test de même enjeu "
+        "pré-enregistré (présidentielle 2017 T1 → 2022 T1, clause ρ ≥ 0,8) reste la validation "
+        "forte à venir, calcul différé au chantier data 2017."
         if pass_carte
         else (
-            "**⚠ PRÉPARATION SEULEMENT — non publiable en carte tant que la révision (issue #28) "
-            "n'a pas tranché.** Le gate de publication de la carte mobilisation (ADR 0002 point 5, "
-            "réutilisation de `projections.backtest.verdict_carte_mobilisation`) est **FAIL** : le "
-            "backtest participation est sorti rouge (ρ europ. 0,769 < 0,8, voir `backtest-2022-2024.md` "
-            "§4). Cette table et ce rapport sont publiés tels quels, en préparation de la carte — "
-            "aucun chiffre n'est caché — mais aucune publication cartographique n'est autorisée avant "
-            "que la révision d'architecture (#28) ne tranche. Les seuils ne bougent pas."
+            "**⚠ PRÉPARATION SEULEMENT — non publiable en carte.** Le gate de publication de la "
+            "carte mobilisation (clause participation ADR 0003, relative au plafond inter-cibles, "
+            "et garde anti-hasard ADR 0002 — réutilisation de `projections.backtest.verdict_carte_mobilisation`) "
+            "est **FAIL** : détail dans `backtest-2022-2024.md` §§4-6. Cette table et ce rapport sont "
+            "publiés tels quels, en préparation de la carte — aucun chiffre n'est caché — mais aucune "
+            "publication cartographique n'est autorisée. Les seuils ne bougent pas."
         )
     )
 
@@ -537,7 +548,7 @@ du bloc » n'a pas de lift (non backtestable, cf. section 4 ci-dessus).
 | --- | --- | --- | --- | --- |
 {lignes_lift}
 
-## Verdict de publication en carte (ADR 0002 point 5)
+## Verdict de publication en carte (ADR 0002 point 5, clause participation ADR 0003)
 
 {avertissement}
 """
@@ -584,7 +595,7 @@ def main() -> None:
 
     print(f"rapport écrit : {args.out}")
     print(f"table réserve écrite : {args.table_out} ({sortie['table_reserve'].height} lignes)")
-    print(f"publication en carte autorisée (ADR 0002) : {sortie['pass_carte_mobilisation']}")
+    print(f"publication en carte autorisée (ADR 0002/0003) : {sortie['pass_carte_mobilisation']}")
 
 
 if __name__ == "__main__":
