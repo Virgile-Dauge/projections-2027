@@ -34,10 +34,15 @@
 
       <section>
         <h2>Ce que la carte affiche</h2>
-        <h3>Couche principale : réserve de voix mobilisables par bloc</h3>
+        <h3>Couche principale : réserve de voix mobilisables (bloc Gauche)</h3>
         <p>
           Pour chaque bureau de vote (ou commune, si le bureau n'est pas fiable — voir plus bas), une estimation du
-          nombre d'électeurs abstentionnistes qu'un bloc politique pourrait mobiliser. Formule :
+          nombre d'électeurs abstentionnistes qu'un bloc politique pourrait mobiliser. La carte n'affiche que la
+          réserve du <strong>bloc Gauche</strong> — un choix d'outil, pas de méthode : ce projet vise la mobilisation
+          contre l'extrême droite, et n'a pas vocation à équiper le porte-à-porte des autres camps. L'estimateur est
+          calculé pour tous les blocs et publié intégralement dans le
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/reserve-2027.md">rapport réserve</a>
+          (la transparence de la méthode ne bouge pas). Formule :
         </p>
         <pre>réserve(unité, bloc) = inscrits
               × taux d'abstention à la présidentielle 2022 (1ᵉʳ tour)

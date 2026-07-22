@@ -1,0 +1,8 @@
+{
+  "name": "r2-uploader-jetable",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-01",
+  "r2_buckets": [
+    { "binding": "BUCKET", "bucket_name": "projections-2027-tiles", "remote": true }
+  ]
+}
