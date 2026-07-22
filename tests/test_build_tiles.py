@@ -13,11 +13,16 @@ import polars as pl
 import pytest
 
 from projections.build_tiles import (
+    BUREAUX_MAXZOOM,
+    BUREAUX_MINZOOM,
+    COMMUNES_MAXZOOM,
     RapportJointure,
     _iter_features_geojson,
     construire_pmtiles,
     joindre_bureaux,
     joindre_communes,
+    joindre_mobilisation_bureaux,
+    joindre_mobilisation_communes,
 )
 
 # --- _iter_features_geojson : parseur streaming --------------------------------
@@ -252,14 +257,168 @@ def test_joindre_communes_joint_par_code_insee(tmp_path):
     assert rapport.contours_sans_score == 1
 
 
+# --- joindre_mobilisation_bureaux (issue #26) -----------------------------------
+
+
+def _donnees_bureau_synthetiques() -> pl.DataFrame:
+    def _ligne(unite_id, statut, bloc_tete, quantile_force, reserve_gauche=12.0, quantile_reserve_gauche=3):
+        return {
+            "unite_id": unite_id,
+            "code_departement": "69",
+            "statut": statut,
+            "maille": "bureau",
+            "reserve_gauche": reserve_gauche,
+            "reserve_centre": None,
+            "reserve_droite": 8.0,
+            "reserve_extreme_droite": 5.0,
+            "reserve_divers": None,
+            "quantile_reserve_gauche": quantile_reserve_gauche,
+            "quantile_reserve_centre": None,
+            "quantile_reserve_droite": 2,
+            "quantile_reserve_extreme_droite": 1,
+            "quantile_reserve_divers": None,
+            "bloc_tete_projete": bloc_tete,
+            "quantile_rapport_force": quantile_force,
+        }
+
+    return pl.DataFrame(
+        [
+            _ligne("69123_0001", "joint_valide", "Gauche", 3),
+            _ligne("ZZ001_0001", "joint_valide", "Centre", 2),  # étranger : jamais dans les contours REU.
+            _ligne("69123_9999", "joint_valide", "Droite", 4),  # absent des contours REU (churn).
+        ]
+    )
+
+
+def test_joindre_mobilisation_bureaux_joint_par_unite_id(tmp_path):
+    chemin_contours = tmp_path / "contours.geojson"
+    _ecrire_geojson(chemin_contours, _contours_bureaux_geojson())
+    sortie = tmp_path / "mobilisation_bureaux.ndjson"
+
+    rapport = joindre_mobilisation_bureaux(chemin_contours, _donnees_bureau_synthetiques(), sortie)
+
+    lignes = sortie.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lignes) == 1
+    feature = json.loads(lignes[0])
+    assert feature["properties"]["unite_id"] == "69123_0001"
+    assert feature["properties"]["statut"] == "joint_valide"
+    assert feature["properties"]["maille"] == "bureau"
+    assert feature["properties"]["reserve_gauche"] == 12.0
+    assert feature["properties"]["reserve_centre"] is None
+    assert feature["properties"]["quantile_reserve_gauche"] == 3
+    assert feature["properties"]["rapport_force_bloc_tete"] == "Gauche"
+    assert feature["properties"]["quantile_rapport_force"] == 3
+    assert feature["tippecanoe"]["layer"] == "mobilisation_bureaux"
+    assert feature["tippecanoe"]["minzoom"] == BUREAUX_MINZOOM
+    assert feature["tippecanoe"]["maxzoom"] == BUREAUX_MAXZOOM
+    assert rapport.nom_couche == "mobilisation_bureaux"
+    assert rapport.scores_joints == 1
+
+
+def test_joindre_mobilisation_bureaux_exclut_naturellement_l_etranger(tmp_path):
+    chemin_contours = tmp_path / "contours.geojson"
+    _ecrire_geojson(chemin_contours, _contours_bureaux_geojson())
+    sortie = tmp_path / "mobilisation_bureaux.ndjson"
+
+    rapport = joindre_mobilisation_bureaux(chemin_contours, _donnees_bureau_synthetiques(), sortie)
+
+    assert rapport.total_scores == 2  # ZZ001_0001 exclu.
+    assert rapport.scores_joints == 1
+    assert rapport.contours_sans_score == 1  # 69123_0002, orphelin.
+
+
+# --- joindre_mobilisation_communes (issue #26) ----------------------------------
+
+
+def _donnees_commune_synthetiques() -> pl.DataFrame:
+    def _ligne(code_commune, statut, degrade, bloc_tete, quantile_force):
+        return {
+            "code_commune": code_commune,
+            "code_departement": "69",
+            "statut": statut,
+            "degrade": degrade,
+            "reserve_gauche": 40.0,
+            "reserve_centre": None,
+            "reserve_droite": 30.0,
+            "reserve_extreme_droite": 20.0,
+            "reserve_divers": None,
+            "quantile_reserve_gauche": 2,
+            "quantile_reserve_centre": None,
+            "quantile_reserve_droite": 1,
+            "quantile_reserve_extreme_droite": 1,
+            "quantile_reserve_divers": None,
+            "bloc_tete_projete": bloc_tete,
+            "quantile_rapport_force": quantile_force,
+        }
+
+    return pl.DataFrame(
+        [
+            _ligne("69123", "joint_valide", False, "Gauche", 2),  # dézoom d'une commune stable.
+            _ligne("69456", "repli", True, "Droite", 3),  # commune en repli, visible à tout zoom.
+        ]
+    )
+
+
+def _contours_communes_geojson() -> dict:
+    return {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {"code": "69123", "nom": "Lyon", "departement": "69"},
+                "geometry": {"type": "Polygon", "coordinates": [[[0, 0], [0, 1], [1, 1], [0, 0]]]},
+            },
+            {
+                "type": "Feature",
+                "properties": {"code": "69456", "nom": "Commune en repli", "departement": "69"},
+                "geometry": {"type": "Polygon", "coordinates": [[[0, 0], [0, 1], [1, 1], [0, 0]]]},
+            },
+            {
+                "type": "Feature",
+                "properties": {"code": "01001", "nom": "Sans donnée mobilisation", "departement": "01"},
+                "geometry": {"type": "Polygon", "coordinates": [[[0, 0], [0, 1], [1, 1], [0, 0]]]},
+            },
+        ],
+    }
+
+
+def test_joindre_mobilisation_communes_joint_par_code_commune(tmp_path):
+    chemin = tmp_path / "communes.geojson.gz"
+    with gzip.open(chemin, "wt", encoding="utf-8") as f:
+        json.dump(_contours_communes_geojson(), f)
+    sortie = tmp_path / "mobilisation_communes.ndjson"
+
+    rapport = joindre_mobilisation_communes(chemin, _donnees_commune_synthetiques(), sortie)
+
+    lignes = {json.loads(ligne)["properties"]["code_commune"]: json.loads(ligne) for ligne in sortie.read_text(encoding="utf-8").strip().splitlines()}
+    assert set(lignes) == {"69123", "69456"}
+    assert rapport.total_contours == 3
+    assert rapport.contours_sans_score == 1
+
+
+def test_joindre_mobilisation_communes_repli_visible_a_tout_zoom_stable_seulement_au_dezoom(tmp_path):
+    chemin = tmp_path / "communes.geojson.gz"
+    with gzip.open(chemin, "wt", encoding="utf-8") as f:
+        json.dump(_contours_communes_geojson(), f)
+    sortie = tmp_path / "mobilisation_communes.ndjson"
+
+    joindre_mobilisation_communes(chemin, _donnees_commune_synthetiques(), sortie)
+    lignes = {json.loads(ligne)["properties"]["code_commune"]: json.loads(ligne) for ligne in sortie.read_text(encoding="utf-8").strip().splitlines()}
+
+    assert lignes["69456"]["properties"]["degrade"] is True
+    assert lignes["69456"]["tippecanoe"]["maxzoom"] == BUREAUX_MAXZOOM  # visible même au zoom bureau.
+    assert lignes["69123"]["properties"]["degrade"] is False
+    assert lignes["69123"]["tippecanoe"]["maxzoom"] == COMMUNES_MAXZOOM  # remplacée par mobilisation_bureaux au-delà.
+    assert lignes["69123"]["tippecanoe"]["layer"] == "mobilisation_communes"
+
+
 # --- construire_pmtiles : erreur explicite si le binaire est introuvable -------
 
 
 def test_construire_pmtiles_leve_une_erreur_explicite_si_tippecanoe_absent(tmp_path):
     with pytest.raises(RuntimeError, match="tippecanoe"):
         construire_pmtiles(
-            tmp_path / "bureaux.ndjson",
-            tmp_path / "communes.ndjson",
+            [tmp_path / "bureaux.ndjson", tmp_path / "communes.ndjson"],
             tmp_path / "out.pmtiles",
             tippecanoe_bin=str(tmp_path / "binaire-inexistant"),
         )
