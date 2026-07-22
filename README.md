@@ -11,6 +11,28 @@ Ce projet succède à [carto_legislatives_2024](https://github.com/Virgile-Dauge
 1. **Recherche** — état de l'art des méthodes de projection électorale (swing, inférence écologique, MRP…) et du choix des élections sources. Cadrage dans [docs/recherche/prompt-hyperresearch.md](docs/recherche/prompt-hyperresearch.md).
 2. **Stack** — pipeline de données en marimo + Polars produisant un fichier PMTiles France entière, servi par un site statique MapLibre GL JS (chargement par tuiles, zéro serveur).
 
+## Installation
+
+```bash
+uv sync
+```
+
+## Télécharger les données
+
+Les fichiers sources (data.gouv.fr) sont volumineux et exclus du dépôt. Ils sont
+téléchargés dans `data/raw/`, hors git :
+
+```bash
+uv run download-data
+```
+
+## Tests
+
+```bash
+uv run pytest
+uv run ruff check .
+```
+
 ## Licence
 
 AGPL-3.0 — voir [LICENSE](LICENSE).
