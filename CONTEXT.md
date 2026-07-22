@@ -9,7 +9,7 @@ Vocabulaire canonique du projet. Les issues, docs et noms de code utilisent ces 
 - **Crosswalk** — table de correspondance des identifiants de bureaux entre deux référentiels ou deux scrutins. La jointure inter-scrutins se fait par identifiants + crosswalk, jamais par géométrie.
 - **Churn** — instabilité du découpage en bureaux entre deux scrutins. Détecté par commune (le nombre de bureaux change d'un scrutin à l'autre) ; mesuré canoniquement en **part des inscrits** en zone instable — la grandeur à minimiser est l'électorat mal identifié localement, jamais un compte de communes ou de bureaux (des unités de tailles trop inégales pour être comparées).
 - **Commune stable / instable** — stable : même nombre de bureaux sur les 4 scrutins sources → jointure directe par id_bv. Instable : le compte change → repli.
-- **Repli** — traitement d'une commune instable : agrégation à la maille communale, ou réallocation dasymétrique pondérée par les électeurs inscrits (jamais par la surface).
+- **Repli** — traitement d'une commune instable : agrégation à la maille communale, ou réallocation dasymétrique pondérée par les électeurs inscrits (jamais par la surface). La dégradation est **toujours signalée, jamais silencieuse** : le marqueur de repli reste visible quel que soit le réglage d'affichage choisi par l'utilisateur.
 - **Panel** — la table bureau × scrutin × bloc issue de l'étape 0, chaque bureau étant soit joint-validé soit explicitement en repli.
 
 ## Scrutins et blocs
