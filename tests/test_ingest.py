@@ -34,23 +34,8 @@ from projections.ingest import (
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
-
-# --- Fixtures pytest ---------------------------------------------------------
-
-
-@pytest.fixture(scope="session")
-def general_results_reel() -> pl.DataFrame:
-    return pl.read_parquet(FIXTURES / "general_results.parquet")
-
-
-@pytest.fixture(scope="session")
-def candidats_results_reel() -> pl.DataFrame:
-    return pl.read_parquet(FIXTURES / "candidats_results.parquet")
-
-
-@pytest.fixture(scope="session")
-def panel_reel(general_results_reel, candidats_results_reel) -> pl.DataFrame:
-    return ingest(general_results_reel, candidats_results_reel)
+# Fixtures partagées (general_results_reel, candidats_results_reel, panel_reel) :
+# voir tests/conftest.py.
 
 
 # --- filtrer_scrutins_sources -------------------------------------------------
