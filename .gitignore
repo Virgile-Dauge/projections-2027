@@ -6,3 +6,7 @@ data/
 .ruff_cache/
 .pytest_cache/
 *.egg-info/
+
+# État local d'outillage — jamais committé
+.claude/
+.hyperresearch/

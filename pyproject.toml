@@ -10,6 +10,7 @@ dependencies = [
 
 [project.scripts]
 download-data = "projections.datasets:main"
+ingest = "projections.ingest:main"
 
 [build-system]
 requires = ["hatchling"]
