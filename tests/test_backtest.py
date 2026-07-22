@@ -16,22 +16,36 @@ import pytest
 
 from projections.backtest import (
     BLOCS_MAJEURS,
+    CIBLES_PARTICIPATION,
+    COLONNE_ABSTENTION_PREDICTEUR,
     POIDS_COMPOSITE_2022_PAR_DEFAUT,
     SCRUTIN_LEGISLATIVES_2022,
     SCRUTIN_LEGISLATIVES_2022_CORRIGE,
+    SEUIL_RHO_PARTICIPATION,
+    calculer_ecart_national_departement,
+    calculer_taux_abstention,
+    calculer_taux_abstention_departement,
     calibrer_poids,
     construire_predicteur_2022,
+    construire_predicteur_departemental_2022,
     construire_table_backtest,
+    construire_table_participation,
     correlation_euro_pres_rn,
     correlation_spearman,
     distribution_swing,
     evaluer_gate,
+    evaluer_gate_participation,
+    executer_backtest_participation,
     executer_backtests,
+    garde_anti_hasard_participation,
+    garde_anti_hasard_structure,
     generer_rapport_backtest,
     isoler_scrutins_2022,
     main,
     rho_par_bloc,
     tercile_competitif,
+    verdict_anti_hasard,
+    verdict_carte_mobilisation,
     verifier_regularite_seuil,
     verdict_global,
 )
@@ -59,7 +73,7 @@ def baseline_reel(panel_avec_statut_reel: pl.DataFrame) -> pl.DataFrame:
     return construire_baseline(panel_avec_statut_reel)
 
 
-def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69"):
+def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69", abstentions=10, inscrits=None):
     id_bv = f"{code_commune}_{code_bv}"
     return {
         "id_election": id_election,
@@ -69,8 +83,8 @@ def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_depart
         "id_bv": id_bv,
         "bloc": bloc,
         "voix": voix,
-        "inscrits": exprimes + 50,
-        "abstentions": 10,
+        "inscrits": inscrits if inscrits is not None else exprimes + 50,
+        "abstentions": abstentions,
         "votants": exprimes + 20,
         "blancs": 10,
         "nuls": 10,
@@ -426,6 +440,208 @@ def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_sta
         "Calibration des poids",
     ):
         assert section in rapport
+
+
+# --- Backtest participation (ADR 0002) ------------------------------------------
+
+
+def test_calculer_taux_abstention_deduplique_par_bloc_et_calcule_le_taux():
+    # 2 lignes de bloc pour le même bureau x scrutin (abstentions/inscrits
+    # répétés) : le taux ne doit apparaître qu'une fois, calculé depuis les
+    # comptes (20/200 = 0.1), jamais une moyenne de taux déjà calculés.
+    lignes = [
+        _ligne("2022_pres_t1", "69123", "0001", "Gauche", 60, 100, abstentions=20, inscrits=200),
+        _ligne("2022_pres_t1", "69123", "0001", "Droite", 40, 100, abstentions=20, inscrits=200),
+    ]
+    resultat = calculer_taux_abstention(_panel(lignes), scrutins=("2022_pres_t1",))
+    assert resultat.height == 1
+    assert resultat.get_column("taux_abstention")[0] == pytest.approx(0.1)
+
+
+def test_calculer_taux_abstention_exprimes_nul_donne_null_jamais_nan():
+    lignes = [_ligne("2022_pres_t1", "69123", "0001", "Gauche", 0, 0, abstentions=10, inscrits=0)]
+    resultat = calculer_taux_abstention(_panel(lignes), scrutins=("2022_pres_t1",))
+    assert resultat.get_column("taux_abstention").null_count() == 1
+    assert not resultat.get_column("taux_abstention").is_nan().any()
+
+
+def test_construire_table_participation_colonnes_attendues(panel_avec_statut_reel, baseline_reel):
+    table = construire_table_participation(panel_avec_statut_reel, baseline_reel)
+    colonnes_attendues = {
+        "unite_id",
+        COLONNE_ABSTENTION_PREDICTEUR,
+        *CIBLES_PARTICIPATION.values(),
+        "code_departement",
+        "statut",
+        "maille",
+    }
+    assert colonnes_attendues <= set(table.columns)
+
+
+def test_executer_backtest_participation_calcule_un_rho_par_cible(panel_avec_statut_reel, baseline_reel):
+    resultat = executer_backtest_participation(panel_avec_statut_reel, baseline_reel)
+    resultats = resultat["resultats"]
+    assert set(resultats.get_column("cible").unique().to_list()) == set(CIBLES_PARTICIPATION)
+    assert isinstance(resultat["rho_inter_cibles"], float)
+    assert resultat["n_inter_cibles"] > 0
+    assert "pass_global" in resultats.columns
+
+
+def test_evaluer_gate_participation_seuil_a_la_limite_est_pass():
+    # >= strict, pas > (même convention que le gate ADR 0001) : ρ = 0,8 pile PASS.
+    resultats = pl.DataFrame({"cible": ["euro"], "rho": [0.8], "n": [100]})
+    verdict = evaluer_gate_participation(resultats)
+    assert verdict.get_column("pass_global")[0] is True
+    assert verdict_global(verdict) is True
+
+
+def test_evaluer_gate_participation_juste_sous_le_seuil_est_fail():
+    resultats = pl.DataFrame({"cible": ["euro"], "rho": [0.7999], "n": [100]})
+    verdict = evaluer_gate_participation(resultats)
+    assert verdict.get_column("pass_global")[0] is False
+    assert verdict_global(verdict) is False
+
+
+def test_evaluer_gate_participation_seuil_gele_a_0_8():
+    # Clause pré-enregistrée ADR 0002 : le seuil ne doit pas dériver silencieusement.
+    assert SEUIL_RHO_PARTICIPATION == 0.8
+
+
+# --- Garde anti-hasard : prédicteur département (structure) -------------------
+
+
+def test_calculer_ecart_national_departement_recalcule_par_sommes_jamais_moyenne():
+    # Département 69 : 2 bureaux à 50/50 (moyenne des écarts bureau = 0 par
+    # construction, quel que soit leur poids). Département 01 : 1 gros bureau
+    # à 90% Gauche. Recalculé par sommes de voix/exprimés (jamais par moyenne
+    # des écarts de bureau), le département 69 doit rester à un écart nul.
+    lignes = [
+        _ligne("2022_pres_t1", "69123", "0001", "Gauche", 50, 100, code_departement="69"),
+        _ligne("2022_pres_t1", "69123", "0001", "Droite", 50, 100, code_departement="69"),
+        _ligne("2022_pres_t1", "69456", "0001", "Gauche", 50, 100, code_departement="69"),
+        _ligne("2022_pres_t1", "69456", "0001", "Droite", 50, 100, code_departement="69"),
+        _ligne("2022_pres_t1", "01001", "0001", "Gauche", 9000, 10000, code_departement="01"),
+        _ligne("2022_pres_t1", "01001", "0001", "Droite", 1000, 10000, code_departement="01"),
+    ]
+    resultat = calculer_ecart_national_departement(_panel(lignes))
+    ecart_69 = resultat.filter((pl.col("unite_id") == "69") & (pl.col("bloc") == "Gauche")).get_column(
+        "ecart_national"
+    )[0]
+    national_gauche = (50 + 50 + 9000) / (100 + 100 + 10000)
+    assert ecart_69 == pytest.approx((0.5 - national_gauche) * 100)
+
+
+def test_construire_predicteur_departemental_2022_invariant_si_2024_change():
+    panel_a = _panel_complet_deux_unites(voix_2024_a=(10, 90), voix_2024_b=(90, 10))
+    panel_b = _panel_complet_deux_unites(voix_2024_a=(99, 1), voix_2024_b=(1, 99))
+    predicteur_a = construire_predicteur_departemental_2022(panel_a)
+    predicteur_b = construire_predicteur_departemental_2022(panel_b)
+    assert predicteur_a.sort(["code_departement", "bloc"]).equals(predicteur_b.sort(["code_departement", "bloc"]))
+
+
+def test_construire_predicteur_departemental_2022_colonnes_attendues(panel_avec_statut_reel):
+    predicteur = construire_predicteur_departemental_2022(panel_avec_statut_reel)
+    assert {"code_departement", "bloc", "composite_2022"} <= set(predicteur.columns)
+    assert predicteur.height > 0
+
+
+# --- Garde anti-hasard : prédicteur département (participation) ---------------
+
+
+def test_calculer_taux_abstention_departement_calcule_par_sommes_jamais_moyenne_des_taux():
+    # 2 bureaux du même département à taux d'abstention très différents et à
+    # poids d'inscrits très différents : le taux départemental doit être la
+    # somme des abstentions sur la somme des inscrits, PAS la moyenne (0.5)
+    # des 2 taux de bureau (0.1 et 0.9).
+    lignes = [
+        _ligne("2022_pres_t1", "69123", "0001", "Gauche", 10, 100, abstentions=10, inscrits=100),
+        _ligne("2022_pres_t1", "69456", "0001", "Gauche", 10, 100, abstentions=900, inscrits=1000),
+    ]
+    resultat = calculer_taux_abstention_departement(_panel(lignes), scrutin="2022_pres_t1")
+    taux = resultat.get_column("abstention_departement_2022")[0]
+    moyenne_naive = (0.1 + 0.9) / 2
+    taux_par_sommes = (10 + 900) / (100 + 1000)
+    assert taux == pytest.approx(taux_par_sommes)
+    assert taux != pytest.approx(moyenne_naive)
+
+
+def test_calculer_taux_abstention_departement_ignore_les_donnees_2024():
+    lignes_a = [
+        _ligne("2022_pres_t1", "69123", "0001", "Gauche", 10, 100, abstentions=10, inscrits=100),
+        _ligne("2024_euro_t1", "69123", "0001", "Gauche", 10, 100, abstentions=10, inscrits=100),
+    ]
+    lignes_b = [
+        _ligne("2022_pres_t1", "69123", "0001", "Gauche", 10, 100, abstentions=10, inscrits=100),
+        _ligne("2024_euro_t1", "69123", "0001", "Gauche", 90, 100, abstentions=90, inscrits=100),
+    ]
+    resultat_a = calculer_taux_abstention_departement(_panel(lignes_a), scrutin="2022_pres_t1")
+    resultat_b = calculer_taux_abstention_departement(_panel(lignes_b), scrutin="2022_pres_t1")
+    assert resultat_a.equals(resultat_b)
+
+
+# --- Garde anti-hasard : verdict bureau vs département + hasard ---------------
+
+
+def test_verdict_anti_hasard_pass_quand_bureau_bat_departement():
+    verdict = verdict_anti_hasard(rho_bureau=0.9, rho_departement=0.5)
+    assert verdict["rho_hasard"] == 0.0
+    assert verdict["lift_vs_hasard"] == pytest.approx(0.9)
+    assert verdict["lift_vs_departement"] == pytest.approx(0.4)
+    assert verdict["pass_global"] is True
+
+
+def test_verdict_anti_hasard_a_egalite_ne_bat_pas_donc_fail():
+    # Frontière de la clause : "battre" (ADR 0002) exige un >, pas un >= --
+    # à égalité, le bureau ne bat pas le département.
+    verdict = verdict_anti_hasard(rho_bureau=0.7, rho_departement=0.7)
+    assert verdict["pass_global"] is False
+
+
+def test_verdict_anti_hasard_fail_si_rho_departement_indefini():
+    verdict = verdict_anti_hasard(rho_bureau=0.9, rho_departement=float("nan"))
+    assert verdict["pass_global"] is False
+
+
+def test_garde_anti_hasard_structure_produit_toutes_les_combinaisons(panel_avec_statut_reel, baseline_reel):
+    resultat = executer_backtests(panel_avec_statut_reel, baseline_reel)
+    anti_hasard = garde_anti_hasard_structure(resultat, panel_avec_statut_reel)
+    assert set(anti_hasard.get_column("bloc").unique().to_list()) == set(BLOCS_MAJEURS)
+    assert anti_hasard.height == len(BLOCS_MAJEURS) * len(CIBLES_PARTICIPATION)
+    assert "pass_global" in anti_hasard.columns
+
+
+def test_garde_anti_hasard_participation_produit_toutes_les_cibles(panel_avec_statut_reel, baseline_reel):
+    resultats_participation = executer_backtest_participation(panel_avec_statut_reel, baseline_reel)
+    anti_hasard = garde_anti_hasard_participation(resultats_participation, panel_avec_statut_reel)
+    assert set(anti_hasard.get_column("cible").unique().to_list()) == set(CIBLES_PARTICIPATION)
+    assert "pass_global" in anti_hasard.columns
+
+
+# --- Verdict global carte mobilisation (ADR 0002, point 5) ---------------------
+
+
+def _verdict_pass(cible="euro"):
+    return pl.DataFrame({"cible": [cible], "pass_global": [True]})
+
+
+def _verdict_fail(cible="euro"):
+    return pl.DataFrame({"cible": [cible], "pass_global": [False]})
+
+
+def test_verdict_carte_mobilisation_pass_quand_tout_est_vert():
+    assert verdict_carte_mobilisation(_verdict_pass(), _verdict_pass(), _verdict_pass()) is True
+
+
+def test_verdict_carte_mobilisation_fail_si_participation_fail():
+    assert verdict_carte_mobilisation(_verdict_fail(), _verdict_pass(), _verdict_pass()) is False
+
+
+def test_verdict_carte_mobilisation_fail_si_anti_hasard_structure_fail():
+    assert verdict_carte_mobilisation(_verdict_pass(), _verdict_fail(), _verdict_pass()) is False
+
+
+def test_verdict_carte_mobilisation_fail_si_anti_hasard_participation_fail():
+    assert verdict_carte_mobilisation(_verdict_pass(), _verdict_pass(), _verdict_fail()) is False
 
 
 # --- Entrée console `uv run backtest` -------------------------------------------
