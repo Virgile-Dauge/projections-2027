@@ -556,6 +556,7 @@ def generer_rapport_backtest(
         f"- **{ligne['cible']}** : « {ligne['jeu_de_poids']} » (ρ = {ligne['rho']:.3f}, bloc {ligne['bloc']})"
         for ligne in meilleur_par_cible.iter_rows(named=True)
     )
+    poids_txt = ", ".join(f"{scrutin} {valeur:.0%}" for scrutin, valeur in poids_composite_2022.items())
 
     return f"""# Backtest 2022→2024 et verdict du gate (ADR 0001)
 
@@ -587,7 +588,7 @@ du périmètre. Les unités en repli (maille commune, cf. `projections.churn`)
 sont exclues : elles agrègent plusieurs bureaux physiques, une granularité
 différente qui fausserait une validation de rang à la maille bureau.
 Correction de l'offre des législatives : méthode `{methode_correction}`.
-Poids du composite 2022 utilisés pour le backtest principal : {poids_composite_2022}.
+Poids du composite 2022 utilisés pour le backtest principal : {poids_txt}.
 
 ## Tercile compétitif — définition
 
