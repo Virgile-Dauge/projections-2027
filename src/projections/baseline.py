@@ -99,9 +99,13 @@ Extrapolable pour un scénario 2027, jamais figé.
 
 from __future__ import annotations
 
+import argparse
 from collections.abc import Iterable
+from pathlib import Path
 
 import polars as pl
+
+INTERIM_DIR = Path("data/interim")
 
 SCRUTIN_PRESIDENTIELLE = "2022_pres_t1"
 SCRUTIN_EUROPEENNES = "2024_euro_t1"
@@ -318,3 +322,71 @@ def calculer_derive(table: pl.DataFrame, nom_colonne: str = "derive") -> pl.Data
         raise ValueError(f"composante(s) manquante(s) dans la table : {manquantes}")
     moyenne_2024 = pl.concat_list([col_euro, col_legi]).list.drop_nulls().list.mean()
     return table.with_columns((moyenne_2024 - pl.col(col_pres)).alias(nom_colonne))
+
+
+def construire_baseline(
+    panel: pl.DataFrame,
+    poids: dict[str, float] | None = None,
+    methode_correction: str = "imputation",
+) -> pl.DataFrame:
+    """Table baseline unité x bloc complète (issue #5) : composantes mono-scrutin
+    conservées + composite + variante moyenne tronquée + dérive + statut/maille
+    hérités du panel (churn.py).
+
+    `panel` : panel avec statut (`projections.churn.construire_panel_avec_statut`),
+    colonne `statut` requise pour hériter la maille (joint_valide -> bureau,
+    repli -> commune).
+    """
+    ecart = calculer_ecart_national(panel, scrutins=SCRUTINS_STRUCTURE)
+    legi_corrige = corriger_offre_legislatives(ecart, methode=methode_correction)
+    table = construire_table_composantes(ecart, legi_corrige)
+    table = composite_pondere(table, poids=poids)
+    table = composite_moyenne_tronquee(table)
+    table = calculer_derive(table)
+
+    statut_maille = (
+        _ajouter_unite(panel)
+        .select("unite_id", "code_departement", "statut")
+        .sort(["unite_id", "code_departement"])
+        .unique(subset="unite_id", keep="first")
+        .with_columns(
+            pl.when(pl.col("statut") == "joint_valide")
+            .then(pl.lit("bureau"))
+            .otherwise(pl.lit("commune"))
+            .alias("maille")
+        )
+    )
+    return table.join(statut_maille, on="unite_id", how="left").sort(["unite_id", "bloc"])
+
+
+def main() -> None:
+    """Point d'entrée `uv run baseline`."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--panel", type=Path, default=INTERIM_DIR / "panel_avec_statut.parquet")
+    parser.add_argument("--out", type=Path, default=INTERIM_DIR / "baseline_unite_bloc.parquet")
+    parser.add_argument(
+        "--poids-presidentielle", type=float, default=POIDS_PAR_DEFAUT[SCRUTIN_PRESIDENTIELLE]
+    )
+    parser.add_argument("--poids-europeennes", type=float, default=POIDS_PAR_DEFAUT[SCRUTIN_EUROPEENNES])
+    parser.add_argument(
+        "--poids-legislatives", type=float, default=POIDS_PAR_DEFAUT[SCRUTIN_LEGISLATIVES_CORRIGE]
+    )
+    parser.add_argument("--methode-correction", choices=("imputation", "exclusion"), default="imputation")
+    args = parser.parse_args()
+
+    poids = {
+        SCRUTIN_PRESIDENTIELLE: args.poids_presidentielle,
+        SCRUTIN_EUROPEENNES: args.poids_europeennes,
+        SCRUTIN_LEGISLATIVES_CORRIGE: args.poids_legislatives,
+    }
+
+    panel = pl.read_parquet(args.panel)
+    baseline = construire_baseline(panel, poids=poids, methode_correction=args.methode_correction)
+
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    baseline.write_parquet(args.out)
+    print(f"baseline écrite : {args.out} ({baseline.height} lignes)")
+
+
+if __name__ == "__main__":
+    main()

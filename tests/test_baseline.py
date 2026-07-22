@@ -13,6 +13,8 @@ Deux familles de tests :
   traverse tout `construire_baseline`.
 """
 
+from pathlib import Path
+
 import polars as pl
 import pytest
 
@@ -20,13 +22,32 @@ from projections.baseline import (
     POIDS_PAR_DEFAUT,
     SCRUTIN_EUROPEENNES,
     SCRUTIN_LEGISLATIVES,
+    SCRUTIN_LEGISLATIVES_CORRIGE,
     SCRUTIN_PRESIDENTIELLE,
     calculer_derive,
     calculer_ecart_national,
     composite_moyenne_tronquee,
     composite_pondere,
+    construire_baseline,
     corriger_offre_legislatives,
+    main,
 )
+from projections.churn import classifier_communes, construire_panel_avec_statut
+from projections.ingest import ingest
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+# --- Fixtures pytest ---------------------------------------------------------
+
+
+@pytest.fixture(scope="session")
+def panel_avec_statut_reel() -> pl.DataFrame:
+    general = pl.read_parquet(FIXTURES / "general_results.parquet")
+    candidats = pl.read_parquet(FIXTURES / "candidats_results.parquet")
+    panel = ingest(general, candidats)
+    classification = classifier_communes(panel)
+    return construire_panel_avec_statut(panel, classification)
 
 
 def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69"):
@@ -308,3 +329,78 @@ def test_calculer_derive_nulle_si_structure_2024_egale_a_2022():
     )
     resultat = calculer_derive(table)
     assert resultat.get_column("derive").to_list() == pytest.approx([0.0])
+
+
+# --- construire_baseline : intégration sur l'extrait réel gelé -----------------
+
+
+def test_construire_baseline_colonnes_attendues(panel_avec_statut_reel):
+    baseline = construire_baseline(panel_avec_statut_reel)
+    colonnes_attendues = {
+        "unite_id",
+        "bloc",
+        f"ecart_{SCRUTIN_PRESIDENTIELLE}",
+        f"ecart_{SCRUTIN_EUROPEENNES}",
+        f"ecart_{SCRUTIN_LEGISLATIVES}_corrige",
+        "composite",
+        "composite_tronque",
+        "derive",
+        "statut",
+        "maille",
+        "code_departement",
+    }
+    assert colonnes_attendues <= set(baseline.columns)
+    assert baseline.height > 0
+
+
+def test_construire_baseline_jamais_de_nan(panel_avec_statut_reel):
+    # Régression : voix/0 (bureaux à exprimes=0) et division par un poids
+    # disponible nul doivent produire des null, jamais des NaN qui passeraient
+    # silencieusement à travers les null_count() de contrôle.
+    baseline = construire_baseline(panel_avec_statut_reel)
+    for colonne in ("composite", "composite_tronque", "derive"):
+        assert baseline.get_column(colonne).is_nan().sum() == 0
+
+
+def test_construire_baseline_maille_coherente_avec_le_statut(panel_avec_statut_reel):
+    baseline = construire_baseline(panel_avec_statut_reel)
+    incoherent = baseline.filter(
+        ((pl.col("statut") == "joint_valide") & (pl.col("maille") != "bureau"))
+        | ((pl.col("statut") == "repli") & (pl.col("maille") != "commune"))
+    )
+    assert incoherent.height == 0
+
+
+def test_construire_baseline_poids_parametrables_de_bout_en_bout(panel_avec_statut_reel):
+    poids_tout_sur_pres = {
+        SCRUTIN_PRESIDENTIELLE: 1.0,
+        SCRUTIN_EUROPEENNES: 0.0,
+        SCRUTIN_LEGISLATIVES_CORRIGE: 0.0,
+    }
+    baseline = construire_baseline(panel_avec_statut_reel, poids=poids_tout_sur_pres)
+    # Là où ecart_2022_pres_t1 est renseigné, le composite (100% sur cette
+    # composante) doit lui être rigoureusement égal.
+    comparable = baseline.filter(pl.col(f"ecart_{SCRUTIN_PRESIDENTIELLE}").is_not_null())
+    assert comparable.get_column("composite").to_list() == pytest.approx(
+        comparable.get_column(f"ecart_{SCRUTIN_PRESIDENTIELLE}").to_list()
+    )
+
+
+# --- Entrée console `uv run baseline` -------------------------------------------
+
+
+def test_main_ecrit_la_baseline_en_parquet(tmp_path, monkeypatch, panel_avec_statut_reel):
+    # panel_avec_statut n'est pas committé sous cette forme dans tests/fixtures/
+    # (seuls les Parquet ingest bruts le sont) : on l'écrit dans tmp_path plutôt
+    # que dans le dépôt.
+    panel_in = tmp_path / "panel_avec_statut.parquet"
+    sortie = tmp_path / "baseline.parquet"
+    panel_avec_statut_reel.write_parquet(panel_in)
+    monkeypatch.setattr(
+        "sys.argv",
+        ["baseline", "--panel", str(panel_in), "--out", str(sortie)],
+    )
+    main()
+    assert sortie.exists()
+    baseline = pl.read_parquet(sortie)
+    assert baseline.height > 0
