@@ -3,10 +3,12 @@ repli du panel bureau × scrutin × bloc, et `rapport-churn.md`.
 
 Condition suspensive du reste du pipeline (HANDOFF.md, étape 0) : la jointure
 bureau-à-bureau entre scrutins n'est pas sûre par défaut (numérotation
-communale sans norme, découpages qui changent). Le churn — proportion de
-bureaux dont le découpage change entre deux scrutins (CONTEXT.md) — est
-mesuré en comparant le nombre de bureaux par commune sur les 4 scrutins
-sources, sans REU : c'est LE nombre que personne n'a jamais publié.
+communale sans norme, découpages qui changent). Le churn — instabilité du
+découpage en bureaux entre deux scrutins (CONTEXT.md) — est détecté en
+comparant le nombre de bureaux par commune sur les 4 scrutins sources, sans
+REU (LE nombre que personne n'a jamais publié), et mesuré canoniquement en
+**part des inscrits** en zone instable, jamais en compte de communes ou de
+bureaux — unités trop inégales pour être comparées (issue #13).
 
 Stratégie à deux étages (CONTEXT.md « Commune stable / instable », « Repli ») :
 - commune stable (même nombre de bureaux sur les 4 scrutins sources) ->
@@ -182,7 +184,12 @@ def construire_panel_avec_statut(panel: pl.DataFrame, classification: pl.DataFra
 
 
 def taux_churn_national(classification: pl.DataFrame) -> float:
-    """Proportion de communes instables parmi l'ensemble des communes du panel."""
+    """Proportion de communes instables parmi l'ensemble des communes du panel.
+
+    Chiffre de contexte uniquement (issue #13) : la mesure canonique du churn
+    est `part_inscrits_zone_instable`, pas ce compte de communes — des unités
+    de tailles trop inégales pour être comparées (CONTEXT.md « Churn »).
+    """
     total = classification.height
     if total == 0:
         return 0.0
