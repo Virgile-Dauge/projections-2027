@@ -85,6 +85,16 @@ exactement. `composite_moyenne_tronquee` calcule directement la médiane des
 composantes présentes (généralise proprement au cas où une composante est
 absente via la variante d'exclusion : médiane de 2 valeurs = leur moyenne,
 médiane de 1 valeur = cette valeur).
+
+## Dérive 2022->2024 (calculer_derive)
+
+    derive = moyenne(ecart_2024_euro_t1, ecart_2024_legi_t1_corrige) - ecart_2022_pres_t1
+
+Évolution de l'écart relatif entre la présidentielle 2022 et la structure
+2024 (moyenne des deux scrutins 2024, législatives déjà corrigées de
+l'offre). Positif : le bloc gagne du terrain relatif dans l'unité entre 2022
+et 2024 -- capte la diffusion RN hors bastions (HANDOFF.md étape 1).
+Extrapolable pour un scénario 2027, jamais figé.
 """
 
 from __future__ import annotations
@@ -293,3 +303,18 @@ def composite_moyenne_tronquee(
         raise ValueError(f"composante(s) manquante(s) dans la table : {manquantes}")
     mediane = pl.concat_list(colonnes).list.drop_nulls().list.median()
     return table.with_columns(mediane.alias(nom_colonne))
+
+
+def calculer_derive(table: pl.DataFrame, nom_colonne: str = "derive") -> pl.DataFrame:
+    """Terme de dérive 2022->2024 par unité x bloc (cf. docstring du module).
+
+    derive = moyenne(ecart_2024_euro_t1, ecart_2024_legi_t1_corrige) - ecart_2022_pres_t1
+    """
+    col_pres = _colonne_composante(SCRUTIN_PRESIDENTIELLE)
+    col_euro = _colonne_composante(SCRUTIN_EUROPEENNES)
+    col_legi = _colonne_composante(SCRUTIN_LEGISLATIVES_CORRIGE)
+    manquantes = [c for c in (col_pres, col_euro, col_legi) if c not in table.columns]
+    if manquantes:
+        raise ValueError(f"composante(s) manquante(s) dans la table : {manquantes}")
+    moyenne_2024 = pl.concat_list([col_euro, col_legi]).list.drop_nulls().list.mean()
+    return table.with_columns((moyenne_2024 - pl.col(col_pres)).alias(nom_colonne))
