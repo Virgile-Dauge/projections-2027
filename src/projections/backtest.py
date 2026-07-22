@@ -72,6 +72,8 @@ from pathlib import Path
 import polars as pl
 
 from projections.baseline import (
+    SCRUTIN_EUROPEENNES,
+    SCRUTIN_LEGISLATIVES,
     SCRUTIN_PRESIDENTIELLE,
     calculer_ecart_national,
     composite_pondere,
@@ -112,6 +114,17 @@ POIDS_COMPOSITE_2022_PAR_DEFAUT: dict[str, float] = {
 BLOCS_MAJEURS: tuple[str, ...] = ("Extrême droite", "Gauche")
 SEUIL_RHO_ENSEMBLE = 0.7
 SEUIL_RHO_TERCILE = 0.5
+
+# Backtest participation + garde anti-hasard (ADR 0002, issue #24) -- seuil
+# gravé à la session de cadrage, ne jamais le recalibrer après avoir vu les
+# résultats (même règle que le gate ADR 0001 ci-dessus).
+SCRUTINS_PARTICIPATION: tuple[str, ...] = (SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES, SCRUTIN_LEGISLATIVES)
+COLONNE_ABSTENTION_PREDICTEUR = f"abstention_{SCRUTIN_PRESIDENTIELLE}"
+CIBLES_PARTICIPATION: dict[str, str] = {
+    "euro": f"abstention_{SCRUTIN_EUROPEENNES}",
+    "legi": f"abstention_{SCRUTIN_LEGISLATIVES}",
+}
+SEUIL_RHO_PARTICIPATION = 0.8
 
 
 # --- Prédicteur 2022 (anti-fuite) ------------------------------------------
@@ -414,8 +427,322 @@ def evaluer_gate(
 
 
 def verdict_global(verdict: pl.DataFrame) -> bool:
-    """PASS uniquement si toutes les lignes (bloc x cible) du gate sont PASS."""
+    """PASS uniquement si toutes les lignes (bloc x cible) du gate sont PASS.
+
+    Générique : ne lit que la colonne `pass_global`, réutilisée telle quelle
+    par `evaluer_gate_participation` et par les tables de la garde anti-hasard
+    (ADR 0002, issue #24) -- même contrat, pas une réimplémentation par gate.
+    """
     return bool(verdict.height) and bool(verdict.get_column("pass_global").all())
+
+
+# --- Backtest participation (ADR 0002, issue #24) ------------------------------
+#
+# Corrélation de rang du taux d'abstention par bureau, présidentielle 2022 T1
+# -> européennes 2024 ET législatives 2024 T1, sur l'ensemble des bureaux
+# joints (statut joint_valide, même périmètre que le backtest structure).
+# Anti-fuite par construction : le prédicteur est `abstention_2022_pres_t1`,
+# un seul scrutin 2022, structurellement aveugle à 2024 -- aucune fonction ici
+# n'a besoin d'un garde-fou `isoler_scrutins_2022` séparé, il n'y a qu'un seul
+# scrutin côté prédicteur. Clause pré-enregistrée (ADR 0002) : ρ ≥ 0,8 par
+# cible. `abstentions`/`inscrits` sont des colonnes de participation répétées
+# sur chaque ligne de bloc du panel long -- dédupliquées avant tout calcul,
+# jamais moyennées (CLAUDE.md « Never average percentages »).
+
+
+def calculer_taux_abstention(panel: pl.DataFrame, scrutins: tuple[str, ...] = SCRUTINS_PARTICIPATION) -> pl.DataFrame:
+    """Taux d'abstention (abstentions / inscrits) par unité x scrutin.
+
+    `panel` : table longue bureau/commune x scrutin x bloc -- `abstentions` et
+    `inscrits` y sont répétés sur chaque ligne de bloc, dédupliqués ici avant
+    de diviser (jamais une moyenne de taux déjà calculés). `inscrits` nul (cas
+    réel rarissime) -> taux null, jamais une division par zéro silencieuse.
+    """
+    df = panel.with_columns(pl.coalesce(["id_bv", "code_commune"]).alias("unite_id")).filter(
+        pl.col("id_election").is_in(list(scrutins))
+    )
+    participation = df.select("id_election", "unite_id", "abstentions", "inscrits").unique()
+    return participation.with_columns(
+        pl.when(pl.col("inscrits") > 0)
+        .then(pl.col("abstentions") / pl.col("inscrits"))
+        .otherwise(None)
+        .alias("taux_abstention")
+    )
+
+
+def construire_table_participation(panel: pl.DataFrame, baseline: pl.DataFrame) -> pl.DataFrame:
+    """Table de travail du backtest participation : abstention 2022 (prédicteur)
+    x abstention 2024 (cibles), par unité, colonnes larges.
+
+    `baseline` : sortie de `projections.baseline.construire_baseline` (issue
+    #5) -- fournit `code_departement`/`statut`/`maille` par unité, mêmes
+    colonnes et même provenance que `construire_table_backtest` (pas
+    recalculées ici). Jointure interne : une unité sans les 3 scrutins de
+    `SCRUTINS_PARTICIPATION` a des colonnes nulles côté manquant, gérées par
+    `correlation_spearman` (drop_nulls), jamais une ligne perdue en amont.
+    """
+    taux = calculer_taux_abstention(panel)
+    large = taux.pivot(on="id_election", index="unite_id", values="taux_abstention")
+    renommage = {scrutin: f"abstention_{scrutin}" for scrutin in SCRUTINS_PARTICIPATION if scrutin in large.columns}
+    large = large.rename(renommage)
+    contexte = baseline.select("unite_id", "code_departement", "statut", "maille").unique(
+        subset="unite_id", keep="first"
+    )
+    return large.join(contexte, on="unite_id", how="inner")
+
+
+def evaluer_gate_participation(resultats: pl.DataFrame, seuil: float = SEUIL_RHO_PARTICIPATION) -> pl.DataFrame:
+    """Verdict PASS/FAIL du backtest participation (ADR 0002) : ρ ≥ 0,8 par cible.
+
+    `resultats` : table `cible` x `rho` x `n` (sortie de
+    `executer_backtest_participation`). Ajoute `seuil` et `pass_global`
+    (`>=` strict, même convention que le gate ADR 0001) -- colonne réutilisée
+    telle quelle par `verdict_global`.
+    """
+    return resultats.with_columns(
+        pl.lit(seuil).alias("seuil"),
+        (pl.col("rho") >= seuil).alias("pass_global"),
+    )
+
+
+def executer_backtest_participation(panel: pl.DataFrame, baseline: pl.DataFrame) -> dict:
+    """Calcule le backtest participation (ADR 0002) sur le périmètre joint-validé.
+
+    Retourne un dict : `table` (table de travail, jointe-validée, maille
+    bureau), `resultats` (cible x rho x n x seuil x pass_global), et l'accord
+    inter-cibles publié en contexte (`rho_inter_cibles`, `n_inter_cibles` --
+    abstention 2024 européennes vs abstention 2024 législatives, même
+    transparence que les plafonds inter-cibles du tercile, cf. ADR 0002).
+    """
+    table_brute = construire_table_participation(panel, baseline)
+    table = table_brute.filter(pl.col("statut") == STATUT_JOINT_VALIDE)
+
+    lignes = [
+        {
+            "cible": nom_cible,
+            "rho": correlation_spearman(table, COLONNE_ABSTENTION_PREDICTEUR, colonne_cible),
+            "n": table.select(COLONNE_ABSTENTION_PREDICTEUR, colonne_cible).drop_nulls().height,
+        }
+        for nom_cible, colonne_cible in CIBLES_PARTICIPATION.items()
+    ]
+    resultats = evaluer_gate_participation(
+        pl.DataFrame(lignes, schema={"cible": pl.String, "rho": pl.Float64, "n": pl.Int64})
+    )
+
+    colonne_euro, colonne_legi = CIBLES_PARTICIPATION["euro"], CIBLES_PARTICIPATION["legi"]
+    return {
+        "table": table,
+        "resultats": resultats,
+        "rho_inter_cibles": correlation_spearman(table, colonne_euro, colonne_legi),
+        "n_inter_cibles": table.select(colonne_euro, colonne_legi).drop_nulls().height,
+    }
+
+
+# --- Garde anti-hasard (ADR 0002, issue #24) -----------------------------------
+#
+# Pour la métrique principale de chaque backtest publié (composite ensemble,
+# blocs majeurs x cibles pour la structure ; rho par cible pour la
+# participation), lift contre 2 nulls : le hasard (rho = 0, l'espérance
+# théorique d'un classement indépendant -- contexte, jamais recalculé par
+# permutation) et le prédicteur à maille département (chaque bureau prédit
+# par la valeur de son département, RECALCULÉE PAR SOMMES de voix/exprimés ou
+# d'abstentions/inscrits -- jamais une moyenne des écarts ou des taux de
+# bureau, CLAUDE.md « Never average percentages »). Clause : la granularité
+# bureau doit BATTRE (>, pas >=) la granularité département.
+
+
+def calculer_ecart_national_departement(panel: pl.DataFrame, scrutins: tuple[str, ...] | None = None) -> pl.DataFrame:
+    """Écart relatif au national à la maille département (garde anti-hasard).
+
+    Même convention que `projections.baseline.calculer_ecart_national` (écart
+    en points des exprimés vs national), mais volontairement une fonction
+    séparée plutôt qu'un paramètre de granularité sur celle-ci : recalculer à
+    une maille plus grossière qu'un bureau/commune est une agrégation
+    plusieurs-vers-un (plusieurs bureaux par département), pas un simple
+    changement d'étiquette -- voix et exprimés sont dédupliqués par
+    bureau/commune PUIS RESOMMÉS par département avant de recalculer la part,
+    jamais une moyenne des écarts de bureau.
+    """
+    df = panel.with_columns(pl.coalesce(["id_bv", "code_commune"]).alias("unite_id"))
+    if scrutins is not None:
+        df = df.filter(pl.col("id_election").is_in(list(scrutins)))
+
+    exprimes_bureau = df.select("id_election", "unite_id", "code_departement", "exprimes").unique()
+    exprimes_departement = exprimes_bureau.group_by(["id_election", "code_departement"]).agg(
+        pl.col("exprimes").sum().alias("exprimes_departement")
+    )
+    exprimes_national = exprimes_bureau.group_by("id_election").agg(
+        pl.col("exprimes").sum().alias("exprimes_national")
+    )
+    voix_departement = df.group_by(["id_election", "code_departement", "bloc"]).agg(
+        pl.col("voix").sum().alias("voix_departement")
+    )
+    voix_national = df.group_by(["id_election", "bloc"]).agg(pl.col("voix").sum().alias("voix_national"))
+    national = voix_national.join(exprimes_national, on="id_election").with_columns(
+        (pl.col("voix_national") / pl.col("exprimes_national")).alias("pct_national")
+    )
+
+    return (
+        voix_departement.join(exprimes_departement, on=["id_election", "code_departement"])
+        .with_columns(
+            pl.when(pl.col("exprimes_departement") > 0)
+            .then(pl.col("voix_departement") / pl.col("exprimes_departement"))
+            .otherwise(None)
+            .alias("pct_unite")
+        )
+        .join(national.select("id_election", "bloc", "pct_national"), on=["id_election", "bloc"])
+        .with_columns(((pl.col("pct_unite") - pl.col("pct_national")) * 100).alias("ecart_national"))
+        .rename({"code_departement": "unite_id"})
+        .sort(["id_election", "unite_id", "bloc"])
+    )
+
+
+def construire_predicteur_departemental_2022(
+    panel: pl.DataFrame,
+    poids: dict[str, float] | None = None,
+    methode_correction: str = "imputation",
+) -> pl.DataFrame:
+    """Prédicteur 2022 à la maille département (garde anti-hasard, ADR 0002).
+
+    Même construction anti-fuite que `construire_predicteur_2022`
+    (`isoler_scrutins_2022` en tête -- aucune donnée 2024 ne peut y entrer),
+    mais recalculé depuis les sommes de voix/exprimés par département
+    (`calculer_ecart_national_departement`), jamais depuis une moyenne des
+    écarts de bureau. Retourne une table `code_departement` x `bloc` x
+    `composite_2022` (mêmes noms de colonnes que le prédicteur bureau, sauf
+    la clé d'unité).
+    """
+    panel_2022 = isoler_scrutins_2022(panel)
+    ecart = calculer_ecart_national_departement(panel_2022, scrutins=SCRUTINS_PREDICTEUR_2022)
+    legi_corrige = corriger_offre_legislatives(
+        ecart,
+        scrutin_a_corriger=SCRUTIN_LEGISLATIVES_2022,
+        scrutin_reference=SCRUTIN_PRESIDENTIELLE,
+        methode=methode_correction,
+    )
+    table = construire_table_composantes(ecart, legi_corrige, scrutins_bruts=[SCRUTIN_PRESIDENTIELLE])
+    table = composite_pondere(table, poids=poids or POIDS_COMPOSITE_2022_PAR_DEFAUT, nom_colonne=COLONNE_COMPOSITE)
+    return table.rename({"unite_id": "code_departement"})
+
+
+def calculer_taux_abstention_departement(panel: pl.DataFrame, scrutin: str = SCRUTIN_PRESIDENTIELLE) -> pl.DataFrame:
+    """Taux d'abstention 2022 à la maille département (garde anti-hasard, ADR 0002).
+
+    Anti-fuite par construction : filtre sur un unique `scrutin` (2022 par
+    défaut), structurellement incapable de lire une ligne 2024. Sommes
+    d'abstentions/inscrits par département (dédupliquées par bureau d'abord,
+    répétées sur chaque ligne de bloc) -- jamais une moyenne des taux de
+    bureau.
+    """
+    df = panel.with_columns(pl.coalesce(["id_bv", "code_commune"]).alias("unite_id")).filter(
+        pl.col("id_election") == scrutin
+    )
+    bureau = df.select("unite_id", "code_departement", "abstentions", "inscrits").unique()
+    departement = bureau.group_by("code_departement").agg(
+        pl.col("abstentions").sum().alias("abstentions_departement"),
+        pl.col("inscrits").sum().alias("inscrits_departement"),
+    )
+    return departement.with_columns(
+        pl.when(pl.col("inscrits_departement") > 0)
+        .then(pl.col("abstentions_departement") / pl.col("inscrits_departement"))
+        .otherwise(None)
+        .alias("abstention_departement_2022")
+    ).select("code_departement", "abstention_departement_2022")
+
+
+def verdict_anti_hasard(rho_bureau: float, rho_departement: float) -> dict:
+    """Lift bureau vs 2 nulls + verdict de la clause (ADR 0002).
+
+    `rho_hasard` = 0 (espérance théorique de Spearman pour un classement
+    indépendant -- contexte, jamais simulé par permutation : c'est un résultat
+    de théorie, pas une mesure). `pass_global` : le bureau doit BATTRE (`>`,
+    pas `>=`) le département -- clause plus stricte que le "au moins aussi
+    bien" du gate ADR 0001 (composite vs mono), cf. formulation ADR 0002. Un
+    rho non défini (NaN, échantillon trop petit ou colonne constante) ne bat
+    jamais rien : verdict FAIL explicite, jamais une comparaison silencieuse.
+    """
+    comparable = rho_bureau == rho_bureau and rho_departement == rho_departement  # ni l'un ni l'autre n'est NaN
+    return {
+        "rho_bureau": rho_bureau,
+        "rho_hasard": 0.0,
+        "lift_vs_hasard": rho_bureau if rho_bureau == rho_bureau else float("nan"),
+        "rho_departement": rho_departement,
+        "lift_vs_departement": (rho_bureau - rho_departement) if comparable else float("nan"),
+        "pass_global": bool(comparable and rho_bureau > rho_departement),
+    }
+
+
+def garde_anti_hasard_structure(
+    resultats_backtest: dict,
+    panel: pl.DataFrame,
+    poids_composite_2022: dict[str, float] | None = None,
+    methode_correction: str = "imputation",
+    blocs: tuple[str, ...] = BLOCS_MAJEURS,
+) -> pl.DataFrame:
+    """Garde anti-hasard pour la métrique principale du backtest structure
+    (ρ_ensemble du composite, blocs majeurs x cibles, ADR 0001/0002).
+
+    `resultats_backtest` : sortie de `executer_backtests` (fournit `table`,
+    déjà restreinte au périmètre joint-validé). Retourne `bloc` x `cible` x
+    les colonnes de `verdict_anti_hasard`.
+    """
+    table = resultats_backtest["table"]
+    predicteur_dept = construire_predicteur_departemental_2022(
+        panel, poids=poids_composite_2022, methode_correction=methode_correction
+    )
+
+    lignes = []
+    for bloc in blocs:
+        predicteur_bloc = predicteur_dept.filter(pl.col("bloc") == bloc).select(
+            "code_departement", pl.col(COLONNE_COMPOSITE).alias("composite_departement_2022")
+        )
+        sous_table = table.filter(pl.col("bloc") == bloc).join(predicteur_bloc, on="code_departement", how="left")
+        for nom_cible, colonne_cible in CIBLES.items():
+            rho_bureau = correlation_spearman(sous_table, COLONNE_COMPOSITE, colonne_cible)
+            rho_departement = correlation_spearman(sous_table, "composite_departement_2022", colonne_cible)
+            lignes.append({"bloc": bloc, "cible": nom_cible, **verdict_anti_hasard(rho_bureau, rho_departement)})
+    return pl.DataFrame(lignes)
+
+
+def garde_anti_hasard_participation(resultats_participation: dict, panel: pl.DataFrame) -> pl.DataFrame:
+    """Garde anti-hasard pour la métrique principale du backtest participation
+    (ρ abstention 2022 -> cible 2024, par cible, ADR 0002).
+
+    `resultats_participation` : sortie de `executer_backtest_participation`.
+    """
+    table = resultats_participation["table"]
+    departement = calculer_taux_abstention_departement(panel)
+    avec_dept = table.join(departement, on="code_departement", how="left")
+
+    lignes = [
+        {
+            "cible": nom_cible,
+            **verdict_anti_hasard(
+                correlation_spearman(avec_dept, COLONNE_ABSTENTION_PREDICTEUR, colonne_cible),
+                correlation_spearman(avec_dept, "abstention_departement_2022", colonne_cible),
+            ),
+        }
+        for nom_cible, colonne_cible in CIBLES_PARTICIPATION.items()
+    ]
+    return pl.DataFrame(lignes)
+
+
+def verdict_carte_mobilisation(
+    verdict_participation: pl.DataFrame,
+    verdict_anti_hasard_structure: pl.DataFrame,
+    verdict_anti_hasard_participation: pl.DataFrame,
+) -> bool:
+    """PASS uniquement si TOUTES les clauses de la carte mobilisation le sont
+    (ADR 0002, point 5) : backtest participation (ρ ≥ 0,8 par cible) ET garde
+    anti-hasard (structure + participation, bureau bat département). La
+    clause tercile de l'ADR 0001 ne gouverne plus ce produit -- elle reste
+    publiée (FAIL inclus) mais ne conditionne plus cette publication-ci.
+    """
+    return (
+        verdict_global(verdict_participation)
+        and verdict_global(verdict_anti_hasard_structure)
+        and verdict_global(verdict_anti_hasard_participation)
+    )
 
 
 # --- Orchestration ------------------------------------------------------------
