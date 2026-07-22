@@ -40,6 +40,53 @@ dans `data/interim/` (hors git) :
 uv run ingest
 ```
 
+## Générer les tuiles
+
+Joint le panel aux contours d'affichage (« Proposition de contours des bureaux
+de vote » REU pour la couche `bureaux`, contours communaux Etalab pour la
+couche `communes`, dézoom) et produit un unique fichier PMTiles France entière
+(métropole + DROM ; les bureaux de l'étranger n'ont pas de contours REU, ils
+restent hors carte) dans `data/tiles/` (hors git) :
+
+```bash
+uv run build-tiles
+```
+
+Prérequis : [tippecanoe](https://github.com/felt/tippecanoe) (binaire non
+vendored — le compiler localement) :
+
+```bash
+git clone https://github.com/felt/tippecanoe.git
+cd tippecanoe && make -j$(nproc)
+```
+
+Le binaire se passe via `--tippecanoe-bin` ou la variable d'environnement
+`TIPPECANOE_BIN` (défaut : `tippecanoe` du PATH). La commande affiche le taux
+de jointure identifiants-résultats ↔ identifiants-contours (les contours REU,
+figés à septembre 2022, ne couvrent pas tous les bureaux 2024). Si le fichier
+produit dépasse 100 Mo, il n'est pas commité mais publié en asset de Release
+GitHub (`gh release upload`), et `site/config.js` pointé vers cette URL.
+
+## Site carto
+
+Site statique dans `site/` : MapLibre GL JS 5 + PMTiles 4 (chargés en CDN,
+aucune dépendance à installer), choroplèthe par bloc en tête, dézoom vers la
+couche communes. Carte **descriptive** (résultats 2024 réels), pas une
+projection — mention affichée en permanence sur la carte.
+
+Test local : copier ou symlinker le PMTiles généré sous `site/tiles/`, puis
+servir le dossier avec un serveur HTTP statique quelconque, par exemple :
+
+```bash
+mkdir -p site/tiles && ln -sf ../../data/tiles/france.pmtiles site/tiles/france.pmtiles
+python -m http.server --directory site
+```
+
+`site/config.js` définit l'URL du PMTiles (`./tiles/france.pmtiles` par
+défaut) — à remplacer par l'URL de la Release GitHub une fois le fichier
+hébergé en production. Déploiement automatique sur GitHub Pages via
+`.github/workflows/deploy.yml` à chaque push sur `main` touchant `site/**`.
+
 ## Tests
 
 ```bash
