@@ -86,8 +86,6 @@ INTERIM_DIR = Path("data/interim")
 # présidentielle 2022 T1 pour la cible 2027 -- présidentielle elle aussi.
 SCRUTIN_REFERENCE = SCRUTIN_PRESIDENTIELLE
 
-BLOCS: tuple[str, ...] = ("Gauche", "Centre", "Droite", "Extrême droite", "Divers")
-
 
 # --- Part estimée du bloc (H1, 2 opérationnalisations documentées) ------------
 
