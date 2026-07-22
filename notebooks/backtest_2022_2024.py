@@ -18,7 +18,7 @@ def _():
         executer_backtests,
         garde_anti_hasard_participation,
         garde_anti_hasard_structure,
-        generer_rapport_backtest,
+        generer_rapport_complet,
         verdict_carte_mobilisation,
         verdict_global,
     )
@@ -32,7 +32,7 @@ def _():
         executer_backtests,
         garde_anti_hasard_participation,
         garde_anti_hasard_structure,
-        generer_rapport_backtest,
+        generer_rapport_complet,
         mo,
         pl,
         verdict_carte_mobilisation,
@@ -193,28 +193,10 @@ def _(mo):
 
 
 @app.cell
-def _(
-    POIDS_COMPOSITE_2022_PAR_DEFAUT,
-    anti_hasard_participation,
-    anti_hasard_structure,
-    calibration,
-    generer_rapport_backtest,
-    mo,
-    resultats_backtest,
-    resultats_participation,
-    table_brute,
-):
-    rapport = generer_rapport_backtest(
-        resultats_backtest,
-        calibration,
-        poids_composite_2022=POIDS_COMPOSITE_2022_PAR_DEFAUT,
-        methode_correction="imputation",
-        n_total=table_brute.height,
-        n_perimetre=resultats_backtest["table"].height,
-        resultats_participation=resultats_participation,
-        anti_hasard_structure=anti_hasard_structure,
-        anti_hasard_participation=anti_hasard_participation,
-    )
+def _(baseline, generer_rapport_complet, mo, panel_avec_statut):
+    # Même chemin que `uv run backtest` : la byte-identité CLI/notebook est
+    # structurelle (les cellules ci-dessus ne servent qu'à l'exploration).
+    rapport = generer_rapport_complet(panel_avec_statut, baseline)["rapport"]
     mo.md(rapport)
     return (rapport,)
 

@@ -870,7 +870,7 @@ def _fmt_rho(x: float) -> str:
 
 def _ligne_resultats_participation(ligne: dict) -> str:
     verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
-    return f"| {ligne['cible']} | {_fmt_rho(ligne['rho'])} ≥ {ligne['seuil']:.1f} ({verdict_txt}) | {ligne['n']} |"
+    return f"| {ligne['cible']} | {_fmt_rho(ligne['rho'])} (seuil {ligne['seuil']:.1f}) — {verdict_txt} | {ligne['n']} |"
 
 
 def _ligne_anti_hasard(prefixe: str, ligne: dict) -> str:
@@ -1174,6 +1174,56 @@ l'ADR 0002 ne bougent pas après avoir vu les résultats.
 # --- Entrée console -----------------------------------------------------------
 
 
+def generer_rapport_complet(
+    panel: pl.DataFrame,
+    baseline: pl.DataFrame,
+    poids_composite_2022: dict[str, float] | None = None,
+    methode_correction: str = "imputation",
+) -> dict:
+    """Pipeline complet panel + baseline → rapport et verdicts.
+
+    Unique chemin de génération de `backtest-2022-2024.md` : le CLI (`main`)
+    et le notebook marimo appellent tous deux cette fonction — la byte-identité
+    CLI/notebook est structurelle, pas une discipline de synchronisation
+    d'arguments (revue PR #27).
+
+    Retourne un dict : `rapport` (str), `pass_gate_adr_0001` (bool),
+    `pass_carte_mobilisation` (bool).
+    """
+    poids = POIDS_COMPOSITE_2022_PAR_DEFAUT if poids_composite_2022 is None else poids_composite_2022
+
+    resultats_backtest = executer_backtests(panel, baseline, poids_composite_2022=poids, methode_correction=methode_correction)
+    calibration = calibrer_poids(panel, baseline, methode_correction=methode_correction)
+
+    resultats_participation = executer_backtest_participation(panel, baseline)
+    anti_hasard_structure = garde_anti_hasard_structure(
+        resultats_backtest, panel, poids_composite_2022=poids, methode_correction=methode_correction
+    )
+    anti_hasard_participation = garde_anti_hasard_participation(resultats_participation, panel)
+
+    table_brute = construire_table_backtest(
+        panel, baseline, poids_composite_2022=poids, methode_correction=methode_correction
+    )
+    rapport = generer_rapport_backtest(
+        resultats_backtest,
+        calibration,
+        poids_composite_2022=poids,
+        methode_correction=methode_correction,
+        n_total=table_brute.height,
+        n_perimetre=resultats_backtest["table"].height,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
+    )
+    return {
+        "rapport": rapport,
+        "pass_gate_adr_0001": verdict_global(resultats_backtest["verdict"]),
+        "pass_carte_mobilisation": verdict_carte_mobilisation(
+            resultats_participation["resultats"], anti_hasard_structure, anti_hasard_participation
+        ),
+    }
+
+
 def main() -> None:
     """Point d'entrée `uv run backtest`."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -1199,37 +1249,14 @@ def main() -> None:
     panel = pl.read_parquet(args.panel)
     baseline = pl.read_parquet(args.baseline)
 
-    resultats_backtest = executer_backtests(panel, baseline, poids_composite_2022=poids, methode_correction=args.methode_correction)
-    calibration = calibrer_poids(panel, baseline, methode_correction=args.methode_correction)
-
-    resultats_participation = executer_backtest_participation(panel, baseline)
-    anti_hasard_structure = garde_anti_hasard_structure(
-        resultats_backtest, panel, poids_composite_2022=poids, methode_correction=args.methode_correction
-    )
-    anti_hasard_participation = garde_anti_hasard_participation(resultats_participation, panel)
-
-    table_brute = construire_table_backtest(
+    sortie = generer_rapport_complet(
         panel, baseline, poids_composite_2022=poids, methode_correction=args.methode_correction
     )
-    rapport = generer_rapport_backtest(
-        resultats_backtest,
-        calibration,
-        poids_composite_2022=poids,
-        methode_correction=args.methode_correction,
-        n_total=table_brute.height,
-        n_perimetre=resultats_backtest["table"].height,
-        resultats_participation=resultats_participation,
-        anti_hasard_structure=anti_hasard_structure,
-        anti_hasard_participation=anti_hasard_participation,
-    )
 
-    args.out.write_text(rapport, encoding="utf-8")
+    args.out.write_text(sortie["rapport"], encoding="utf-8")
     print(f"rapport écrit : {args.out}")
-    print(f"gate ADR 0001 PASS: {verdict_global(resultats_backtest['verdict'])}")
-    print(
-        "carte mobilisation PASS (ADR 0002): "
-        f"{verdict_carte_mobilisation(resultats_participation['resultats'], anti_hasard_structure, anti_hasard_participation)}"
-    )
+    print(f"gate ADR 0001 PASS: {sortie['pass_gate_adr_0001']}")
+    print(f"carte mobilisation PASS (ADR 0002): {sortie['pass_carte_mobilisation']}")
 
 
 if __name__ == "__main__":

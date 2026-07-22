@@ -16,6 +16,7 @@ import pytest
 
 from projections.backtest import (
     BLOCS_MAJEURS,
+    CIBLES,
     CIBLES_PARTICIPATION,
     COLONNE_ABSTENTION_PREDICTEUR,
     POIDS_COMPOSITE_2022_PAR_DEFAUT,
@@ -40,6 +41,7 @@ from projections.backtest import (
     garde_anti_hasard_participation,
     garde_anti_hasard_structure,
     generer_rapport_backtest,
+    generer_rapport_complet,
     isoler_scrutins_2022,
     main,
     rho_par_bloc,
@@ -479,6 +481,39 @@ def test_generer_rapport_backtest_est_deterministe(panel_avec_statut_reel, basel
     assert rapport_1 == rapport_2
 
 
+def test_generer_rapport_complet_identique_a_l_assemblage_manuel(panel_avec_statut_reel, baseline_reel):
+    # Verrou CLI <-> notebook (revue PR #27) : le chemin partagé produit
+    # exactement ce que l'assemblage manuel produisait.
+    resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation = (
+        _resultats_participation_reels(panel_avec_statut_reel, baseline_reel)
+    )
+    calibration = calibrer_poids(panel_avec_statut_reel, baseline_reel)
+    table_brute = construire_table_backtest(panel_avec_statut_reel, baseline_reel)
+    attendu = generer_rapport_backtest(
+        resultat,
+        calibration,
+        poids_composite_2022=POIDS_COMPOSITE_2022_PAR_DEFAUT,
+        methode_correction="imputation",
+        n_total=table_brute.height,
+        n_perimetre=resultat["table"].height,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
+    )
+    sortie = generer_rapport_complet(panel_avec_statut_reel, baseline_reel)
+    assert sortie["rapport"] == attendu
+    assert isinstance(sortie["pass_gate_adr_0001"], bool)
+    assert isinstance(sortie["pass_carte_mobilisation"], bool)
+
+
+def test_notebook_regenere_par_le_meme_chemin_que_le_cli():
+    # Le notebook ne réassemble pas le rapport à la main : il doit passer par
+    # generer_rapport_complet, l'unique chemin partagé avec `uv run backtest`.
+    source = (Path(__file__).parent.parent / "notebooks" / "backtest_2022_2024.py").read_text(encoding="utf-8")
+    assert "generer_rapport_complet(" in source
+    assert "generer_rapport_backtest(" not in source
+
+
 # --- Backtest participation (ADR 0002) ------------------------------------------
 
 
@@ -643,7 +678,7 @@ def test_garde_anti_hasard_structure_produit_toutes_les_combinaisons(panel_avec_
     resultat = executer_backtests(panel_avec_statut_reel, baseline_reel)
     anti_hasard = garde_anti_hasard_structure(resultat, panel_avec_statut_reel)
     assert set(anti_hasard.get_column("bloc").unique().to_list()) == set(BLOCS_MAJEURS)
-    assert anti_hasard.height == len(BLOCS_MAJEURS) * len(CIBLES_PARTICIPATION)
+    assert anti_hasard.height == len(BLOCS_MAJEURS) * len(CIBLES)
     assert "pass_global" in anti_hasard.columns
 
 
