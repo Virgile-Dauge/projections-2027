@@ -29,14 +29,9 @@
         <label><input type="radio" name="couche" value="reserve" />Réserve mobilisable</label>
         <label><input type="radio" name="couche" value="force" />Rapport de force</label>
       </fieldset>
-      <fieldset id="selecteur-bloc" hidden>
-        <legend>Bloc</legend>
-        <label><input type="radio" name="bloc" value="gauche" checked />Gauche</label>
-        <label><input type="radio" name="bloc" value="centre" />Centre</label>
-        <label><input type="radio" name="bloc" value="droite" />Droite</label>
-        <label><input type="radio" name="bloc" value="extreme_droite" />Extrême droite</label>
-        <label><input type="radio" name="bloc" value="divers" />Divers</label>
-      </fieldset>
+      <!-- Décision mainteneur (PR #33) : la carte n'affiche que la réserve du
+           bloc Gauche — pas de sélecteur de bloc ; les autres blocs restent
+           publiés dans reserve-2027.md (voir la page méthode). -->
     </div>
 
     <div id="legende">

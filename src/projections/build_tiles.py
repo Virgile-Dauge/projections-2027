@@ -13,7 +13,8 @@ décode une Feature à la fois). Le fichier communes (~32 Mo décompressé) est
 assez petit pour être chargé entier.
 
 Sortie : un unique fichier PMTiles à deux couches (`bureaux` haute zoom,
-`communes` basse zoom pour le dézoom), produit par tippecanoe (binaire externe,
+`communes` basse zoom pour le dézoom), chaque feature portant résultats 2024
+ET données mobilisation, produit par tippecanoe (binaire externe,
 non vendored — voir `--tippecanoe-bin` / variable d'environnement
 `TIPPECANOE_BIN`, README du projet).
 """
@@ -113,28 +114,58 @@ class RapportJointure:
     scores_joints: int
     total_contours: int
     contours_sans_score: int
+    # Fusion mobilisation (issue #26) : None quand la couche est construite sans
+    # données mobilisation (tracer bullet seul), sinon la couverture de la fusion.
+    mobilisation_total: int | None = None
+    mobilisation_jointes: int | None = None
 
     @property
     def taux_scores_joints(self) -> float:
         return self.scores_joints / self.total_scores * 100 if self.total_scores else 0.0
 
     def __str__(self) -> str:
-        return (
+        texte = (
             f"{self.nom_couche} : {self.scores_joints}/{self.total_scores} résultats joints à un "
             f"contour ({self.taux_scores_joints:.1f} %) ; {self.contours_sans_score}/{self.total_contours} "
             f"contours sans résultat correspondant."
         )
+        if self.mobilisation_total is not None:
+            texte += f" Mobilisation : {self.mobilisation_jointes}/{self.mobilisation_total} lignes fusionnées."
+        return texte
 
 
-def joindre_bureaux(chemin_contours: Path, scores: pl.DataFrame, sortie: Path) -> RapportJointure:
+def joindre_bureaux(
+    chemin_contours: Path,
+    scores: pl.DataFrame,
+    sortie: Path,
+    donnees_mobilisation: pl.DataFrame | None = None,
+) -> RapportJointure:
     """Joint les contours REU (couche `bureaux`) aux scores par `codeBureauVote` == `id_bv`.
 
     Écrit un NDJSON en streaming (une ligne par Feature jointe). Les contours de
     l'étranger n'existent pas dans la source REU : les bureaux `id_bv` en `ZZ...`
     du panel sont donc naturellement absents de la carte, sans filtre explicite.
+
+    `donnees_mobilisation` (issue #26, sortie de
+    `projections.mobilisation.assembler_donnees_bureau`, jointe par `unite_id`
+    == `codeBureauVote`) : ses colonnes (statut/maille, réserve, rapport de
+    force) sont FUSIONNÉES dans les propriétés de la MÊME couche `bureaux` —
+    jamais une seconde couche : dupliquer la géométrie double le poids des
+    tuiles et pousse tippecanoe à sacrifier la couche dupliquée
+    (`--drop-densest-as-needed`, constaté sur données réelles : 1 feature
+    survivante par tuile z5). Un contour n'ayant QUE des données mobilisation
+    (sans score descriptif) est conservé, et réciproquement.
     """
     scores_par_id = {ligne["id_bv"]: ligne for ligne in scores.iter_rows(named=True) if not ligne["id_bv"].startswith("ZZ")}
+    mobilisation_par_id: dict = {}
+    if donnees_mobilisation is not None:
+        mobilisation_par_id = {
+            ligne["unite_id"]: ligne
+            for ligne in donnees_mobilisation.iter_rows(named=True)
+            if not ligne["unite_id"].startswith("ZZ")
+        }
     ids_scores_joints: set[str] = set()
+    ids_mobilisation_joints: set[str] = set()
     total_contours = 0
     contours_sans_score = 0
 
@@ -144,20 +175,33 @@ def joindre_bureaux(chemin_contours: Path, scores: pl.DataFrame, sortie: Path) -
             total_contours += 1
             id_bv = feature.get("properties", {}).get("codeBureauVote")
             score = scores_par_id.get(id_bv) if id_bv else None
-            if score is None:
+            ligne_mob = mobilisation_par_id.get(id_bv) if id_bv else None
+            if score is None and ligne_mob is None:
                 contours_sans_score += 1
                 continue
-            ids_scores_joints.add(id_bv)
             proprietes = feature.get("properties", {})
+            proprietes_feature = {
+                "id_bv": id_bv,
+                "commune": proprietes.get("nomCommune"),
+                "bureau": proprietes.get("numeroBureauVote"),
+            }
+            if score is not None:
+                ids_scores_joints.add(id_bv)
+                proprietes_feature.update(_proprietes_score(score))
+            if ligne_mob is not None:
+                ids_mobilisation_joints.add(id_bv)
+                proprietes_feature.update(
+                    {
+                        "statut": ligne_mob["statut"],
+                        "maille": ligne_mob["maille"],
+                        **_proprietes_reserve(ligne_mob),
+                        **_proprietes_rapport_force(ligne_mob),
+                    }
+                )
             sortie_feature = {
                 "type": "Feature",
                 "tippecanoe": {"layer": "bureaux", "minzoom": BUREAUX_MINZOOM, "maxzoom": BUREAUX_MAXZOOM},
-                "properties": {
-                    "id_bv": id_bv,
-                    "commune": proprietes.get("nomCommune"),
-                    "bureau": proprietes.get("numeroBureauVote"),
-                    **_proprietes_score(score),
-                },
+                "properties": proprietes_feature,
                 "geometry": feature["geometry"],
             }
             f.write(json.dumps(sortie_feature, ensure_ascii=False))
@@ -169,21 +213,45 @@ def joindre_bureaux(chemin_contours: Path, scores: pl.DataFrame, sortie: Path) -
         scores_joints=len(ids_scores_joints),
         total_contours=total_contours,
         contours_sans_score=contours_sans_score,
+        mobilisation_total=len(mobilisation_par_id) if donnees_mobilisation is not None else None,
+        mobilisation_jointes=len(ids_mobilisation_joints) if donnees_mobilisation is not None else None,
     )
 
 
-def joindre_communes(chemin_communes_gz: Path, scores: pl.DataFrame, sortie: Path) -> RapportJointure:
+def joindre_communes(
+    chemin_communes_gz: Path,
+    scores: pl.DataFrame,
+    sortie: Path,
+    donnees_mobilisation: pl.DataFrame | None = None,
+) -> RapportJointure:
     """Joint les contours communaux Etalab (couche `communes`) aux scores par `code` == `code_commune`.
 
     Fichier assez petit (~32 Mo décompressé) pour être chargé entier — pas de
     contrainte de streaming ici contrairement à `joindre_bureaux`.
+
+    `donnees_mobilisation` (issue #26, sortie de
+    `projections.mobilisation.assembler_donnees_commune`, jointe par
+    `code_commune` == `code`) : colonnes fusionnées dans la MÊME couche
+    `communes` (jamais une seconde couche — même raison que `joindre_bureaux`).
+    Zoom variable PAR FEATURE selon `degrade` (ADR 0002 « Repli », dégradation
+    jamais silencieuse) : une commune en repli (`degrade=True`) n'a pas de
+    contour bureau fiable — son polygone commune reste visible JUSQU'AU ZOOM
+    BUREAU (`BUREAUX_MAXZOOM`), là où la couche `bureaux` est vide pour elle.
+    Une commune stable (`degrade=False`) s'arrête au zoom de bascule
+    (`COMMUNES_MAXZOOM`), remplacée par `bureaux` au-delà. Un contour n'ayant
+    QUE des données mobilisation (sans score descriptif) est conservé, et
+    réciproquement.
     """
     scores_par_code = {ligne["code_commune"]: ligne for ligne in scores.iter_rows(named=True)}
+    mobilisation_par_code: dict = {}
+    if donnees_mobilisation is not None:
+        mobilisation_par_code = {ligne["code_commune"]: ligne for ligne in donnees_mobilisation.iter_rows(named=True)}
     with gzip.open(chemin_communes_gz, "rt", encoding="utf-8") as f:
         geojson = json.load(f)
     features = geojson["features"]
 
     ids_scores_joints: set[str] = set()
+    ids_mobilisation_joints: set[str] = set()
     contours_sans_score = 0
     sortie.parent.mkdir(parents=True, exist_ok=True)
     with sortie.open("w", encoding="utf-8") as f:
@@ -191,18 +259,35 @@ def joindre_communes(chemin_communes_gz: Path, scores: pl.DataFrame, sortie: Pat
             proprietes = feature.get("properties", {})
             code = proprietes.get("code")
             score = scores_par_code.get(code) if code else None
-            if score is None:
+            ligne_mob = mobilisation_par_code.get(code) if code else None
+            if score is None and ligne_mob is None:
                 contours_sans_score += 1
                 continue
-            ids_scores_joints.add(code)
+            proprietes_feature = {
+                "code_commune": code,
+                "commune": proprietes.get("nom"),
+            }
+            maxzoom = COMMUNES_MAXZOOM
+            if score is not None:
+                ids_scores_joints.add(code)
+                proprietes_feature.update(_proprietes_score(score))
+            if ligne_mob is not None:
+                ids_mobilisation_joints.add(code)
+                degrade = bool(ligne_mob["degrade"])
+                if degrade:
+                    maxzoom = BUREAUX_MAXZOOM
+                proprietes_feature.update(
+                    {
+                        "statut": ligne_mob["statut"],
+                        "degrade": degrade,
+                        **_proprietes_reserve(ligne_mob),
+                        **_proprietes_rapport_force(ligne_mob),
+                    }
+                )
             sortie_feature = {
                 "type": "Feature",
-                "tippecanoe": {"layer": "communes", "minzoom": COMMUNES_MINZOOM, "maxzoom": COMMUNES_MAXZOOM},
-                "properties": {
-                    "code_commune": code,
-                    "commune": proprietes.get("nom"),
-                    **_proprietes_score(score),
-                },
+                "tippecanoe": {"layer": "communes", "minzoom": COMMUNES_MINZOOM, "maxzoom": maxzoom},
+                "properties": proprietes_feature,
                 "geometry": feature["geometry"],
             }
             f.write(json.dumps(sortie_feature, ensure_ascii=False))
@@ -214,23 +299,34 @@ def joindre_communes(chemin_communes_gz: Path, scores: pl.DataFrame, sortie: Pat
         scores_joints=len(ids_scores_joints),
         total_contours=len(features),
         contours_sans_score=contours_sans_score,
+        mobilisation_total=len(mobilisation_par_code) if donnees_mobilisation is not None else None,
+        mobilisation_jointes=len(ids_mobilisation_joints) if donnees_mobilisation is not None else None,
     )
 
 
-# --- Couches mobilisation (issue #26, ADR 0002/0003 — réserve #25 + rapport de --
-# --- force projeté #5, jointes par IDENTIFIANTS comme les couches ci-dessus)  ---
+# --- Propriétés mobilisation (issue #26, ADR 0002/0003 — réserve #25 + rapport --
+# --- de force projeté #5, fusionnées par IDENTIFIANTS dans les couches ci-dessus) --
+
+
+# Décision mainteneur (2026-07-22, PR #33) : seule la réserve du bloc Gauche
+# est diffusée sur la carte — les autres blocs restent publiés dans
+# `reserve-2027.md` (la transparence méthode ne bouge pas), mais la carte
+# n'outille pas la mobilisation des autres camps. Bonus : ~8 propriétés de
+# moins par feature dans les tuiles.
+BLOCS_RESERVE_CARTE: tuple[str, ...] = ("gauche",)
 
 
 def _proprietes_reserve(ligne: dict) -> dict:
-    """Colonnes réserve (`reserve_<slug>`/`quantile_reserve_<slug>`), communes aux
-    couches `mobilisation_bureaux` et `mobilisation_communes` (mêmes noms de
-    colonnes en sortie de `projections.mobilisation.assembler_donnees_bureau`/
-    `assembler_donnees_commune`). Valeur absente (bloc structurellement sans
-    estimation, cf. `projections.mobilisation._completer_colonnes_blocs`) ->
-    null, jamais un zéro fabriqué -- une réserve n'est pas un pourcentage.
+    """Colonnes réserve (`reserve_<slug>`/`quantile_reserve_<slug>`) fusionnées
+    aux couches `bureaux`/`communes`, restreintes à `BLOCS_RESERVE_CARTE`
+    (mêmes noms de colonnes en sortie de
+    `projections.mobilisation.assembler_donnees_bureau`/`assembler_donnees_commune`).
+    Valeur absente (unité structurellement sans estimation, cf.
+    `projections.mobilisation._completer_colonnes_blocs`) -> null, jamais un
+    zéro fabriqué -- une réserve n'est pas un pourcentage.
     """
     proprietes: dict = {}
-    for slug in BLOC_SLUG.values():
+    for slug in BLOCS_RESERVE_CARTE:
         valeur = ligne.get(f"reserve_{slug}")
         proprietes[f"reserve_{slug}"] = round(valeur, 1) if valeur is not None else None
         proprietes[f"quantile_reserve_{slug}"] = ligne.get(f"quantile_reserve_{slug}")
@@ -248,130 +344,17 @@ def _proprietes_rapport_force(ligne: dict) -> dict:
     }
 
 
-def joindre_mobilisation_bureaux(chemin_contours: Path, donnees: pl.DataFrame, sortie: Path) -> RapportJointure:
-    """Joint les contours REU (couche `mobilisation_bureaux`) aux données
-    mobilisation par `codeBureauVote` == `unite_id` (issue #26).
-
-    `donnees` : sortie de `projections.mobilisation.assembler_donnees_bureau`,
-    déjà restreinte à la maille bureau -- aucun filtre de statut/maille ici,
-    symétrique de `joindre_bureaux`. Les communes en repli n'ont pas de
-    contour bureau fiable : elles sont hors de `donnees`, gérées par
-    `joindre_mobilisation_communes` (visible à tout zoom, jamais silencieux).
-    """
-    donnees_par_id = {
-        ligne["unite_id"]: ligne for ligne in donnees.iter_rows(named=True) if not ligne["unite_id"].startswith("ZZ")
-    }
-    ids_joints: set[str] = set()
-    total_contours = 0
-    contours_sans_donnee = 0
-
-    sortie.parent.mkdir(parents=True, exist_ok=True)
-    with sortie.open("w", encoding="utf-8") as f:
-        for feature in _iter_features_geojson(chemin_contours):
-            total_contours += 1
-            id_bv = feature.get("properties", {}).get("codeBureauVote")
-            ligne = donnees_par_id.get(id_bv) if id_bv else None
-            if ligne is None:
-                contours_sans_donnee += 1
-                continue
-            ids_joints.add(id_bv)
-            proprietes_contour = feature.get("properties", {})
-            sortie_feature = {
-                "type": "Feature",
-                "tippecanoe": {"layer": "mobilisation_bureaux", "minzoom": BUREAUX_MINZOOM, "maxzoom": BUREAUX_MAXZOOM},
-                "properties": {
-                    "unite_id": id_bv,
-                    "commune": proprietes_contour.get("nomCommune"),
-                    "bureau": proprietes_contour.get("numeroBureauVote"),
-                    "statut": ligne["statut"],
-                    "maille": ligne["maille"],
-                    **_proprietes_reserve(ligne),
-                    **_proprietes_rapport_force(ligne),
-                },
-                "geometry": feature["geometry"],
-            }
-            f.write(json.dumps(sortie_feature, ensure_ascii=False))
-            f.write("\n")
-
-    return RapportJointure(
-        nom_couche="mobilisation_bureaux",
-        total_scores=len(donnees_par_id),
-        scores_joints=len(ids_joints),
-        total_contours=total_contours,
-        contours_sans_score=contours_sans_donnee,
-    )
-
-
-def joindre_mobilisation_communes(chemin_communes_gz: Path, donnees: pl.DataFrame, sortie: Path) -> RapportJointure:
-    """Joint les contours communaux Etalab (couche `mobilisation_communes`) aux
-    données mobilisation par `code` == `code_commune`, POUR TOUTE LA FRANCE
-    (issue #26).
-
-    `donnees` : sortie de `projections.mobilisation.assembler_donnees_commune`
-    (communes stables dézoomées ET communes en repli mélangées, colonne
-    `degrade` qui les distingue). Zoom variable PAR FEATURE selon `degrade`
-    (ADR 0002 « Repli », dégradation jamais silencieuse) : une commune en
-    repli (`degrade=True`) n'a pas de contour bureau fiable -- son polygone
-    commune reste visible JUSQU'AU ZOOM BUREAU (`BUREAUX_MAXZOOM`), là où
-    `mobilisation_bureaux` serait vide pour elle. Une commune stable dézoomée
-    (`degrade=False`, un simple agrégat de zoom) ne s'affiche qu'en dessous du
-    zoom de bascule (`COMMUNES_MAXZOOM`), remplacée par `mobilisation_bureaux`
-    au-delà -- même bascule que la couche descriptive `communes`/`bureaux`.
-    """
-    donnees_par_code = {ligne["code_commune"]: ligne for ligne in donnees.iter_rows(named=True)}
-    with gzip.open(chemin_communes_gz, "rt", encoding="utf-8") as f:
-        geojson = json.load(f)
-    features = geojson["features"]
-
-    ids_joints: set[str] = set()
-    contours_sans_donnee = 0
-    sortie.parent.mkdir(parents=True, exist_ok=True)
-    with sortie.open("w", encoding="utf-8") as f:
-        for feature in features:
-            proprietes_contour = feature.get("properties", {})
-            code = proprietes_contour.get("code")
-            ligne = donnees_par_code.get(code) if code else None
-            if ligne is None:
-                contours_sans_donnee += 1
-                continue
-            ids_joints.add(code)
-            degrade = bool(ligne["degrade"])
-            maxzoom = BUREAUX_MAXZOOM if degrade else COMMUNES_MAXZOOM
-            sortie_feature = {
-                "type": "Feature",
-                "tippecanoe": {"layer": "mobilisation_communes", "minzoom": COMMUNES_MINZOOM, "maxzoom": maxzoom},
-                "properties": {
-                    "code_commune": code,
-                    "commune": proprietes_contour.get("nom"),
-                    "statut": ligne["statut"],
-                    "degrade": degrade,
-                    **_proprietes_reserve(ligne),
-                    **_proprietes_rapport_force(ligne),
-                },
-                "geometry": feature["geometry"],
-            }
-            f.write(json.dumps(sortie_feature, ensure_ascii=False))
-            f.write("\n")
-
-    return RapportJointure(
-        nom_couche="mobilisation_communes",
-        total_scores=len(donnees_par_code),
-        scores_joints=len(ids_joints),
-        total_contours=len(features),
-        contours_sans_score=contours_sans_donnee,
-    )
-
-
 def construire_pmtiles(
     ndjson_fichiers: list[Path], sortie: Path, tippecanoe_bin: str, tmpdir: Path | None = None
 ) -> None:
     """Invoque tippecanoe pour fusionner N NDJSON (un par couche) en un unique PMTiles.
 
     Chaque Feature porte sa propre extension `tippecanoe.layer/minzoom/maxzoom`
-    (voir `joindre_bureaux`/`joindre_communes`/`joindre_mobilisation_bureaux`/
-    `joindre_mobilisation_communes`) : un seul appel suffit, pas besoin de `-L`
-    par fichier -- `ndjson_fichiers` accepte 2 fichiers (tracer bullet seul) ou
-    4 (+ mobilisation, issue #26), dans n'importe quel ordre.
+    (voir `joindre_bureaux`/`joindre_communes`) : un seul appel suffit, pas
+    besoin de `-L` par fichier. Les données mobilisation (issue #26) sont
+    FUSIONNÉES dans les couches `bureaux`/`communes` en amont — jamais des
+    couches séparées, qui dupliqueraient la géométrie et se feraient sacrifier
+    par `--drop-densest-as-needed` (constaté sur données réelles).
     `--drop-densest-as-needed` est un filet de sécurité pour rester sous la
     limite de taille par tuile (surtout aux zooms bas de la couche communes, où
     de nombreux petits polygones peuvent se superposer dans une même tuile)
@@ -420,10 +403,10 @@ TILES_DIR = Path("data/tiles")
 def main() -> None:
     """Point d'entrée `uv run build-tiles`.
 
-    Construit le PMTiles France entière du tracer bullet (couches `bureaux`/
-    `communes`, résultats 2024 réels) ET les couches mobilisation (issue #26,
-    `mobilisation_bureaux`/`mobilisation_communes` — réserve #25 + rapport de
-    force projeté #5) dans le MÊME fichier. Le gate mécanique
+    Construit le PMTiles France entière : couches `bureaux`/`communes` portant
+    À LA FOIS les résultats 2024 réels (tracer bullet) et les données
+    mobilisation (issue #26 — réserve #25 + rapport de force projeté #5),
+    fusionnées par identifiants dans les mêmes features. Le gate mécanique
     (`projections.mobilisation.construire_donnees_mobilisation`, réutilise
     `projections.backtest.verdict_carte_mobilisation` tel quel) s'exécute
     AVANT toute jointure aux contours : si le verdict est FAIL, la commande
@@ -469,23 +452,17 @@ def main() -> None:
 
     ndjson_bureaux = args.workdir / "bureaux.ndjson"
     ndjson_communes = args.workdir / "communes.ndjson"
-    ndjson_mobilisation_bureaux = args.workdir / "mobilisation_bureaux.ndjson"
-    ndjson_mobilisation_communes = args.workdir / "mobilisation_communes.ndjson"
-    rapport_b = joindre_bureaux(args.contours_bureaux, scores_b, ndjson_bureaux)
-    rapport_c = joindre_communes(args.contours_communes, scores_c, ndjson_communes)
-    rapport_mob_b = joindre_mobilisation_bureaux(
-        args.contours_bureaux, donnees_mobilisation["donnees_bureau"], ndjson_mobilisation_bureaux
+    rapport_b = joindre_bureaux(
+        args.contours_bureaux, scores_b, ndjson_bureaux, donnees_mobilisation=donnees_mobilisation["donnees_bureau"]
     )
-    rapport_mob_c = joindre_mobilisation_communes(
-        args.contours_communes, donnees_mobilisation["donnees_commune"], ndjson_mobilisation_communes
+    rapport_c = joindre_communes(
+        args.contours_communes, scores_c, ndjson_communes, donnees_mobilisation=donnees_mobilisation["donnees_commune"]
     )
     print(rapport_b)
     print(rapport_c)
-    print(rapport_mob_b)
-    print(rapport_mob_c)
 
     construire_pmtiles(
-        [ndjson_bureaux, ndjson_communes, ndjson_mobilisation_bureaux, ndjson_mobilisation_communes],
+        [ndjson_bureaux, ndjson_communes],
         args.out,
         args.tippecanoe_bin,
         tmpdir=args.tippecanoe_tmpdir,

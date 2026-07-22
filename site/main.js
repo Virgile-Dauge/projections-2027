@@ -163,14 +163,14 @@ const style = {
 
     // --- Couches mobilisation (issue #26) -- masquées par défaut, bandeau
     // "Résultats 2024" étant la couche active au chargement. Le sélecteur de
-    // couche (index.html) bascule leur visibilité et, pour la réserve, le
-    // bloc affiché (fill-color/fill-opacity recalculés par bloc, cf. plus bas).
+    // couche (index.html) bascule leur visibilité. Réserve : bloc Gauche
+    // uniquement (décision mainteneur, PR #33) -- pas de sélecteur de bloc.
 
     {
       id: "mob-reserve-communes-fill",
       type: "fill",
       source: "france",
-      "source-layer": "mobilisation_communes",
+      "source-layer": "communes",
       layout: { visibility: "none" },
       paint: {
         "fill-color": COULEURS_BLOC.Gauche,
@@ -181,7 +181,7 @@ const style = {
       id: "mob-reserve-bureaux-fill",
       type: "fill",
       source: "france",
-      "source-layer": "mobilisation_bureaux",
+      "source-layer": "bureaux",
       minzoom: ZOOM_BASCULE,
       layout: { visibility: "none" },
       paint: {
@@ -193,7 +193,7 @@ const style = {
       id: "mob-force-communes-fill",
       type: "fill",
       source: "france",
-      "source-layer": "mobilisation_communes",
+      "source-layer": "communes",
       layout: { visibility: "none" },
       paint: {
         "fill-color": expressionCouleurRapportForce(),
@@ -204,7 +204,7 @@ const style = {
       id: "mob-force-bureaux-fill",
       type: "fill",
       source: "france",
-      "source-layer": "mobilisation_bureaux",
+      "source-layer": "bureaux",
       minzoom: ZOOM_BASCULE,
       layout: { visibility: "none" },
       paint: {
@@ -215,12 +215,12 @@ const style = {
     {
       // Communes en repli : dégradation TOUJOURS visible (jamais silencieuse,
       // CONTEXT.md « Repli »), à tout zoom où une couche mobilisation est active
-      // -- y compris au zoom bureau, là où mobilisation_bureaux n'a aucune
-      // donnée fiable pour elles (cf. joindre_mobilisation_communes).
+      // -- y compris au zoom bureau, là où la couche bureaux n'a aucune
+      // donnée fiable pour elles (maxzoom par feature, cf. joindre_communes).
       id: "mob-repli-ligne",
       type: "line",
       source: "france",
-      "source-layer": "mobilisation_communes",
+      "source-layer": "communes",
       filter: ["==", ["get", "degrade"], true],
       layout: { visibility: "none" },
       paint: {
@@ -260,8 +260,8 @@ function libelleQuantile(quantile, nMax) {
 function libelleStatut(proprietes) {
   // Dégradation jamais silencieuse (CONTEXT.md « Repli ») : le statut de
   // réconciliation est toujours affiché, jamais seulement encodé visuellement.
-  // `degrade` n'existe QUE sur les features de mobilisation_communes (jamais
-  // sur mobilisation_bureaux, où la maille est toujours "bureau") : `true` ->
+  // `degrade` n'existe QUE sur les features de la couche communes (jamais
+  // sur la couche bureaux, où la maille est toujours "bureau") : `true` ->
   // repli, `false` -> agrégat de dézoom d'une commune stable, absent -> bureau.
   if (proprietes.degrade === true) {
     return "⚠ commune en repli — statut agrégé, pas de détail fiable par bureau (voir la méthode)";
@@ -306,23 +306,22 @@ function afficherPanneau(proprietes, estCommune) {
 }
 
 function afficherPanneauReserve(proprietes, estCommune) {
+  // Décision mainteneur (PR #33) : seule la réserve du bloc Gauche est
+  // affichée (et embarquée dans les tuiles) — les autres blocs restent
+  // publiés dans reserve-2027.md, lié depuis la page méthode.
   const titre = estCommune
     ? proprietes.commune || proprietes.code_commune
     : `${proprietes.commune || ""} — bureau ${proprietes.bureau || ""}`;
-  const lignes = BLOCS_AFFICHAGE.map(
-    (bloc) => `
-      <tr>
-        <td><span class="pastille" style="background:${COULEURS_BLOC[bloc.label]}"></span>${bloc.label}</td>
-        <td>${formatNombre(proprietes["reserve_" + bloc.slug])} inscrits mobilisables</td>
-        <td>${libelleQuantile(proprietes["quantile_reserve_" + bloc.slug], N_QUANTILES_RESERVE)}</td>
-      </tr>`
-  ).join("");
 
   ouvrirPanneau(`
     ${fermerBouton()}
     <h2>${titre}</h2>
-    <p class="tete">Réserve de voix par bloc — <a href="methode.html">estimateur v1</a></p>
-    <table>${lignes}</table>
+    <p class="tete">Réserve de voix — <a href="methode.html">estimateur v1</a></p>
+    <p>
+      <span class="pastille" style="background:${COULEURS_BLOC.Gauche}"></span>Gauche :
+      <strong>${formatNombre(proprietes.reserve_gauche)}</strong> inscrits mobilisables
+      (${libelleQuantile(proprietes.quantile_reserve_gauche, N_QUANTILES_RESERVE)})
+    </p>
     <p class="participation">${libelleStatut(proprietes)}</p>
   `);
 }
@@ -367,7 +366,6 @@ const BANDEAU_PAR_MODE = {
 };
 
 let modeCouche = "resultats2024";
-let blocReserve = "gauche";
 
 function appliquerMode() {
   for (const [mode, ids] of Object.entries(COUCHES_PAR_MODE)) {
@@ -385,21 +383,11 @@ function appliquerMode() {
     modeCouche === "reserve" || modeCouche === "force" ? "visible" : "none"
   );
 
-  document.getElementById("selecteur-bloc").hidden = modeCouche !== "reserve";
   document.getElementById("legende-quantile").hidden = modeCouche === "resultats2024";
 
   const bandeau = BANDEAU_PAR_MODE[modeCouche];
   document.getElementById("bandeau-titre").textContent = bandeau.titre;
   document.getElementById("bandeau-texte").textContent = bandeau.texte;
-}
-
-function appliquerBlocReserve() {
-  const couleur = COULEURS_BLOC[BLOCS_AFFICHAGE.find((b) => b.slug === blocReserve).label];
-  const opacite = expressionOpaciteQuantile(`quantile_reserve_${blocReserve}`, N_QUANTILES_RESERVE);
-  for (const id of ["mob-reserve-communes-fill", "mob-reserve-bureaux-fill"]) {
-    map.setPaintProperty(id, "fill-color", couleur);
-    map.setPaintProperty(id, "fill-opacity", opacite);
-  }
 }
 
 map.on("load", () => {
@@ -439,19 +427,12 @@ map.on("load", () => {
     if (e.features.length) afficherPanneauForce(e.features[0].properties, false);
   });
 
-  appliquerBlocReserve();
   appliquerMode();
 
   document.querySelectorAll('input[name="couche"]').forEach((input) => {
     input.addEventListener("change", (e) => {
       modeCouche = e.target.value;
       appliquerMode();
-    });
-  });
-  document.querySelectorAll('input[name="bloc"]').forEach((input) => {
-    input.addEventListener("change", (e) => {
-      blocReserve = e.target.value;
-      appliquerBlocReserve();
     });
   });
 });
