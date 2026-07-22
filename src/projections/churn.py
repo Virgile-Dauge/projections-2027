@@ -47,6 +47,11 @@ STATUT_INSTABLE = "instable"
 STATUT_JOINT_VALIDE = "joint_valide"
 STATUT_REPLI = "repli"
 
+# Scrutin de référence pour tout calcul en inscrits (churn national, tables par
+# département, top communes) : un seul scrutin explicite et documenté, jamais
+# une moyenne entre scrutins (CONTEXT.md).
+SCRUTIN_REFERENCE_INSCRITS = "2024_legi_t1"
+
 PARTICIPATION: tuple[str, ...] = ("inscrits", "abstentions", "votants", "blancs", "nuls", "exprimes")
 
 COLONNES_PANEL: tuple[str, ...] = (
@@ -204,8 +209,50 @@ def distribution_par_departement(classification: pl.DataFrame) -> pl.DataFrame:
     )
 
 
-def part_inscrits_zone_stable(panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str) -> float:
-    """% des inscrits (sur `scrutin_reference`) situés dans une commune stable.
+def inscrits_par_departement(
+    panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str
+) -> pl.DataFrame:
+    """Inscrits en zone instable par département (absolu et part), depuis les sommes.
+
+    Jamais de moyenne des taux communaux (CONTEXT.md, « Churn ») : chaque
+    département recalcule sa part depuis la somme de ses inscrits (`statut`
+    lu sur `classification`, jamais sur le `code_departement` du panel qui
+    peut être incohérent pour une même commune DOM/COM d'un scrutin à
+    l'autre, cf. `classifier_communes`), dédupliqués par bureau.
+    """
+    inscrits = (
+        panel.filter(pl.col("id_election") == scrutin_reference)
+        .select("code_commune", "id_bv", "inscrits")
+        .unique()
+        .join(classification.select("code_commune", "code_departement", "statut"), on="code_commune", how="left")
+    )
+    return inscrits.group_by("code_departement").agg(
+        pl.col("inscrits").sum().alias("inscrits_departement"),
+        pl.col("inscrits").filter(pl.col("statut") == STATUT_INSTABLE).sum().alias("inscrits_instables"),
+    ).with_columns(
+        (pl.col("inscrits_instables") / pl.col("inscrits_departement")).alias("part_inscrits_instables")
+    )
+
+
+def table_departements(panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str) -> pl.DataFrame:
+    """Table de priorisation par département : inscrits en zone instable + colonnes communales.
+
+    Ajoute `inscrits_instables` (absolu) et `part_inscrits_instables` aux
+    colonnes de `distribution_par_departement` (nb_communes,
+    nb_communes_instables, taux_instable). Triée par inscrits en zone
+    instable décroissant — l'ordre de la charge de travail — puis
+    code_departement croissant (déterminisme à égalité) ; le taux communal
+    reste en colonne (intensité) mais ne pilote plus le tri (CONTEXT.md).
+    """
+    return (
+        inscrits_par_departement(panel, classification, scrutin_reference)
+        .join(distribution_par_departement(classification), on="code_departement", how="left")
+        .sort(["inscrits_instables", "code_departement"], descending=[True, False])
+    )
+
+
+def _part_inscrits(panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str, statut: str) -> float:
+    """% des inscrits (sur `scrutin_reference`) situés dans une commune du `statut` donné.
 
     Pondéré par les électeurs inscrits, jamais par la surface (CONTEXT.md).
     Les inscrits sont dédupliqués par bureau avant sommation : ils sont
@@ -220,11 +267,61 @@ def part_inscrits_zone_stable(panel: pl.DataFrame, classification: pl.DataFrame,
     total = inscrits.get_column("inscrits").sum()
     if not total:
         return 0.0
-    stables = inscrits.filter(pl.col("statut") == STATUT_STABLE).get_column("inscrits").sum()
-    return stables / total
+    part = inscrits.filter(pl.col("statut") == statut).get_column("inscrits").sum()
+    return part / total
 
 
-SCRUTIN_REFERENCE_INSCRITS = "2024_legi_t1"
+def part_inscrits_zone_stable(panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str) -> float:
+    """% des inscrits (sur `scrutin_reference`) situés dans une commune stable."""
+    return _part_inscrits(panel, classification, scrutin_reference, STATUT_STABLE)
+
+
+def top_communes_instables_par_inscrits(
+    panel: pl.DataFrame,
+    classification: pl.DataFrame,
+    scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS,
+    n: int = 20,
+) -> pl.DataFrame:
+    """Top `n` communes instables par inscrits, avec leur nombre de bureaux.
+
+    Cible concrète de la future réallocation dasymétrique (CONTEXT.md,
+    « Repli ») : dit où chaque effort récupère le plus d'électorat, à la
+    granularité fine. Tri par inscrits décroissant, code_commune croissant
+    en secondaire (déterminisme à égalité).
+    """
+    election_reference = re.sub(r"_t\d+$", "", scrutin_reference)
+    nb_bureaux = (
+        compter_bureaux_par_commune(panel)
+        .filter(pl.col("election") == election_reference)
+        .select("code_commune", "nb_bureaux")
+    )
+    inscrits = (
+        panel.filter(pl.col("id_election") == scrutin_reference)
+        .select("code_commune", "id_bv", "inscrits")
+        .unique()
+        .group_by("code_commune")
+        .agg(pl.col("inscrits").sum())
+    )
+    return (
+        classification.filter(pl.col("statut") == STATUT_INSTABLE)
+        .select("code_commune", "code_departement")
+        .join(inscrits, on="code_commune", how="left")
+        .join(nb_bureaux, on="code_commune", how="left")
+        .with_columns(pl.col("inscrits").fill_null(0), pl.col("nb_bureaux").fill_null(0))
+        .sort(["inscrits", "code_commune"], descending=[True, False])
+        .head(n)
+    )
+
+
+def part_inscrits_zone_instable(panel: pl.DataFrame, classification: pl.DataFrame, scrutin_reference: str) -> float:
+    """% des inscrits (sur `scrutin_reference`) situés dans une commune instable.
+
+    Mesure canonique du churn (CONTEXT.md « Churn ») : la grandeur à
+    minimiser est l'électorat mal identifié localement, jamais un compte de
+    communes ou de bureaux — unités trop inégales pour être comparées.
+    C'est le chiffre de tête de `rapport-churn.md`.
+    """
+    return _part_inscrits(panel, classification, scrutin_reference, STATUT_INSTABLE)
 
 
 def generer_rapport_churn(panel: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS) -> str:

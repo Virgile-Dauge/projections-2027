@@ -23,9 +23,13 @@ from projections.churn import (
     construire_panel_avec_statut,
     distribution_par_departement,
     generer_rapport_churn,
+    inscrits_par_departement,
     main,
+    part_inscrits_zone_instable,
     part_inscrits_zone_stable,
+    table_departements,
     taux_churn_national,
+    top_communes_instables_par_inscrits,
 )
 from projections.ingest import ingest
 
@@ -241,6 +245,76 @@ def test_distribution_par_departement_taux_instable_par_departement():
     assert resultat.get_column("taux_instable").to_list() == [0.0, 0.5]
 
 
+def test_inscrits_par_departement_ratio_depuis_les_sommes_jamais_une_moyenne_de_taux():
+    # 2 communes dans le même département, poids d'inscrits très inégaux
+    # (100 vs 900) : si le code moyennait les taux communaux (0 et 1), le
+    # résultat serait 0.5. Le bon calcul (somme des inscrits instables /
+    # somme des inscrits du département) donne 0.9.
+    panel = _panel_synthetique(
+        [
+            {**_ligne_bureau("2024_legi_t1", "69001", "0001", code_departement="69"), "inscrits": 100},
+            {**_ligne_bureau("2024_legi_t1", "69002", "0001", code_departement="69"), "inscrits": 900},
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["69001", "69002"],
+            "code_departement": ["69", "69"],
+            "statut": [STATUT_STABLE, STATUT_INSTABLE],
+        }
+    )
+    resultat = inscrits_par_departement(panel, classification, "2024_legi_t1")
+    ligne = resultat.filter(pl.col("code_departement") == "69")
+    assert ligne.get_column("inscrits_departement").to_list() == [1000]
+    assert ligne.get_column("inscrits_instables").to_list() == [900]
+    assert ligne.get_column("part_inscrits_instables").to_list() == pytest.approx([0.9])
+
+
+def test_table_departements_triee_par_inscrits_instables_absolu_decroissant():
+    # Département "69" : taux communal élevé (1 commune instable sur 1 =
+    # 100 %) mais peu d'inscrits (100). Département "75" : taux communal
+    # plus faible (1 sur 2 = 50 %) mais beaucoup plus d'inscrits instables
+    # (900). La table doit prioriser l'absolu (75 en tête), pas le taux.
+    panel = _panel_synthetique(
+        [
+            {**_ligne_bureau("2024_legi_t1", "69001", "0001", code_departement="69"), "inscrits": 100},
+            {**_ligne_bureau("2024_legi_t1", "75001", "0001", code_departement="75"), "inscrits": 900},
+            {**_ligne_bureau("2024_legi_t1", "75002", "0001", code_departement="75"), "inscrits": 50},
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["69001", "75001", "75002"],
+            "code_departement": ["69", "75", "75"],
+            "statut": [STATUT_INSTABLE, STATUT_INSTABLE, STATUT_STABLE],
+        }
+    )
+    resultat = table_departements(panel, classification, "2024_legi_t1")
+    assert resultat.get_column("code_departement").to_list() == ["75", "69"]
+    assert resultat.get_column("inscrits_instables").to_list() == [900, 100]
+    # Colonnes communales existantes toujours présentes (ajout, pas remplacement).
+    assert "nb_communes" in resultat.columns
+    assert "taux_instable" in resultat.columns
+
+
+def test_table_departements_ordre_deterministe_a_egalite_d_inscrits_instables():
+    panel = _panel_synthetique(
+        [
+            {**_ligne_bureau("2024_legi_t1", "93001", "0001", code_departement="93"), "inscrits": 100},
+            {**_ligne_bureau("2024_legi_t1", "01001", "0001", code_departement="01"), "inscrits": 100},
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["93001", "01001"],
+            "code_departement": ["93", "01"],
+            "statut": [STATUT_INSTABLE, STATUT_INSTABLE],
+        }
+    )
+    resultat = table_departements(panel, classification, "2024_legi_t1")
+    assert resultat.get_column("code_departement").to_list() == ["01", "93"]
+
+
 def test_distribution_par_departement_ordre_deterministe_a_egalite_de_taux():
     # Reproductibilité du rapport (critère d'acceptation #4) : à taux
     # d'instabilité égal (ex. 0 %, le cas le plus fréquent), l'ordre des
@@ -272,6 +346,71 @@ def test_part_inscrits_zone_stable_pondere_par_les_inscrits_pas_par_la_surface()
     )
     resultat = part_inscrits_zone_stable(panel, classification, "2024_legi_t1")
     assert resultat == pytest.approx(0.5)
+
+
+def test_part_inscrits_zone_instable_pondere_par_les_inscrits_jamais_par_la_surface():
+    # Mesure canonique du churn (CONTEXT.md « Churn ») : la grandeur à
+    # minimiser, jamais un compte de communes. Poids délibérément inégaux
+    # (200 vs 800) pour distinguer d'une simple moyenne 50/50 des statuts.
+    panel = _panel_synthetique(
+        [
+            {**_ligne_bureau("2024_legi_t1", "69123", "0001", code_departement="69"), "inscrits": 200},
+            {**_ligne_bureau("2024_legi_t1", "01001", "0001", code_departement="01"), "inscrits": 800},
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["69123", "01001"],
+            "code_departement": ["69", "01"],
+            "statut": [STATUT_STABLE, STATUT_INSTABLE],
+        }
+    )
+    resultat = part_inscrits_zone_instable(panel, classification, "2024_legi_t1")
+    assert resultat == pytest.approx(0.8)  # 800 / (200 + 800), pas une moyenne de statuts (0.5)
+
+
+def test_top_communes_instables_par_inscrits_tri_et_limite():
+    # 3 communes instables + 1 stable (exclue) ; on ne garde que le top 2 par
+    # inscrits, avec leur nombre de bureaux sur le scrutin de référence.
+    panel = _panel_synthetique(
+        [
+            _ligne_bureau("2024_legi_t1", "69001", "0001", code_departement="69"),  # 500 inscrits, instable
+            _ligne_bureau("2024_legi_t1", "69002", "0001", code_departement="69"),
+            _ligne_bureau("2024_legi_t1", "69002", "0002", code_departement="69"),  # 2 bureaux -> 1000 inscrits
+            _ligne_bureau("2024_legi_t1", "69003", "0001", code_departement="69"),  # 500 inscrits, instable
+            _ligne_bureau("2024_legi_t1", "69004", "0001", code_departement="69"),  # stable, exclue
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["69001", "69002", "69003", "69004"],
+            "code_departement": ["69", "69", "69", "69"],
+            "statut": [STATUT_INSTABLE, STATUT_INSTABLE, STATUT_INSTABLE, STATUT_STABLE],
+        }
+    )
+    resultat = top_communes_instables_par_inscrits(panel, classification, "2024_legi_t1", n=2)
+    assert resultat.height == 2
+    assert resultat.get_column("code_commune").to_list() == ["69002", "69001"]
+    assert resultat.get_column("inscrits").to_list() == [1000, 500]
+    assert resultat.get_column("nb_bureaux").to_list() == [2, 1]
+
+
+def test_top_communes_instables_par_inscrits_ordre_deterministe_a_egalite():
+    panel = _panel_synthetique(
+        [
+            _ligne_bureau("2024_legi_t1", "69003", "0001", code_departement="69"),
+            _ligne_bureau("2024_legi_t1", "69001", "0001", code_departement="69"),
+        ]
+    )
+    classification = pl.DataFrame(
+        {
+            "code_commune": ["69003", "69001"],
+            "code_departement": ["69", "69"],
+            "statut": [STATUT_INSTABLE, STATUT_INSTABLE],
+        }
+    )
+    resultat = top_communes_instables_par_inscrits(panel, classification, "2024_legi_t1")
+    assert resultat.get_column("code_commune").to_list() == ["69001", "69003"]
 
 
 # --- generer_rapport_churn : contenu attendu par le rapport --------------------
