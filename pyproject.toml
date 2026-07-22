@@ -13,6 +13,7 @@ dependencies = [
 download-data = "projections.datasets:main"
 ingest = "projections.ingest:main"
 rapport-churn = "projections.churn:main"
+build-tiles = "projections.build_tiles:main"
 
 [build-system]
 requires = ["hatchling"]

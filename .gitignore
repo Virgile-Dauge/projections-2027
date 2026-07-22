@@ -11,3 +11,6 @@ __marimo__/
 # État local d'outillage — jamais committé
 .claude/
 .hyperresearch/
+
+# Source tippecanoe clonée localement (binaire non vendored, voir README)
+.tippecanoe-src/
