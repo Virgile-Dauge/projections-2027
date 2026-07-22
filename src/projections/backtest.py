@@ -126,6 +126,14 @@ CIBLES_PARTICIPATION: dict[str, str] = {
 }
 SEUIL_RHO_PARTICIPATION = 0.8
 
+# Clause participation révisée (ADR 0003, issue #28/#30) -- fraction du
+# plafond inter-cibles, gravée à la session de cadrage de la révision
+# (2026-07-22, POST-HOC et le dit : le 0,769 < 0,8 était déjà connu). Même
+# règle que SEUIL_RHO_PARTICIPATION ci-dessus : ne JAMAIS la recalibrer après
+# avoir vu un nouveau résultat -- la révision post-hoc est documentée une
+# fois (docs/adr/0003), pas rejouable à chaque backtest défavorable.
+FRACTION_PLAFOND_PARTICIPATION = 0.85
+
 
 # --- Prédicteur 2022 (anti-fuite) ------------------------------------------
 
@@ -538,6 +546,45 @@ def executer_backtest_participation(panel: pl.DataFrame, baseline: pl.DataFrame)
     }
 
 
+# --- Clause participation révisée (ADR 0003, issue #28/#30) -------------------
+#
+# Le seuil absolu ρ ≥ 0,8 (ci-dessus) est sorti rouge sur données réelles pour
+# la cible européennes (0,769 < 0,8, PR #27/issue #24) : révision post-hoc
+# assumée et datée (docs/adr/0003). La clause devient relative au PLAFOND
+# inter-cibles (`rho_inter_cibles`, déjà calculé par `executer_backtest_participation`
+# -- une corrélation de rang réelle, jamais recalculée/moyennée ici) : pour
+# chaque cible, ρ(2022→cible) ≥ FRACTION_PLAFOND_PARTICIPATION × plafond.
+# N'affecte QUE `verdict_carte_mobilisation` et la nouvelle section de rapport
+# -- `evaluer_gate_participation`/`SEUIL_RHO_PARTICIPATION` ci-dessus restent
+# calculés et publiés tels quels (section 4 du rapport, byte-identique).
+
+
+def evaluer_gate_participation_relatif(
+    resultats_participation: dict,
+    fraction: float = FRACTION_PLAFOND_PARTICIPATION,
+) -> pl.DataFrame:
+    """Verdict PASS/FAIL de la clause participation révisée (ADR 0003), par cible :
+    ρ(2022→cible) ≥ `fraction` × plafond inter-cibles.
+
+    `resultats_participation` : sortie de `executer_backtest_participation`
+    (fournit `resultats` -- cible x rho x n -- et `rho_inter_cibles`, le
+    plafond empirique mesuré sur le MÊME périmètre de bureaux joints -- lu tel
+    quel, jamais recalculé ni moyenné ici). `>=`, même convention que les
+    autres gates de ce module : à la frontière exacte (ratio == `fraction`),
+    PASS.
+    """
+    plafond = resultats_participation["rho_inter_cibles"]
+    seuil_effectif = fraction * plafond
+    resultats = resultats_participation["resultats"].select("cible", "rho", "n")
+    return resultats.with_columns(
+        pl.lit(plafond).alias("plafond"),
+        pl.lit(fraction).alias("fraction"),
+        pl.lit(seuil_effectif).alias("seuil_effectif"),
+        (pl.col("rho") / plafond).alias("ratio_plafond"),
+        (pl.col("rho") >= seuil_effectif).alias("pass_global"),
+    )
+
+
 # --- Garde anti-hasard (ADR 0002, issue #24) -----------------------------------
 #
 # Pour la métrique principale de chaque backtest publié (composite ensemble,
@@ -728,18 +775,25 @@ def garde_anti_hasard_participation(resultats_participation: dict, panel: pl.Dat
 
 
 def verdict_carte_mobilisation(
-    verdict_participation: pl.DataFrame,
+    verdict_participation_relatif: pl.DataFrame,
     verdict_anti_hasard_structure: pl.DataFrame,
     verdict_anti_hasard_participation: pl.DataFrame,
 ) -> bool:
     """PASS uniquement si TOUTES les clauses de la carte mobilisation le sont
-    (ADR 0002, point 5) : backtest participation (ρ ≥ 0,8 par cible) ET garde
-    anti-hasard (structure + participation, bureau bat département). La
+    (ADR 0002 point 5, clause participation révisée par ADR 0003) : clause
+    participation relative au plafond inter-cibles (`evaluer_gate_participation_relatif`,
+    ADR 0003 -- remplace la clause absolue ρ ≥ 0,8 pour CE verdict ; l'absolu
+    reste calculé et publié section 4 du rapport, jamais recalculé ici) ET
+    garde anti-hasard (structure + participation, bureau bat département). La
     clause tercile de l'ADR 0001 ne gouverne plus ce produit -- elle reste
     publiée (FAIL inclus) mais ne conditionne plus cette publication-ci.
+
+    Fonction générique (ne lit que `pass_global`) : le premier argument
+    attendu a changé de table (absolu ADR 0002 -> relatif ADR 0003) mais pas
+    la logique -- même contrat, pas une fourche de code (cf. revue #30).
     """
     return (
-        verdict_global(verdict_participation)
+        verdict_global(verdict_participation_relatif)
         and verdict_global(verdict_anti_hasard_structure)
         and verdict_global(verdict_anti_hasard_participation)
     )
@@ -891,6 +945,14 @@ def _ligne_anti_hasard_participation(ligne: dict) -> str:
     return _ligne_anti_hasard(ligne["cible"], ligne)
 
 
+def _ligne_clause_relative(ligne: dict) -> str:
+    verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
+    return (
+        f"| {ligne['cible']} | {_fmt_rho(ligne['rho'])} | {_fmt_rho(ligne['plafond'])} "
+        f"| {ligne['seuil_effectif']:.4f} | {ligne['ratio_plafond']:.1%} | **{verdict_txt}** |"
+    )
+
+
 def generer_rapport_backtest(
     resultats_backtest: dict,
     calibration: pl.DataFrame,
@@ -992,16 +1054,49 @@ def generer_rapport_backtest(
         )
     )
 
-    pass_carte = verdict_carte_mobilisation(resultats_part, anti_hasard_structure, anti_hasard_participation)
+    # --- ADR 0003 / issue #28-#30 : clause participation révisée, relative au
+    # plafond inter-cibles -- section NOUVELLE, section 4 ci-dessus (absolue,
+    # ADR 0002) inchangée. `verdict_participation_relatif` remplace
+    # `resultats_part` comme base de `verdict_carte_mobilisation` (même
+    # fonction, table différente -- cf. docstring de `verdict_carte_mobilisation`).
+    verdict_participation_relatif = evaluer_gate_participation_relatif(resultats_participation)
+    lignes_clause_relative = "\n".join(
+        _ligne_clause_relative(ligne)
+        for ligne in verdict_participation_relatif.sort("cible").iter_rows(named=True)
+    )
+    fraction_plafond = FRACTION_PLAFOND_PARTICIPATION
+    seuil_effectif_plafond = fraction_plafond * resultats_participation["rho_inter_cibles"]
+
+    pass_clause_relative = verdict_global(verdict_participation_relatif)
+    verdict_clause_relative_txt = (
+        "**PASS** — chaque cible atteint au moins "
+        f"{fraction_plafond:.0%} du plafond inter-cibles (ADR 0003) : la clause révisée est "
+        "satisfaite. Le test de même enjeu pré-enregistré (Spearman de l'abstention par bureau, "
+        "présidentielle 2017 T1 → présidentielle 2022 T1, clause ρ ≥ 0,8) reste la validation "
+        "forte à venir — calcul différé au chantier data 2017 (crosswalk 2017↔2022 à construire), "
+        "seuil gravé avant tout calcul, non rediscutable après lecture."
+        if pass_clause_relative
+        else (
+            "**FAIL** — au moins une cible est sous "
+            f"{fraction_plafond:.0%} du plafond inter-cibles (ADR 0003), détail dans le tableau "
+            "ci-dessus. Fraction gelée, jamais recalibrée après lecture des résultats."
+        )
+    )
+
+    pass_carte = verdict_carte_mobilisation(
+        verdict_participation_relatif, anti_hasard_structure, anti_hasard_participation
+    )
     verdict_carte_mobilisation_txt = (
-        "**PASS** — les clauses pré-enregistrées de l'ADR 0002 (backtest participation + garde "
-        "anti-hasard) sont toutes au vert : publication de la carte mobilisation autorisée."
+        "**PASS** — la clause participation révisée (ADR 0003, section 6 ci-dessus, relative au "
+        "plafond inter-cibles) et la garde anti-hasard (section 5) sont toutes deux au vert : "
+        "publication de la carte mobilisation autorisée. Le seuil absolu ρ ≥ 0,8 (ADR 0002, "
+        "section 4 ci-dessus) reste publié tel quel — FAIL pour la cible européennes — mais ne "
+        "gouverne plus cette publication (révision ADR 0003, post-hoc et datée, cf. section 6)."
         if pass_carte
         else (
-            "**FAIL** — au moins une clause pré-enregistrée de l'ADR 0002 échoue (détail dans les "
-            "sections 4 et 5 ci-dessus) : pas de publication de la carte mobilisation. Décision de "
-            "révision d'architecture à l'humain (nouvelle issue de révision, ADR 0002) — les seuils "
-            "ne bougent pas."
+            "**FAIL** — au moins une clause pré-enregistrée (participation relative ADR 0003, "
+            "section 6, ou garde anti-hasard, section 5) échoue : pas de publication de la carte "
+            "mobilisation. Décision de révision d'architecture à l'humain — les seuils ne bougent pas."
         )
     )
 
@@ -1157,7 +1252,34 @@ département, sinon pas de publication à cette maille.
 
 {verdict_anti_hasard_txt}
 
-## Verdict global — publication de la carte mobilisation (ADR 0002)
+## 6. Clause révisée (ADR 0003) — seuil relatif au plafond inter-cibles
+
+Révision **post-hoc**, datée et assumée comme telle (`docs/adr/0003-clause-participation-plafond-relatif.md`,
+2026-07-22) : rédigée APRÈS le résultat rouge de la section 4 ci-dessus (ρ euro
+= 0,769 < 0,8, publié tel quel, non modifié). D'où venait le 0,8 : un chiffre
+d'intuition, dans la mauvaise unité (un absolu, là où la grandeur pertinente
+est relative à ce que la réalité électorale se reproduit à elle-même). Le 0,8
+absolu est rendu à la grandeur qu'il visait : un vrai test de même enjeu,
+**pré-enregistré AVANT tout calcul** — Spearman de l'abstention par bureau,
+présidentielle **2017 T1 → présidentielle 2022 T1**, ensemble des bureaux
+joints via un crosswalk 2017↔2022 à construire, clause **ρ ≥ 0,8**, calcul
+différé au chantier data dédié ; s'il échoue, H2 est infirmée à sa propre
+barre (révision d'architecture obligatoire, pas d'ajustement de seuil).
+
+En attendant ce test, la clause participation devient relative au plafond
+inter-cibles mesuré sur le même périmètre (ρ = {rho_inter_cibles:.3f}, section 4
+ci-dessus, n = {n_inter_cibles}) : pour chaque cible,
+ρ(2022→cible) ≥ {fraction_plafond:.0%} × plafond = {seuil_effectif_plafond:.4f}.
+Fraction gelée à la session de cadrage de la révision (`FRACTION_PLAFOND_PARTICIPATION`),
+même interdiction de recalibrage après lecture que le seuil absolu ci-dessus.
+
+| Cible | ρ | Plafond inter-cibles | Seuil effectif ({fraction_plafond:.0%} × plafond) | Ratio au plafond | Verdict |
+| --- | --- | --- | --- | --- | --- |
+{lignes_clause_relative}
+
+{verdict_clause_relative_txt}
+
+## Verdict global — publication de la carte mobilisation (ADR 0002/0003)
 
 {verdict_carte_mobilisation_txt}
 
@@ -1188,7 +1310,8 @@ def generer_rapport_complet(
     d'arguments (revue PR #27).
 
     Retourne un dict : `rapport` (str), `pass_gate_adr_0001` (bool),
-    `pass_carte_mobilisation` (bool).
+    `pass_carte_mobilisation` (bool -- clause participation ADR 0003, relative
+    au plafond inter-cibles, ET garde anti-hasard, cf. `verdict_carte_mobilisation`).
     """
     poids = POIDS_COMPOSITE_2022_PAR_DEFAUT if poids_composite_2022 is None else poids_composite_2022
 
@@ -1215,11 +1338,12 @@ def generer_rapport_complet(
         anti_hasard_structure=anti_hasard_structure,
         anti_hasard_participation=anti_hasard_participation,
     )
+    verdict_participation_relatif = evaluer_gate_participation_relatif(resultats_participation)
     return {
         "rapport": rapport,
         "pass_gate_adr_0001": verdict_global(resultats_backtest["verdict"]),
         "pass_carte_mobilisation": verdict_carte_mobilisation(
-            resultats_participation["resultats"], anti_hasard_structure, anti_hasard_participation
+            verdict_participation_relatif, anti_hasard_structure, anti_hasard_participation
         ),
     }
 
@@ -1256,7 +1380,7 @@ def main() -> None:
     args.out.write_text(sortie["rapport"], encoding="utf-8")
     print(f"rapport écrit : {args.out}")
     print(f"gate ADR 0001 PASS: {sortie['pass_gate_adr_0001']}")
-    print(f"carte mobilisation PASS (ADR 0002): {sortie['pass_carte_mobilisation']}")
+    print(f"carte mobilisation PASS (ADR 0002/0003): {sortie['pass_carte_mobilisation']}")
 
 
 if __name__ == "__main__":

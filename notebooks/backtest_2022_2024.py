@@ -14,6 +14,7 @@ def _():
         POIDS_COMPOSITE_2022_PAR_DEFAUT,
         calibrer_poids,
         construire_table_backtest,
+        evaluer_gate_participation_relatif,
         executer_backtest_participation,
         executer_backtests,
         garde_anti_hasard_participation,
@@ -28,6 +29,7 @@ def _():
         POIDS_COMPOSITE_2022_PAR_DEFAUT,
         calibrer_poids,
         construire_table_backtest,
+        evaluer_gate_participation_relatif,
         executer_backtest_participation,
         executer_backtests,
         garde_anti_hasard_participation,
@@ -148,8 +150,11 @@ def _(mo):
     Deux clauses pré-enregistrées qui conditionnent la publication de la carte
     mobilisation (postérieures aux seuils, commit docs de la branche) : le
     backtest participation (persistance de l'abstention 2022→2024, ρ ≥ 0,8 par
-    cible) et la garde anti-hasard (la granularité bureau doit battre la
-    granularité département sur la métrique principale de chaque backtest).
+    cible, ABSOLU) et la garde anti-hasard (la granularité bureau doit battre la
+    granularité département sur la métrique principale de chaque backtest). Le
+    seuil absolu est sorti rouge sur la cible européennes (0,769 < 0,8) : la
+    clause qui gouverne effectivement la publication est désormais la clause
+    révisée ADR 0003 (relative au plafond inter-cibles, section 5bis ci-dessous).
     """)
     return
 
@@ -176,13 +181,32 @@ def _(garde_anti_hasard_participation, panel_avec_statut, resultats_participatio
 
 
 @app.cell
+def _(mo):
+    mo.md("""
+    ### 5bis. Clause participation révisée (ADR 0003, issue #28/#30)
+
+    Le seuil absolu ci-dessus est rendu à sa grandeur (test de même enjeu
+    2017→2022, calcul différé) : la clause qui gouverne la publication devient
+    relative au plafond inter-cibles mesuré sur le même périmètre.
+    """)
+    return
+
+
+@app.cell
+def _(evaluer_gate_participation_relatif, resultats_participation):
+    verdict_participation_relatif = evaluer_gate_participation_relatif(resultats_participation)
+    verdict_participation_relatif
+    return (verdict_participation_relatif,)
+
+
+@app.cell
 def _(
     anti_hasard_participation,
     anti_hasard_structure,
-    resultats_participation,
     verdict_carte_mobilisation,
+    verdict_participation_relatif,
 ):
-    f"carte mobilisation PASS (ADR 0002) : {verdict_carte_mobilisation(resultats_participation['resultats'], anti_hasard_structure, anti_hasard_participation)}"
+    f"carte mobilisation PASS (ADR 0002/0003) : {verdict_carte_mobilisation(verdict_participation_relatif, anti_hasard_structure, anti_hasard_participation)}"
     return
 
 

@@ -19,6 +19,7 @@ from projections.backtest import (
     CIBLES,
     CIBLES_PARTICIPATION,
     COLONNE_ABSTENTION_PREDICTEUR,
+    FRACTION_PLAFOND_PARTICIPATION,
     POIDS_COMPOSITE_2022_PAR_DEFAUT,
     SCRUTIN_LEGISLATIVES_2022,
     SCRUTIN_LEGISLATIVES_2022_CORRIGE,
@@ -36,6 +37,7 @@ from projections.backtest import (
     distribution_swing,
     evaluer_gate,
     evaluer_gate_participation,
+    evaluer_gate_participation_relatif,
     executer_backtest_participation,
     executer_backtests,
     garde_anti_hasard_participation,
@@ -455,9 +457,77 @@ def test_generer_rapport_backtest_contient_les_sections_attendues(panel_avec_sta
         "Calibration des poids",
         "Backtest participation",
         "Garde anti-hasard",
+        "Clause révisée (ADR 0003)",
         "carte mobilisation",
     ):
         assert section in rapport
+
+
+def test_generer_rapport_backtest_section_4_reste_byte_identique_quel_que_soit_le_verdict_adr_0003(
+    panel_avec_statut_reel, baseline_reel
+):
+    # Acceptance criteria #30 : la section 4 (clause absolue ADR 0002, échec
+    # publié tel quel) ne doit JAMAIS bouger, que la nouvelle clause ADR 0003
+    # (section 6) passe ou échoue -- seule la section "Verdict global" (portée
+    # par `pass_carte_mobilisation`) est autorisée à changer de texte.
+    resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation = (
+        _resultats_participation_reels(panel_avec_statut_reel, baseline_reel)
+    )
+    calibration = calibrer_poids(panel_avec_statut_reel, baseline_reel)
+    args = dict(
+        poids_composite_2022=POIDS_COMPOSITE_2022_PAR_DEFAUT,
+        methode_correction="imputation",
+        n_total=100,
+        n_perimetre=90,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
+    )
+    rapport = generer_rapport_backtest(resultat, calibration, **args)
+
+    debut_section_4 = rapport.index("## 4. Backtest participation (ADR 0002)")
+    fin_section_4 = rapport.index("## 5. Garde anti-hasard (ADR 0002)")
+    section_4 = rapport[debut_section_4:fin_section_4]
+
+    resultats_part = resultats_participation["resultats"]
+    for ligne in resultats_part.iter_rows(named=True):
+        verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
+        assert verdict_txt in section_4
+    assert f"ρ = {resultats_participation['rho_inter_cibles']:.3f}" in section_4
+    # Le seuil absolu 0,8 est publié tel quel, jamais remplacé par le seuil relatif.
+    assert "seuil 0,8" in section_4
+
+
+def test_generer_rapport_backtest_section_6_contient_le_verdict_par_cible_et_le_test_2017(
+    panel_avec_statut_reel, baseline_reel
+):
+    resultat, resultats_participation, anti_hasard_structure, anti_hasard_participation = (
+        _resultats_participation_reels(panel_avec_statut_reel, baseline_reel)
+    )
+    calibration = calibrer_poids(panel_avec_statut_reel, baseline_reel)
+    rapport = generer_rapport_backtest(
+        resultat,
+        calibration,
+        poids_composite_2022=POIDS_COMPOSITE_2022_PAR_DEFAUT,
+        methode_correction="imputation",
+        n_total=100,
+        n_perimetre=90,
+        resultats_participation=resultats_participation,
+        anti_hasard_structure=anti_hasard_structure,
+        anti_hasard_participation=anti_hasard_participation,
+    )
+    debut_section_6 = rapport.index("## 6. Clause révisée (ADR 0003)")
+    fin_section_6 = rapport.index("## Verdict global")
+    section_6 = rapport[debut_section_6:fin_section_6]
+
+    verdict_relatif = evaluer_gate_participation_relatif(resultats_participation)
+    for ligne in verdict_relatif.iter_rows(named=True):
+        verdict_txt = "PASS" if ligne["pass_global"] else "FAIL"
+        assert f"| {ligne['cible']} |" in section_6
+        assert verdict_txt in section_6
+    assert "2017" in section_6
+    assert "pré-enregistré" in section_6
+    assert "85%" in section_6
 
 
 def test_generer_rapport_backtest_est_deterministe(panel_avec_statut_reel, baseline_reel):
@@ -577,6 +647,75 @@ def test_evaluer_gate_participation_juste_sous_le_seuil_est_fail():
 def test_evaluer_gate_participation_seuil_gele_a_0_8():
     # Clause pré-enregistrée ADR 0002 : le seuil ne doit pas dériver silencieusement.
     assert SEUIL_RHO_PARTICIPATION == 0.8
+
+
+# --- Clause participation révisée (ADR 0003) -----------------------------------
+
+
+def _resultats_participation_synthetiques(rho_euro: float, rho_legi: float, plafond: float) -> dict:
+    return {
+        "resultats": pl.DataFrame({"cible": ["euro", "legi"], "rho": [rho_euro, rho_legi], "n": [100, 100]}),
+        "rho_inter_cibles": plafond,
+        "n_inter_cibles": 100,
+    }
+
+
+def test_evaluer_gate_participation_relatif_fraction_gelee_a_0_85():
+    # Clause pré-enregistrée ADR 0003 : la fraction ne doit pas dériver silencieusement.
+    assert FRACTION_PLAFOND_PARTICIPATION == 0.85
+
+
+def test_evaluer_gate_participation_relatif_ratio_exactement_a_la_fraction_est_pass():
+    # Frontière de la clause (>=, même convention que les autres gates) : un
+    # rho construit pile à fraction * plafond doit passer, pas juste en-dessous.
+    plafond = 0.87
+    rho_pile = FRACTION_PLAFOND_PARTICIPATION * plafond
+    resultats = _resultats_participation_synthetiques(rho_euro=rho_pile, rho_legi=0.95, plafond=plafond)
+    verdict = evaluer_gate_participation_relatif(resultats)
+    ligne_euro = verdict.filter(pl.col("cible") == "euro")
+    assert ligne_euro.get_column("ratio_plafond")[0] == pytest.approx(FRACTION_PLAFOND_PARTICIPATION)
+    assert ligne_euro.get_column("pass_global")[0] is True
+
+
+def test_evaluer_gate_participation_relatif_juste_sous_la_fraction_est_fail():
+    plafond = 0.87
+    rho_juste_sous = FRACTION_PLAFOND_PARTICIPATION * plafond - 1e-6
+    resultats = _resultats_participation_synthetiques(rho_euro=rho_juste_sous, rho_legi=0.95, plafond=plafond)
+    verdict = evaluer_gate_participation_relatif(resultats)
+    ligne_euro = verdict.filter(pl.col("cible") == "euro")
+    assert ligne_euro.get_column("pass_global")[0] is False
+
+
+def test_evaluer_gate_participation_relatif_plafond_jamais_recalcule_ni_moyenne():
+    # Le plafond doit être lu tel quel depuis `rho_inter_cibles` (une corrélation
+    # de rang déjà calculée sur données réelles) -- jamais recalculé/moyenné ici
+    # à partir des rho par cible.
+    resultats = _resultats_participation_synthetiques(rho_euro=0.7, rho_legi=0.9, plafond=0.87)
+    verdict = evaluer_gate_participation_relatif(resultats)
+    assert (verdict.get_column("plafond") == 0.87).all()
+    moyenne_naive_des_rho = (0.7 + 0.9) / 2
+    assert 0.87 != pytest.approx(moyenne_naive_des_rho)
+
+
+def test_evaluer_gate_participation_relatif_est_deterministe():
+    resultats = _resultats_participation_synthetiques(rho_euro=0.769, rho_legi=0.815, plafond=0.870)
+    verdict_1 = evaluer_gate_participation_relatif(resultats)
+    verdict_2 = evaluer_gate_participation_relatif(resultats)
+    assert verdict_1.equals(verdict_2)
+
+
+def test_evaluer_gate_participation_relatif_sur_l_extrait_reel(panel_avec_statut_reel, baseline_reel):
+    # Traverse tout `executer_backtest_participation` sur l'extrait réel gelé
+    # (tests/fixtures) -- le verdict par cible doit correspondre exactement à
+    # la définition de la clause (ratio au plafond réellement mesuré), pas à
+    # un chiffre figé sorti de l'ADR (calculé sur le panel réel complet, hors
+    # du dépôt).
+    resultat = executer_backtest_participation(panel_avec_statut_reel, baseline_reel)
+    verdict = evaluer_gate_participation_relatif(resultat)
+    plafond = resultat["rho_inter_cibles"]
+    for ligne in verdict.iter_rows(named=True):
+        attendu = ligne["rho"] >= FRACTION_PLAFOND_PARTICIPATION * plafond
+        assert ligne["pass_global"] == attendu
 
 
 # --- Garde anti-hasard : prédicteur département (structure) -------------------
