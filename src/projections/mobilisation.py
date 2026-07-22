@@ -57,6 +57,7 @@ from __future__ import annotations
 import polars as pl
 
 from projections.carte import BLOC_SLUG
+from projections.reserve import METHODE_PART_DEFAUT, generer_rapport_complet
 
 # --- Sortie ordinale générique --------------------------------------------------
 
@@ -225,6 +226,86 @@ def preparer_carte_rapport_force(baseline: pl.DataFrame, n_quantiles: int = 4) -
         )
         .sort("unite_id")
     )
+
+
+# --- Assemblage réserve + rapport de force, par maille (pour build_tiles.py) ----
+
+
+def assembler_donnees_bureau(
+    table_reserve: pl.DataFrame,
+    baseline: pl.DataFrame,
+    n_quantiles_reserve: int = 5,
+    n_quantiles_force: int = 4,
+) -> pl.DataFrame:
+    """Réserve + rapport de force pour la couche tuiles `mobilisation_bureaux`
+    (maille bureau uniquement) : une ligne par `unite_id`.
+
+    Jointure PLEINE (`how="full"`) sur `unite_id`, jamais interne : une unité
+    présente d'un seul côté (réserve calculable mais composite non défini, ou
+    l'inverse -- cas dégénérés, non rencontrés en pratique) garde ses colonnes
+    de l'autre côté à null plutôt que de disparaître silencieusement.
+    """
+    reserve = preparer_carte_reserve(table_reserve, n_quantiles=n_quantiles_reserve)
+    force = preparer_carte_rapport_force(baseline, n_quantiles=n_quantiles_force).filter(pl.col("maille") == "bureau")
+    colonnes_partagees = [c for c in ("code_departement", "statut", "maille") if c in force.columns]
+    force_sans_doublon = force.drop(colonnes_partagees)
+    return reserve.join(force_sans_doublon, on="unite_id", how="full", coalesce=True).sort("unite_id")
+
+
+def assembler_donnees_commune(
+    table_reserve: pl.DataFrame,
+    baseline: pl.DataFrame,
+    n_quantiles_reserve: int = 5,
+    n_quantiles_force: int = 4,
+) -> pl.DataFrame:
+    """Réserve (dézoom + repli) + rapport de force (REPLI SEULEMENT, cf.
+    limitation documentée dans `preparer_carte_rapport_force`) pour la couche
+    tuiles `mobilisation_communes` : une ligne par `code_commune`, pour toute
+    la France.
+
+    Jointure `left` (jamais `inner`) : les communes stables dézoomées restent
+    dans la sortie même sans rapport de force agrégé (colonnes null, jamais
+    une ligne perdue).
+    """
+    reserve_commune = agreger_reserve_commune(table_reserve, n_quantiles=n_quantiles_reserve)
+    force_repli = (
+        preparer_carte_rapport_force(baseline, n_quantiles=n_quantiles_force)
+        .filter(pl.col("maille") == "commune")
+        .rename({"unite_id": "code_commune"})
+        .select("code_commune", "bloc_tete_projete", "quantile_rapport_force")
+    )
+    return reserve_commune.join(force_repli, on="code_commune", how="left").sort("code_commune")
+
+
+# --- Orchestration : gate + assemblage, un seul passage (issue #26) -------------
+
+
+def construire_donnees_mobilisation(
+    panel_avec_statut: pl.DataFrame,
+    baseline: pl.DataFrame,
+    methode_part: str = METHODE_PART_DEFAUT,
+    n_quantiles_reserve: int = 5,
+    n_quantiles_force: int = 4,
+) -> dict:
+    """Pipeline complet panel + baseline -> données mobilisation prêtes pour les
+    tuiles (issue #26). Point d'entrée unique appelé par `projections.build_tiles`.
+
+    Réutilise `projections.reserve.generer_rapport_complet` TEL QUEL pour le
+    verdict de publication ET la table réserve (jamais recalculés séparément
+    -- la carte et `reserve-2027.md` doivent porter exactement la même donnée,
+    même discipline que le verrou CLI/notebook des issues #24/#25).
+    `verifier_publication_autorisee` lève AVANT tout assemblage bureau/commune
+    si le verdict est FAIL : refus mécanique, pas de tuiles mobilisation
+    préparées pour un verdict rouge.
+    """
+    sortie_reserve = generer_rapport_complet(panel_avec_statut, baseline, methode_part=methode_part)
+    verifier_publication_autorisee(sortie_reserve["pass_carte_mobilisation"])
+    table_reserve = sortie_reserve["table_reserve"]
+    return {
+        "donnees_bureau": assembler_donnees_bureau(table_reserve, baseline, n_quantiles_reserve, n_quantiles_force),
+        "donnees_commune": assembler_donnees_commune(table_reserve, baseline, n_quantiles_reserve, n_quantiles_force),
+        "pass_carte_mobilisation": sortie_reserve["pass_carte_mobilisation"],
+    }
 
 
 def verifier_publication_autorisee(pass_carte_mobilisation: bool) -> None:

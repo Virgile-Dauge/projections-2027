@@ -19,6 +19,9 @@ from projections.baseline import construire_baseline
 from projections.churn import classifier_communes, construire_panel_avec_statut
 from projections.mobilisation import (
     agreger_reserve_commune,
+    assembler_donnees_bureau,
+    assembler_donnees_commune,
+    construire_donnees_mobilisation,
     preparer_carte_rapport_force,
     preparer_carte_reserve,
     quantiles_larges,
@@ -135,11 +138,17 @@ def _panel_bureau_commune_repli() -> list[dict]:
 
 
 @pytest.fixture(scope="module")
-def table_reserve_synthetique() -> pl.DataFrame:
+def panel_et_baseline_synthetiques() -> tuple[pl.DataFrame, pl.DataFrame]:
     panel_brut = pl.DataFrame(_panel_bureau_commune_repli())
     classification = classifier_communes(panel_brut)
     panel = construire_panel_avec_statut(panel_brut, classification)
     baseline = construire_baseline(panel)
+    return panel, baseline
+
+
+@pytest.fixture(scope="module")
+def table_reserve_synthetique(panel_et_baseline_synthetiques) -> pl.DataFrame:
+    panel, baseline = panel_et_baseline_synthetiques
     return construire_table_reserve(panel, baseline)
 
 
@@ -243,3 +252,69 @@ def test_preparer_carte_rapport_force_est_deterministe():
     a = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
     b = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
     assert a.equals(b)
+
+
+# --- assembler_donnees_bureau / assembler_donnees_commune -----------------------
+
+
+def test_assembler_donnees_bureau_joint_reserve_et_rapport_de_force(panel_et_baseline_synthetiques, table_reserve_synthetique):
+    _, baseline = panel_et_baseline_synthetiques
+    donnees = assembler_donnees_bureau(table_reserve_synthetique, baseline)
+    ligne = donnees.filter(pl.col("unite_id") == "69123_0001")
+    assert ligne.height == 1
+    assert ligne.get_column("reserve_gauche")[0] is not None
+    # Le composite est un écart au NATIONAL (pas la part brute) : seule
+    # l'appartenance à un bloc connu est vérifiée ici, pas la direction --
+    # `preparer_carte_rapport_force` (testé séparément) couvre le calcul exact.
+    assert ligne.get_column("bloc_tete_projete")[0] in ("Gauche", "Droite")
+    assert ligne.get_column("quantile_rapport_force")[0] is not None
+
+
+def test_assembler_donnees_bureau_exclut_les_communes_en_repli(panel_et_baseline_synthetiques, table_reserve_synthetique):
+    _, baseline = panel_et_baseline_synthetiques
+    donnees = assembler_donnees_bureau(table_reserve_synthetique, baseline)
+    assert donnees.filter(pl.col("unite_id") == "69456").height == 0
+
+
+def test_assembler_donnees_commune_attache_le_rapport_de_force_du_repli_seulement(
+    panel_et_baseline_synthetiques, table_reserve_synthetique
+):
+    _, baseline = panel_et_baseline_synthetiques
+    donnees = assembler_donnees_commune(table_reserve_synthetique, baseline)
+    ligne_repli = donnees.filter(pl.col("code_commune") == "69456")
+    assert ligne_repli.get_column("bloc_tete_projete")[0] is not None
+
+    ligne_dezoom = donnees.filter(pl.col("code_commune") == "69777")
+    # Pas de rapport de force agrégé pour une commune stable dézoomée (limitation documentée).
+    assert ligne_dezoom.get_column("bloc_tete_projete")[0] is None
+
+
+# --- construire_donnees_mobilisation : gate mécanique ---------------------------
+
+
+def test_construire_donnees_mobilisation_leve_si_verdict_rouge(panel_et_baseline_synthetiques):
+    # Le panel synthétique minuscule échoue nécessairement la garde anti-hasard
+    # (trop peu d'unités pour battre un prédicteur département) -- même
+    # situation que l'extrait gelé réel (cf. tests/test_reserve.py).
+    panel, baseline = panel_et_baseline_synthetiques
+    with pytest.raises(RuntimeError, match="[Vv]erdict"):
+        construire_donnees_mobilisation(panel, baseline)
+
+
+def test_construire_donnees_mobilisation_assemble_si_verdict_force_vert(monkeypatch, panel_et_baseline_synthetiques):
+    import projections.mobilisation as mobilisation
+
+    panel, baseline = panel_et_baseline_synthetiques
+
+    appel_original = mobilisation.generer_rapport_complet
+
+    def _force_pass(*args, **kwargs):
+        sortie = appel_original(*args, **kwargs)
+        return {**sortie, "pass_carte_mobilisation": True}
+
+    monkeypatch.setattr(mobilisation, "generer_rapport_complet", _force_pass)
+
+    resultat = construire_donnees_mobilisation(panel, baseline)
+    assert resultat["pass_carte_mobilisation"] is True
+    assert resultat["donnees_bureau"].height > 0
+    assert resultat["donnees_commune"].height > 0
