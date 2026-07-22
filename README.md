@@ -52,6 +52,15 @@ restent hors carte) dans `data/tiles/` (hors git) :
 uv run build-tiles
 ```
 
+Depuis la carte mobilisation (issue #26), la commande construit aussi 2 couches
+supplémentaires — `mobilisation_bureaux`/`mobilisation_communes` (réserve de
+voix par bloc + rapport de force projeté, `data/interim/reserve_bureau_bloc.parquet`
+et `baseline_unite_bloc.parquet`, chargés via `--panel-avec-statut`/`--baseline`)
+— dans le même fichier PMTiles. **Gate mécanique** : la commande relit le
+verdict de publication (`projections.backtest.verdict_carte_mobilisation`,
+clause participation ADR 0003 + garde anti-hasard) et **refuse d'écrire quoi
+que ce soit** si ce verdict est rouge — voir `docs/adr/0002-*.md`/`0003-*.md`.
+
 Prérequis : [tippecanoe](https://github.com/felt/tippecanoe) (binaire non
 vendored — le compiler localement) :
 
@@ -70,9 +79,22 @@ GitHub (`gh release upload`), et `site/config.js` pointé vers cette URL.
 ## Site carto
 
 Site statique dans `site/` : MapLibre GL JS 5 + PMTiles 4 (chargés en CDN,
-aucune dépendance à installer), choroplèthe par bloc en tête, dézoom vers la
-couche communes. Carte **descriptive** (résultats 2024 réels), pas une
-projection — mention affichée en permanence sur la carte.
+aucune dépendance à installer). Trois couches, basculées par le sélecteur en
+haut à gauche :
+
+- **Résultats 2024** — choroplèthe par bloc en tête, descriptive (résultats
+  réels), pas une projection.
+- **Réserve mobilisable** — réserve de voix par bloc (sélecteur de bloc),
+  chiffres d'inscrits mobilisables + tranches (quantiles), jamais un
+  pourcentage à intervalle de confiance (ADR 0001).
+- **Rapport de force** — bloc en tête projeté, quantiles larges uniquement
+  (ADR 0002, l'ordre fin des bureaux est déclassé).
+
+Les communes en repli (découpage en bureaux instable d'un scrutin à l'autre)
+sont affichées à la maille communale avec un contour en tirets — dégradation
+toujours visible, jamais silencieuse. Page [méthode, hypothèses, limites](site/methode.html)
+liée depuis la carte : chronologie complète des décisions (y compris les gates
+sortis rouges), hypothèses H1/H2, limites, appel à contradiction.
 
 Test local : copier ou symlinker le PMTiles généré sous `site/tiles/`, puis
 servir le dossier avec un serveur HTTP statique quelconque, par exemple :
