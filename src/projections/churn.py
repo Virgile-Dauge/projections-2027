@@ -186,7 +186,13 @@ def taux_churn_national(classification: pl.DataFrame) -> float:
 
 
 def distribution_par_departement(classification: pl.DataFrame) -> pl.DataFrame:
-    """Taux d'instabilité par département, du plus touché au moins touché."""
+    """Taux d'instabilité par département, du plus touché au moins touché.
+
+    Tri secondaire par code_departement : sans lui, l'ordre des départements
+    à égalité de taux (nombreux à 0 %) n'est pas garanti stable d'un run à
+    l'autre (group_by ne préserve pas d'ordre), ce qui casserait la
+    reproductibilité du rapport.
+    """
     return (
         classification.group_by("code_departement")
         .agg(
@@ -194,7 +200,7 @@ def distribution_par_departement(classification: pl.DataFrame) -> pl.DataFrame:
             (pl.col("statut") == STATUT_INSTABLE).sum().alias("nb_communes_instables"),
         )
         .with_columns((pl.col("nb_communes_instables") / pl.col("nb_communes")).alias("taux_instable"))
-        .sort("taux_instable", descending=True)
+        .sort(["taux_instable", "code_departement"], descending=[True, False])
     )
 
 
