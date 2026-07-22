@@ -29,6 +29,7 @@ Vocabulaire canonique du projet. Les issues, docs et noms de code utilisent ces 
 - **Scénario** — hypothèse nationale discrète (RN bas / central / haut) tirée des sondages. Le niveau national entre toujours en scénarios, jamais en point recalé en continu.
 - **Matrice de transfert** — répartition des voix d'un bloc du T1 vers les candidats du T2, conditionnelle à l'affiche du duel. Structure ordinale stable empruntée à 2024, niveaux pris dans la source la plus proche du scrutin cible.
 - **Backtest** — validation auto-produite : prédire la géographie 2024 depuis 2022 et mesurer la corrélation de rang (Spearman/Kendall) par bloc. Publié avec les cartes.
+- **Plafond inter-cibles** — l'accord (corrélation de rang) entre les deux cibles réelles 2024 sur une même grandeur, mesuré sur le même périmètre : ce que la réalité électorale se reproduit à elle-même, borne haute de ce qu'un prédicteur peut atteindre. La clause participation se calibre dessus — seuil relatif, pas absolu (ADR 0003).
 
 ## Produit
 
