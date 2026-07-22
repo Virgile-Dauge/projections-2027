@@ -16,7 +16,16 @@ Deux familles de tests :
 import polars as pl
 import pytest
 
-from projections.baseline import calculer_ecart_national, corriger_offre_legislatives
+from projections.baseline import (
+    POIDS_PAR_DEFAUT,
+    SCRUTIN_EUROPEENNES,
+    SCRUTIN_LEGISLATIVES,
+    SCRUTIN_PRESIDENTIELLE,
+    calculer_ecart_national,
+    composite_moyenne_tronquee,
+    composite_pondere,
+    corriger_offre_legislatives,
+)
 
 
 def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69"):
@@ -194,3 +203,83 @@ def test_corriger_offre_legislatives_variante_exclusion_n_ajoute_aucune_ligne():
 def test_corriger_offre_legislatives_methode_inconnue_leve_une_erreur():
     with pytest.raises(ValueError, match="méthode inconnue"):
         corriger_offre_legislatives(_table_ecart_offre(), methode="n_importe_quoi")
+
+
+# --- composite_pondere : pondérations paramétrables -----------------------------
+
+
+def _table_composantes() -> pl.DataFrame:
+    return pl.DataFrame(
+        {
+            "unite_id": ["u1"],
+            "bloc": ["Extrême droite"],
+            f"ecart_{SCRUTIN_PRESIDENTIELLE}": [10.0],
+            f"ecart_{SCRUTIN_EUROPEENNES}": [30.0],
+            f"ecart_{SCRUTIN_LEGISLATIVES}_corrige": [50.0],
+        }
+    )
+
+
+def test_composite_pondere_poids_par_defaut():
+    resultat = composite_pondere(_table_composantes())
+    attendu = 10.0 * 0.5 + 30.0 * 0.25 + 50.0 * 0.25
+    assert resultat.get_column("composite").to_list() == pytest.approx([attendu])
+
+
+def test_composite_pondere_poids_parametrables_changent_le_resultat():
+    # Poids 100% sur une seule composante : le composite doit reproduire
+    # exactement cette composante -- preuve que les poids sont effectifs, pas
+    # des constantes enfouies.
+    poids_tout_sur_pres = {
+        SCRUTIN_PRESIDENTIELLE: 1.0,
+        SCRUTIN_EUROPEENNES: 0.0,
+        f"{SCRUTIN_LEGISLATIVES}_corrige": 0.0,
+    }
+    resultat = composite_pondere(_table_composantes(), poids=poids_tout_sur_pres)
+    assert resultat.get_column("composite").to_list() == pytest.approx([10.0])
+
+
+def test_composite_pondere_par_defaut_somme_a_un():
+    assert sum(POIDS_PAR_DEFAUT.values()) == pytest.approx(1.0)
+
+
+def test_composite_pondere_renormalise_sur_les_composantes_presentes():
+    # Variante 'exclusion' : une composante peut être absente (null) pour une
+    # unité x bloc donnée -- le composite renormalise les poids sur ce qui reste,
+    # au lieu de traiter le null comme un zéro.
+    table = pl.DataFrame(
+        {
+            "unite_id": ["u1"],
+            "bloc": ["Extrême droite"],
+            f"ecart_{SCRUTIN_PRESIDENTIELLE}": [10.0],
+            f"ecart_{SCRUTIN_EUROPEENNES}": [30.0],
+            f"ecart_{SCRUTIN_LEGISLATIVES}_corrige": [None],
+        }
+    )
+    resultat = composite_pondere(table)
+    attendu = (10.0 * 0.5 + 30.0 * 0.25) / (0.5 + 0.25)
+    assert resultat.get_column("composite").to_list() == pytest.approx([attendu])
+
+
+# --- composite_moyenne_tronquee : dégénérescence en médiane à 3 composantes ----
+
+
+def test_composite_moyenne_tronquee_egale_la_mediane_a_3_composantes():
+    resultat = composite_moyenne_tronquee(_table_composantes())
+    # valeurs 10 / 30 / 50 triées -> médiane 30.
+    assert resultat.get_column("composite_tronque").to_list() == pytest.approx([30.0])
+
+
+def test_composite_moyenne_tronquee_ignore_les_composantes_absentes():
+    table = pl.DataFrame(
+        {
+            "unite_id": ["u1"],
+            "bloc": ["Extrême droite"],
+            f"ecart_{SCRUTIN_PRESIDENTIELLE}": [10.0],
+            f"ecart_{SCRUTIN_EUROPEENNES}": [30.0],
+            f"ecart_{SCRUTIN_LEGISLATIVES}_corrige": [None],
+        }
+    )
+    resultat = composite_moyenne_tronquee(table)
+    # 2 valeurs restantes (10, 30) -> médiane = leur moyenne = 20.
+    assert resultat.get_column("composite_tronque").to_list() == pytest.approx([20.0])

@@ -68,6 +68,23 @@ sur ce bulletin », puisque tous les bureaux d'une même circonscription
 partagent le même bulletin -- une détection à la maille unité est donc au
 moins aussi précise qu'une détection à la maille circonscription, sans
 dépendre d'une colonne vide.
+
+## Composite pondéré (composite_pondere) et variante moyenne tronquée
+(composite_moyenne_tronquee)
+
+Combinaison pondérée des 3 composantes conservées (présidentielle 2022 brute,
+européennes 2024 brutes, législatives 2024 corrigées) : poids par défaut 50 %
+/ 25 % / 25 % (`POIDS_PAR_DEFAUT`), PARAMÉTRABLES -- ce sont des constantes de
+départ, pas des constantes enfouies : c'est le backtest (#6) qui les calibre.
+
+Variante « moyenne tronquée » à la Inside Elections : avec exactement 3
+composantes, une troncature à 1 de chaque extrémité ne laisse qu'une seule
+valeur -- la médiane. C'est une dégénérescence VOULUE, pas un raccourci
+malheureux : à 3 notations, moyenne tronquée et médiane coïncident
+exactement. `composite_moyenne_tronquee` calcule directement la médiane des
+composantes présentes (généralise proprement au cas où une composante est
+absente via la variante d'exclusion : médiane de 2 valeurs = leur moyenne,
+médiane de 1 valeur = cette valeur).
 """
 
 from __future__ import annotations
@@ -85,6 +102,17 @@ SCRUTIN_LEGISLATIVES_CORRIGE = f"{SCRUTIN_LEGISLATIVES}_corrige"
 # européennes 2024, législatives 2024 (avant correction d'offre -- la version
 # corrigée est calculée par corriger_offre_legislatives, à venir).
 SCRUTINS_STRUCTURE: tuple[str, ...] = (SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES, SCRUTIN_LEGISLATIVES)
+
+# Point de départ, pas une constante figée : le backtest (#6) calibre ces poids.
+POIDS_PAR_DEFAUT: dict[str, float] = {
+    SCRUTIN_PRESIDENTIELLE: 0.50,
+    SCRUTIN_EUROPEENNES: 0.25,
+    SCRUTIN_LEGISLATIVES_CORRIGE: 0.25,
+}
+
+
+def _colonne_composante(scrutin: str) -> str:
+    return f"ecart_{scrutin}"
 
 
 def _ajouter_unite(panel: pl.DataFrame) -> pl.DataFrame:
@@ -185,3 +213,83 @@ def corriger_offre_legislatives(
         .select("id_election", "unite_id", "bloc", "ecart_national", "impute")
     )
     return pl.concat([observe_marque, impute]).sort(["unite_id", "bloc"])
+
+
+def construire_table_composantes(ecart: pl.DataFrame, legi_corrige: pl.DataFrame) -> pl.DataFrame:
+    """Table large unité x bloc : une colonne par composante mono-scrutin conservée.
+
+    Combine l'écart présidentielle 2022 et européennes 2024 (bruts, `ecart` =
+    sortie de `calculer_ecart_national`) avec les législatives 2024 corrigées
+    (`legi_corrige` = sortie de `corriger_offre_legislatives`) -- les 3
+    composantes que le backtest (#6) doit pouvoir comparer individuellement au
+    composite.
+    """
+    composantes_long = pl.concat(
+        [
+            ecart.filter(pl.col("id_election").is_in([SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES])).select(
+                "id_election", "unite_id", "bloc", "ecart_national"
+            ),
+            legi_corrige.select("id_election", "unite_id", "bloc", "ecart_national"),
+        ]
+    )
+    large = composantes_long.pivot(on="id_election", index=["unite_id", "bloc"], values="ecart_national")
+    renommage = {
+        scrutin: _colonne_composante(scrutin) for scrutin in large.columns if scrutin not in ("unite_id", "bloc")
+    }
+    return large.rename(renommage)
+
+
+def composite_pondere(
+    table: pl.DataFrame, poids: dict[str, float] | None = None, nom_colonne: str = "composite"
+) -> pl.DataFrame:
+    """Moyenne pondérée des composantes présentes (cf. docstring du module).
+
+    `poids` : mapping id_election (SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES,
+    SCRUTIN_LEGISLATIVES_CORRIGE par défaut) -> poids. PARAMÉTRABLE : jamais de
+    poids figé en dur ailleurs que dans `POIDS_PAR_DEFAUT`, qui n'est qu'un point
+    de départ. Une composante nulle pour une unité x bloc (variante "exclusion"
+    de la correction d'offre) est exclue du calcul et son poids renormalisé sur
+    les composantes restantes -- jamais traitée comme un 0.
+    """
+    poids = poids or POIDS_PAR_DEFAUT
+    colonnes = {scrutin: _colonne_composante(scrutin) for scrutin in poids}
+    manquantes = [col for col in colonnes.values() if col not in table.columns]
+    if manquantes:
+        raise ValueError(f"composante(s) manquante(s) dans la table : {manquantes}")
+
+    poids_disponible = pl.sum_horizontal(
+        [
+            pl.when(pl.col(col).is_not_null()).then(pl.lit(w)).otherwise(0.0)
+            for w, col in zip(poids.values(), colonnes.values(), strict=True)
+        ]
+    )
+    somme_ponderee = pl.sum_horizontal(
+        [pl.col(col).fill_null(0.0) * w for w, col in zip(poids.values(), colonnes.values(), strict=True)]
+    )
+    # Aucune composante disponible (ex. bloc structurellement absent d'un scrutin,
+    # comme "Divers" à la présidentielle) : composite null, jamais une division
+    # par zéro qui produirait NaN.
+    return table.with_columns(
+        pl.when(poids_disponible > 0).then(somme_ponderee / poids_disponible).otherwise(None).alias(nom_colonne)
+    )
+
+
+def composite_moyenne_tronquee(
+    table: pl.DataFrame, colonnes: Iterable[str] | None = None, nom_colonne: str = "composite_tronque"
+) -> pl.DataFrame:
+    """Variante « moyenne tronquée » à la Inside Elections (cf. docstring du module).
+
+    Médiane des composantes présentes : à 3 composantes (le cas par défaut),
+    c'est très exactement une moyenne tronquée à 1 de chaque extrémité --
+    dégénérescence voulue, pas un raccourci.
+    """
+    colonnes = (
+        list(colonnes)
+        if colonnes is not None
+        else [_colonne_composante(s) for s in (SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES, SCRUTIN_LEGISLATIVES_CORRIGE)]
+    )
+    manquantes = [c for c in colonnes if c not in table.columns]
+    if manquantes:
+        raise ValueError(f"composante(s) manquante(s) dans la table : {manquantes}")
+    mediane = pl.concat_list(colonnes).list.drop_nulls().list.median()
+    return table.with_columns(mediane.alias(nom_colonne))
