@@ -5,7 +5,7 @@ Vocabulaire canonique du projet. Les issues, docs et noms de code utilisent ces 
 ## Unités et identifiants
 
 - **Bureau (de vote)** — l'unité atomique du projet (~70 000 en France). Juridiquement un rattachement d'adresses par arrêté préfectoral, **pas** une zone géométrique : les contours n'ont aucune existence officielle et ne servent qu'à l'affichage.
-- **id_bv** — clé de jointure d'un bureau : code INSEE commune (5 chiffres) + `_` + code bureau.
+- **id_bv** — clé de jointure d'un bureau : code commune (5 caractères — code INSEE en chiffres, ou `ZZ`+numéro pour les bureaux de l'étranger) + `_` + code bureau.
 - **Crosswalk** — table de correspondance des identifiants de bureaux entre deux référentiels ou deux scrutins. La jointure inter-scrutins se fait par identifiants + crosswalk, jamais par géométrie.
 - **Churn** — proportion de bureaux dont le découpage ou l'identifiant change entre deux scrutins. Mesuré par commune en comparant le nombre de bureaux par scrutin.
 - **Commune stable / instable** — stable : même nombre de bureaux sur les 4 scrutins sources → jointure directe par id_bv. Instable : le compte change → repli.
