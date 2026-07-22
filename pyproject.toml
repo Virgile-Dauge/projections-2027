@@ -1,0 +1,25 @@
+[project]
+name = "projections"
+version = "0.1.0"
+description = "Cartes électorales structurelles pour 2027 : projection des résultats passés au niveau bureau de vote."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "polars>=1.0",
+]
+
+[project.scripts]
+download-data = "projections.datasets:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/projections"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
