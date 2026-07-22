@@ -290,6 +290,45 @@ def reconcilier_bureaux_par_reallocation(
     return pl.concat(morceaux, how="vertical_relaxed")
 
 
+def voix_perdues_t2(commune: pl.DataFrame, scrutin_reference: str = SCRUTIN_REFERENCE_INSCRITS) -> pl.DataFrame:
+    """Voix perdues par exclusion du second tour des législatives de la réallocation (issues #14, #18).
+
+    `reconcilier_bureaux_par_reallocation` exclut délibérément `*_legi_t2` de
+    la réallocation (fabriquer un reliquat sur ces bureaux fabriquerait des
+    ballottages qui n'ont pas eu lieu, cf. sa docstring) : les bureaux du T2
+    dont l'`id_bv` n'existe pas dans la grille cible (`scrutin_reference`) —
+    typiquement des bureaux renumérotés — ne sont ni réconciliés ni réalloués,
+    donc absents du panel final pour ce scrutin. Cette fonction recompte leurs
+    voix depuis les données (jamais une constante) pour que le chiffre publié
+    reste vrai si les données ou le périmètre changent (issue #18 : à
+    réexaminer avec une matrice de transfert).
+
+    `commune` : lignes du panel brut pour une seule commune, tous scrutins
+    confondus (même contrat que `reconcilier_bureaux_par_reallocation`).
+    Retourne une ligne par `*_legi_t2` présent dans `commune`
+    (`id_election`, `voix_perdues` sommées tous blocs confondus) ; un
+    DataFrame vide (mais avec le bon schéma) si aucun T2 n'est présent.
+    """
+    schema = {"id_election": pl.String, "voix_perdues": pl.Float64}
+    cible_ids = set(
+        commune.filter(pl.col("id_election") == scrutin_reference).get_column("id_bv").unique().to_list()
+    )
+    scrutins_t2 = sorted(e for e in commune.get_column("id_election").unique().to_list() if e.endswith("_legi_t2"))
+    if not scrutins_t2:
+        return pl.DataFrame(schema=schema)
+
+    return (
+        commune.filter(pl.col("id_election").is_in(scrutins_t2) & ~pl.col("id_bv").is_in(cible_ids))
+        .group_by("id_election")
+        .agg(pl.col("voix").sum().alias("voix_perdues"))
+        .join(pl.DataFrame({"id_election": scrutins_t2}), on="id_election", how="right")
+        .with_columns(pl.col("voix_perdues").fill_null(0.0))
+        .sort("id_election")
+        .select("id_election", "voix_perdues")
+        .cast(schema)
+    )
+
+
 def construire_panel_avec_statut(
     panel: pl.DataFrame,
     classification: pl.DataFrame,
@@ -540,7 +579,9 @@ def generer_rapport_churn(panel: pl.DataFrame, scrutin_reference: str = SCRUTIN_
     minimiser (CONTEXT.md « Churn »), jamais un compte de communes ou de
     bureaux. Le compte de communes descend en simple contexte. Publie
     ensuite le gain de la réconciliation bureau de Paris (issue #14, avant/
-    après chiffré), la table de priorisation par département (triée par
+    après chiffré) et le coût chiffré de l'exclusion du second tour des
+    législatives de la réallocation (`voix_perdues_t2`, jamais une constante
+    — issue #18), la table de priorisation par département (triée par
     inscrits en zone instable décroissant, ratios recalculés depuis les
     sommes) puis le top 20 des communes instables par inscrits.
     """
@@ -553,6 +594,24 @@ def generer_rapport_churn(panel: pl.DataFrame, scrutin_reference: str = SCRUTIN_
     panel_avec_statut = construire_panel_avec_statut(panel, classification, scrutin_reference)
     part_apres = part_inscrits_zone_instable_apres_reconciliation(panel_avec_statut, scrutin_reference)
     gain_points = (part_instable - part_apres) * 100
+
+    perdues_t2 = (
+        pl.concat(
+            [
+                voix_perdues_t2(panel.filter(pl.col("code_commune") == code_commune), scrutin_reference)
+                for code_commune in COMMUNES_RECONCILIATION_BUREAU
+            ],
+            how="vertical_relaxed",
+        )
+        .group_by("id_election")
+        .agg(pl.col("voix_perdues").sum())
+        .sort("id_election")
+    )
+    total_voix_perdues_t2 = perdues_t2.get_column("voix_perdues").sum() if perdues_t2.height else 0.0
+    lignes_perdues_t2 = "\n".join(
+        f"- {ligne['id_election']} : **{ligne['voix_perdues']:.0f} voix**"
+        for ligne in perdues_t2.iter_rows(named=True)
+    ) or "- aucun scrutin T2 dans ce panel"
 
     lignes_departements = "\n".join(
         f"| {ligne['code_departement']} | {ligne['inscrits_instables']} | "
@@ -616,13 +675,26 @@ cherche pas à retrouver cette bijection cachée (aucun crosswalk adresses/IRIS
 disponible) : elle répartit le reliquat au prorata des inscrits sur
 l'ensemble des bureaux orphelins du même scrutin — une approximation très
 proche de la vérité dans ce cas précis, qui le serait moins sur une commune
-au redécoupage plus disruptif. Le second tour des législatives (ballottage
-partiel, pas de second tour dans toutes les circonscriptions) est exclu de la
-réallocation : les bureaux non appariés y restent silencieusement absents,
-comme pour une commune stable. Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`)
-est générique mais volontairement limité à Paris ici : l'étendre à d'autres
-grandes villes à arrondissements (Lyon, Marseille, également instables) est
-laissé à une itération suivante.
+au redécoupage plus disruptif.
+
+**Second tour des législatives : exclu de la réallocation, coût chiffré.**
+`*_legi_t2` est délibérément exclu du calcul du reliquat : une partie des
+circonscriptions n'a pas de second tour (pas de ballottage), et réallouer un
+reliquat sur ces bureaux fabriquerait des ballottages qui n'ont pas eu lieu.
+Cette exclusion a un coût mesurable, jamais silencieux — les bureaux
+renumérotés du second tour n'ont, par construction, aucune correspondance
+dans la grille cible, et n'y sont ni réconciliés ni réalloués : leurs voix
+sortent purement et simplement du panel pour ce scrutin.
+
+{lignes_perdues_t2}
+- **Total : {total_voix_perdues_t2:.0f} voix**
+
+À réexaminer avec la matrice de transfert — voir issue #18.
+
+Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`) est générique mais
+volontairement limité à Paris ici : l'étendre à d'autres grandes villes à
+arrondissements (Lyon, Marseille, également instables) est laissé à une
+itération suivante.
 
 **Gain chiffré.** Avant réconciliation (Paris à 100 % en repli communal,
 comme toute commune instable) : **{part_instable:.1%}** des inscrits en zone

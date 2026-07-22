@@ -47,13 +47,27 @@ cherche pas à retrouver cette bijection cachée (aucun crosswalk adresses/IRIS
 disponible) : elle répartit le reliquat au prorata des inscrits sur
 l'ensemble des bureaux orphelins du même scrutin — une approximation très
 proche de la vérité dans ce cas précis, qui le serait moins sur une commune
-au redécoupage plus disruptif. Le second tour des législatives (ballottage
-partiel, pas de second tour dans toutes les circonscriptions) est exclu de la
-réallocation : les bureaux non appariés y restent silencieusement absents,
-comme pour une commune stable. Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`)
-est générique mais volontairement limité à Paris ici : l'étendre à d'autres
-grandes villes à arrondissements (Lyon, Marseille, également instables) est
-laissé à une itération suivante.
+au redécoupage plus disruptif.
+
+**Second tour des législatives : exclu de la réallocation, coût chiffré.**
+`*_legi_t2` est délibérément exclu du calcul du reliquat : une partie des
+circonscriptions n'a pas de second tour (pas de ballottage), et réallouer un
+reliquat sur ces bureaux fabriquerait des ballottages qui n'ont pas eu lieu.
+Cette exclusion a un coût mesurable, jamais silencieux — les bureaux
+renumérotés du second tour n'ont, par construction, aucune correspondance
+dans la grille cible, et n'y sont ni réconciliés ni réalloués : leurs voix
+sortent purement et simplement du panel pour ce scrutin.
+
+- 2022_legi_t2 : **30026 voix**
+- 2024_legi_t2 : **0 voix**
+- **Total : 30026 voix**
+
+À réexaminer avec la matrice de transfert — voir issue #18.
+
+Le mécanisme (`COMMUNES_RECONCILIATION_BUREAU`) est générique mais
+volontairement limité à Paris ici : l'étendre à d'autres grandes villes à
+arrondissements (Lyon, Marseille, également instables) est laissé à une
+itération suivante.
 
 **Gain chiffré.** Avant réconciliation (Paris à 100 % en repli communal,
 comme toute commune instable) : **14.9%** des inscrits en zone

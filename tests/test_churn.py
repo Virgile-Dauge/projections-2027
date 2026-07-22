@@ -37,6 +37,7 @@ from projections.churn import (
     table_departements,
     taux_churn_national,
     top_communes_instables_par_inscrits,
+    voix_perdues_t2,
 )
 from projections.ingest import ingest
 
@@ -307,6 +308,39 @@ def test_reconcilier_bureaux_par_reallocation_second_tour_legi_partiel_non_reall
     t2 = resultat.filter(pl.col("id_election") == "2024_legi_t2")
     assert t2.get_column("id_bv").to_list() == ["75056_0211"]
     assert t2.get_column("statut").to_list() == [STATUT_RECONCILIE]
+
+
+# --- voix_perdues_t2 : coût chiffré de l'exclusion du T2 (issue #14, #18) -----
+
+
+def test_voix_perdues_t2_bureau_orphelin_compte_comme_perdu():
+    # 0201 (T2) n'a pas d'équivalent dans la grille cible (renuméroté en 0211) :
+    # ses voix sont exclues de la réallocation (docstring de
+    # reconcilier_bureaux_par_reallocation) donc purement perdues du panel.
+    cible = [
+        {**_ligne_bureau("2024_legi_t1", "75056", "0211", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 300},
+    ]
+    source_t2 = [
+        {**_ligne_bureau("2024_legi_t2", "75056", "0201", bloc="Gauche", voix=7, code_departement="75"), "inscrits": 300},
+    ]
+    commune = _panel_synthetique(cible + source_t2)
+    resultat = voix_perdues_t2(commune, scrutin_reference="2024_legi_t1")
+    ligne = resultat.filter(pl.col("id_election") == "2024_legi_t2")
+    assert ligne.get_column("voix_perdues").item() == pytest.approx(7.0)
+
+
+def test_voix_perdues_t2_commune_entierement_appariee_ne_perd_rien():
+    # Même id_bv des deux côtés au T2 : bureau reconcilié, aucune voix perdue.
+    cible = [
+        {**_ligne_bureau("2024_legi_t1", "75056", "0001", bloc="Gauche", voix=10, code_departement="75"), "inscrits": 300},
+    ]
+    source_t2 = [
+        {**_ligne_bureau("2024_legi_t2", "75056", "0001", bloc="Gauche", voix=9, code_departement="75"), "inscrits": 300},
+    ]
+    commune = _panel_synthetique(cible + source_t2)
+    resultat = voix_perdues_t2(commune, scrutin_reference="2024_legi_t1")
+    ligne = resultat.filter(pl.col("id_election") == "2024_legi_t2")
+    assert ligne.get_column("voix_perdues").item() == pytest.approx(0.0)
 
 
 # --- construire_panel_avec_statut : routage Paris (issue #14) ------------------
