@@ -288,25 +288,34 @@ def verifier_regularite_seuil(
     Seuil pris comme la MÉDIANE de `colonne` -- choix défendable et
     documenté (cf. docstring du module) : le point qui sépare, dans le
     classement produit, les unités où le bloc progresse de celles où il
-    recule. Découpe `colonne` en `n_bins` classes de largeur égale entre son
-    min et son max, compare la densité de la classe contenant le seuil à la
-    densité moyenne des classes -- `anomalie` si le ratio dépasse
-    `seuil_alerte` (1,5x la densité moyenne par défaut).
+    recule. Découpe `colonne` en `n_bins` classes à POPULATION ÉGALE
+    (percentile de rang, même primitive que `tercile_competitif`) -- PAS des
+    classes à largeur égale sur min/max : une distribution continue et
+    unimodale, étirée par quelques valeurs extrêmes (queue lourde typique
+    d'un swing réel), sur-représenterait alors à tort sa classe centrale,
+    sans qu'aucune masse anormale n'existe réellement au seuil (vérifié : un
+    jeu de valeurs toutes distinctes avec 4 extrêmes déclenchait un faux
+    positif avec des classes à largeur égale). Sous des classes à
+    population égale, chacune contient ~n/n_bins points par construction,
+    quelle que soit la forme de la distribution -- un excès RÉEL (valeurs
+    dupliquées/quasi identiques au seuil) fait déborder une classe au-delà
+    de sa population cible ; c'est ce débordement, et lui seul, qui
+    déclenche `anomalie` (ratio > `seuil_alerte`, 1,5x par défaut).
     """
     serie = table.filter(pl.col("bloc") == bloc).get_column(colonne).drop_nulls()
     if serie.len() < 2:
         return {"n": serie.len(), "anomalie": False}
     seuil = serie.median()
-    minimum, maximum = serie.min(), serie.max()
-    largeur = (maximum - minimum) / n_bins
-    if largeur == 0:
-        return {"n": serie.len(), "seuil": seuil, "anomalie": False}
 
-    classes = ((serie - minimum) / largeur).floor().clip(0, n_bins - 1)
+    percentile = (serie.rank(method="average") - 1) / (serie.len() - 1)
+    classes = (percentile * n_bins).floor().clip(0, n_bins - 1)
     comptes = pl.DataFrame({"classe": classes}).group_by("classe").agg(pl.len().alias("n")).sort("classe")
     densite_moyenne = comptes.get_column("n").mean()
 
-    indice_seuil = min(max(int((seuil - minimum) / largeur), 0), n_bins - 1)
+    # Le seuil EST la médiane (ci-dessus) : sa position dans le classement
+    # de `serie` est donc, par construction, le percentile 0,5 -- même
+    # formule que `classes`, pas de recherche supplémentaire nécessaire.
+    indice_seuil = min(max(int(0.5 * n_bins), 0), n_bins - 1)
     ligne_seuil = comptes.filter(pl.col("classe") == indice_seuil).get_column("n")
     densite_seuil = ligne_seuil[0] if ligne_seuil.len() else 0
 

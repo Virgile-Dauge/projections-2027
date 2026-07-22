@@ -348,6 +348,22 @@ def test_verifier_regularite_seuil_detecte_un_pic_au_seuil():
     assert resultat["anomalie"] is True
 
 
+def test_verifier_regularite_seuil_pas_anomalie_si_continue_mais_etiree_par_des_extremes():
+    # Distribution CONTINUE (toutes les valeurs distinctes, aucun ex-aequo),
+    # resserrée près de la médiane mais étirée par quelques valeurs extrêmes
+    # -- une queue lourde typique d'un swing réel, PAS une masse anormale au
+    # seuil. Des bins à largeur égale sur min/max (bug historique) sur-
+    # représenteraient à tort le centre à cause des quelques extrêmes qui
+    # étirent l'échelle ; des bins à population égale (rang/percentile,
+    # même primitive que `tercile_competitif`) ne doivent pas s'y tromper.
+    valeurs_centrales = [i / 100 for i in range(-200, 201)]  # 401 valeurs continues, resserrées
+    valeurs_extremes = [-100.0, -80.0, 70.0, 90.0]  # étirent min/max, aucune masse ajoutée
+    derive = valeurs_centrales + valeurs_extremes
+    table = pl.DataFrame({"bloc": ["Extrême droite"] * len(derive), "derive": derive})
+    resultat = verifier_regularite_seuil(table, n_bins=20)
+    assert resultat["anomalie"] is False
+
+
 # --- correlation_euro_pres_rn : identique à la ligne mono/euro du backtest 1 --
 
 
