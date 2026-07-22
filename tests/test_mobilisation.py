@@ -1,0 +1,245 @@
+"""Tests de la préparation des données carte mobilisation (issue #26, ADR 0002/0003).
+
+Quatre familles :
+- `quantiles_larges` : bucket ordinal générique, calculé par groupe, déterministe ;
+- `preparer_carte_reserve` / `agreger_reserve_commune` : format large bureau x
+  commune de la réserve (#25), dézoom par SOMMES jamais moyennes, repli visible ;
+- `preparer_carte_rapport_force` : bloc en tête projeté + quantile large (#5,
+  ADR 0002 — l'ordre fin est déclassé, jamais recalculé ici) ;
+- `verifier_publication_autorisee` : gate mécanique, réutilise
+  `projections.backtest.verdict_carte_mobilisation` tel quel, jamais recalculé.
+"""
+
+from __future__ import annotations
+
+import polars as pl
+import pytest
+
+from projections.baseline import construire_baseline
+from projections.churn import classifier_communes, construire_panel_avec_statut
+from projections.mobilisation import (
+    agreger_reserve_commune,
+    preparer_carte_rapport_force,
+    preparer_carte_reserve,
+    quantiles_larges,
+    verifier_publication_autorisee,
+)
+from projections.reserve import construire_table_reserve
+
+# --- quantiles_larges ----------------------------------------------------------
+
+
+def test_quantiles_larges_repartit_en_n_buckets_egaux():
+    # 10 valeurs, 1 seul groupe, n=5 -> 2 valeurs par bucket, buckets 1..5 dans
+    # l'ordre croissant de la valeur.
+    table = pl.DataFrame({"bloc": ["Gauche"] * 10, "reserve": list(range(10))})
+    resultat = quantiles_larges(table, "reserve", groupe="bloc", n=5)
+    buckets = resultat.sort("reserve").get_column("quantile_reserve").to_list()
+    assert buckets == [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+
+
+def test_quantiles_larges_calcule_separement_par_groupe():
+    # 2 blocs, échelles de valeurs très différentes : le bucket d'une unité ne
+    # doit dépendre que de la distribution DE SON PROPRE bloc.
+    table = pl.DataFrame(
+        {
+            "bloc": ["Gauche", "Gauche", "Droite", "Droite"],
+            "v": [1.0, 1000.0, 5.0, 6.0],
+        }
+    )
+    resultat = quantiles_larges(table, "v", groupe="bloc", n=2)
+    gauche = resultat.filter(pl.col("bloc") == "Gauche").sort("v").get_column("quantile_v").to_list()
+    droite = resultat.filter(pl.col("bloc") == "Droite").sort("v").get_column("quantile_v").to_list()
+    assert gauche == [1, 2]
+    assert droite == [1, 2]
+
+
+def test_quantiles_larges_valeur_nulle_reste_nulle_jamais_un_bucket_fabrique():
+    table = pl.DataFrame({"bloc": ["Gauche", "Gauche", "Gauche"], "v": [1.0, None, 3.0]})
+    resultat = quantiles_larges(table, "v", groupe="bloc", n=2)
+    ligne_nulle = resultat.filter(pl.col("v").is_null())
+    assert ligne_nulle.get_column("quantile_v")[0] is None
+
+
+def test_quantiles_larges_est_deterministe():
+    table = pl.DataFrame({"bloc": ["Gauche"] * 6, "v": [3.0, 1.0, 4.0, 1.0, 5.0, 9.0]})
+    a = quantiles_larges(table, "v", groupe="bloc", n=3)
+    b = quantiles_larges(table, "v", groupe="bloc", n=3)
+    assert a.equals(b)
+
+
+# --- verifier_publication_autorisee ---------------------------------------------
+
+
+def test_verifier_publication_autorisee_ne_leve_rien_si_pass():
+    verifier_publication_autorisee(True)  # ne doit pas lever
+
+
+def test_verifier_publication_autorisee_leve_si_fail():
+    with pytest.raises(RuntimeError, match="[Vv]erdict"):
+        verifier_publication_autorisee(False)
+
+
+# --- preparer_carte_reserve / agreger_reserve_commune : pipeline réel ----------
+
+
+def _ligne(id_election, code_commune, code_bv, bloc, voix, exprimes, code_departement="69", abstentions=10, inscrits=None):
+    id_bv = f"{code_commune}_{code_bv}"
+    return {
+        "id_election": id_election,
+        "code_departement": code_departement,
+        "code_commune": code_commune,
+        "code_bv": code_bv,
+        "id_bv": id_bv,
+        "bloc": bloc,
+        "voix": voix,
+        "inscrits": inscrits if inscrits is not None else exprimes + 50,
+        "abstentions": abstentions,
+        "votants": exprimes + 20,
+        "blancs": 10,
+        "nuls": 10,
+        "exprimes": exprimes,
+    }
+
+
+def _panel_bureau_commune_repli() -> list[dict]:
+    lignes = []
+    # 69123 : 1 bureau stable, 2 blocs.
+    for id_election in ("2022_pres_t1", "2022_legi_t1", "2024_euro_t1", "2024_legi_t1"):
+        lignes.append(_ligne(id_election, "69123", "0001", "Gauche", 30, 100, abstentions=60, inscrits=200))
+        lignes.append(_ligne(id_election, "69123", "0001", "Droite", 70, 100, abstentions=60, inscrits=200))
+    # 69777 : 2 bureaux stables (mêmes 2 blocs) -- pour tester la SOMME du dézoom.
+    for id_election in ("2022_pres_t1", "2022_legi_t1", "2024_euro_t1", "2024_legi_t1"):
+        lignes.append(_ligne(id_election, "69777", "0001", "Gauche", 20, 100, abstentions=40, inscrits=150))
+        lignes.append(_ligne(id_election, "69777", "0001", "Droite", 80, 100, abstentions=40, inscrits=150))
+        lignes.append(_ligne(id_election, "69777", "0002", "Gauche", 10, 50, abstentions=25, inscrits=100))
+        lignes.append(_ligne(id_election, "69777", "0002", "Droite", 40, 50, abstentions=25, inscrits=100))
+    # 69456 : commune en repli (2 bureaux au pres/legi2022/euro2024, 1 seul aux legi2024).
+    lignes += [
+        _ligne("2022_pres_t1", "69456", "0001", "Gauche", 10, 50, abstentions=20, inscrits=100),
+        _ligne("2022_pres_t1", "69456", "0001", "Droite", 40, 50, abstentions=20, inscrits=100),
+        _ligne("2022_pres_t1", "69456", "0002", "Gauche", 5, 40, abstentions=15, inscrits=80),
+        _ligne("2022_pres_t1", "69456", "0002", "Droite", 35, 40, abstentions=15, inscrits=80),
+        _ligne("2022_legi_t1", "69456", "0001", "Gauche", 10, 50, abstentions=20, inscrits=100),
+        _ligne("2022_legi_t1", "69456", "0001", "Droite", 40, 50, abstentions=20, inscrits=100),
+        _ligne("2022_legi_t1", "69456", "0002", "Gauche", 5, 40, abstentions=15, inscrits=80),
+        _ligne("2022_legi_t1", "69456", "0002", "Droite", 35, 40, abstentions=15, inscrits=80),
+        _ligne("2024_euro_t1", "69456", "0001", "Gauche", 10, 50, abstentions=20, inscrits=100),
+        _ligne("2024_euro_t1", "69456", "0001", "Droite", 40, 50, abstentions=20, inscrits=100),
+        _ligne("2024_euro_t1", "69456", "0002", "Gauche", 5, 40, abstentions=15, inscrits=80),
+        _ligne("2024_euro_t1", "69456", "0002", "Droite", 35, 40, abstentions=15, inscrits=80),
+        _ligne("2024_legi_t1", "69456", "0003", "Gauche", 15, 90, abstentions=35, inscrits=180),
+        _ligne("2024_legi_t1", "69456", "0003", "Droite", 75, 90, abstentions=35, inscrits=180),
+    ]
+    return lignes
+
+
+@pytest.fixture(scope="module")
+def table_reserve_synthetique() -> pl.DataFrame:
+    panel_brut = pl.DataFrame(_panel_bureau_commune_repli())
+    classification = classifier_communes(panel_brut)
+    panel = construire_panel_avec_statut(panel_brut, classification)
+    baseline = construire_baseline(panel)
+    return construire_table_reserve(panel, baseline)
+
+
+def test_preparer_carte_reserve_une_ligne_par_unite_bureau_avec_colonnes_par_bloc(table_reserve_synthetique):
+    large = preparer_carte_reserve(table_reserve_synthetique, n_quantiles=5)
+    ligne = large.filter(pl.col("unite_id") == "69123_0001")
+    assert ligne.height == 1
+    # inscrits=200, taux_abstention=0.3, part Gauche=0.3 -> réserve = 18.0 ; Droite 0.7 -> 42.0.
+    assert ligne.get_column("reserve_gauche")[0] == pytest.approx(18.0)
+    assert ligne.get_column("reserve_droite")[0] == pytest.approx(42.0)
+    assert ligne.get_column("statut")[0] == "joint_valide"
+    assert ligne.get_column("maille")[0] == "bureau"
+
+
+def test_preparer_carte_reserve_exclut_les_communes_en_repli(table_reserve_synthetique):
+    large = preparer_carte_reserve(table_reserve_synthetique, n_quantiles=5)
+    assert large.filter(pl.col("unite_id") == "69456").height == 0
+    assert (large.get_column("maille") == "bureau").all()
+
+
+def test_agreger_reserve_commune_somme_les_bureaux_stables(table_reserve_synthetique):
+    large = agreger_reserve_commune(table_reserve_synthetique, n_quantiles=3)
+    ligne = large.filter(pl.col("code_commune") == "69777")
+    assert ligne.height == 1
+    # Gauche : bureau1 (150*0.4/150*20/100=0.2)=150*0.2667*0.2 ... calcul direct via somme des réserves des 2 bureaux.
+    b1 = table_reserve_synthetique.filter((pl.col("unite_id") == "69777_0001") & (pl.col("bloc") == "Gauche")).get_column("reserve")[0]
+    b2 = table_reserve_synthetique.filter((pl.col("unite_id") == "69777_0002") & (pl.col("bloc") == "Gauche")).get_column("reserve")[0]
+    assert ligne.get_column("reserve_gauche")[0] == pytest.approx(b1 + b2)
+    # bureau1 : inscrits=150, abstention=40/150, part Gauche=20/100=0.2 -> 8.0 ;
+    # bureau2 : inscrits=100, abstention=25/100, part Gauche=10/50=0.2 -> 5.0.
+    assert ligne.get_column("reserve_gauche")[0] == pytest.approx(13.0)
+    assert ligne.get_column("degrade")[0] is False
+
+
+def test_agreger_reserve_commune_repli_reste_visible_et_degrade(table_reserve_synthetique):
+    large = agreger_reserve_commune(table_reserve_synthetique, n_quantiles=3)
+    ligne = large.filter(pl.col("code_commune") == "69456")
+    assert ligne.height == 1
+    assert ligne.get_column("degrade")[0] is True
+    assert ligne.get_column("statut")[0] == "repli"
+
+
+def test_agreger_reserve_commune_couvre_toute_la_france_bureau_et_repli(table_reserve_synthetique):
+    large = agreger_reserve_commune(table_reserve_synthetique, n_quantiles=3)
+    communes = set(large.get_column("code_commune").to_list())
+    assert communes == {"69123", "69777", "69456"}
+
+
+# --- preparer_carte_rapport_force -----------------------------------------------
+
+
+def _baseline_synthetique() -> pl.DataFrame:
+    return pl.DataFrame(
+        [
+            {"unite_id": "a", "bloc": "Gauche", "composite": 10.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "a", "bloc": "Droite", "composite": 5.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "b", "bloc": "Gauche", "composite": -8.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "b", "bloc": "Droite", "composite": 12.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "c", "bloc": "Gauche", "composite": 20.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "c", "bloc": "Droite", "composite": -20.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            # égalité exacte entre Droite et Gauche -> départage par bloc croissant ("Droite" < "Gauche").
+            {"unite_id": "d", "bloc": "Gauche", "composite": 3.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            {"unite_id": "d", "bloc": "Droite", "composite": 3.0, "code_departement": "69", "statut": "joint_valide", "maille": "bureau"},
+            # commune en repli : composite déjà à cette maille, jamais recalculé ici.
+            {"unite_id": "69456", "bloc": "Gauche", "composite": 1.0, "code_departement": "69", "statut": "repli", "maille": "commune"},
+            {"unite_id": "69456", "bloc": "Droite", "composite": -1.0, "code_departement": "69", "statut": "repli", "maille": "commune"},
+        ]
+    )
+
+
+def test_preparer_carte_rapport_force_choisit_le_bloc_au_composite_maximal():
+    resultat = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    tete = dict(zip(resultat.get_column("unite_id").to_list(), resultat.get_column("bloc_tete_projete").to_list()))
+    assert tete["a"] == "Gauche"
+    assert tete["b"] == "Droite"
+    assert tete["c"] == "Gauche"
+
+
+def test_preparer_carte_rapport_force_departage_les_egalites_par_bloc_croissant():
+    resultat = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    ligne = resultat.filter(pl.col("unite_id") == "d")
+    assert ligne.get_column("bloc_tete_projete")[0] == "Droite"
+
+
+def test_preparer_carte_rapport_force_quantile_calcule_sur_le_bloc_gagnant_uniquement():
+    resultat = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    # "c" gagne avec Gauche=20.0, le plus fort de la distribution Gauche (10, -8, 20, 3) -> quantile max (4).
+    ligne_c = resultat.filter(pl.col("unite_id") == "c")
+    assert ligne_c.get_column("quantile_rapport_force")[0] == 4
+
+
+def test_preparer_carte_rapport_force_conserve_le_statut_et_la_maille_du_repli():
+    resultat = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    ligne = resultat.filter(pl.col("unite_id") == "69456")
+    assert ligne.get_column("bloc_tete_projete")[0] == "Gauche"
+    assert ligne.get_column("statut")[0] == "repli"
+    assert ligne.get_column("maille")[0] == "commune"
+
+
+def test_preparer_carte_rapport_force_est_deterministe():
+    a = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    b = preparer_carte_rapport_force(_baseline_synthetique(), n_quantiles=4)
+    assert a.equals(b)
