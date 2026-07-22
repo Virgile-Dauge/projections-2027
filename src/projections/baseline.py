@@ -229,18 +229,24 @@ def corriger_offre_legislatives(
     return pl.concat([observe_marque, impute]).sort(["unite_id", "bloc"])
 
 
-def construire_table_composantes(ecart: pl.DataFrame, legi_corrige: pl.DataFrame) -> pl.DataFrame:
+def construire_table_composantes(
+    ecart: pl.DataFrame, legi_corrige: pl.DataFrame, scrutins_bruts: Iterable[str] | None = None
+) -> pl.DataFrame:
     """Table large unité x bloc : une colonne par composante mono-scrutin conservée.
 
-    Combine l'écart présidentielle 2022 et européennes 2024 (bruts, `ecart` =
-    sortie de `calculer_ecart_national`) avec les législatives 2024 corrigées
-    (`legi_corrige` = sortie de `corriger_offre_legislatives`) -- les 3
-    composantes que le backtest (#6) doit pouvoir comparer individuellement au
-    composite.
+    Combine les composantes brutes demandées (`scrutins_bruts`, sortie de
+    `calculer_ecart_national` -- par défaut présidentielle 2022 + européennes
+    2024, les 2 composantes non corrigées de la baseline #5) avec une
+    composante corrigée de l'offre (`legi_corrige` = sortie de
+    `corriger_offre_legislatives`) -- PARAMÉTRABLE : le backtest (#6) réutilise
+    cette fonction pour construire un prédicteur 2022 (présidentielle brute +
+    législatives 2022 corrigées), un jeu de composantes différent de celui de
+    la baseline #5.
     """
+    scrutins_bruts = list(scrutins_bruts) if scrutins_bruts is not None else [SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES]
     composantes_long = pl.concat(
         [
-            ecart.filter(pl.col("id_election").is_in([SCRUTIN_PRESIDENTIELLE, SCRUTIN_EUROPEENNES])).select(
+            ecart.filter(pl.col("id_election").is_in(scrutins_bruts)).select(
                 "id_election", "unite_id", "bloc", "ecart_national"
             ),
             legi_corrige.select("id_election", "unite_id", "bloc", "ecart_national"),
