@@ -15,6 +15,7 @@ ingest = "projections.ingest:main"
 rapport-churn = "projections.churn:main"
 build-tiles = "projections.build_tiles:main"
 baseline = "projections.baseline:main"
+backtest = "projections.backtest:main"
 
 [build-system]
 requires = ["hatchling"]
