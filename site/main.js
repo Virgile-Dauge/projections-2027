@@ -98,6 +98,25 @@ function expressionCouleurBloc() {
   ];
 }
 
+// Opacité "de base" de chaque couche d'aplat de données, AVANT le curseur
+// global (ADR 0004 §3) -- source de vérité unique, utilisée à la fois par le
+// style initial ci-dessous et par appliquerOpacite() lors des changements de
+// curseur/mode. Résultats 2024 : valeur fixe 0.65 (baissée de 0.85 pour
+// laisser transparaître le fond IGN). Modes mobilisation : l'expression de
+// quantile ne change pas (ADR 0001, l'opacité code un RANG, jamais un
+// pourcentage) -- le curseur la multiplie uniformément, l'ordre des tranches
+// reste intact. Ne contient QUE des couches d'aplat -- jamais de liseré.
+const OPACITE_RESULTATS_BASE = 0.65;
+
+const BASE_OPACITE = {
+  "communes-fill": OPACITE_RESULTATS_BASE,
+  "bureaux-fill": OPACITE_RESULTATS_BASE,
+  "mob-reserve-communes-fill": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
+  "mob-reserve-bureaux-fill": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
+  "mob-force-communes-fill": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
+  "mob-force-bureaux-fill": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
+};
+
 // Fond de carte Plan IGN (Géoplateforme, WMTS raster, sans clé) -- ADR 0004.
 // Couvre métropole ET DROM (WMTS mondial en Pseudo-Mercator). Pas de minzoom
 // -- visible à tout niveau de zoom, sous toutes les couches de données.
@@ -143,7 +162,7 @@ const style = {
       maxzoom: ZOOM_BASCULE,
       paint: {
         "fill-color": expressionCouleurBloc(),
-        "fill-opacity": 0.85,
+        "fill-opacity": BASE_OPACITE["communes-fill"],
       },
     },
     {
@@ -170,7 +189,7 @@ const style = {
       minzoom: ZOOM_BASCULE,
       paint: {
         "fill-color": expressionCouleurBloc(),
-        "fill-opacity": 0.85,
+        "fill-opacity": BASE_OPACITE["bureaux-fill"],
       },
     },
     {
@@ -199,7 +218,7 @@ const style = {
       layout: { visibility: "none" },
       paint: {
         "fill-color": COULEURS_BLOC.Gauche,
-        "fill-opacity": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
+        "fill-opacity": BASE_OPACITE["mob-reserve-communes-fill"],
       },
     },
     {
@@ -211,7 +230,7 @@ const style = {
       layout: { visibility: "none" },
       paint: {
         "fill-color": COULEURS_BLOC.Gauche,
-        "fill-opacity": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
+        "fill-opacity": BASE_OPACITE["mob-reserve-bureaux-fill"],
       },
     },
     {
@@ -222,7 +241,7 @@ const style = {
       layout: { visibility: "none" },
       paint: {
         "fill-color": expressionCouleurRapportForce(),
-        "fill-opacity": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
+        "fill-opacity": BASE_OPACITE["mob-force-communes-fill"],
       },
     },
     {
@@ -234,7 +253,7 @@ const style = {
       layout: { visibility: "none" },
       paint: {
         "fill-color": expressionCouleurRapportForce(),
-        "fill-opacity": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
+        "fill-opacity": BASE_OPACITE["mob-force-bureaux-fill"],
       },
     },
     {
