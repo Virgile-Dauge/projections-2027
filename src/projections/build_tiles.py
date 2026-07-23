@@ -317,19 +317,25 @@ BLOCS_RESERVE_CARTE: tuple[str, ...] = ("gauche",)
 
 
 def _proprietes_reserve(ligne: dict) -> dict:
-    """Colonnes réserve (`reserve_<slug>`/`quantile_reserve_<slug>`) fusionnées
-    aux couches `bureaux`/`communes`, restreintes à `BLOCS_RESERVE_CARTE`
-    (mêmes noms de colonnes en sortie de
+    """Colonnes réserve (`reserve_<slug>`/`quantile_reserve_<slug>`/
+    `quantile_reserve_<slug>_dep`) fusionnées aux couches `bureaux`/`communes`,
+    restreintes à `BLOCS_RESERVE_CARTE` (mêmes noms de colonnes en sortie de
     `projections.mobilisation.assembler_donnees_bureau`/`assembler_donnees_commune`).
     Valeur absente (unité structurellement sans estimation, cf.
     `projections.mobilisation._completer_colonnes_blocs`) -> null, jamais un
     zéro fabriqué -- une réserve n'est pas un pourcentage.
+
+    Tranche départementale (issue #37, ADR 0005) : `quantile_reserve_<slug>_dep`
+    embarquée À CÔTÉ du quantile national `quantile_reserve_<slug>`, jamais à
+    sa place -- le national reste dans les tuiles (réversibilité côté client
+    seul), seul le site (`site/main.js`) cesse de l'afficher.
     """
     proprietes: dict = {}
     for slug in BLOCS_RESERVE_CARTE:
         valeur = ligne.get(f"reserve_{slug}")
         proprietes[f"reserve_{slug}"] = round(valeur, 1) if valeur is not None else None
         proprietes[f"quantile_reserve_{slug}"] = ligne.get(f"quantile_reserve_{slug}")
+        proprietes[f"quantile_reserve_{slug}_dep"] = ligne.get(f"quantile_reserve_{slug}_dep")
     return proprietes
 
 

@@ -71,6 +71,45 @@ def test_quantiles_larges_est_deterministe():
     assert a.equals(b)
 
 
+def test_quantiles_larges_groupe_multiple_calcule_par_sous_groupe():
+    # `groupe` accepte une liste de colonnes (issue #37, CONTEXT.md « Tranche
+    # départementale ») : le bucket d'une unité ne dépend que de la
+    # distribution de SON sous-groupe (bloc x département), jamais des deux
+    # départements mélangés.
+    table = pl.DataFrame(
+        {
+            "bloc": ["Gauche"] * 4,
+            "code_departement": ["69", "69", "75", "75"],
+            "v": [1.0, 1000.0, 5.0, 6.0],
+        }
+    )
+    resultat = quantiles_larges(table, "v", groupe=["bloc", "code_departement"], n=2)
+    d69 = resultat.filter(pl.col("code_departement") == "69").sort("v").get_column("quantile_v").to_list()
+    d75 = resultat.filter(pl.col("code_departement") == "75").sort("v").get_column("quantile_v").to_list()
+    assert d69 == [1, 2]
+    assert d75 == [1, 2]
+
+
+def test_quantiles_larges_suffixe_nomme_la_colonne_differemment():
+    # `suffixe` (issue #37) : le quantile départemental s'ajoute en colonne
+    # SUPPLÉMENTAIRE (`quantile_<colonne>_dep`), jamais en remplacement.
+    table = pl.DataFrame({"bloc": ["Gauche"] * 4, "v": [1.0, 2.0, 3.0, 4.0]})
+    resultat = quantiles_larges(table, "v", groupe="bloc", n=2, suffixe="_dep")
+    assert "quantile_v_dep" in resultat.columns
+    assert "quantile_v" not in resultat.columns
+
+
+def test_quantiles_larges_petit_groupe_reste_borne_dans_1_n():
+    # Cas 975 (Saint-Pierre-et-Miquelon, 4 bureaux, n=5) : un groupe plus petit
+    # que n ne peut jamais produire un bucket hors [1, n] -- la tranche 1 peut
+    # simplement rester vide (jamais une erreur, cf. docs/adr/0005-*.md).
+    table = pl.DataFrame({"bloc": ["Gauche"] * 4, "v": [1.0, 2.0, 3.0, 4.0]})
+    resultat = quantiles_larges(table, "v", groupe="bloc", n=5)
+    buckets = resultat.sort("v").get_column("quantile_v").to_list()
+    assert buckets == [2, 3, 4, 5]
+    assert all(1 <= b <= 5 for b in buckets)
+
+
 # --- verifier_publication_autorisee ---------------------------------------------
 
 
@@ -167,6 +206,76 @@ def test_preparer_carte_reserve_exclut_les_communes_en_repli(table_reserve_synth
     large = preparer_carte_reserve(table_reserve_synthetique, n_quantiles=5)
     assert large.filter(pl.col("unite_id") == "69456").height == 0
     assert (large.get_column("maille") == "bureau").all()
+
+
+# --- Tranche départementale (issue #37, CONTEXT.md « Tranche départementale »,
+# --- docs/adr/0005-*.md) : quantile_reserve_<slug>_dep, recalculé PAR département --
+
+
+def _table_reserve_deux_departements() -> pl.DataFrame:
+    # 69 : bastion (20 bureaux, réserve Gauche élevée partout) ; 75 : réserve
+    # Gauche faible partout (5 bureaux) -- au national, même le MEILLEUR
+    # bureau de 75 tombe en tranche basse (écrasé par le volume du bastion) ;
+    # à l'échelle départementale, chaque département affiche sa PROPRE gamme
+    # complète de tranches (l'objectif produit de l'issue).
+    lignes = []
+    for i in range(20):
+        lignes.append(
+            {
+                "unite_id": f"69_{i}",
+                "bloc": "Gauche",
+                "reserve": 100.0 + i * 10,
+                "code_departement": "69",
+                "statut": "joint_valide",
+                "maille": "bureau",
+            }
+        )
+    for i, valeur in enumerate([1.0, 2.0, 3.0, 4.0, 5.0]):
+        lignes.append(
+            {
+                "unite_id": f"75_{i}",
+                "bloc": "Gauche",
+                "reserve": valeur,
+                "code_departement": "75",
+                "statut": "joint_valide",
+                "maille": "bureau",
+            }
+        )
+    return pl.DataFrame(lignes)
+
+
+def test_preparer_carte_reserve_quantile_departemental_desaplatit_le_departement_faible():
+    large = preparer_carte_reserve(_table_reserve_deux_departements(), n_quantiles=5)
+    ligne = large.filter(pl.col("unite_id") == "75_4")  # valeur=5.0, max de SON département.
+    # National : écrasé par le volume du bastion 69 (20 bureaux à 100+) -> tranche la plus basse.
+    assert ligne.get_column("quantile_reserve_gauche")[0] == 1
+    # Départemental : au sommet de SA PROPRE distribution -> tranche max.
+    assert ligne.get_column("quantile_reserve_gauche_dep")[0] == 5
+
+
+def test_preparer_carte_reserve_quantile_national_reste_present_inchange():
+    # Le quantile national n'est pas retiré des tuiles (réversibilité côté
+    # client seul) -- seul le site cesse de l'afficher (site/main.js).
+    large = preparer_carte_reserve(_table_reserve_deux_departements(), n_quantiles=5)
+    assert "quantile_reserve_gauche" in large.columns
+    assert "quantile_reserve_gauche_dep" in large.columns
+
+
+def test_agreger_reserve_commune_quantile_departemental_calcule_sur_sa_propre_population(table_reserve_synthetique):
+    # La maille commune recalcule sa PROPRE échelle départementale (jamais
+    # mélangée avec la population bureau, même discipline que le quantile
+    # national -- cf. docstring de `agreger_reserve_commune`).
+    large = agreger_reserve_commune(table_reserve_synthetique, n_quantiles=3)
+    assert "quantile_reserve_gauche_dep" in large.columns
+
+
+def test_agreger_reserve_commune_repli_participe_au_quantile_departemental(table_reserve_synthetique):
+    # CONTEXT.md « Repli » : la dégradation reste visible, mais la commune en
+    # repli participe bien au calcul du quantile communal de son département
+    # (jamais exclue silencieusement).
+    large = agreger_reserve_commune(table_reserve_synthetique, n_quantiles=3)
+    ligne_repli = large.filter(pl.col("code_commune") == "69456")
+    assert ligne_repli.get_column("quantile_reserve_gauche_dep")[0] is not None
 
 
 def test_agreger_reserve_commune_somme_les_bureaux_stables(table_reserve_synthetique):

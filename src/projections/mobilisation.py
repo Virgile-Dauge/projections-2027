@@ -62,17 +62,31 @@ from projections.reserve import METHODE_PART_DEFAUT, generer_rapport_complet
 # --- Sortie ordinale générique --------------------------------------------------
 
 
-def quantiles_larges(table: pl.DataFrame, colonne: str, groupe: str = "bloc", n: int = 5) -> pl.DataFrame:
-    """Ajoute `quantile_{colonne}` (Int64, 1..n) : quantile ORDINAL de `colonne`,
-    calculé séparément PAR `groupe` (cf. docstring du module).
+def quantiles_larges(
+    table: pl.DataFrame, colonne: str, groupe: str | list[str] = "bloc", n: int = 5, suffixe: str = ""
+) -> pl.DataFrame:
+    """Ajoute `quantile_{colonne}{suffixe}` (Int64, 1..n) : quantile ORDINAL de
+    `colonne`, calculé séparément PAR `groupe` (cf. docstring du module).
+
+    `groupe` accepte une seule colonne (`"bloc"`, national) ou une LISTE de
+    colonnes (`["bloc", "code_departement"]`, tranche départementale -- issue
+    #37, CONTEXT.md « Tranche départementale ») : `.over()` Polars partitionne
+    alors sur la combinaison des colonnes, jamais sur une colonne à la fois --
+    chaque sous-groupe (ex. Gauche x Rhône) a sa propre échelle, indépendante
+    des autres. `suffixe` distingue la colonne de sortie quand plusieurs appels
+    coexistent (ex. `quantile_reserve` national + `quantile_reserve_dep`
+    départemental, tous deux embarqués dans les tuiles -- ADR 0005) : par
+    défaut vide, comportement inchangé.
 
     Rang moyen (ex-aequo -> même bucket le plus souvent, comme
     `projections.backtest.correlation_spearman`/`tercile_competitif`) ramené en
     fraction `rang / effectif` (effectif = nombre de valeurs NON NULLES du
     groupe, jamais le nombre total de lignes) puis multiplié par `n` et
     arrondi au-dessus (`ceil`), borné à `[1, n]` -- garantit qu'aucune valeur
-    non nulle ne tombe hors bornes par arrondi. Déterministe (tri stable,
-    aucun aléa). `colonne` nulle -> quantile null, jamais un bucket fabriqué.
+    non nulle ne tombe hors bornes par arrondi, même pour un groupe plus petit
+    que `n` (ex. 975, 4 bureaux : la tranche 1 reste simplement vide, jamais
+    une erreur). Déterministe (tri stable, aucun aléa). `colonne` nulle ->
+    quantile null, jamais un bucket fabriqué.
     """
     valeur = pl.col(colonne)
     rang = valeur.rank(method="average").over(groupe)
@@ -80,36 +94,55 @@ def quantiles_larges(table: pl.DataFrame, colonne: str, groupe: str = "bloc", n:
     fraction = rang / effectif
     bucket = (fraction * n).ceil().clip(1, n).cast(pl.Int64)
     return table.with_columns(
-        pl.when(valeur.is_not_null()).then(bucket).otherwise(None).alias(f"quantile_{colonne}")
+        pl.when(valeur.is_not_null()).then(bucket).otherwise(None).alias(f"quantile_{colonne}{suffixe}")
     )
 
 
 # --- Gate mécanique --------------------------------------------------------------
 
 
-def _completer_colonnes_blocs(large: pl.DataFrame, prefixe: str, dtype: pl.DataType) -> pl.DataFrame:
-    """Garantit une colonne `{prefixe}_{slug}` par bloc (docs/classification_en_blocs.md),
+def _completer_colonnes_blocs(large: pl.DataFrame, prefixe: str, dtype: pl.DataType, suffixe: str = "") -> pl.DataFrame:
+    """Garantit une colonne `{prefixe}_{slug}{suffixe}` par bloc (docs/classification_en_blocs.md),
     même si un bloc n'a aucune ligne dans toute la maille après pivot (ex. Divers,
     structurellement absent des candidatures présidentielle -- CONTEXT.md « Nuance »).
     Valeur null, jamais fabriquée : contrairement à `carte.py._bloc_tete_et_pct`
     (qui remplit un pourcentage absent à 0.0, une valeur réelle), une réserve ou
-    un rapport de force absent n'a simplement pas d'estimation.
+    un rapport de force absent n'a simplement pas d'estimation. `suffixe` (issue
+    #37) distingue la variante départementale (`quantile_reserve_<slug>_dep`) de
+    la nationale, mêmes garanties de complétude pour les deux.
     """
     manquantes = {
-        f"{prefixe}_{slug}": pl.lit(None, dtype=dtype) for slug in BLOC_SLUG.values() if f"{prefixe}_{slug}" not in large.columns
+        f"{prefixe}_{slug}{suffixe}": pl.lit(None, dtype=dtype)
+        for slug in BLOC_SLUG.values()
+        if f"{prefixe}_{slug}{suffixe}" not in large.columns
     }
     return large.with_columns(**manquantes) if manquantes else large
 
 
 def _reserve_large(table_longue: pl.DataFrame, cle: str, n_quantiles: int) -> pl.DataFrame:
     """Table réserve longue (`cle` x bloc x reserve x contexte) -> large (une ligne
-    par `cle`, colonnes `reserve_<slug>`/`quantile_reserve_<slug>` par bloc).
+    par `cle`, colonnes `reserve_<slug>`/`quantile_reserve_<slug>`/
+    `quantile_reserve_<slug>_dep` par bloc).
 
     Reprend le pattern pivot + renommage de `carte.py._bloc_tete_et_pct` (pas un
-    second calcul indépendant) : deux pivots séparés (valeur, quantile) plutôt
-    qu'un pivot multi-valeurs, pour un renommage explicite et symétrique.
+    second calcul indépendant) : trois pivots séparés (valeur, quantile
+    national, quantile départemental) plutôt qu'un pivot multi-valeurs, pour un
+    renommage explicite et symétrique.
+
+    Tranche départementale (issue #37, CONTEXT.md « Tranche départementale »,
+    ADR 0005) : quantile RECALCULÉ par sous-groupe (bloc x `code_departement`),
+    colonne ADDITIONNELLE `_dep` -- le quantile national `quantile_reserve_<slug>`
+    reste présent tel quel (réversibilité côté client seul, site n'affiche
+    plus que la variante départementale). Appelé séparément par
+    `preparer_carte_reserve` (population bureau) et `agreger_reserve_commune`
+    (population commune) : chaque maille calcule sa PROPRE échelle
+    départementale sur sa propre population, jamais mélangées -- même
+    discipline que le quantile national existant.
     """
     avec_quantile = quantiles_larges(table_longue, "reserve", groupe="bloc", n=n_quantiles)
+    avec_quantile = quantiles_larges(
+        avec_quantile, "reserve", groupe=["bloc", "code_departement"], n=n_quantiles, suffixe="_dep"
+    )
     colonnes_contexte = [c for c in ("code_departement", "statut", "maille", "degrade") if c in avec_quantile.columns]
     contexte = avec_quantile.select(cle, *colonnes_contexte).unique(subset=cle, keep="first").sort(cle)
 
@@ -125,7 +158,18 @@ def _reserve_large(table_longue: pl.DataFrame, cle: str, n_quantiles: int) -> pl
     )
     quantile_large = _completer_colonnes_blocs(quantile_large, "quantile_reserve", pl.Int64)
 
-    return contexte.join(reserve_large, on=cle).join(quantile_large, on=cle).sort(cle)
+    quantile_dep_large = avec_quantile.pivot(on="bloc", index=cle, values="quantile_reserve_dep")
+    quantile_dep_large = quantile_dep_large.rename(
+        {bloc: f"quantile_reserve_{slug}_dep" for bloc, slug in BLOC_SLUG.items() if bloc in quantile_dep_large.columns}
+    )
+    quantile_dep_large = _completer_colonnes_blocs(quantile_dep_large, "quantile_reserve", pl.Int64, suffixe="_dep")
+
+    return (
+        contexte.join(reserve_large, on=cle)
+        .join(quantile_large, on=cle)
+        .join(quantile_dep_large, on=cle)
+        .sort(cle)
+    )
 
 
 # --- Réserve : bureau (zoom haut) et commune (dézoom + repli, ADR 0002 point 1) --
