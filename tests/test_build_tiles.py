@@ -261,7 +261,15 @@ def test_joindre_communes_joint_par_code_insee(tmp_path):
 
 
 def _donnees_bureau_synthetiques() -> pl.DataFrame:
-    def _ligne(unite_id, statut, bloc_tete, quantile_force, reserve_gauche=12.0, quantile_reserve_gauche=3):
+    def _ligne(
+        unite_id,
+        statut,
+        bloc_tete,
+        quantile_force,
+        reserve_gauche=12.0,
+        quantile_reserve_gauche=3,
+        quantile_reserve_gauche_dep=5,
+    ):
         return {
             "unite_id": unite_id,
             "code_departement": "69",
@@ -277,6 +285,13 @@ def _donnees_bureau_synthetiques() -> pl.DataFrame:
             "quantile_reserve_droite": 2,
             "quantile_reserve_extreme_droite": 1,
             "quantile_reserve_divers": None,
+            # Tranche départementale (issue #37) : colonne additionnelle,
+            # jamais un remplacement -- le national reste au-dessus.
+            "quantile_reserve_gauche_dep": quantile_reserve_gauche_dep,
+            "quantile_reserve_centre_dep": None,
+            "quantile_reserve_droite_dep": 4,
+            "quantile_reserve_extreme_droite_dep": 2,
+            "quantile_reserve_divers_dep": None,
             "bloc_tete_projete": bloc_tete,
             "quantile_rapport_force": quantile_force,
         }
@@ -291,7 +306,7 @@ def _donnees_bureau_synthetiques() -> pl.DataFrame:
 
 
 def _donnees_commune_synthetiques() -> pl.DataFrame:
-    def _ligne(code_commune, statut, degrade, bloc_tete, quantile_force):
+    def _ligne(code_commune, statut, degrade, bloc_tete, quantile_force, quantile_reserve_gauche_dep=4):
         return {
             "code_commune": code_commune,
             "code_departement": "69",
@@ -307,6 +322,11 @@ def _donnees_commune_synthetiques() -> pl.DataFrame:
             "quantile_reserve_droite": 1,
             "quantile_reserve_extreme_droite": 1,
             "quantile_reserve_divers": None,
+            "quantile_reserve_gauche_dep": quantile_reserve_gauche_dep,
+            "quantile_reserve_centre_dep": None,
+            "quantile_reserve_droite_dep": 2,
+            "quantile_reserve_extreme_droite_dep": 1,
+            "quantile_reserve_divers_dep": None,
             "bloc_tete_projete": bloc_tete,
             "quantile_rapport_force": quantile_force,
         }
@@ -314,7 +334,7 @@ def _donnees_commune_synthetiques() -> pl.DataFrame:
     return pl.DataFrame(
         [
             _ligne("69123", "joint_valide", False, "Gauche", 2),  # dézoom d'une commune stable.
-            _ligne("69456", "repli", True, "Droite", 3),  # commune en repli, visible à tout zoom.
+            _ligne("69456", "repli", True, "Droite", 3, quantile_reserve_gauche_dep=5),  # repli, visible à tout zoom.
         ]
     )
 
@@ -363,6 +383,10 @@ def test_joindre_bureaux_fusionne_les_proprietes_mobilisation(tmp_path):
     assert "reserve_centre" not in proprietes
     assert "quantile_reserve_droite" not in proprietes
     assert proprietes["quantile_reserve_gauche"] == 3
+    # Tranche départementale (issue #37) : propagée jusqu'aux tuiles, colonne
+    # additionnelle -- le national ci-dessus reste présent, pas remplacé.
+    assert proprietes["quantile_reserve_gauche_dep"] == 5
+    assert "quantile_reserve_droite_dep" not in proprietes  # seul le bloc Gauche part dans les tuiles (PR #33).
     assert proprietes["statut"] == "joint_valide"
     assert proprietes["maille"] == "bureau"
     assert proprietes["rapport_force_bloc_tete"] == "Gauche"
@@ -430,6 +454,11 @@ def test_joindre_communes_fusionne_et_conserve_les_features_asymetriques(tmp_pat
     assert lignes["69123"]["properties"]["reserve_gauche"] == 40.0
     assert "pct_gauche" not in lignes["69456"]["properties"]  # mobilisation seule, rien de fabriqué.
     assert lignes["69456"]["properties"]["reserve_gauche"] == 40.0
+    # Tranche départementale (issue #37) propagée -- y compris pour une commune
+    # en repli (elle participe au quantile communal de son département, marqueur
+    # de repli inchangé par ailleurs).
+    assert lignes["69123"]["properties"]["quantile_reserve_gauche_dep"] == 4
+    assert lignes["69456"]["properties"]["quantile_reserve_gauche_dep"] == 5
     assert rapport.contours_sans_score == 1
     assert rapport.mobilisation_total == 2
     assert rapport.mobilisation_jointes == 2
