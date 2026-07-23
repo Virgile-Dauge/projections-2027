@@ -77,6 +77,21 @@
       </section>
 
       <section>
+        <h2>Fond de carte</h2>
+        <p>
+          Depuis cette version, le fond de carte (rues, toponymes) est chargé en tuiles raster depuis le
+          <strong>Plan IGN</strong> de la Géoplateforme (<code>data.geopf.fr</code>), un service public français,
+          gratuit et sans clé. C'est la première dépendance runtime tierce du site : les
+          <strong>viewports des utilisateurs (zone et niveau de zoom consultés) sont donc visibles de ce
+          service</strong>. En cas de panne ou de coupure réseau vers data.geopf.fr, la carte reste lisible sur
+          l'aplat uni utilisé jusqu'ici. Limite assumée en v1 : les toponymes du raster passent
+          <strong>sous</strong> les aplats de résultats/mobilisation, donc peu lisibles aux opacités élevées — un
+          passage à des tuiles vectorielles IGN les remettrait au-dessus si le besoin s'en fait sentir (voir
+          <a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/docs/adr/0004-fond-de-carte-ign.md">ADR 0004</a>).
+        </p>
+      </section>
+
+      <section>
         <h2>Les deux hypothèses de la réserve (H1 et H2)</h2>
         <p>
           La réserve n'est <strong>pas backtestable</strong> : aucun scrutin passé ne nous dit qui, exactement, un
