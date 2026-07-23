@@ -37,6 +37,14 @@ const ZOOM_BASCULE = 9;
 const N_QUANTILES_RESERVE = 5;
 const N_QUANTILES_FORCE = 4;
 
+// Tranche départementale (issue #37, CONTEXT.md « Tranche départementale »,
+// docs/adr/0005-*.md) : la couche réserve affiche `quantile_reserve_gauche_dep`
+// (quantile recalculé par département), jamais `quantile_reserve_gauche`
+// (national) -- remplacement sec, pas de sélecteur d'échelle. Le national
+// reste dans les tuiles (réversibilité côté client seul) mais n'est plus lu
+// ici. Le rapport de force, lui, reste en quantile national par bloc
+// (`quantile_rapport_force`, INCHANGÉ) -- asymétrie assumée, cf. méthode.
+
 const protocole = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", protocole.tile);
 
@@ -111,8 +119,8 @@ const OPACITE_RESULTATS_BASE = 0.65;
 const BASE_OPACITE = {
   "communes-fill": OPACITE_RESULTATS_BASE,
   "bureaux-fill": OPACITE_RESULTATS_BASE,
-  "mob-reserve-communes-fill": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
-  "mob-reserve-bureaux-fill": expressionOpaciteQuantile("quantile_reserve_gauche", N_QUANTILES_RESERVE),
+  "mob-reserve-communes-fill": expressionOpaciteQuantile("quantile_reserve_gauche_dep", N_QUANTILES_RESERVE),
+  "mob-reserve-bureaux-fill": expressionOpaciteQuantile("quantile_reserve_gauche_dep", N_QUANTILES_RESERVE),
   "mob-force-communes-fill": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
   "mob-force-bureaux-fill": expressionOpaciteQuantile("quantile_rapport_force", N_QUANTILES_FORCE),
 };
@@ -297,8 +305,14 @@ function formatNombre(valeur) {
   return valeur === null || valeur === undefined ? "n/d" : Math.round(Number(valeur)).toLocaleString("fr-FR");
 }
 
-function libelleQuantile(quantile, nMax) {
-  return quantile === null || quantile === undefined ? "n/d" : `tranche ${quantile}/${nMax}`;
+function libelleQuantile(quantile, nMax, referentiel) {
+  // `referentiel` (issue #37) : le référentiel du quantile est TOUJOURS
+  // annoncé avec la tranche, jamais silencieux (même esprit que « Repli »,
+  // CONTEXT.md « Tranche départementale ») -- ex. "tranche 3/5 dans le
+  // département" pour la réserve. Omis (rapport de force, national) : le
+  // libellé reste "tranche X/N" tel quel, inchangé.
+  if (quantile === null || quantile === undefined) return "n/d";
+  return referentiel ? `tranche ${quantile}/${nMax} ${referentiel}` : `tranche ${quantile}/${nMax}`;
 }
 
 function libelleStatut(proprietes) {
@@ -364,7 +378,7 @@ function afficherPanneauReserve(proprietes, estCommune) {
     <p>
       <span class="pastille" style="background:${COULEURS_BLOC.Gauche}"></span>Gauche :
       <strong>${formatNombre(proprietes.reserve_gauche)}</strong> inscrits mobilisables
-      (${libelleQuantile(proprietes.quantile_reserve_gauche, N_QUANTILES_RESERVE)})
+      (${libelleQuantile(proprietes.quantile_reserve_gauche_dep, N_QUANTILES_RESERVE, "dans le département")})
     </p>
     <p class="participation">${libelleStatut(proprietes)}</p>
   `);
@@ -401,12 +415,20 @@ const BANDEAU_PAR_MODE = {
   resultats2024: { titre: "Carte descriptive", texte: "— résultats 2024 réels, pas une projection." },
   reserve: {
     titre: "Réserve mobilisable",
-    texte: "— estimateur v1, assumé grossier (ADR 0002) : voir la méthode.",
+    texte: "— estimateur v1, assumé grossier (ADR 0002), tranche départementale (ADR 0005) : voir la méthode.",
   },
   force: {
     titre: "Rapport de force projeté",
     texte: "— quantiles larges uniquement, l'ordre fin n'est pas fiable (voir la méthode).",
   },
+};
+
+// Référentiel du quantile affiché par mode (issue #37) : jamais silencieux,
+// annoncé dans la légende comme dans le bandeau/panneau. `force` : quantile
+// national par bloc (asymétrie assumée, voir méthode) -- non touché par #37.
+const LEGENDE_QUANTILE_PAR_MODE = {
+  reserve: "Intensité = tranche (quantile) dans le département, jamais un pourcentage à intervalle de confiance.",
+  force: "Intensité = tranche (quantile) à l'échelle nationale par bloc, jamais un pourcentage à intervalle de confiance.",
 };
 
 let modeCouche = "resultats2024";
@@ -440,7 +462,14 @@ function appliquerMode() {
     modeCouche === "reserve" || modeCouche === "force" ? "visible" : "none"
   );
 
-  document.getElementById("legende-quantile").hidden = modeCouche === "resultats2024";
+  // Référentiel du quantile toujours annoncé (issue #37) : texte spécifique
+  // au mode actif, jamais un libellé générique qui laisserait croire à une
+  // seule échelle pour réserve (département) et rapport de force (national).
+  const texteQuantile = LEGENDE_QUANTILE_PAR_MODE[modeCouche];
+  document.getElementById("legende-quantile").hidden = !texteQuantile;
+  if (texteQuantile) {
+    document.getElementById("legende-texte-quantile").textContent = texteQuantile;
+  }
 
   const bandeau = BANDEAU_PAR_MODE[modeCouche];
   document.getElementById("bandeau-titre").textContent = bandeau.titre;
