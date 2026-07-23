@@ -65,7 +65,8 @@ body {
   gap: 0.4rem;
 }
 
-#controles fieldset {
+#controles fieldset,
+#controles .panneau-controle {
   background: var(--panneau-fond);
   border: none;
   border-radius: 6px;
@@ -85,6 +86,17 @@ body {
   white-space: nowrap;
   cursor: pointer;
   padding: 0.1rem 0;
+}
+
+/* Curseur d'opacité global (ADR 0004 §3) -- ne module que les couches
+   d'aplat de données actives, jamais les liserés (voir main.js). */
+#reglage-opacite label {
+  cursor: default;
+}
+
+#reglage-opacite input[type="range"] {
+  width: 100%;
+  margin-top: 0.2rem;
 }
 
 /* Légende des blocs, coin bas-gauche. */

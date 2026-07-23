@@ -410,6 +410,19 @@ const BANDEAU_PAR_MODE = {
 };
 
 let modeCouche = "resultats2024";
+let facteurOpacite = 1;
+
+function appliquerOpacite() {
+  // Curseur global (ADR 0004 §3) : multiplie l'opacité de base de chaque
+  // couche d'aplat -- résultats (valeur fixe) ou mobilisation (expression de
+  // quantile). Multiplication uniforme -> ordre des tranches inchangé. Ne
+  // parcourt QUE BASE_OPACITE : ne touche jamais un liseré (communes-ligne,
+  // bureaux-ligne, mob-repli-ligne) -- le repli reste visible à tout réglage
+  // (CONTEXT.md « Repli »).
+  for (const [id, base] of Object.entries(BASE_OPACITE)) {
+    map.setPaintProperty(id, "fill-opacity", ["*", facteurOpacite, base]);
+  }
+}
 
 function appliquerMode() {
   for (const [mode, ids] of Object.entries(COUCHES_PAR_MODE)) {
@@ -432,6 +445,8 @@ function appliquerMode() {
   const bandeau = BANDEAU_PAR_MODE[modeCouche];
   document.getElementById("bandeau-titre").textContent = bandeau.titre;
   document.getElementById("bandeau-texte").textContent = bandeau.texte;
+
+  appliquerOpacite();
 }
 
 map.on("load", () => {
@@ -478,5 +493,13 @@ map.on("load", () => {
       modeCouche = e.target.value;
       appliquerMode();
     });
+  });
+
+  const curseurOpacite = document.getElementById("curseur-opacite");
+  const valeurOpacite = document.getElementById("valeur-opacite");
+  curseurOpacite.addEventListener("input", (e) => {
+    facteurOpacite = Number(e.target.value);
+    valeurOpacite.textContent = Math.round(facteurOpacite * 100) + " %";
+    appliquerOpacite();
   });
 });
