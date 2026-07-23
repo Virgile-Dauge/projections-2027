@@ -55,7 +55,9 @@
         <p>
           Affichage : un <strong>nombre brut d'inscrits mobilisables</strong> et une <strong>tranche (quantile)</strong>
           parmi 5, jamais un pourcentage avec marge d'erreur. Le dézoom (vue département/région) additionne les
-          voix mobilisables des bureaux d'une commune — jamais une moyenne de pourcentages.
+          voix mobilisables des bureaux d'une commune — jamais une moyenne de pourcentages. Cette tranche est
+          calculée <strong>à l'échelle du département</strong>, pas de la France entière — voir « Échelle
+          départementale de la réserve », ci-dessous.
         </p>
 
         <h3>Couche de contexte : rapport de force projeté</h3>
@@ -72,7 +74,49 @@
           l'autre (fusion de bureaux, redécoupage) : on ne peut pas comparer un bureau de 2022 à « le même » bureau
           de 2024 avec confiance. Ces communes sont <strong>repliées à la maille communale</strong> — un contour
           plus grossier, une estimation moins précise — et ce repli est <strong>toujours visible</strong> sur la
-          carte : contour en tirets, mention explicite au clic. Ce n'est jamais masqué ni lissé en silence.
+          carte : contour en tirets, mention explicite au clic. Ce n'est jamais masqué ni lissé en silence. Ces
+          communes participent normalement au quantile départemental de leur maille (ci-dessous) : le repli dégrade
+          la précision de l'estimation, jamais sa participation au classement local.
+        </p>
+      </section>
+
+      <section>
+        <h2>Échelle départementale de la réserve</h2>
+        <p>
+          La tranche affichée sur la couche réserve n'est <strong>pas</strong> calculée sur la France entière, mais
+          <strong>parmi les unités du même département</strong> — les bureaux entre eux, les communes entre elles,
+          jamais mélangés (<a href="https://github.com/Virgile-Dauge/projections-2027/blob/main/docs/adr/0005-echelle-departementale-reserve.md">ADR 0005</a>).
+          À l'échelle nationale, un même classement produirait deux effets indésirables : les bastions de gauche
+          saturent l'échelle (tout y ressort en tranche 5), et les départements où la gauche est structurellement
+          faible ressortent <strong>uniformément pâles</strong> — aucun contraste local, alors que du gisement
+          mobilisable existe bel et bien à l'intérieur. Une carte qui décourage au lieu d'orienter ne sert à rien
+          pour décider où aller. La tranche départementale redonne, dans <strong>chaque</strong> département, la
+          gamme complète des 5 tranches — une échelle d'action locale (« où aller autour de moi »), pas un palmarès
+          national.
+        </p>
+        <p>
+          Garde-fous, pour ne pas transformer un artefact d'échelle en fausse bonne nouvelle : le référentiel est
+          <strong>toujours annoncé</strong> avec la tranche (« tranche 4/5 <em>dans le département</em> », jamais
+          juste « tranche 4/5 ») et le <strong>nombre absolu</strong> d'inscrits mobilisables reste affiché à côté
+          — un 5/5 dans un département globalement faible peut représenter, en valeur absolue, moins de voix qu'un
+          3/5 dans un département dense. La tranche dit où regarder <em>dans ce département</em>, pas combien de
+          voix sont en jeu.
+        </p>
+        <p>
+          <strong>Asymétrie assumée avec le rapport de force.</strong> La couche rapport de force, elle, reste en
+          quantile <strong>national</strong> par bloc, inchangée : c'est une couche de contexte volontairement
+          grossière (voir « Pourquoi l'ordre fin est abandonné »), pas un outil de ciblage local — la comparer entre
+          départements a du sens (« qui est en tête, à gros traits, ici plutôt que là »), contrairement à la réserve
+          où c'est justement l'échelle nationale qui aplatit l'information utile.
+        </p>
+        <p>
+          <strong>Cas des très petits départements.</strong> Le découpage par <code>code_departement</code> est
+          complet sur les données réelles (aucune valeur nulle), et inclut des groupes non numériques valides :
+          <code>2A</code>/<code>2B</code> (Corse), <code>ZX</code>/<code>ZZ</code> (Français de l'étranger). Le
+          plus petit groupe est <code>975</code> (Saint-Pierre-et-Miquelon), avec seulement 4 bureaux de vote. Avec
+          5 tranches et 4 bureaux, la tranche 1 y reste structurellement <strong>vide</strong> — c'est un effet
+          arithmétique attendu du découpage en quantiles sur un petit effectif, <strong>jamais une erreur</strong>
+          ni un bureau manquant.
         </p>
       </section>
 
