@@ -2,8 +2,10 @@
 //
 // Une seule source vectorielle (le PMTiles France entière, deux couches :
 // `bureaux` haute zoom, `communes` basse zoom pour le dézoom — voir
-// projections.build_tiles). Pas de fond de carte externe : la choroplèthe EST
-// la carte, les contours communaux servent de repère en filigrane à tout zoom.
+// projections.build_tiles). Fond de carte : Plan IGN (Géoplateforme, WMTS
+// raster) désaturé sous la choroplèthe, avec l'aplat uni `fond` en filet de
+// sécurité réseau dessous -- voir docs/adr/0004-fond-de-carte-ign.md pour
+// l'arbitrage (choix de source, désaturation, curseur d'opacité global).
 
 // Couleurs de blocs — convention du projet (docs/heritage-2024.md). Garder en
 // synchro avec BLOC_SLUG de src/projections/carte.py.
@@ -96,6 +98,12 @@ function expressionCouleurBloc() {
   ];
 }
 
+// Fond de carte Plan IGN (Géoplateforme, WMTS raster, sans clé) -- ADR 0004.
+// Couvre métropole ET DROM (WMTS mondial en Pseudo-Mercator). Pas de minzoom
+// -- visible à tout niveau de zoom, sous toutes les couches de données.
+const FOND_IGN_TEMPLATE =
+  "https://data.geopf.fr/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&STYLE=normal&TILEMATRIXSET=PM&FORMAT=image/png&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}";
+
 const style = {
   version: 8,
   sources: {
@@ -103,12 +111,29 @@ const style = {
       type: "vector",
       url: "pmtiles://" + PMTILES_URL,
     },
+    "fond-ign": {
+      type: "raster",
+      tiles: [FOND_IGN_TEMPLATE],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution: "© IGN — Géoplateforme",
+    },
   },
   layers: [
     {
+      // Filet de sécurité réseau : reste dessous le raster IGN, donc visible
+      // si data.geopf.fr est en panne ou le raster ne charge pas (ADR 0004).
       id: "fond",
       type: "background",
       paint: { "background-color": "#eef0ef" },
+    },
+    {
+      // Désaturé : un Plan IGN coloré fausserait la lecture des couleurs de
+      // bloc perçues à travers les aplats semi-transparents (ADR 0004 §2).
+      id: "fond-ign",
+      type: "raster",
+      source: "fond-ign",
+      paint: { "raster-saturation": -1 },
     },
     {
       id: "communes-fill",
